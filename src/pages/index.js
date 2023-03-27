@@ -16,7 +16,7 @@ export default function Home() {
       </Head>
       <main className={styles.main}>
         <div className={styles.description}>
-          <p>Erjon Demaku</p>
+          <p>Altin Morina</p>
           <div>
             <a
               href="https://vercel.com?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
@@ -33,6 +33,7 @@ export default function Home() {
                 priority
               />
             </a>
+            <p>Hello There</p>
           </div>
         </div>
 
