@@ -53,7 +53,16 @@ export default function Home() {
               height={31}
               priority
             />
+
+<Image
+              src="/thirteen.svg"
+              alt="13"
+              width={40}
+              height={31}
+              priority
+            />
           </div>
+
         </div>
 
         <div className={styles.grid}>
