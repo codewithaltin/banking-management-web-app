@@ -13,7 +13,7 @@ export default function Navbar(props) {
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <Link
               href="/"
-              className="text-black text-sm font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+              className="text-blueGray-900 text-xl font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
             >
               Futur Banking
             </Link>
