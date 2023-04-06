@@ -327,10 +327,9 @@ ul {
  */
 
 html {
-  font-family: Roboto, ui-sans-serif, system-ui, -apple-system,
-    BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans",
-    sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol",
-    "Noto Color Emoji"; /* 1 */
+  font-family: ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif,
+    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji"; /* 1 */
   line-height: 1.5; /* 2 */
 }
 
@@ -536,7 +535,7 @@ select {
   -webkit-appearance: none;
   appearance: none;
   background-color: #fff;
-  border-color: #29292d;
+  border-color: #71717a;
   border-width: 1px;
   border-radius: 0px;
   padding-top: 0.5rem;
@@ -1384,6 +1383,10 @@ select {
   --tw-bg-opacity: 1;
   background-color: rgba(30, 41, 59, var(--tw-bg-opacity));
 }
+.bg-blueGray-900 {
+  --tw-bg-opacity: 1;
+  background-color: rgba(25, 25, 25, var(--tw-bg-opacity));
+}
 
 .focus\:bg-white:focus {
   --tw-bg-opacity: 1;
@@ -1504,7 +1507,7 @@ select {
 
 .border-blueGray-600 {
   --tw-border-opacity: 1;
-  border-color: rgba(15, 15, 15, var(--tw-border-opacity));
+  border-color: rgba(71, 85, 105, var(--tw-border-opacity));
 }
 
 .focus\:border-black:focus {
@@ -3314,7 +3317,7 @@ select {
 
 .text-blueGray-600 {
   --tw-text-opacity: 1;
-  color: rgba(15, 15, 15, var(--tw-text-opacity));
+  color: rgba(71, 85, 105, var(--tw-text-opacity));
 }
 
 .text-blueGray-700 {
@@ -3325,6 +3328,10 @@ select {
 .text-blueGray-800 {
   --tw-text-opacity: 1;
   color: rgba(30, 41, 59, var(--tw-text-opacity));
+}
+.text-blueGray-900 {
+  --tw-text-opacity: 1;
+  color: rgb(25, 25, 25, var(--tw-text-opacity));
 }
 
 .hover\:text-lightBlue-600:hover {

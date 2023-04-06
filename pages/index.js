@@ -13,17 +13,17 @@ export default function Index() {
         <div className="container mx-auto items-center flex flex-wrap">
           <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
             <div className="pt-32 sm:pt-0">
-              <h2 className="font-semibold text-4xl text-blueGray-600">
-                THE FUTUR BANKING
-              </h2>
-              <p className="mt-2 text-lg leading-relaxed text-blueGray-700">
-                Shijoje komoditetin e bankingut online.
+              <h1 className="text-5xl font-bold leading-normal capitalize mt-0 mb-2 text-blueGray-900">
+                Digital Banking Service
+              </h1>
+              <p className="mt-2 text-lg leading-relaxed capitalize text-blueGray-800">
+                Flexible, Secure and Secure Cooporate Banking
               </p>
               <div className="mt-12">
                 <a
                   href="https://www.creative-tim.com/learning-lab/tailwind/nextjs/overview/notus?ref=nnjs-index"
                   target="_blank"
-                  className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-black active:bg-black uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-"
+                  className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-900 active:bg-blueGray-900 capitalize text-sm shadow hover:shadow-lg ease-linear transition-all duration-"
                 >
                   Get started
                 </a>
