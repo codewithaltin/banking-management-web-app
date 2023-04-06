@@ -44,7 +44,7 @@ export default function Navbar(props) {
                 {" "}
                 <Link
                   href="/auth/login"
-                  className="text-black text-xs font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                  className="text-blueGray-900  text-xs font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
                 >
                   Individ
                 </Link>{" "}
@@ -53,7 +53,7 @@ export default function Navbar(props) {
                 {" "}
                 <Link
                   href="/auth/login"
-                  className="text-black text-xs font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                  className="text-blueGray-900 text-xs font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
                 >
                   Biznes
                 </Link>{" "}
