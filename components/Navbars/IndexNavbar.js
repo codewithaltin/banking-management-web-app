@@ -44,18 +44,18 @@ export default function Navbar(props) {
                 {" "}
                 <Link
                   href="/auth/login"
-                  className="text-blueGray-900  text-xs font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                  className="text-blueGray-900  hover:text-blueGray-700 text-xs font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
                 >
-                  Individ
+                  Individual
                 </Link>{" "}
               </li>
               <li className="flex items-center">
                 {" "}
                 <Link
                   href="/auth/login"
-                  className="text-blueGray-900 text-xs font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                  className="text-blueGray-900 hover:text-blueGray-700 text-xs font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
                 >
-                  Biznes
+                  Business
                 </Link>{" "}
               </li>
             </ul>

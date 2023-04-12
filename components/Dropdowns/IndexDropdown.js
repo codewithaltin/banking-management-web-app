@@ -19,7 +19,7 @@ const IndexDropdown = () => {
   return (
     <>
       <a
-        className="hover:text-blueGray-700 text-blueGray-900 px-3 py-4 lg:py-2 flex items-center text-xs uppercase font-bold"
+        className="text-blueGray-900  hover:text-blueGray-700 text-xs font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
         href="#pablo"
         ref={btnDropdownRef}
         onClick={(e) => {
