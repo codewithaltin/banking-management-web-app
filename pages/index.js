@@ -196,94 +196,94 @@ export default function Index() {
               <div className="justify-center flex flex-wrap relative">
                 <div className="my-4 w-full lg:w-6/12 px-4">
                   <a
-                    href="https://www.creative-tim.com/learning-lab/tailwind/svelte/alerts/notus?ref=vtw-index"
+                    href="#"
                     target="_blank"
                   >
                     <div className="bg-red-600 shadow-lg rounded-lg text-center p-8">
                       <img
                         alt="..."
                         className="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                        src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/svelte.jpg"
+                        src="/img/retirement.png"
                       />
                       <p className="text-lg text-white mt-4 font-semibold">
-                        Svelte
+                        Retirement Planning
                       </p>
                     </div>
                   </a>
                   <a
-                    href="https://www.creative-tim.com/learning-lab/tailwind/react/alerts/notus?ref=vtw-index"
+                    href="#"
                     target="_blank"
                   >
                     <div className="bg-lightBlue-500 shadow-lg rounded-lg text-center p-8 mt-8">
                       <img
                         alt="..."
                         className="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                        src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/react.jpg"
+                        src="/img/property.png"
                       />
                       <p className="text-lg text-white mt-4 font-semibold">
-                        ReactJS
+                        Mortgage 
                       </p>
                     </div>
                   </a>
                   <a
-                    href="https://www.creative-tim.com/learning-lab/tailwind/nextjs/alerts/notus?ref=vtw-index"
+                    href="#"
                     target="_blank"
                   >
-                    <div className="bg-blueGray-700 shadow-lg rounded-lg text-center p-8 mt-8">
+                    <div className="bg-blueGray-900 shadow-lg rounded-lg text-center p-8 mt-8">
                       <img
                         alt="..."
                         className="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                        src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/nextjs.jpg"
+                        src="/img/piggy-b.png"
                       />
                       <p className="text-lg text-white mt-4 font-semibold">
-                        NextJS
+                        Saving Accounts
                       </p>
                     </div>
                   </a>
                 </div>
                 <div className="my-4 w-full lg:w-6/12 px-4 lg:mt-16">
                   <a
-                    href="https://www.creative-tim.com/learning-lab/tailwind/js/alerts/notus?ref=vtw-index"
+                    href="#"
                     target="_blank"
                   >
                     <div className="bg-yellow-500 shadow-lg rounded-lg text-center p-8">
                       <img
                         alt="..."
                         className="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                        src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/js.png"
+                        src="/img/money.png"
                       />
                       <p className="text-lg text-white mt-4 font-semibold">
-                        JavaScript
+                        Grow Wealth
                       </p>
                     </div>
                   </a>
                   <a
-                    href="https://www.creative-tim.com/learning-lab/tailwind/angular/alerts/notus?ref=vtw-index"
+                    href="#"
                     target="_blank"
                   >
                     <div className="bg-red-700 shadow-lg rounded-lg text-center p-8 mt-8">
                       <img
                         alt="..."
                         className="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                        src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/angular.jpg"
+                        src="/img/risk-m.png"
                       />
                       <p className="text-lg text-white mt-4 font-semibold">
-                        Angular
+                        Risk Management
                       </p>
                     </div>
                   </a>
                   <a
-                    href="https://www.creative-tim.com/learning-lab/tailwind/vue/alerts/notus?ref=vtw-index"
+                    href="#"
                     target="_blank"
                   >
                     <div className="bg-emerald-500 shadow-lg rounded-lg text-center p-8 mt-8">
                       <img
                         alt="..."
                         className="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                        src="https://raw.githubusercontent.com/creativetimofficial/public-assets/master/logos/vue.jpg"
+                        src="/img/euro.png"
                       />
                       <p className="text-lg text-white mt-4 font-semibold">
-                        Vue.js
+                        Smart Money Moves
                       </p>
                     </div>
                   </a>
@@ -295,17 +295,14 @@ export default function Index() {
               <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
                 <i className="fas fa-drafting-compass text-xl"></i>
               </div>
-              <h3 className="text-3xl mb-2 font-semibold leading-normal">
-                Javascript Components
+              <h3 className="text-3xl mb-2 font-semibold leading-normal text-blueGray-900">
+                Financial Empowerment
               </h3>
-              <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-                In order to create a great User Experience some components
-                require JavaScript. In this way you can manipulate the elements
-                on the page and give more options to your users.
+              <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-800">
+              “FuturBanking” is all-in-one solution for individuals looking to manage their finances effectively. Users can easily compare different insurance plans, purchase policies, and manage their coverage online, all from a single platform. 
               </p>
-              <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-                We created a set of Components that are dynamic and come to help
-                you.
+              <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-800">
+              Furthermore, our platform can be a valuable resource for individuals seeking financial tips and investment guidance.
               </p>
               <div className="block pb-6">
                 <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white  last:mr-0 mr-2 mt-2">
