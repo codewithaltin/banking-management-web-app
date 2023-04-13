@@ -17,7 +17,7 @@ export default function Index() {
                 Digital Banking Service
               </h1>
               <p className="mt-2 text-lg leading-relaxed capitalize text-blueGray-800">
-                Flexible, Secure and Secure Cooporate Banking
+                Banking that fits your lifestyle and supports your ambitions!
               </p>
               <div className="mt-12">
                 <a
