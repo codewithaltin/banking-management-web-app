@@ -60,10 +60,10 @@ export default function Index() {
                     className="absolute left-0 w-full block h-95-px -top-94-px"
                   ></svg>
                   <h4 className="text-xl font-bold text-blueGray-900">
-                    Get Individual/Businness Loan
+                    Get Individual/ Business Loan
                   </h4>
                   <p className="text-md font-light mt-2 text-blueGray-900">
-                    Get the lowest rates loans, individually or as a business.
+                    Whether you're an individual looking to make a big purchase or a business owner in need of funding, our loan options can help you get the funds you need. Apply now and take the first step toward achieving your financial goals.
                   </p>
                 </blockquote>
               </div>
@@ -74,25 +74,27 @@ export default function Index() {
                 <div className="w-full md:w-6/12 px-4">
                   <div className="relative flex flex-col mt-4">
                     <div className="px-4 py-5 flex-auto">
-                      <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white">
-                        <i className="fas fa-sitemap"></i>
+                      <div className="text-blueGray-700 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white">
+                        <i className="fas fa-balance-scale"></i>
                       </div>
-                      <h6 className="text-xl mb-1 font-semibold">
-                        Many Options
+                      <h6 className="text-xl mb-1 font-semibold  text-blueGray-900">
+                        Control Balance
                       </h6>
-                      <p className="mb-4 text-blueGray-500">
-                        Choose from many options.
+                      <p className="mb-4 text-blueGray-600">
+                        Track your finances and stay in control with the balance.
                       </p>
                     </div>
                   </div>
                   <div className="relative flex flex-col min-w-0">
                     <div className="px-4 py-5 flex-auto">
-                      <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white">
-                        <i className="fas fa-drafting-compass"></i>
+                      <div className="text-blueGray-700 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white">
+                        <i className="fas fa-calculator"></i>
                       </div>
-                      <h6 className="text-xl mb-1 font-semibold">Precise</h6>
-                      <p className="mb-4 text-blueGray-900">
-                        All the rates & due time will be shown in the bill.
+                      <h6 className="text-xl mb-1 font-semibold text-blueGray-900">
+                        Crunch the Numbers
+                      </h6>
+                      <p className="mb-4 text-blueGray-600">
+                      Use our financial calculator to make sense of your finances.
                       </p>
                     </div>
                   </div>
@@ -100,27 +102,27 @@ export default function Index() {
                 <div className="w-full md:w-6/12 px-4">
                   <div className="relative flex flex-col min-w-0 mt-4">
                     <div className="px-4 py-5 flex-auto">
-                      <div className="text-blueGray-900 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white">
-                        <i className="fas fa-newspaper"></i>
+                      <div className="text-blueGray-700 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white">
+                        <i className="fas fa-wallet"></i>
                       </div>
                       <h6 className="text-xl mb-1 font-semibold text-blueGray-900">
-                        Easy & Fast
+                        Digital Wallet
                       </h6>
-                      <p className="mb-4 text-blueGray-900">
-                        Get a loan within a day.
+                      <p className="mb-4 text-blueGray-600">
+                        Carry your bank in your pocket with our secure digital wallet.
                       </p>
                     </div>
                   </div>
                   <div className="relative flex flex-col min-w-0">
                     <div className="px-4 py-5 flex-auto">
-                      <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white">
-                        <i className="fas fa-file-alt"></i>
+                      <div className="text-blueGray-700 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white ">
+                        <i className="fas fa-landmark"></i>
                       </div>
-                      <h6 className="text-xl mb-1 font-semibold">
-                        Papers Ready
+                      <h6 className="text-xl mb-1 font-semibold  text-blueGray-900">
+                        "Landmark Banking"
                       </h6>
-                      <p className="mb-4 text-blueGray-500">
-                        All the papers you need, will be provided by our team.
+                      <p className="mb-4 text-blueGray-600">
+                        We are the reliable partner in achieving your financial goals.
                       </p>
                     </div>
                   </div>
