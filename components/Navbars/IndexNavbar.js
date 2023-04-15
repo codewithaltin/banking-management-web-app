@@ -43,7 +43,7 @@ export default function Navbar(props) {
               <li className="flex items-center">
                 {" "}
                 <Link
-                  href="/auth/login"
+                  href="/auth/individual_register"
                   className="text-blueGray-900  hover:text-blueGray-700 text-xs font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
                 >
                   Individual
@@ -52,7 +52,7 @@ export default function Navbar(props) {
               <li className="flex items-center">
                 {" "}
                 <Link
-                  href="/auth/login"
+                  href="/auth/business_register"
                   className="text-blueGray-900 hover:text-blueGray-700 text-xs font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
                 >
                   Business

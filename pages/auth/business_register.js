@@ -5,6 +5,16 @@ import React from "react";
 import Auth from "layouts/Auth.js";
 
 export default function Register() {
+  const options = [
+    "Partnership",
+    "Individual/Sole Partnership",
+    "Coorporation",
+    "Nonprofil Organization",
+    "Goverment Entity",
+  ];
+  const onOptionChangeHandler = (event) => {
+    console.log("User Selected Value - ", event.target.value);
+  };
   return (
     <>
       <div className="container mx-auto px-4 h-full">
@@ -45,15 +55,14 @@ export default function Register() {
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      Name
+                      Business Name
                     </label>
                     <input
                       type="email"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Name"
+                      placeholder="Business Name"
                     />
                   </div>
-
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -67,7 +76,6 @@ export default function Register() {
                       placeholder="Email"
                     />
                   </div>
-
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -79,6 +87,50 @@ export default function Register() {
                       type="password"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Password"
+                    />
+                  </div>
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      repeat password
+                    </label>
+                    <input
+                      type="password"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="repeat password"
+                    />
+                  </div>
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      category
+                    </label>
+
+                    <select
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      onChange={onOptionChangeHandler}
+                    >
+                      <option>Select</option>
+                      {options.map((option, index) => {
+                        return <option key={index}>{option}</option>;
+                      })}
+                    </select>
+                  </div>
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      Business Address
+                    </label>
+                    <input
+                      type="text"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="Business Address"
                     />
                   </div>
 
@@ -101,7 +153,6 @@ export default function Register() {
                       </span>
                     </label>
                   </div>
-
                   <div className="text-center mt-6">
                     <button
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
