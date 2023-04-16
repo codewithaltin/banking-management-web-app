@@ -136,15 +136,13 @@ export default function Index() {
           <div className="flex flex-wrap items-center">
             <div className="w-full md:w-4/12 px-12 md:px-4 ml-auto mr-auto mt-48">
               <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
-                <i className="fas fa-sitemap text-xl"></i>
+                <i className="fas fa-comments-dollar text-xl"></i>
               </div>
               <h3 className="text-3xl mb-2 font-semibold leading-normal text-blueGray-900">
-                CSS Components
+                  Simplify your life
               </h3>
               <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-                Every element that you need in a product comes built in as a
-                component. All components fit perfectly with each other and can
-                have different colours.
+                  Looking for a way to simplify your finances and keep your money at your fingertips? Everyday Checking is the solution. Whether you're paying bills, depositing a check, or making a purchase, Everyday Checking streamlines your financial life and gives you greater control over your money. 
               </p>
 
               <a
@@ -161,32 +159,32 @@ export default function Index() {
               <div className="relative flex flex-col min-w-0 w-full mb-6 mt-48 md:mt-0">
                 <img
                   alt="..."
-                  src="/img/component-btn.png"
+                  src="/img/f-banking.png"
                   className="w-full align-middle rounded absolute shadow-lg max-w-100-px left-145-px -top-29-px z-3"
                 />
                 <img
                   alt="..."
-                  src="/img/component-profile-card.png"
+                  src="/img/strong-finance1.jpg"
                   className="w-full align-middle rounded-lg absolute shadow-lg max-w-210-px left-260-px -top-160-px"
                 />
                 <img
                   alt="..."
-                  src="/img/component-info-card.png"
+                  src="/img/money-time.jpg"
                   className="w-full align-middle rounded-lg absolute shadow-lg max-w-180-px left-40-px -top-225-px z-2"
                 />
                 <img
                   alt="..."
-                  src="/img/component-info-2.png"
+                  src="/img/simplify-finance.jpg"
                   className="w-full align-middle rounded-lg absolute shadow-2xl max-w-200-px -left-50-px top-25-px"
                 />
                 <img
                   alt="..."
-                  src="/img/component-menu.png"
+                  src="/img/bussiness-agreement.png"
                   className="w-full align-middle rounded absolute shadow-lg max-w-580-px -left-20-px top-210-px"
                 />
                 <img
                   alt="..."
-                  src="https://images.unsplash.com/photo-1589758438368-0ad531db3366?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1332&q=80"
+                  src="/img/banking-card.jpg"
                   className="w-full align-middle rounded absolute shadow-xl max-w-120-px left-195-px top-95-px"
                 />
               </div>
