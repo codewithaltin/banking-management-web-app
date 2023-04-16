@@ -1,17 +1,42 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-
-// layout for page
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+import "yup-phone";
 
 import Auth from "layouts/Auth.js";
+const phoneReg = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
+const schema = yup
+  .object()
+  .shape({
+    fullName: yup.string().required("Full Name is required."),
+    email: yup
+      .string()
+      .email("Please enter a valid e-mail")
+      .required("Email is required."),
+    phoneNumber: yup
+      .string()
+      .required("Phone number is required")
+      .matches(phoneReg, "Phone Number is not valid."),
+    password: yup
+      .string()
+      .required("Password is required.")
+      .min(5, "Password must be 5 characters long")
+      .max(35, "Password must be shorter than 35 characters"),
+    confirmPassword: yup
+      .string()
+      .oneOf([yup.ref("password"), null], "Passwords do not match.")
+      .required("Confirm Password field is required."),
+  })
+  .required();
 export default function Register() {
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
-  } = useForm();
+  } = useForm({ resolver: yupResolver(schema) });
   const onSubmit = (data) => console.log(data);
 
   return (
@@ -49,24 +74,26 @@ export default function Register() {
                   <small>Or sign up with credentials</small>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
+                  {" "}
                   <div className="relative w-full mb-3">
                     <label
-                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      className="block uppercase text-blueGray-900 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      Name
+                      Full Name
                     </label>
                     <input
-                      {...register("name", { required: true })}
-                      type="email"
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder=" Full Name"
+                      {...register("fullName")}
+                      className="border-0 px-3 py-3 placeholder-blueGray-300
+                    text-blueGray-900 bg-white rounded text-sm shadow
+                    focus:outline-none focus:ring w-full ease-linear
+                    transition-all duration-150"
+                      placeholder="p.s Altin Morina"
                     />
-                    {errors.exampleRequired && (
-                      <span>This field is required</span>
-                    )}
+                    <small role="alert" className="text-red-500 ">
+                      {errors.fullName?.message}
+                    </small>
                   </div>
-
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -75,10 +102,14 @@ export default function Register() {
                       Email
                     </label>
                     <input
+                      {...register("email")}
                       type="email"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Email"
+                      placeholder="p.s example@gmail.com"
                     />
+                    <small role="alert" className="text-red-500 ">
+                      {errors.email?.message}
+                    </small>
                   </div>
                   <div className="relative w-full mb-3">
                     <label
@@ -88,10 +119,14 @@ export default function Register() {
                       Phone number
                     </label>
                     <input
-                      type="email"
+                      {...register("phoneNumber")}
+                      type="tel"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Phone Number"
+                      placeholder="p.s 049588814"
                     />
+                    <small role="alert" className="text-red-500 ">
+                      {errors.phoneNumber?.message}
+                    </small>
                   </div>
                   <div className="relative w-full mb-3">
                     <label
@@ -101,23 +136,31 @@ export default function Register() {
                       Password
                     </label>
                     <input
+                      {...register("password")}
                       type="password"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Password"
                     />
+                    <small role="alert" className="text-red-500 ">
+                      {errors.password?.message}
+                    </small>
                   </div>
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      Repeat Password
+                      Confirm Password
                     </label>
                     <input
+                      {...register("confirmPassword")}
                       type="password"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Password"
+                      placeholder="Comfirm Password"
                     />
+                    <small role="alert" className="text-red-500 ">
+                      {errors.confirmPassword?.message}
+                    </small>
                   </div>
                   <div>
                     <label className="inline-flex items-center cursor-pointer">
@@ -138,14 +181,12 @@ export default function Register() {
                       </span>
                     </label>
                   </div>
-
                   <div className="text-center mt-6">
-                    <button
+                    <input
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                      type="button"
-                    >
-                      Submit
-                    </button>
+                      type="submit"
+                      value="Submit"
+                    />
                   </div>
                 </form>
               </div>
