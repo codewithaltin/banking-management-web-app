@@ -5,7 +5,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import Auth from "layouts/Auth.js";
-const phoneReg = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 const schema = yup
   .object()
@@ -19,10 +18,6 @@ const schema = yup
       .string()
       .email("Please enter a valid e-mail")
       .required("Email is required."),
-    phoneNumber: yup
-      .string()
-      .required("Phone number is required")
-      .matches(phoneReg, "Phone Number is not valid."),
     password: yup
       .string()
       .required("Password is required.")
@@ -40,6 +35,13 @@ const schema = yup
   .required();
 
 export default function Register() {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
+  const onSubmit = (data) => console.log(data);
   const options = [
     "Partnership",
     "Individual/Sole Partnership",
@@ -50,13 +52,7 @@ export default function Register() {
   const onOptionChangeHandler = (event) => {
     console.log("User Selected Value - ", event.target.value);
   };
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
-  const onSubmit = (data) => console.log(data);
+
   return (
     <>
       <div className="container mx-auto px-4 h-full">

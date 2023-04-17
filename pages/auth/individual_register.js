@@ -31,7 +31,6 @@ const schema = yup
       .string()
       .oneOf([yup.ref("password"), null], "Passwords do not match.")
       .required("Confirm Password field is required."),
-    category: yup.string.required("Category must be selected"),
   })
   .required();
 export default function Register() {
