@@ -2,7 +2,6 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import "yup-phone";
 
 import Auth from "layouts/Auth.js";
 const phoneReg = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -10,7 +9,11 @@ const phoneReg = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4}
 const schema = yup
   .object()
   .shape({
-    fullName: yup.string().required("Full Name is required."),
+    fullName: yup
+      .string()
+      .required("Full Name is required.")
+      .min(5, "Full name must be longer than 5 characters")
+      .max(50, "Full name must be shorter than 50 characters."),
     email: yup
       .string()
       .email("Please enter a valid e-mail")
@@ -122,7 +125,7 @@ export default function Register() {
                       {...register("phoneNumber")}
                       type="tel"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="p.s 049588814"
+                      placeholder="p.s 049-588-814"
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.phoneNumber?.message}
