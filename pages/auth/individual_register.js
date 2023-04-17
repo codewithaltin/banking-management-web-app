@@ -31,6 +31,7 @@ const schema = yup
       .string()
       .oneOf([yup.ref("password"), null], "Passwords do not match.")
       .required("Confirm Password field is required."),
+    category: yup.string.required("Category must be selected"),
   })
   .required();
 export default function Register() {
@@ -168,10 +169,14 @@ export default function Register() {
                   <div>
                     <label className="inline-flex items-center cursor-pointer">
                       <input
+                        {...register("category")}
                         id="customCheckLogin"
                         type="checkbox"
                         className="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
                       />
+                      <small role="alert" className="text-red-500 ">
+                        {errors.category?.message}
+                      </small>
                       <span className="ml-2 text-sm font-semibold text-blueGray-600">
                         I agree with the{" "}
                         <a
