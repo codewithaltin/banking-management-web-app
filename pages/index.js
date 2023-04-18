@@ -418,11 +418,9 @@ export default function Index() {
 
         <div className="justify-center text-center flex flex-wrap mt-24">
           <div className="w-full md:w-6/12 px-12 md:px-4">
-            <h2 className="font-semibold text-4xl">Beautiful Example Pages</h2>
+            <h2 className="font-semibold text-4xl">Explore Our Site</h2>
             <p className="text-lg leading-relaxed mt-4 mb-4 text-blueGray-500">
-              Notus NextJS is a completly new product built using our past
-              experience in web templates. Take the examples we made for you and
-              start playing with them.
+            We invite you to explore all that we have to offer. Click on one of the three images below to access different sections of our site. Thank you for choosing us as your destination for all banking things. Happy exploring!
             </p>
           </div>
         </div>
