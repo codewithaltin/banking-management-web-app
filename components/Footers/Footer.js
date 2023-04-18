@@ -116,7 +116,7 @@ export default function Footer() {
                     <li>
                       <a
                         className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="https://creative-tim.com/terms?ref=nnjs-footer"
+                        href="#"
                       >
                         Financial Empowerment
                       </a>
@@ -124,7 +124,7 @@ export default function Footer() {
                     <li>
                       <a
                         className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="https://creative-tim.com/privacy?ref=nnjs-footer"
+                        href="#"
                       >
                         Elevate Your Giving
                       </a>
@@ -132,7 +132,7 @@ export default function Footer() {
                     <li>
                       <a
                         className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="https://creative-tim.com/contact-us?ref=nnjs-footer"
+                        href="#"
                       >
                         Global Banking Services
                       </a>

@@ -21,7 +21,7 @@ export default function Index() {
               </p>
               <div className="mt-12">
                 <a
-                  href="https://www.creative-tim.com/learning-lab/tailwind/nextjs/overview/notus?ref=nnjs-index"
+                  href="/auth/individual_register"
                   target="_blank"
                   className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-900 active:bg-blueGray-900 capitalize text-sm shadow hover:shadow-lg ease-linear transition-all duration-"
                 >
@@ -304,7 +304,7 @@ export default function Index() {
               <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-800">
               Furthermore, our platform can be a valuable resource for individuals seeking financial tips and investment guidance.
               </p>
-              <div className="block pb-6">
+              {/* <div className="block pb-6">
                 <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white  last:mr-0 mr-2 mt-2">
                   Alerts
                 </span>
@@ -329,9 +329,9 @@ export default function Index() {
                 <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white  last:mr-0 mr-2 mt-2">
                   Tooltips
                 </span>
-              </div>
+              </div> */}
               <a
-                href="https://www.creative-tim.com/learning-lab/tailwind/nextjs/alerts/notus?ref=nnjs-index"
+                href="#"
                 target="_blank"
                 className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
               >
@@ -512,7 +512,7 @@ export default function Index() {
         </div>
       </section>
 
-      <section className="pb-16 bg-blueGray-200 relative pt-32">
+      {/* <section className="pb-16 bg-blueGray-200 relative pt-32">
         <div
           className="-mt-20 top-0 bottom-auto left-0 right-0 w-full absolute h-20"
           style={{ transform: "translateZ(0)" }}
@@ -570,7 +570,7 @@ export default function Index() {
             </div>
           </div>
         </div>
-      </section>
+      </section> */}
       <Footer />
     </>
   );
