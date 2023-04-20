@@ -1,4 +1,4 @@
-package com.bimi.bankingsystem;
+package com.bimi.bankingsystem.service;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
