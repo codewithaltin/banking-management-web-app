@@ -1,4 +1,4 @@
-package com.dailycodebuffer.usersystem.model;
+package com.bimi.bankingsystem.model;
 
 public class User {
     private long id;

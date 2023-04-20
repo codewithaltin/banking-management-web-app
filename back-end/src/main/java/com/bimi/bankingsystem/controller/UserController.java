@@ -1,7 +1,7 @@
-package com.dailycodebuffer.usersystem.controller;
+package com.bimi.bankingsystem.controller;
 
-import com.dailycodebuffer.usersystem.model.User;
-import com.dailycodebuffer.usersystem.service.UserService;
+import com.bimi.bankingsystem.model.User;
+import com.bimi.bankingsystem.service.BankingService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -15,33 +15,33 @@ import java.util.Map;
 @RequestMapping("/api/v1/")
 public class UserController {
 
-    private final UserService userService;
+    private final BankingService bankingService;
 
-    public UserController(UserService userService) {
-        this.userService = userService;
+    public UserController(BankingService bankingService) {
+        this.bankingService = bankingService;
     }
 
     @PostMapping("/users")
     public User saveUser(@RequestBody User user) {
-        return userService.saveUser(user);
+        return bankingService.saveUser(user);
     }
 
     @GetMapping("/users")
     public List<User> getAllUsers() {
-        return userService.getAllUsers();
+        return bankingService.getAllUsers();
     }
 
     @GetMapping("/users/{id}")
     public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
         User user = null;
-        user = userService.getUserById(id);
+        user = bankingService.getUserById(id);
         return ResponseEntity.ok(user);
     }
 
     @DeleteMapping("/users/{id}")
     public ResponseEntity<Map<String,Boolean>> deleteEmployee(@PathVariable("id") Long id) {
         boolean deleted = false;
-        deleted =userService.deleteUser(id);
+        deleted =bankingService.deleteUser(id);
         Map<String,Boolean> response = new HashMap<>();
         response.put("deleted", deleted);
         return ResponseEntity.ok(response);
@@ -50,7 +50,7 @@ public class UserController {
     @PutMapping("/users/{id}")
     public ResponseEntity<User> updateUser(@PathVariable("id") Long id,
                                            @RequestBody User user) {
-        user = userService.updateUser(id,user);
+        user = bankingService.updateUser(id,user);
         return ResponseEntity.ok(user);
     }
 

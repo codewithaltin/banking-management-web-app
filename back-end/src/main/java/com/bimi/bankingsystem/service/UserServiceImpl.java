@@ -1,8 +1,8 @@
-package com.dailycodebuffer.usersystem.service;
+package com.bimi.bankingsystem.service;
 
-import com.dailycodebuffer.usersystem.entity.UserEntity;
-import com.dailycodebuffer.usersystem.model.User;
-import com.dailycodebuffer.usersystem.repository.UserRepository;
+import com.bimi.bankingsystem.entity.UserEntity;
+import com.bimi.bankingsystem.model.User;
+import com.bimi.bankingsystem.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements BankingService{
 
     private UserRepository userRepository;
 

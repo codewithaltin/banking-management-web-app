@@ -1,10 +1,10 @@
-package com.dailycodebuffer.usersystem.service;
+package com.bimi.bankingsystem.service;
 
-import com.dailycodebuffer.usersystem.model.User;
+import com.bimi.bankingsystem.model.User;
 
 import java.util.List;
 
-public interface UserService {
+public interface BankingService {
     User saveUser(User user);
 
     List<User> getAllUsers();

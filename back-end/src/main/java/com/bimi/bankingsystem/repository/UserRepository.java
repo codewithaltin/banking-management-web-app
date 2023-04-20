@@ -1,6 +1,6 @@
-package com.dailycodebuffer.usersystem.repository;
+package com.bimi.bankingsystem.repository;
 
-import com.dailycodebuffer.usersystem.entity.UserEntity;
+import com.bimi.bankingsystem.entity.UserEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
