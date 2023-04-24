@@ -51,6 +51,17 @@ export default function Navbar(props) {
                   Business
                 </Link>{" "}
               </li>{" "}
+
+              <li className="flex items-center">
+                {" "}
+                <Link
+                  href="/auth/invoice_details"
+                  className="text-blueGray-100  hover:text-blueGray-200 text-xs font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                >
+                  Invoice
+                </Link>{" "}
+              </li>
+
               <li className="flex items-center">
                 <IndexDropdown />
               </li>
