@@ -1424,6 +1424,9 @@ select {
 .bg-opacity-50 {
   --tw-bg-opacity: 0.5;
 }
+.bg-opacity-20 {
+  --tw-bg-opacity: 0.2;
+}
 
 .bg-center {
   background-position: center;

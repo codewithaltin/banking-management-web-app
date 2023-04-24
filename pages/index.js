@@ -9,17 +9,19 @@ export default function Index() {
   return (
     <>
       <IndexNavbar fixed />
+      <img className="absolute" src="/img/background.jpg" alt="..." />
+
       <section className="header relative pt-16 items-center flex h-screen max-h-860-px">
-        <div className="container mx-auto items-center flex flex-wrap">
+        <div className="container justify-center mx-auto items-center flex flex-wrap">
           <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
             <div className="pt-32 sm:pt-0">
-              <h1 className="text-5xl font-bold leading-normal capitalize mt-0 mb-2 text-blueGray-900">
+              <h1 className="text-5xl font-bold text-center leading-normal capitalize mt-0 mb-2 text-blueGray-900">
                 Digital Banking Service
               </h1>
-              <p className="mt-2 text-lg leading-relaxed capitalize text-blueGray-800">
+              <p className="mt-2 text-lg leading-relaxed capitalize text-center text-blueGray-800">
                 Banking that fits your lifestyle and supports your ambitions!
               </p>
-              <div className="mt-12">
+              <div className="mt-12 flex justify-center">
                 <a
                   href="/auth/individual_register"
                   target="_blank"
@@ -31,11 +33,6 @@ export default function Index() {
             </div>
           </div>
         </div>
-        <img
-          className=" absolute top-0 b-auto right-0 pt-16  sm:w-6/12 -mt-48 sm:mt-0 w-10/12 max-h-860-px  "
-          src="/img/cover_card.png"
-          alt="..."
-        />
       </section>
 
       <section className="mt-48 md:mt-40 pb-40 relative ">
@@ -63,7 +60,10 @@ export default function Index() {
                     Get Individual/ Business Loan
                   </h4>
                   <p className="text-md font-light mt-2 text-blueGray-900">
-                    Whether you're an individual looking to make a big purchase or a business owner in need of funding, our loan options can help you get the funds you need. Apply now and take the first step toward achieving your financial goals.
+                    Whether you're an individual looking to make a big purchase
+                    or a business owner in need of funding, our loan options can
+                    help you get the funds you need. Apply now and take the
+                    first step toward achieving your financial goals.
                   </p>
                 </blockquote>
               </div>
@@ -81,7 +81,8 @@ export default function Index() {
                         Control Balance
                       </h6>
                       <p className="mb-4 text-blueGray-600">
-                        Track your finances and stay in control with the balance.
+                        Track your finances and stay in control with the
+                        balance.
                       </p>
                     </div>
                   </div>
@@ -94,7 +95,8 @@ export default function Index() {
                         Crunch the Numbers
                       </h6>
                       <p className="mb-4 text-blueGray-600">
-                      Use our financial calculator to make sense of your finances.
+                        Use our financial calculator to make sense of your
+                        finances.
                       </p>
                     </div>
                   </div>
@@ -109,7 +111,8 @@ export default function Index() {
                         Digital Wallet
                       </h6>
                       <p className="mb-4 text-blueGray-600">
-                        Carry your bank in your pocket with our secure digital wallet.
+                        Carry your bank in your pocket with our secure digital
+                        wallet.
                       </p>
                     </div>
                   </div>
@@ -122,7 +125,8 @@ export default function Index() {
                         "Landmark Banking"
                       </h6>
                       <p className="mb-4 text-blueGray-600">
-                        We are the reliable partner in achieving your financial goals.
+                        We are the reliable partner in achieving your financial
+                        goals.
                       </p>
                     </div>
                   </div>
@@ -139,10 +143,14 @@ export default function Index() {
                 <i className="fas fa-comments-dollar text-xl"></i>
               </div>
               <h3 className="text-3xl mb-2 font-semibold leading-normal text-blueGray-900">
-                  Simplify your life
+                Simplify your life
               </h3>
               <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-                  Looking for a way to simplify your finances and keep your money at your fingertips? Everyday Checking is the solution. Whether you're paying bills, depositing a check, or making a purchase, Everyday Checking streamlines your financial life and gives you greater control over your money. 
+                Looking for a way to simplify your finances and keep your money
+                at your fingertips? Everyday Checking is the solution. Whether
+                you're paying bills, depositing a check, or making a purchase,
+                Everyday Checking streamlines your financial life and gives you
+                greater control over your money.
               </p>
 
               <a
@@ -195,10 +203,7 @@ export default function Index() {
             <div className="w-full md:w-6/12 px-4 mr-auto ml-auto mt-32">
               <div className="justify-center flex flex-wrap relative">
                 <div className="my-4 w-full lg:w-6/12 px-4">
-                  <a
-                    href="#"
-                    target="_blank"
-                  >
+                  <a href="#" target="_blank">
                     <div className="bg-red-600 shadow-lg rounded-lg text-center p-8">
                       <img
                         alt="..."
@@ -210,10 +215,7 @@ export default function Index() {
                       </p>
                     </div>
                   </a>
-                  <a
-                    href="#"
-                    target="_blank"
-                  >
+                  <a href="#" target="_blank">
                     <div className="bg-lightBlue-500 shadow-lg rounded-lg text-center p-8 mt-8">
                       <img
                         alt="..."
@@ -221,14 +223,11 @@ export default function Index() {
                         src="/img/property.png"
                       />
                       <p className="text-lg text-white mt-4 font-semibold">
-                        Mortgage 
+                        Mortgage
                       </p>
                     </div>
                   </a>
-                  <a
-                    href="#"
-                    target="_blank"
-                  >
+                  <a href="#" target="_blank">
                     <div className="bg-blueGray-900 shadow-lg rounded-lg text-center p-8 mt-8">
                       <img
                         alt="..."
@@ -242,10 +241,7 @@ export default function Index() {
                   </a>
                 </div>
                 <div className="my-4 w-full lg:w-6/12 px-4 lg:mt-16">
-                  <a
-                    href="#"
-                    target="_blank"
-                  >
+                  <a href="#" target="_blank">
                     <div className="bg-yellow-500 shadow-lg rounded-lg text-center p-8">
                       <img
                         alt="..."
@@ -257,10 +253,7 @@ export default function Index() {
                       </p>
                     </div>
                   </a>
-                  <a
-                    href="#"
-                    target="_blank"
-                  >
+                  <a href="#" target="_blank">
                     <div className="bg-red-700 shadow-lg rounded-lg text-center p-8 mt-8">
                       <img
                         alt="..."
@@ -272,10 +265,7 @@ export default function Index() {
                       </p>
                     </div>
                   </a>
-                  <a
-                    href="#"
-                    target="_blank"
-                  >
+                  <a href="#" target="_blank">
                     <div className="bg-emerald-500 shadow-lg rounded-lg text-center p-8 mt-8">
                       <img
                         alt="..."
@@ -299,10 +289,14 @@ export default function Index() {
                 Financial Empowerment
               </h3>
               <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-800">
-              “FuturBanking” is all-in-one solution for individuals looking to manage their finances effectively. Users can easily compare different insurance plans, purchase policies, and manage their coverage online, all from a single platform. 
+                “FuturBanking” is all-in-one solution for individuals looking to
+                manage their finances effectively. Users can easily compare
+                different insurance plans, purchase policies, and manage their
+                coverage online, all from a single platform.
               </p>
               <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-800">
-              Furthermore, our platform can be a valuable resource for individuals seeking financial tips and investment guidance.
+                Furthermore, our platform can be a valuable resource for
+                individuals seeking financial tips and investment guidance.
               </p>
               {/* <div className="block pb-6">
                 <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white  last:mr-0 mr-2 mt-2">
@@ -350,10 +344,14 @@ export default function Index() {
                   <i className="fas fa-hand-holding-heart text-xl"></i>
                 </div>
                 <h3 className="text-3xl font-semibold text-blueGray-900">
-                Elevate Your Giving
+                  Elevate Your Giving
                 </h3>
                 <p className="mt-4 text-lg leading-relaxed text-blueGray-700">
-                At “FuturBanking”, we believe in making a positive impact on the world. By using our online banking platform, you can easily donate to a variety of charitable organizations that we've partnered with. Join us in giving back to your community and make a difference today!
+                  At “FuturBanking”, we believe in making a positive impact on
+                  the world. By using our online banking platform, you can
+                  easily donate to a variety of charitable organizations that
+                  we've partnered with. Join us in giving back to your community
+                  and make a difference today!
                 </p>
                 <ul className="list-none mt-6">
                   <li className="py-2">
@@ -420,7 +418,10 @@ export default function Index() {
           <div className="w-full md:w-6/12 px-12 md:px-4">
             <h2 className="font-semibold text-4xl">Explore Our Site</h2>
             <p className="text-lg leading-relaxed mt-4 mb-4 text-blueGray-500">
-            We invite you to explore all that we have to offer. Click on one of the three images below to access different sections of our site. Thank you for choosing us as your destination for all banking things. Happy exploring!
+              We invite you to explore all that we have to offer. Click on one
+              of the three images below to access different sections of our
+              site. Thank you for choosing us as your destination for all
+              banking things. Happy exploring!
             </p>
           </div>
         </div>
@@ -492,10 +493,15 @@ export default function Index() {
                 Global Banking Services
               </h3>
               <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-300">
-              Our global banking services are designed to meet your financial needs, no matter where you are in the world. Whether you are traveling abroad or managing your finances from afar, we offer a range of services to help you stay connected to your money. 
+                Our global banking services are designed to meet your financial
+                needs, no matter where you are in the world. Whether you are
+                traveling abroad or managing your finances from afar, we offer a
+                range of services to help you stay connected to your money.
               </p>
               <p className="text-lg font-light leading-relaxed mt-0 mb-4 text-blueGray-300">
-              So, whether you're exploring new horizons or simply looking to expand your financial reach, our global banking services are here to help you achieve your goals.
+                So, whether you're exploring new horizons or simply looking to
+                expand your financial reach, our global banking services are
+                here to help you achieve your goals.
               </p>
               <a
                 href="#"
