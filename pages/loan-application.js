@@ -1,11 +1,65 @@
 import React from "react";
 import Link from "next/link";
-
 import Navbar from "components/Navbars/AuthNavbar.js";
 import Footer from "components/Footers/Footer.js";
 
-export default function Loan() {
-    return <>
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
+import Auth from "layouts/Auth.js";
+const phoneReg = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+
+const schema = yup
+  .object()
+  .shape({
+    fullName: yup
+      .string()
+      .required("Full Name is required.")
+      .min(5, "Full name must be longer than 5 characters")
+      .max(50, "Full name must be shorter than 50 characters."),
+    email: yup
+      .string()
+      .email("Please enter a valid e-mail")
+      .required("Email is required."),
+    phoneNumber: yup
+      .string()
+      .required("Phone number is required")
+      .matches(phoneReg, "Phone Number is not valid."),
+    address: yup
+      .string()
+      .required("Address is required")
+      .min(7, "Address must be at least 7 characters"),
+    amount: yup
+      .number()
+      .typeError('Input must be a number')
+      .required("Loan Amount is required")
+      .min(2000, "Loan amount must be greater than €2000")
+      .max(50000, "Loan amount must be lower than €50000"),
+    income: yup
+      .number()
+      .typeError('Input must be a number')
+      .required("Monthly incomes are required")
+      .min(500, "Monthly incomes must be greater than €500"),
+    purpose: yup
+      .string()
+      .required("Loan purpose is required")
+      .min(20, "Purpose must be at least 20 characters"),
+    
+  })
+  .required();
+
+export default function Register() {
+    const {
+      register,
+      handleSubmit,
+      watch,
+      formState: { errors },
+    } = useForm({ resolver: yupResolver(schema) });
+    const onSubmit = (data) => console.log(data);
+
+    return( 
+    <>
       <Navbar transparent />
       <main>
       <div className="relative pt-16 pb-32 flex content-center items-center justify-center min-h-screen-75">
@@ -95,6 +149,10 @@ export default function Loan() {
                   <p className="leading-relaxed mt-1 mb-4 text-blueGray-500">
                     Complete this form and we will review your details.
                   </p>
+
+
+                  <form onSubmit={handleSubmit(onSubmit)}>
+                  {" "}
                   <div className="relative w-full mb-3 mt-8">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -104,9 +162,13 @@ export default function Loan() {
                     </label>
                     <input
                       type="text"
+                      {...register("fullName")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s Ilir Gjika"
                     />
+                    <small role="alert" className="text-red-500 ">
+                      {errors.fullName?.message}
+                    </small>
                   </div>
 
                   <div className="relative w-full mb-3">
@@ -118,65 +180,85 @@ export default function Loan() {
                     </label>
                     <input
                       type="email"
+                      {...register("email")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s example@gmail.com"
                     />
+                    <small role="alert" className="text-red-500 ">
+                      {errors.email?.message}
+                    </small>
                   </div>
 
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="email"
+                      htmlFor="phone-number"
                     >
                       Phone Number
                     </label>
                     <input
-                      type="email"
+                      type="tel"
+                      {...register("phoneNumber")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s 045-630-886"
                     />
+                    <small role="alert" className="text-red-500 ">
+                      {errors.phoneNumber?.message}
+                    </small>
                   </div>
 
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="email"
+                      htmlFor="address"
                     >
                       Address
                     </label>
                     <input
-                      type="email"
+                      type="text"
+                      {...register("address")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s Sheshi Skënderbej"
                     />
+                    <small role="alert" className="text-red-500 ">
+                      {errors.address?.message}
+                    </small>
                   </div>
 
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="email"
+                      htmlFor="loan-amount"
                     >
                       Loan Amount (€)
                     </label>
                     <input
-                      type="email"
+                      type="number"
+                      {...register("amount")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s 15000"
                     />
+                    <small role="alert" className="text-red-500 ">
+                      {errors.amount?.message}
+                    </small>
                   </div>
 
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="email"
+                      htmlFor="monthly-income"
                     >
                       Monthly income (€)
                     </label>
                     <input
-                      type="email"
+                      type="number"
+                      {...register("income")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s 800"
                     />
+                    <small role="alert" className="text-red-500 ">
+                      {errors.income?.message}
+                    </small>
                   </div>
 
                   <div className="relative w-full mb-3">
@@ -189,18 +271,24 @@ export default function Loan() {
                     <textarea
                       rows="4"
                       cols="80"
+                      {...register("purpose")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                       placeholder="Type a message..."
                     />
+                    <small role="alert" className="text-red-500 ">
+                      {errors.purpose?.message}
+                    </small>
                   </div>
                   <div className="text-center mt-6">
                     <button
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                      type="button"
+                      type="submit"
+                      value="Submit"
                     >
                       Submit
                     </button>
                   </div>
+                </form>
                 </div>
               </div>
             </div>
@@ -210,5 +298,5 @@ export default function Loan() {
 
       </main>
     <Footer />
-  </>;
+  </>);
 }
