@@ -9,25 +9,29 @@ export default function Index() {
   return (
     <>
       <IndexNavbar fixed />
-      <img className="absolute" src="/img/background.jpg" alt="..." />
+      <img
+        className="absolute w-full max-h-860-px"
+        src="/img/background.jpg"
+        alt="..."
+      />
 
       <section className="header relative pt-16 items-center flex h-screen max-h-860-px">
         <div className="container justify-center mx-auto items-center flex flex-wrap">
           <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
             <div className="pt-32 sm:pt-0">
-              <h1 className="text-5xl font-bold text-center leading-normal capitalize mt-0 mb-2 text-blueGray-900">
+              <h1 className="text-5xl font-bold text-center leading-normal capitalize mt-0 mb-2 text-blueGray-100">
                 Digital Banking Service
               </h1>
-              <p className="mt-2 text-lg leading-relaxed capitalize text-center text-blueGray-800">
+              <p className="mt-2 text-lg leading-relaxed capitalize text-center text-blueGray-100">
                 Banking that fits your lifestyle and supports your ambitions!
               </p>
               <div className="mt-12 flex justify-center">
                 <a
                   href="/auth/individual_register"
                   target="_blank"
-                  className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-900 active:bg-blueGray-900 capitalize text-sm shadow hover:shadow-lg ease-linear transition-all duration-"
+                  className="get-started text-blueGray-100 font-bold px-6 py-4 rounded-lg outline-none focus:outline-none mr-1 mb-1 bg-blueGray-100 active:bg-blueGray-100 bg-opacity-20 capitalize text-m shadow hover:shadow-lg ease-linear transition-all duration-"
                 >
-                  Get started
+                  GET STARTED
                 </a>
               </div>
             </div>
