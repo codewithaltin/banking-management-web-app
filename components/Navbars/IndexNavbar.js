@@ -8,8 +8,8 @@ export default function Navbar(props) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   return (
     <>
-      <nav className="top-0 fixed z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg bg-white shadow">
-        <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
+      <nav className="top-0 fixed z-50 w-full flex items-center  px-2 py-3 navbar-expand-lg bg-white shadow">
+        <div className="container px-4 mx-auto flex items-center ">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <Link
               href="/"
@@ -27,38 +27,48 @@ export default function Navbar(props) {
           </div>
           <div
             className={
-              "lg:flex flex-grow items-center bg-white lg:bg-opacity-0 lg:shadow-none" +
+              "lg:flex justify-between items-center w-full  bg-white lg:bg-opacity-0 lg:shadow-none" +
               (navbarOpen ? " block" : " hidden")
             }
             id="example-navbar-warning"
           >
-            <ul className="flex flex-col lg:flex-row list-none mr-auto">
-              <li className="flex items-center"></li>
-            </ul>
-            <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
-              <li className="flex items-center">
-                <IndexDropdown />
-              </li>
+            <div>
+              <ul className="flex flex-col lg:flex-row list-none mr-auto">
+                <li className="flex items-center">
+                  <IndexDropdown />
+                </li>
 
-              <li className="flex items-center">
-                {" "}
-                <Link
-                  href="/auth/individual_register"
-                  className="text-blueGray-900  hover:text-blueGray-700 text-xs font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
-                >
-                  Individual
-                </Link>{" "}
-              </li>
-              <li className="flex items-center">
+                <li className="flex items-center">
+                  {" "}
+                  <Link
+                    href="/auth/individual_register"
+                    className="text-blueGray-900  hover:text-blueGray-700 text-xs font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                  >
+                    Individual
+                  </Link>{" "}
+                </li>
+                <li className="flex items-center">
+                  {" "}
+                  <Link
+                    href="/auth/business_register"
+                    className="text-blueGray-900 hover:text-blueGray-700 text-xs font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                  >
+                    Business
+                  </Link>{" "}
+                </li>
+              </ul>
+            </div>
+            <div>
+              <li className="flex items-center justify-end bg-bluegray-900">
                 {" "}
                 <Link
                   href="/auth/business_register"
                   className="text-blueGray-900 hover:text-blueGray-700 text-xs font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
                 >
-                  Business
+                  Sign in
                 </Link>{" "}
               </li>
-            </ul>
+            </div>
           </div>
         </div>
       </nav>
