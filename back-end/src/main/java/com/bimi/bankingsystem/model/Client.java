@@ -1,3 +1,4 @@
+
 package com.bimi.bankingsystem.model;
 
 import jakarta.persistence.*;
@@ -13,6 +14,7 @@ public class Client {
     private Integer id;
     private String name;
     private String username;
+
 
     public Integer getId() {
         return id;
@@ -38,3 +40,4 @@ public class Client {
         this.username = username;
     }
 }
+
