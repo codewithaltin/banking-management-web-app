@@ -2,7 +2,6 @@ package com.bimi.bankingsystem.service;
 
 import com.bimi.bankingsystem.model.Client;
 import com.bimi.bankingsystem.repository.ClientRepository;
-import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,7 +26,7 @@ public class ClientService {
     public Client updateClient(Integer id, Client client){
         Client client1= clientRepository.findById(id).get();
         client1.setName(client.getName());
-        client1.setUsername(client.getUsername());
+        client1.setEmail(client.getEmail());
 
         return clientRepository.save(client1);
     }
