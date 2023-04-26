@@ -121,14 +121,14 @@ export default function Invoice() {
                                                 </label>
 
                                                 <button
-                                                    className="bg-red-500 h-8 px-3 py-3 flex items-center justify-center text-white font-bold rounded focus:outline-none focus:shadow-outline"
+                                                    className="bg-red-500 active:bg-blueGray-500 h-8 px-3 py-3 flex items-center justify-center text-white font-bold rounded focus:outline-none focus:shadow-outline"
                                                     type="button"
                                                 >
                                                     Remove
                                                 </button>
                                             </div>
                                             <button
-                                                className="bg-blueGray-700 h-8 px-3 py-3 flex items-center justify-center text-white font-bold rounded focus:outline-none focus:shadow-outline"
+                                                className="bg-blueGray-700 active:bg-blueGray-500 h-8 px-3 py-3 flex items-center justify-center text-white font-bold rounded focus:outline-none focus:shadow-outline"
                                                 type="button"
                                             >
                                                 Add Item
@@ -151,13 +151,13 @@ export default function Invoice() {
                                             </div>
                                             <div className="flex items-center justify-between">
                                                 <button
-                                                    className="bg-blueGray-700 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                                    className="bg-blueGray-700 active:bg-blueGray-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                                     type="button"
                                                 >
                                                     Send Invoice
                                                 </button>
                                                 <button
-                                                    className="bg-blueGray-700 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                                    className="bg-blueGray-700 active:bg-blueGray-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                                     type="button"
                                                 >
                                                     Download Invoice
