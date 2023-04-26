@@ -1,5 +1,3 @@
-
-
 import React from "react";
 import Navbar from "components/Navbars/AuthNavbar.js";
 import Footer from "components/Footers/Footer.js";
@@ -28,7 +26,6 @@ export default function Invoice() {
                         ></polygon>
                     </svg>
                 </div>
-
             </section>
             <section className="relative block py-24 lg:pt-0  bg-blueGray-800" >
                 <div className="container mx-auto px-0">
@@ -39,84 +36,135 @@ export default function Invoice() {
 
                                     <div className="rounded-t mb-o px-4 py-2">
                                         <form>
-                                            <h4 className="text-2xl font-semibold">
-                                                Invoice Information
-                                            </h4>
-                                            <p className="leading-relaxed mt-1 mb-4 text-blueGray-500">
-                                                Bill form
-                                            </p>
-                                            <div className="flex mb-4">
-                                                <div className="w-1/2 mr-3">
-                                                    <label
-                                                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                                        htmlFor="full-name"
-                                                    >
-                                                        City
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                        placeholder="city"
-                                                    />
-
-                                                </div>
-
-                                                <div className="w-1/2 ml-3 mr-3">
-                                                    <label
-                                                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                                        htmlFor="post-code"
-                                                    >
-                                                        Post Code
-                                                    </label>
-                                                    <input
-                                                        type="number"
-                                                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                        placeholder="post code"
-                                                    />
-                                                </div>
-
-                                                <div className="w-1/2 ml-3">
-                                                    <label
-                                                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                                        htmlFor="Country"
-                                                    >
-                                                        Country
-                                                    </label>
-                                                    <input
-                                                        type="text"
-                                                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                                        placeholder="country"
-                                                    />
-                                                </div>
+                                            <div className="mb-4">
+                                                <h4 className="text-4xl font-semibold text-center">
+                                                    Invoice
+                                                </h4>
                                             </div>
-
-
-                                            <div className="relative w-full mb-3">
+                                            <div className="py-2">
                                                 <label
-                                                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                                    htmlFor="message"
+                                                    className="block text-gray-700 text-sm font-bold mb-2"
+                                                    htmlFor="sender"
                                                 >
-                                                    Message
+                                                    Your email address
+                                                </label>
+                                                <input
+                                                    className="mb-4 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                    id="sender"
+                                                    name="sender"
+                                                    type="email"
+                                                    required
+                                                    placeholder="Who is this invoice from? (required)"
+                                                />
+                                                <label
+                                                    className="block text-gray-700 text-sm font-bold my-3"
+                                                >
+                                                    Bill To
                                                 </label>
                                                 <textarea
-                                                    rows="4"
-                                                    cols="80"
-                                                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
-                                                    placeholder="Type a message..."
+                                                    className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                    id="billTo"
+                                                    name="billTo"
+                                                    type="email"
+                                                    required
+                                                    placeholder="Who is this invoice to? (required)"
                                                 />
                                             </div>
-                                            <div className="text-center mt-6">
+                                            <div className="mb-6">
+                                                <label
+                                                    className="block text-gray-700 text-sm font-bold mb-2"
+                                                >
+                                                    Ship To
+                                                </label>
+                                                <input
+                                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                                                    id="shipTo"
+                                                    name="shipTo"
+                                                    type="email"
+                                                    required
+                                                    placeholder="Client's email"
+                                                />
+                                            </div>
+
+                                            <div
+                                                className="flex justify-center items-center space-x-4"
+                                            >
+                                                <label
+                                                    className="block text-gray-700 text-sm font-bold mb-2 w-full mr-5"
+                                                >
+                                                    Invoice Item
+                                                    <input
+                                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                                                        name="itemDescription"
+                                                        type="text"
+                                                    />
+                                                </label>
+                                                <label
+                                                    className="block text-gray-700 text-sm font-bold mb-2 w-full mr-5"
+                                                >
+                                                    Quantity
+                                                    <input
+                                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                                                        name="qty"
+                                                        type="number"
+                                                    />
+                                                </label>
+                                                <label
+                                                    className="block text-gray-700 text-sm font-bold mb-2 w-full  mr-5"
+                                                >
+                                                    Unit Price
+                                                    <input
+                                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                                                        name="price"
+                                                        type="tel"
+                                                    />
+                                                </label>
+
                                                 <button
-                                                    className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                                                    className="bg-red-500 h-8 px-3 py-3 flex items-center justify-center text-white font-bold rounded focus:outline-none focus:shadow-outline"
                                                     type="button"
                                                 >
-                                                    Send Message
+                                                    Remove
+                                                </button>
+                                            </div>
+                                            <button
+                                                className="bg-blueGray-700 h-8 px-3 py-3 flex items-center justify-center text-white font-bold rounded focus:outline-none focus:shadow-outline"
+                                                type="button"
+                                            >
+                                                Add Item
+                                            </button>
+                                            <div className="my-6 flex flex-col">
+                                                <label
+                                                    htmlFor="note"
+                                                    className="block text-gray-700 text-sm font-bold mb-2 w-full"
+                                                >
+                                                    Invoice Notes
+                                                </label>
+                                                <textarea
+                                                    id="note"
+                                                    name="note"
+                                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                                                />
+                                            </div>
+                                            <div className="mb-6 flex justify-between font-bold text-xl">
+                                                <p>Total:</p>
+                                            </div>
+                                            <div className="flex items-center justify-between">
+                                                <button
+                                                    className="bg-blueGray-700 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                                    type="button"
+                                                >
+                                                    Send Invoice
+                                                </button>
+                                                <button
+                                                    className="bg-blueGray-700 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                                    type="button"
+                                                >
+                                                    Download Invoice
                                                 </button>
                                             </div>
                                         </form>
                                     </div>
-
-
                                 </div>
                             </div>
                         </div>
