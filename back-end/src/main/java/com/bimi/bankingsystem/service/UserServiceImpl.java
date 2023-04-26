@@ -1,10 +1,13 @@
 package com.bimi.bankingsystem.service;
 
+import com.bimi.bankingsystem.entity.UserEntity;
 import com.bimi.bankingsystem.model.User;
 import com.bimi.bankingsystem.repository.UserRepository;
+import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class UserServiceImpl implements BankingService {
@@ -17,13 +20,22 @@ public class UserServiceImpl implements BankingService {
 
     @Override
     public User saveUser(User user) {
-        userRepository.save(user);
+        UserEntity userEntity = new UserEntity();
+        BeanUtils.copyProperties(user,userEntity);
+        userRepository.save(userEntity);
         return user;
     }
 
     @Override
     public List<User> getAllUsers() {
-        return userRepository.findAll();
+        List<UserEntity> userEntities = userRepository.findAll();
+        List<User> users = userEntities.stream().map(userEntity -> new User(
+                userEntity.getId(),
+                userEntity.getFirstName(),
+                userEntity.getLastName(),
+                userEntity.getEmailId()
+        )).collect(Collectors.toList());
+        return users;
     }
 
     @Override
