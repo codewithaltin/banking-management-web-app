@@ -1,9 +1,32 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 // components
 
 import User from "components/Cards/User.js";
+const USER_API_BASE_URL = "http://localhost:8080/api/v1/users";
+const [users, setUsers] = useState(null);
+const [loading, setLoading] = useState(true);
+
+useEffect(() => {
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(USER_API_BASE_URL, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const users = await response.json();
+      setUsers(users);
+    } catch (error) {
+      console.log(error);
+    }
+    setLoading(false);
+  };
+  fetchData();
+});
 
 export default function UserTable() {
   return (
