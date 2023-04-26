@@ -1,14 +1,14 @@
 import React from "react";
-import CardTable from "components/Cards/CardTable.js";
+import UserTable from "components/Cards/UserTable.js";
 import Admin from "layouts/Admin.js";
 
-const UserList = () => {
+const userlist = () => {
   return (
-    <div>
-      <CardTable color="dark" />
-    </div>
+    <>
+      <UserTable />;
+    </>
   );
 };
-UserList.layout = Admin;
+userlist.layout = Admin;
 
-export default UserList;
+export default userlist;
