@@ -43,7 +43,7 @@ public class UserController {
         boolean deleted = false;
         deleted = bankingService.deleteUser(id);
         Map<String,Boolean> response = new HashMap<>();
-        response.put("deleted",deleted)
+        response.put("deleted",deleted);
         return ResponseEntity.ok(response);
     }
 

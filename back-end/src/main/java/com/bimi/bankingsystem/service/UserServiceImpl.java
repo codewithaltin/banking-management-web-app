@@ -41,7 +41,7 @@ public class UserServiceImpl implements BankingService {
     @Override
     public User getUserById(Long id) {
         UserEntity userEntity = userRepository.findById(id).get();
-        User user new User();
+        User user =  new User();
         BeanUtils.copyProperties(userEntity,user);
         return user;
     }
@@ -55,14 +55,15 @@ public class UserServiceImpl implements BankingService {
 
     @Override
     public User updateUser(Long id, User user) {
-        User userEntity =
+        UserEntity userEntity =
                 userRepository.findById(id).get();
         userEntity.setEmailId(user.getEmailId());
         userEntity.setFirstName(user.getFirstName());
         userEntity.setLastName(user.getLastName());
 
         userRepository.save(userEntity);
-        return userEntity;
+        return user;
+
     }
 }
 
