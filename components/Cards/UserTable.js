@@ -4,31 +4,31 @@ import PropTypes from "prop-types";
 // components
 
 import User from "components/Cards/User.js";
-const USER_API_BASE_URL = "http://localhost:8080/api/v1/users";
-const [users, setUsers] = useState(null);
-const [loading, setLoading] = useState(true);
-
-useEffect(() => {
-  const fetchData = async () => {
-    setLoading(true);
-    try {
-      const response = await fetch(USER_API_BASE_URL, {
-        method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
-      const users = await response.json();
-      setUsers(users);
-    } catch (error) {
-      console.log(error);
-    }
-    setLoading(false);
-  };
-  fetchData();
-});
 
 export default function UserTable() {
+  const USER_API_BASE_URL = "http://localhost:8080/api/v1/users";
+  const [users, setUsers] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(USER_API_BASE_URL, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const users = await response.json();
+        setUsers(users);
+      } catch (error) {
+        console.log(error);
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, []);
   return (
     <>
       <div className=" w-28 h-28 mt-16">.</div>
@@ -87,9 +87,13 @@ export default function UserTable() {
                 ></th>
               </tr>
             </thead>
-            <tbody>
-              <User />
-            </tbody>
+            {!loading && (
+              <tbody>
+                {users?.map((user) => {
+                  <User user={user} key={user.id} />;
+                })}
+              </tbody>
+            )}
           </table>
         </div>
       </div>
