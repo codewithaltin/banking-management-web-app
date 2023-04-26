@@ -40,12 +40,17 @@ public class UserServiceImpl implements BankingService {
 
     @Override
     public User getUserById(Long id) {
-        return userRepository.findById(id).get();
+        UserEntity userEntity = userRepository.findById(id).get();
+        User user new User();
+        BeanUtils.copyProperties(userEntity,user);
+        return user;
     }
 
     @Override
-    public void deleteUser(Long id) {
-        userRepository.deleteById(id);
+    public boolean deleteUser(Long id) {
+        UserEntity user = userRepository.findById(id).get();
+        userRepository.delete(user);
+        return true;
     }
 
     @Override
