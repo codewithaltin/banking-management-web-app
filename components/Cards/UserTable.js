@@ -89,9 +89,9 @@ export default function UserTable() {
             </thead>
             {!loading && (
               <tbody>
-                {users?.map((user) => {
-                  <User user={user} key={user.id} />;
-                })}
+                {users?.map((user) => (
+                  <User user={user} key={user.id} />
+                ))}
               </tbody>
             )}
           </table>
