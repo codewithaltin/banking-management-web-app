@@ -47,12 +47,64 @@ export default function Register() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
   const onSubmit = (data) => console.log(data);
+
+  const USER_API_BASE_URL = "http://localhost:8080/api/v1/users";
+
+  const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState({
     id: "",
     firstName: "",
     lastName: "",
     emailId: "",
   });
+  const [responseUser, setResponseUser] = useState({
+    id: "",
+    firstName: "",
+    lastName: "",
+    emailId: "",
+  });
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setUser({ ...user, [event.target.name]: value });
+  };
+
+  const saveUser = async (e) => {
+    e.preventDefault();
+    const response = await fetch(USER_API_BASE_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+    if (!response.ok) {
+      throw new Error("Something went wrong");
+    }
+    const _user = await response.json();
+    setResponseUser(_user);
+    reset(e);
+  };
+
+  const reset = (e) => {
+    e.preventDefault();
+    setUser({
+      id: "",
+      firstName: "",
+      lastName: "",
+      emailId: "",
+    });
+    setIsOpen(false);
+  };
+
   return (
     <>
       <div className="container mx-auto px-4 h-full">
@@ -97,21 +149,25 @@ export default function Register() {
                   <div className="flex w-full  mb-3">
                     <input
                       {...register("firstName")}
+                      name="firstName"
                       className="border-0 px-3 py-3 mx-5 placeholder-blueGray-300
                     text-blueGray-900 bg-white rounded text-sm shadow
                     focus:outline-none focus:ring w-1/2 ease-linear
                     transition-all duration-150"
                       placeholder="First Name"
                       value={user.firstName}
+                      onChange={(e) => handleChange(e)}
                     />
                     <input
                       {...register("lastName")}
+                      name="lastName"
                       className="border-0 px-3 py-3 mx-5 placeholder-blueGray-300
                     text-blueGray-900 bg-white rounded text-sm shadow
                     focus:outline-none focus:ring w-1/2  ease-linear
                     transition-all duration-150"
                       placeholder="Last Name"
                       value={user.lastName}
+                      onChange={(e) => handleChange(e)}
                     />
                   </div>
                   <small role="alert" className="text-red-500 mb-2 block">
@@ -130,9 +186,11 @@ export default function Register() {
                     <input
                       {...register("email")}
                       type="email"
+                      name="emailId"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s example@gmail.com"
                       value={user.emailId}
+                      onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.email?.message}
@@ -214,6 +272,7 @@ export default function Register() {
                   </div>
                   <div className="text-center mt-6">
                     <input
+                      onClick={saveUser}
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="submit"
                       value="Submit"
