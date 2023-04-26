@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -10,11 +10,16 @@ const phoneReg =
 const schema = yup
   .object()
   .shape({
-    fullName: yup
+    firstName: yup
       .string()
-      .required("Full Name is required.")
-      .min(5, "Full name must be longer than 5 characters")
-      .max(50, "Full name must be shorter than 50 characters."),
+      .required("First Name is required.")
+      .min(5, "First name must be longer than 5 characters")
+      .max(50, "First name must be shorter than 30 characters."),
+    lastName: yup
+      .string()
+      .required("Last Name is required.")
+      .min(5, "Last name must be longer than 5 characters")
+      .max(50, "Last name must be shorter than 50 characters."),
     email: yup
       .string()
       .email("Please enter a valid e-mail")
@@ -42,7 +47,12 @@ export default function Register() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
   const onSubmit = (data) => console.log(data);
-
+  const [user, setUser] = useState({
+    id: "",
+    firstName: "",
+    lastName: "",
+    emailId: "",
+  });
   return (
     <>
       <div className="container mx-auto px-4 h-full">
@@ -73,32 +83,43 @@ export default function Register() {
                 </div>
                 <hr className="mt-6 border-b-1 border-blueGray-300" />
               </div>
-              Profile and visibility
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                 <div className="text-blueGray-400 text-center mb-3 font-bold">
                   <small>Or sign up with credentials</small>
                 </div>
                 <form onSubmit={handleSubmit(onSubmit)}>
-                  {" "}
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase text-blueGray-900 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      Full Name
-                    </label>
+                  <label
+                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlFor="grid-password"
+                  >
+                    Full Name
+                  </label>
+                  <div className="flex w-full  mb-3">
                     <input
-                      {...register("fullName")}
-                      className="border-0 px-3 py-3 placeholder-blueGray-300
+                      {...register("firstName")}
+                      className="border-0 px-3 py-3 mx-5 placeholder-blueGray-300
                     text-blueGray-900 bg-white rounded text-sm shadow
-                    focus:outline-none focus:ring w-full ease-linear
+                    focus:outline-none focus:ring w-1/2 ease-linear
                     transition-all duration-150"
-                      placeholder="p.s Altin Morina"
+                      placeholder="First Name"
+                      value={user.firstName}
                     />
-                    <small role="alert" className="text-red-500 ">
-                      {errors.fullName?.message}
-                    </small>
+                    <input
+                      {...register("lastName")}
+                      className="border-0 px-3 py-3 mx-5 placeholder-blueGray-300
+                    text-blueGray-900 bg-white rounded text-sm shadow
+                    focus:outline-none focus:ring w-1/2  ease-linear
+                    transition-all duration-150"
+                      placeholder="Last Name"
+                      value={user.lastName}
+                    />
                   </div>
+                  <small role="alert" className="text-red-500 mb-2 block">
+                    {errors.firstName?.message}
+                  </small>
+                  <small role="alert" className="block text-red-500 mb-2 ">
+                    {errors.lastName?.message}
+                  </small>
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -111,6 +132,7 @@ export default function Register() {
                       type="email"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s example@gmail.com"
+                      value={user.emailId}
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.email?.message}
