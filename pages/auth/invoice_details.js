@@ -41,7 +41,59 @@ export default function Invoice() {
                                                     Invoice
                                                 </h4>
                                             </div>
-                                            <div className="py-2">
+                                            <div className="pt-6">
+                                                <label
+                                                    className="block text-gray-700 text-sm font-bold mb-2"
+                                                    htmlFor="sender"
+                                                >
+                                                    Street Address
+                                                </label>
+                                                <input
+                                                    className="mb-4 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                                    id="address"
+                                                    name="address"
+                                                    type="text"
+                                                    required
+                                                    placeholder="Write your address? (required)"
+                                                />
+                                            </div>
+                                            <div
+                                                className="flex justify-center items-center space-x-4 pt-2"
+                                            >
+                                                <label
+                                                    className="block text-gray-700 text-sm font-bold mb-2 w-full mr-5"
+                                                >
+                                                    Full Name
+                                                    <input
+                                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                                                        name="name"
+                                                        type="text"
+                                                        required
+                                                        placeholder="Name"
+                                                    />
+                                                </label>
+                                                <label
+                                                    className="block text-gray-700 text-sm font-bold mb-2 w-full mr-5"
+                                                >
+                                                    Country
+                                                    <input
+                                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                                                        name="country"
+                                                        type="text"
+                                                    />
+                                                </label>
+                                                <label
+                                                    className="block text-gray-700 text-sm font-bold mb-2 w-full  mr-5"
+                                                >
+                                                    Post Code
+                                                    <input
+                                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                                                        name="postCode"
+                                                        type="number"
+                                                    />
+                                                </label>
+                                            </div>
+                                            <div className="pb-2">
                                                 <label
                                                     className="block text-gray-700 text-sm font-bold mb-2"
                                                     htmlFor="sender"
