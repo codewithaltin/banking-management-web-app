@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 // components
-
-import User from "components/Cards/User.js";
+import EditUser from "./EditUser";
+import User from "./User";
 
 export default function UserTable({ user }) {
   const USER_API_BASE_URL = "http://localhost:8080/api/v1/users";
@@ -64,7 +64,7 @@ export default function UserTable({ user }) {
             </div>
           </div>
         </div>
-        <div className="block w-full overflow-x-auto">
+        <div className=" w-full overflow-x-auto flex justify-center ">
           {/* Projects table */}
           <table className="items-center w-full bg-transparent border-collapse">
             <thead>
@@ -110,12 +110,18 @@ export default function UserTable({ user }) {
             {!loading && (
               <tbody>
                 {users?.map((user) => (
-                  <User user={user} key={user.id} deleteUser={deleteUser} />
+                  <User
+                    user={user}
+                    key={user.id}
+                    deleteUser={deleteUser}
+                    editUser={editUser}
+                  />
                 ))}
               </tbody>
             )}
           </table>
         </div>
+        <EditUser userId={userId} />
       </div>
     </>
   );
