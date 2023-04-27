@@ -58,7 +58,7 @@ export default function Contact() {
                   {" "}
                   <div className="relative w-full mb-3">
                     <label
-                      className="block uppercase text-blueGray-900 text-xs font-bold mb-2"
+                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
                       Full Name
@@ -128,29 +128,7 @@ export default function Contact() {
                     {errors["text-area"]?.message}
                   </small>
                 </div>
-                  <div>
-                    <label className="inline-flex items-center cursor-pointer">
-                      <input
-                        {...register("category")}
-                        id="customCheckLogin"
-                        type="checkbox"
-                        className="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
-                      />
-                      <small role="alert" className="text-red-500 ">
-                        {errors.category?.message}
-                      </small>
-                      <span className="ml-2 text-sm font-semibold text-blueGray-600">
-                        I agree with the{" "}
-                        <a
-                          href="#pablo"
-                          className="text-lightBlue-500"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          Privacy Policy
-                        </a>
-                      </span>
-                    </label>
-                  </div>
+                  
                   <div className="text-center mt-6">
                     <input
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
