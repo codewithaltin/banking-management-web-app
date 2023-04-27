@@ -12,9 +12,18 @@ function Invoice() {
 
     const validationSchema = Yup.object().shape({
 
+        address: Yup.string().required('Address is required')
+            .min(5, "Address must be longer than 5 characters"),
+
         name: Yup.string().required('Name is required')
             .min(5, "Name must be longer than 5 characters")
             .max(50, "Name must be shorter than 50 characters."),
+
+        country: Yup.string().required('Country is required')
+            .min(4, "Country Name must be longer than 4 characters")
+            .max(50, "Country Name must be shorter than 50 characters."),
+
+        postCode: Yup.number().required('Post Code is required'),
 
     });
 
@@ -28,7 +37,9 @@ function Invoice() {
     function onSubmit(data) {
         // display form data on success
         reset({
+            address: '',
             name: '',
+            country: '',
         })
         alert('SUCCESS!! :-)\n\n');
         return false;
@@ -73,7 +84,7 @@ function Invoice() {
                                                         Invoice
                                                     </h4>
                                                 </div>
-                                                <div className="pt-6">
+                                                <div className="pt-6 text-sm font-bold">
                                                     <label
                                                         className="block text-gray-700 text-sm font-bold mb-2"
                                                     >
@@ -85,7 +96,9 @@ function Invoice() {
                                                         name="address"
                                                         type="text"
                                                         placeholder="Write your address? (required)"
+                                                        {...register('address')}
                                                     />
+                                                    <small role="alert" className=" text-red-500 ">{errors.address?.message}</small>
                                                 </div>
                                                 <div
                                                     className="flex justify-center items-center space-x-4 pt-2"
@@ -109,7 +122,9 @@ function Invoice() {
                                                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                                                             name="country"
                                                             type="text"
+                                                            {...register('country')}
                                                         />
+                                                        <small role="alert" className=" text-red-500 ">{errors.country?.message}</small>
                                                     </label>
                                                     <label
                                                         className="block text-gray-700 text-sm font-bold mb-2 w-full  mr-5"
@@ -119,7 +134,9 @@ function Invoice() {
                                                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                                                             name="postCode"
                                                             type="number"
+                                                            {...register('postCode')}
                                                         />
+                                                        <small role="alert" className=" text-red-500 ">{errors.postCode?.message}</small>
                                                     </label>
                                                 </div>
                                                 <div className="pb-2">
