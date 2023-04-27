@@ -1,6 +1,6 @@
 import React from "react";
 
-const User = ({ user }) => {
+const User = ({ user, deleteUser }) => {
   return (
     <tr key={user.id}>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-medium tracking-wide">
@@ -18,7 +18,10 @@ const User = ({ user }) => {
         </a>
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-medium tracking-wide">
-        <a className="text-indigo-600 hover:text-indigo-800 cursor-pointer">
+        <a
+          onClick={(e, id) => deleteUser(e, user.id)}
+          className="text-indigo-600 hover:text-indigo-800 cursor-pointer"
+        >
           Delete
         </a>
       </td>

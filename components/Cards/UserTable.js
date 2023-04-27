@@ -5,10 +5,12 @@ import PropTypes from "prop-types";
 
 import User from "components/Cards/User.js";
 
-export default function UserTable() {
+export default function UserTable({ user }) {
   const USER_API_BASE_URL = "http://localhost:8080/api/v1/users";
   const [users, setUsers] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [userId, setUserId] = useState(null);
+  const [responseUser, setResponseUser] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -28,7 +30,25 @@ export default function UserTable() {
       setLoading(false);
     };
     fetchData();
-  }, []);
+  }, [user, responseUser]);
+
+  const deleteUser = (e, id) => {
+    e.preventDefault();
+    fetch(USER_API_BASE_URL + "/" + id, {
+      method: "DELETE",
+    }).then((res) => {
+      if (users) {
+        setUsers((prevElement) => {
+          return prevElement.filter((user) => user.id !== id);
+        });
+      }
+    });
+  };
+
+  const editUser = (e, id) => {
+    e.preventDefault();
+    setUserId(id);
+  };
   return (
     <>
       <div className=" w-28 h-28 mt-16">.</div>
@@ -90,7 +110,7 @@ export default function UserTable() {
             {!loading && (
               <tbody>
                 {users?.map((user) => (
-                  <User user={user} key={user.id} />
+                  <User user={user} key={user.id} deleteUser={deleteUser} />
                 ))}
               </tbody>
             )}
