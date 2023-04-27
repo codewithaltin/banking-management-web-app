@@ -208,20 +208,19 @@ function Invoice() {
                                                             type="number"
                                                         />
                                                     </label>
-
-                                                    <button
+                                                    {/* <button
                                                         className="bg-red-700 active:bg-blueGray-500 h-8 px-3 py-3 flex items-center justify-center text-white font-bold rounded focus:outline-none focus:shadow-outline"
                                                         type="button"
                                                     >
                                                         Remove
-                                                    </button>
+                                                    </button> */}
                                                 </div>
-                                                <button
+                                                {/* <button
                                                     className="bg-blueGray-700 active:bg-blueGray-500 h-8 px-3 py-3 flex items-center justify-center text-white font-bold rounded focus:outline-none focus:shadow-outline"
                                                     type="button"
                                                 >
                                                     Add Item
-                                                </button>
+                                                </button> */}
                                                 <div className="my-6 flex flex-col">
                                                     <label
                                                         htmlFor="note"
