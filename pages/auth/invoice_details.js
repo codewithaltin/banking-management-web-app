@@ -23,7 +23,7 @@ function Invoice() {
             .min(4, "Country Name must be longer than 4 characters")
             .max(50, "Country Name must be shorter than 50 characters."),
 
-        postCode: Yup.number().required('Post Code is required'),
+        postCode: Yup.string().required('Post Code is required'),
 
     });
 
