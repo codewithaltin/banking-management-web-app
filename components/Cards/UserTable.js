@@ -64,7 +64,7 @@ export default function UserTable({ user }) {
             </div>
           </div>
         </div>
-        <div className=" w-full overflow-x-auto flex justify-center ">
+        <div className=" w-full overflow-x-auto flex justify-center  ">
           {/* Projects table */}
           <table className="items-center w-full bg-transparent border-collapse">
             <thead>
