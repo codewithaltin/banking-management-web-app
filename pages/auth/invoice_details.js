@@ -25,6 +25,16 @@ function Invoice() {
 
         postCode: Yup.string().required('Post Code is required'),
 
+        sender: Yup.string().required("Email is required.")
+            .email("Please enter a valid e-mail"),
+
+        billTo: Yup.string().required("Email is required.")
+            .email("Please enter a valid e-mail"),
+
+        shipTo: Yup.string().required("Email is required.")
+            .email("Please enter a valid e-mail"),
+
+
     });
 
 
@@ -40,6 +50,9 @@ function Invoice() {
             address: '',
             name: '',
             country: '',
+            sender: '',
+            billTo: '',
+            shipTo: '',
         })
         alert('SUCCESS!! :-)\n\n');
         return false;
@@ -139,7 +152,7 @@ function Invoice() {
                                                         <small role="alert" className=" text-red-500 ">{errors.postCode?.message}</small>
                                                     </label>
                                                 </div>
-                                                <div className="pb-2">
+                                                <div className="pb-2 text-sm font-bold">
                                                     <label
                                                         className="block text-gray-700 text-sm font-bold mb-2"
                                                         htmlFor="sender"
@@ -152,7 +165,9 @@ function Invoice() {
                                                         name="sender"
                                                         type="email"
                                                         placeholder="Who is this invoice from? (required)"
+                                                        {...register('sender')}
                                                     />
+                                                    <small role="alert" className=" text-red-500 ">{errors.sender?.message}</small>
                                                     <label
                                                         className="block text-gray-700 text-sm font-bold my-3"
                                                     >
@@ -164,9 +179,11 @@ function Invoice() {
                                                         name="billTo"
                                                         type="email"
                                                         placeholder="Who is this invoice to? (required)"
+                                                        {...register('billTo')}
                                                     />
+                                                    <small role="alert" className=" text-red-500 ">{errors.billTo?.message}</small>
                                                 </div>
-                                                <div className="mb-6">
+                                                <div className="mb-6 text-sm font-bold">
                                                     <label
                                                         className="block text-gray-700 text-sm font-bold mb-2"
                                                     >
@@ -178,7 +195,9 @@ function Invoice() {
                                                         name="shipTo"
                                                         type="email"
                                                         placeholder="Client's email"
+                                                        {...register('shipTo')}
                                                     />
+                                                    <small role="alert" className=" text-red-500 ">{errors.shipTo?.message}</small>
                                                     <label
                                                         className="block text-gray-700 text-sm font-bold mb-2"
                                                     >
