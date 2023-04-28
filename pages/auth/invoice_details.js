@@ -34,6 +34,19 @@ function Invoice() {
         shipTo: Yup.string().required("Email is required.")
             .email("Please enter a valid e-mail"),
 
+        dueDate: Yup.string().required("Date is required."),
+
+        itemDescription: Yup.string().required('Add an Item'),
+
+        qty: Yup.string().required('Quantity is required')
+            .min(1, "Add at least one quantity"),
+
+        price: Yup.string().required('Price is required'),
+
+        note: Yup.string().required('Note is required')
+            .min(50, "Note must be longer than 50 characters")
+            .max(150, "note must be shorter than 150 characters."),
+
 
     });
 
@@ -50,9 +63,15 @@ function Invoice() {
             address: '',
             name: '',
             country: '',
+            postCode: '',
             sender: '',
             billTo: '',
             shipTo: '',
+            dueDate: '',
+            itemDescription: '',
+            qty: '',
+            price: '',
+            note: '',
         })
         alert('SUCCESS!! :-)\n\n');
         return false;
@@ -208,11 +227,13 @@ function Invoice() {
                                                         id="dueDate"
                                                         name="dueDate"
                                                         type="date"
+                                                        {...register('dueDate')}
                                                     />
+                                                    <small role="alert" className=" text-red-500 ">{errors.dueDate?.message}</small>
                                                 </div>
 
                                                 <div
-                                                    className="flex justify-center items-center space-x-4"
+                                                    className="flex justify-center items-center  space-x-4"
                                                 >
                                                     <label
                                                         className="block text-gray-700 text-sm font-bold mb-2 w-full mr-5"
@@ -222,7 +243,9 @@ function Invoice() {
                                                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                                                             name="itemDescription"
                                                             type="text"
+                                                            {...register('itemDescription')}
                                                         />
+                                                        <small role="alert" className=" text-red-500 ">{errors.itemDescription?.message}</small>
                                                     </label>
                                                     <label
                                                         className="block text-gray-700 text-sm font-bold mb-2 w-full mr-5"
@@ -232,7 +255,9 @@ function Invoice() {
                                                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                                                             name="qty"
                                                             type="number"
+                                                            {...register('qty')}
                                                         />
+                                                        <small role="alert" className=" text-red-500 ">{errors.qty?.message}</small>
                                                     </label>
                                                     <label
                                                         className="block text-gray-700 text-sm font-bold mb-2 w-full  mr-5"
@@ -242,7 +267,9 @@ function Invoice() {
                                                             className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
                                                             name="price"
                                                             type="number"
+                                                            {...register('price')}
                                                         />
+                                                        <small role="alert" className=" text-red-500 ">{errors.price?.message}</small>
                                                     </label>
                                                     {/* <button
                                                         className="bg-red-700 active:bg-blueGray-500 h-8 px-3 py-3 flex items-center justify-center text-white font-bold rounded focus:outline-none focus:shadow-outline"
@@ -257,9 +284,8 @@ function Invoice() {
                                                 >
                                                     Add Item
                                                 </button> */}
-                                                <div className="my-6 flex flex-col">
+                                                <div className="my-6 flex flex-col text-sm font-bold">
                                                     <label
-                                                        htmlFor="note"
                                                         className="block text-gray-700 text-sm font-bold mb-2 w-full"
                                                     >
                                                         Invoice Notes
@@ -268,11 +294,22 @@ function Invoice() {
                                                         id="note"
                                                         name="note"
                                                         className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                                                        {...register('note')}
                                                     />
+                                                    <small role="alert" className=" text-red-500 ">{errors.note?.message}</small>
                                                 </div>
-                                                <div className="mb-6 flex justify-between font-bold text-xl">
-                                                    <p>Total:</p>
-                                                </div>
+                                                {/* <div className="mb-6 flex items-center justify-between font-bold text-xl">
+
+                                                    <div className="">
+                                                        <p>Total:</p>
+                                                    </div>
+
+                                                    <input
+                                                        className="shadow appearance-none border rounded py-2 px-3 mx- text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                                                        name="total"
+                                                        type="number"
+                                                    />
+                                                </div> */}
                                                 <div className="flex items-center justify-between">
                                                     <button
                                                         className="btn btn-secondary bg-red-700 active:bg-blueGray-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
