@@ -9,10 +9,9 @@ import { useSession, signIn, signOut } from "next-auth/react";
 import { getSession } from "next-auth/react";
 
 export default function Index({ session }) {
-  const { data: status } = useSession();
   return (
     <>
-      {session && <AdminNavbar fixed />}
+      {session ? <AdminNavbar fixed /> : <IndexNavbar />}
 
       <section className="header relative pt-16 items-center flex h-screen max-h-860-px bg-cover">
         <div className="container justify-center mx-auto items-center flex flex-wrap">

@@ -28,7 +28,6 @@ Router.events.on("routeChangeError", () => {
 });
 
 export default class MyApp extends App {
-  
   componentDidMount() {
     let comment = document.createComment(`
 
@@ -51,7 +50,9 @@ export default class MyApp extends App {
 
     return (
       <React.Fragment>
-      
+        <SessionProvider session={session}>
+          <Component {...pageProps} />
+        </SessionProvider>
         <Head>
           <meta
             name="viewport"
@@ -67,14 +68,4 @@ export default class MyApp extends App {
       </React.Fragment>
     );
   }
-}
-export default function App({
-  Component,
-  pageProps: { session, ...pageProps },
-}) {
-  return (
-    <SessionProvider session={session}>
-      <Component {...pageProps} />
-    </SessionProvider>
-  )
 }

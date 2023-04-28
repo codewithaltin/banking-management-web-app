@@ -1,8 +1,11 @@
 import React from "react";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 import UserDropdown from "components/Dropdowns/UserDropdown.js";
 
-export default function Navbar() {
+export default function Navbar(session) {
+  const { data: session } = useSession();
+
   return (
     <>
       {/* Navbar */}
@@ -32,6 +35,7 @@ export default function Navbar() {
           {/* User */}
           <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
             <UserDropdown />
+            <li></li>
           </ul>
         </div>
       </nav>
