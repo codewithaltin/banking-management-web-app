@@ -72,10 +72,10 @@ const EditUser = ({ userId, setResponseUser }) => {
     <Transition appear show={isOpen} as={Fragment}>
       <Dialog
         as="div"
-        className=" inset-0 z-10 overflow-y-auto absolute top-1/2 left-1/2"
+        className=" min-h-screen flex justify-center align-middle"
         onClose={closeModal}
       >
-        <div className="min-h-screen px-4 text-center  ">
+        <div className="px-4 text-center">
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"
@@ -85,7 +85,7 @@ const EditUser = ({ userId, setResponseUser }) => {
             leaveFrom="opacity-100 scale-100"
             leaveTo="opacity-0 scale-95"
           >
-            <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-md">
+            <div className="inline-block p-5  w-full max-w-md my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-md">
               <Dialog.Title
                 as="h3"
                 className="text-lg font-medium leading-6 text-gray-900"
@@ -133,7 +133,7 @@ const EditUser = ({ userId, setResponseUser }) => {
                   <div className="h-14 my-4 space-x-4 pt-4">
                     <button
                       onClick={updateUser}
-                      className="rounded text-white font-semibold bg-green-400 hover:bg-green-700 py-2 px-6"
+                      className=" bg-black  rounded text-white font-semibold   py-2 px-6"
                     >
                       Update
                     </button>
