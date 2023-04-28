@@ -35,10 +35,10 @@ function Invoice() {
 
         itemDescription: Yup.string().required('Add an Item'),
 
+        price: Yup.string().required('Price is required'),
+
         qty: Yup.string().required('Quantity is required')
             .min(1, "Add at least one quantity"),
-
-        price: Yup.string().required('Price is required'),
 
         note: Yup.string().required('Note is required')
             .min(50, "Note must be longer than 50 characters")
@@ -65,8 +65,8 @@ function Invoice() {
             billTo: '',
             dueDate: '',
             itemDescription: '',
-            qty: '',
             price: '',
+            qty: '',
             note: '',
         })
         alert('SUCCESS!! :-)\n\n');
@@ -230,18 +230,6 @@ function Invoice() {
                                                         <small role="alert" className=" text-red-500 ">{errors.itemDescription?.message}</small>
                                                     </label>
                                                     <label
-                                                        className="block text-gray-700 text-sm font-bold mb-2 w-full mr-5"
-                                                    >
-                                                        Quantity
-                                                        <input
-                                                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                                                            name="qty"
-                                                            type="number"
-                                                            {...register('qty')}
-                                                        />
-                                                        <small role="alert" className=" text-red-500 ">{errors.qty?.message}</small>
-                                                    </label>
-                                                    <label
                                                         className="block text-gray-700 text-sm font-bold mb-2 w-full  mr-5"
                                                     >
                                                         Unit Price
@@ -252,6 +240,18 @@ function Invoice() {
                                                             {...register('price')}
                                                         />
                                                         <small role="alert" className=" text-red-500 ">{errors.price?.message}</small>
+                                                    </label>
+                                                    <label
+                                                        className="block text-gray-700 text-sm font-bold mb-2 w-full mr-5"
+                                                    >
+                                                        Quantity
+                                                        <input
+                                                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                                                            name="qty"
+                                                            type="number"
+                                                            {...register('qty')}
+                                                        />
+                                                        <small role="alert" className=" text-red-500 ">{errors.qty?.message}</small>
                                                     </label>
                                                     {/* <button
                                                         className="bg-red-700 active:bg-blueGray-500 h-8 px-3 py-3 flex items-center justify-center text-white font-bold rounded focus:outline-none focus:shadow-outline"
