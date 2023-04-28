@@ -54,6 +54,17 @@ export default function Navbar(props) {
               <li className="flex items-center">
                 <IndexDropdown />
               </li>
+
+              <li className="flex items-center">
+                {" "}
+                <Link
+                  href="/auth/individual_register"
+                  className="text-blueGray-100  hover:text-blueGray-200 text-xs font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                >
+                  Debit Card
+                </Link>{" "}
+              </li>
+
             </ul>
             <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
               <li className="flex items-center">
