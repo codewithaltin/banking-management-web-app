@@ -4,6 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 // layout for page
+import { signIn } from "next-auth/react";
 
 import Auth from "layouts/Auth.js";
 
@@ -53,9 +54,10 @@ export default function Login() {
                   <button
                     className="bg-white active:bg-blueGray-50 text-blueGray-700  px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
                     type="button"
+                    onClick={signIn}
                   >
-                    <img alt="..." className="w-5 mr-1" src="/img/google.svg" />
-                    Google
+                    <img alt="..." className="w-5 mr-1" src="/img/fb.png" />
+                    Facebook
                   </button>
                 </div>
                 <hr className="mt-6 border-b-1 border-blueGray-300" />

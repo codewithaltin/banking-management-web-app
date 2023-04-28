@@ -1,6 +1,7 @@
 package com.bimi.bankingsystem.entity;
 
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -9,9 +10,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @NoArgsConstructor
+
 @Table ( name="users")
 public class UserEntity {
-    @Id
+    @Setter(AccessLevel.PROTECTED) @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String firstName;
