@@ -31,9 +31,6 @@ function Invoice() {
         billTo: Yup.string().required("Email is required.")
             .email("Please enter a valid e-mail"),
 
-        shipTo: Yup.string().required("Email is required.")
-            .email("Please enter a valid e-mail"),
-
         dueDate: Yup.string().required("Date is required."),
 
         itemDescription: Yup.string().required('Add an Item'),
@@ -66,7 +63,6 @@ function Invoice() {
             postCode: '',
             sender: '',
             billTo: '',
-            shipTo: '',
             dueDate: '',
             itemDescription: '',
             qty: '',
@@ -203,20 +199,6 @@ function Invoice() {
                                                     <small role="alert" className=" text-red-500 ">{errors.billTo?.message}</small>
                                                 </div>
                                                 <div className="mb-6 text-sm font-bold">
-                                                    <label
-                                                        className="block text-gray-700 text-sm font-bold mb-2"
-                                                    >
-                                                        Ship To
-                                                    </label>
-                                                    <input
-                                                        className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
-                                                        id="shipTo"
-                                                        name="shipTo"
-                                                        type="email"
-                                                        placeholder="Client's email"
-                                                        {...register('shipTo')}
-                                                    />
-                                                    <small role="alert" className=" text-red-500 ">{errors.shipTo?.message}</small>
                                                     <label
                                                         className="block text-gray-700 text-sm font-bold mb-2"
                                                     >
