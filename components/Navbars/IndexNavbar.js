@@ -56,6 +56,13 @@ export default function Navbar(props) {
                   Business
                 </Link>{" "}
               </li>{" "}
+              <li className="flex items-center">
+                {" "}
+              </li>
+
+              <li className="flex items-center">
+                <IndexDropdown />
+              </li>
             </ul>
             <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
               <li className="flex items-center">
