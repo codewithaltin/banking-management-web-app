@@ -3,19 +3,18 @@ import React from "react";
 import Link from "next/link";
 
 import IndexNavbar from "components/Navbars/IndexNavbar.js";
+import AdminNavbar from "components/Navbars/AdminNavbar.js";
+import UserNavbar from "components/Navbars/UserNavbar.js";
 import Footer from "components/Footers/Footer.js";
+import { getSession } from "next-auth/react";
+import { createRoot } from "react-dom/client";
+import { BrowserRouter as Router } from "react-router-dom";
 
-export default function Index() {
+export default function Index(session) {
   return (
     <>
-      <IndexNavbar fixed />
-      <img
-        className="absolute w-full max-h-860-px"
-        src="/img/background.jpg"
-        alt="..."
-      />
-
-      <section className="header relative pt-16 items-center flex h-screen max-h-860-px">
+      <IndexNavbar />
+      <section className="header relative pt-16 items-center flex h-screen max-h-860-px bg-cover">
         <div className="container justify-center mx-auto items-center flex flex-wrap">
           <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
             <div className="pt-32 sm:pt-0">
@@ -38,7 +37,6 @@ export default function Index() {
           </div>
         </div>
       </section>
-
       <section className="mt-48 md:mt-40 pb-40 relative ">
         <div
           className="-mt-20 top-0 bottom-auto left-0 right-0 w-full absolute h-20"
@@ -430,7 +428,6 @@ export default function Index() {
           </div>
         </div>
       </section>
-
       <section className="block relative z-1 bg-blueGray-600">
         <div className="container mx-auto">
           <div className="justify-center flex flex-wrap">
@@ -485,7 +482,6 @@ export default function Index() {
           </div>
         </div>
       </section>
-
       <section className="py-20 bg-blueGray-600 overflow-hidden">
         <div className="container mx-auto pb-64">
           <div className="flex flex-wrap justify-center">
@@ -521,7 +517,6 @@ export default function Index() {
           </div>
         </div>
       </section>
-
       {/* <section className="pb-16 bg-blueGray-200 relative pt-32">
         <div
           className="-mt-20 top-0 bottom-auto left-0 right-0 w-full absolute h-20"
@@ -584,4 +579,12 @@ export default function Index() {
       <Footer />
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  return {
+    props: { session },
+  };
 }
