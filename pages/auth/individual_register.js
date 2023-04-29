@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-
+import { useNavigate } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Auth from "layouts/Auth.js";
+import Login from "pages/auth/login.js";
 const phoneReg =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
@@ -20,7 +22,7 @@ const schema = yup
       .required("Last Name is required.")
       .min(5, "Last name must be longer than 5 characters")
       .max(50, "Last name must be shorter than 50 characters."),
-    email: yup
+    emailId: yup
       .string()
       .email("Please enter a valid e-mail")
       .required("Email is required."),
@@ -54,7 +56,7 @@ export default function Register() {
     id: "",
     firstName: "",
     lastName: "",
-    email: "",
+    emailId: "",
   });
   const [responseUser, setResponseUser] = useState({
     id: "",
@@ -62,21 +64,9 @@ export default function Register() {
     lastName: "",
     email: "",
   });
-
-  function closeModal() {
-    setIsOpen(false);
-  }
-
-  function openModal() {
-    setIsOpen(true);
-  }
-  const onSubmit = (event) => {
-    const value = event.target.value;
-    setUser({ ...user, [event.target.name]: value });
-  };
-
+  const navigate = useNavigate();
   const saveUser = async (e) => {
-    e.preventDefault();
+    //e.preventDefault();
     const response = await fetch(USER_API_BASE_URL, {
       method: "POST",
       headers: {
@@ -89,18 +79,11 @@ export default function Register() {
     }
     const _user = await response.json();
     setResponseUser(_user);
-    reset(e);
+    navigate("login.js");
   };
-
-  const reset = (e) => {
-    e.preventDefault();
-    setUser({
-      id: "",
-      firstName: "",
-      lastName: "",
-      emailId: "",
-    });
-    setIsOpen(false);
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setUser({ ...user, [event.target.name]: value });
   };
 
   return (
@@ -137,7 +120,7 @@ export default function Register() {
                 <div className="text-blueGray-400 text-center mb-3 font-bold">
                   <small>Or sign up with credentials</small>
                 </div>
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(saveUser)}>
                   <label
                     className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                     htmlFor="grid-password"
@@ -147,14 +130,14 @@ export default function Register() {
                   <div className="flex w-full  mb-3">
                     <input
                       {...register("firstName")}
-                      name="firstName"
                       className="border-0 px-3 py-3 mx-5 placeholder-blueGray-300
                     text-blueGray-900 bg-white rounded text-sm shadow
                     focus:outline-none focus:ring w-1/2 ease-linear
                     transition-all duration-150"
                       placeholder="First Name"
+                      name="firstName"
                       value={user.firstName}
-                      onChange={(e) => onSubmit(e)}
+                      onChange={(e) => handleChange(e)}
                     />
                     <input
                       {...register("lastName")}
@@ -165,7 +148,7 @@ export default function Register() {
                     transition-all duration-150"
                       placeholder="Last Name"
                       value={user.lastName}
-                      onChange={(e) => onSubmit(e)}
+                      onChange={(e) => handleChange(e)}
                     />
                   </div>
                   <small role="alert" className="text-red-500 mb-2 block">
@@ -182,16 +165,16 @@ export default function Register() {
                       Email
                     </label>
                     <input
-                      {...register("email")}
+                      {...register("emailId")}
                       type="email"
-                      name="email"
+                      name="emailId"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s example@gmail.com"
                       value={user.emailId}
-                      onChange={(e) => onSubmit(e)}
+                      onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
-                      {errors.email?.message}
+                      {errors.emailId?.message}
                     </small>
                   </div>
                   <div className="relative w-full mb-3">
@@ -273,6 +256,7 @@ export default function Register() {
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="submit"
                       value="Submit"
+                      onClick={handleChange}
                     />
                   </div>
                 </form>
