@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 // layout for page
-import { signIn } from "next-auth/react";
+import { useSession, signIn, signOut } from "next-auth/react";
 
 import Auth from "layouts/Auth.js";
 
@@ -22,6 +22,7 @@ const schema = yup
       .max(35, "Password must be shorter than 35 characters"),
   })
   .required();
+
 export default function Login() {
   const {
     register,

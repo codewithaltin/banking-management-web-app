@@ -49,20 +49,28 @@ export default class MyApp extends App {
     const Layout = Component.layout || (({ children }) => <>{children}</>);
 
     return (
-      <React.Fragment>
-        <Head>
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1, shrink-to-fit=no"
-          />
-          <title>Futur Banking</title>
-          <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-        </Head>
-
-        <Layout>
+      <>
+        {" "}
+        {/*{" "}
+        <SessionProvider session={session}>
           <Component {...pageProps} />
-        </Layout>
-      </React.Fragment>
+        </SessionProvider>
+        */}
+        <React.Fragment>
+          {" "}
+          <Head>
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1, shrink-to-fit=no"
+            />
+            <title>Futur Banking</title>
+            <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+          </Head>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </React.Fragment>
+      </>
     );
   }
 }
