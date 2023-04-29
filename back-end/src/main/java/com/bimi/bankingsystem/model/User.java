@@ -1,10 +1,19 @@
 package com.bimi.bankingsystem.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "\"user\"") //WE DO THESE QUOTES TO GET AWAY FROM RESERVERD WORD IN POSTGRESQL USER
 public class User {
+    @Id
+    @SequenceGenerator(name = "user_sequence", sequenceName = "user_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
+    @Column(updatable = false)
     private long id;
     private String firstName;
     private String lastName;
     private String emailId;
+
 
     public long getId() {
         return id;
@@ -38,13 +47,13 @@ public class User {
         this.emailId = emailId;
     }
 
+    public User() {
+    }
+
     public User(long id, String firstName, String lastName, String emailId) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailId = emailId;
-    }
-
-    public User() {
     }
 }

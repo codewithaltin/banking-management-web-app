@@ -26,7 +26,7 @@ public class ClientService {
     public Client updateClient(Integer id, Client client){
         Client client1= clientRepository.findById(id).get();
         client1.setName(client.getName());
-        client1.setUsername(client.getUsername());
+        client1.setEmail(client.getEmail());
 
         return clientRepository.save(client1);
     }
