@@ -2,10 +2,11 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { useNavigate } from "react-router-dom";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Auth from "layouts/Auth.js";
 import Login from "pages/auth/login.js";
+import ReactDOM from "react-dom";
+import { BrowserRouter } from "react-router-dom";
 const phoneReg =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
@@ -65,6 +66,10 @@ export default function Register() {
     email: "",
   });
   const navigate = useNavigate();
+  const navigateHome = () => {
+    navigate("/");
+  };
+
   const saveUser = async (e) => {
     //e.preventDefault();
     const response = await fetch(USER_API_BASE_URL, {
@@ -88,6 +93,9 @@ export default function Register() {
 
   return (
     <>
+      <Routes>
+        <Route path="/" element={<Login />} />
+      </Routes>
       <div className="container mx-auto px-4 h-full">
         <div className="flex content-center items-center justify-center h-full">
           <div className="w-full lg:w-6/12 px-4">
@@ -270,3 +278,12 @@ export default function Register() {
 }
 
 Register.layout = Auth;
+/*
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <React.StrictMode>
+    <BrowserRouter>
+      <Register />
+    </BrowserRouter>
+  </React.StrictMode>
+);
+*/
