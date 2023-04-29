@@ -108,6 +108,15 @@ const IndexDropdown = () => {
           Business Register
         </Link>
 
+        <Link
+          href="/invoice_details"
+          className={
+            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+          }
+        >
+          Invoice
+        </Link>
+
         <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
         <span
           className={
