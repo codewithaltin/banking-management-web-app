@@ -1,5 +1,6 @@
 import React from "react";
 import Link from "next/link";
+import PagesDropdown from "components/Dropdowns/PagesDropdown";
 // components
 
 import IndexDropdown from "components/Dropdowns/IndexDropdown.js";
