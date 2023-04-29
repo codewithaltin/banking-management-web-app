@@ -1,10 +1,13 @@
 import React from "react";
 import Link from "next/link";
+import { useSession, signIn, signOut } from "next-auth/react";
+import { getSession } from "next-auth/react";
+
 // components
 
 import IndexDropdown from "components/Dropdowns/IndexDropdown.js";
 
-export default function Navbar(props) {
+export default function Navbar({ navbar, session }) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   return (
     <>
@@ -33,6 +36,7 @@ export default function Navbar(props) {
             id="example-navbar-warning"
           >
             <ul className="flex flex-col lg:flex-row list-none align-center mr-auto">
+              <li>{session && <IndexDropdown />}</li>
               <li className="flex items-center">
                 {" "}
                 <Link
@@ -51,9 +55,6 @@ export default function Navbar(props) {
                   Business
                 </Link>{" "}
               </li>{" "}
-              <li className="flex items-center">
-                <IndexDropdown />
-              </li>
             </ul>
             <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
               <li className="flex items-center">
@@ -61,9 +62,7 @@ export default function Navbar(props) {
                 <Link
                   href="/auth/login"
                   className="text-white hover:text-blueGray-00 text-xs font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
-                >
-                  Sign In
-                </Link>{" "}
+                ></Link>{" "}
               </li>
             </ul>
           </div>
@@ -71,4 +70,12 @@ export default function Navbar(props) {
       </nav>
     </>
   );
+}
+
+export async function getServerSideProps(context) {
+  const session = await getSession(context);
+
+  return {
+    props: { session },
+  };
 }

@@ -50,9 +50,6 @@ export default class MyApp extends App {
 
     return (
       <React.Fragment>
-        <SessionProvider session={session}>
-          <Component {...pageProps} />
-        </SessionProvider>
         <Head>
           <meta
             name="viewport"

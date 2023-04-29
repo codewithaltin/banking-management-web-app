@@ -8,11 +8,10 @@ import Footer from "components/Footers/Footer.js";
 import { useSession, signIn, signOut } from "next-auth/react";
 import { getSession } from "next-auth/react";
 
-export default function Index({ session }) {
+export default function Index() {
   return (
     <>
-      {session ? <AdminNavbar fixed /> : <IndexNavbar />}
-
+      <IndexNavbar />
       <section className="header relative pt-16 items-center flex h-screen max-h-860-px bg-cover">
         <div className="container justify-center mx-auto items-center flex flex-wrap">
           <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
@@ -578,12 +577,4 @@ export default function Index({ session }) {
       <Footer />
     </>
   );
-}
-
-export async function getServerSideProps(context) {
-  const session = await getSession(context);
-
-  return {
-    props: { session },
-  };
 }
