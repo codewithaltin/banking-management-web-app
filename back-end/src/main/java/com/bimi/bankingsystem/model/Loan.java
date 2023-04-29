@@ -2,15 +2,32 @@ package com.bimi.bankingsystem.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table
+@Table (name = "\"loan\"")
 public class Loan {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "loan_id")
     private Integer id;
+
+    @Column(name = "name")
     private String fullName;
+
+    @Column(name = "email")
     private String email;
+    
+    @Column(name = "phone")
     private Integer phoneNumber;
-    private String adress;
+
+    @Column(name = "address")
+    private String address;
+
+    @Column(name = "amount")
     private double loanAmount;
-    private double monthlyIcome;
+
+    @Column(name = "income")
+    private double monthlyIncome;
+
+    @Column(name = "purpouse")
     private String purpouse;
 
     public Loan() {
@@ -21,9 +38,9 @@ public class Loan {
         this.fullName = fullName;
         this.email = email;
         this.phoneNumber = phoneNumber;
-        this.adress = adress;
+        this.address = adress;
         this.loanAmount = loanAmount;
-        this.monthlyIcome = monthlyIcome;
+        this.monthlyIncome = monthlyIcome;
         this.purpouse = purpouse;
     }
 
@@ -59,12 +76,12 @@ public class Loan {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getAdress() {
-        return adress;
+    public String getAddress() {
+        return address;
     }
 
-    public void setAdress(String adress) {
-        this.adress = adress;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public double getLoanAmount() {
@@ -75,12 +92,12 @@ public class Loan {
         this.loanAmount = loanAmount;
     }
 
-    public double getMonthlyIcome() {
-        return monthlyIcome;
+    public double getMonthlyIncome() {
+        return monthlyIncome;
     }
 
-    public void setMonthlyIcome(double monthlyIcome) {
-        this.monthlyIcome = monthlyIcome;
+    public void setMonthlyIncome(double monthlyIncome) {
+        this.monthlyIncome = monthlyIncome;
     }
 
     public String getPurpouse() {

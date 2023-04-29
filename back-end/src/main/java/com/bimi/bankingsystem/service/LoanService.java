@@ -27,9 +27,9 @@ public class LoanService {
         loan1.setFullName(loan.getFullName());
         loan1.setEmail(loan.getEmail());
         loan1.setPhoneNumber(loan.getPhoneNumber());
-        loan1.setAdress(loan.getAdress());
+        loan1.setAddress(loan.getAddress());
         loan1.setLoanAmount(loan.getLoanAmount());
-        loan1.setMonthlyIcome(loan.getMonthlyIcome());
+        loan1.setMonthlyIncome(loan.getMonthlyIncome());
         loan1.setPurpouse(loan.getPurpouse());
 
         return loanRepository.save(loan1);
