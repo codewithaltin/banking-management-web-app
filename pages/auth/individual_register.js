@@ -84,7 +84,7 @@ export default function Register() {
     }
     const _user = await response.json();
     setResponseUser(_user);
-    // navigate("login.js");
+    navigate("login.js");
   };
   const handleChange = (event) => {
     const value = event.target.value;
@@ -138,7 +138,7 @@ export default function Register() {
                   <div className="flex w-full  mb-3">
                     <input
                       {...register("firstName")}
-                      className="border-0 px-3 py-3 mx-5 placeholder-blueGray-300
+                      className="border-0 px-3 py-3 mr-3 placeholder-blueGray-300
                     text-blueGray-900 bg-white rounded text-sm shadow
                     focus:outline-none focus:ring w-1/2 ease-linear
                     transition-all duration-150"
@@ -197,6 +197,8 @@ export default function Register() {
                       type="tel"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s 049-588-814"
+                      value={user.phoneNumber}
+                      onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.phoneNumber?.message}
@@ -214,6 +216,8 @@ export default function Register() {
                       type="password"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="Password"
+                      value={user.password}
+                      onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.password?.message}

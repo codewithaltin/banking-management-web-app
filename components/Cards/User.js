@@ -13,6 +13,12 @@ const User = ({ user, deleteUser, editUser }) => {
         {user.emailId}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-medium tracking-wide">
+        {user.password}
+      </td>
+      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-medium tracking-wide">
+        {user.phoneNumber}
+      </td>
+      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 font-medium tracking-wide">
         <a
           onClick={(e, id) => editUser(e, user.id)}
           className="text-indigo-600 hover:text-indigo-800 cursor-pointer"
