@@ -1,4 +1,5 @@
 package com.bimi.bankingsystem.service;
+import com.bimi.bankingsystem.entity.UserEntity;
 import com.bimi.bankingsystem.model.User;
 import com.bimi.bankingsystem.entity.UserEntity;
 import com.bimi.bankingsystem.repository.UserRepository;
@@ -76,7 +77,6 @@ public class UserServiceImpl implements UserService {
         userEntity.setLastName(user.getLastName());
         userEntity.setPassword(user.getPassword());
         userEntity.setPhoneNumber(user.getPhoneNumber());
-        userEntity.setRole(user.getRole());
 
         userRepository.save(userEntity);
         return user;
