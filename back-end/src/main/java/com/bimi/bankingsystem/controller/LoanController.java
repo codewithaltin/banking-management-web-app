@@ -1,8 +1,6 @@
 package com.bimi.bankingsystem.controller;
 
-import com.bimi.bankingsystem.model.Client;
 import com.bimi.bankingsystem.model.Loan;
-import com.bimi.bankingsystem.service.ClientService;
 import com.bimi.bankingsystem.service.LoanService;
 import org.springframework.web.bind.annotation.*;
 

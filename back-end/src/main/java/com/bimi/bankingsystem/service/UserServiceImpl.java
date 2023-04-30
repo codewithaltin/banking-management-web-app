@@ -1,5 +1,6 @@
 package com.bimi.bankingsystem.service;
 import com.bimi.bankingsystem.model.User;
+import com.bimi.bankingsystem.entity.UserEntity;
 import com.bimi.bankingsystem.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -68,7 +69,7 @@ public class UserServiceImpl implements BankingService {
 
     @Override
     public User updateUser(Long id, User user) {
-        User userEntity =
+        UserEntity userEntity =
                 userRepository.findById(id).get();
         userEntity.setEmailId(user.getEmailId());
         userEntity.setFirstName(user.getFirstName());
