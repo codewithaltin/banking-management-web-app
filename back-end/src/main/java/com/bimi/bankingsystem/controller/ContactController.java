@@ -1,8 +1,7 @@
 package com.bimi.bankingsystem.controller;
 
-import com.bimi.bankingsystem.model.User;
+import com.bimi.bankingsystem.entity.ContactEntity;
 import com.bimi.bankingsystem.service.ContactService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.bimi.bankingsystem.model.Contact;
@@ -28,7 +27,7 @@ public class ContactController {
     }
 
     @GetMapping("/contact")
-    public List<Contact> getAllContact() {
+    public List<ContactEntity> getAllContact() {
         return contactService.getAllContact();
     }
 

@@ -40,7 +40,7 @@ public class UserController {
     @DeleteMapping("/users/{id}")
     public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id) {
         boolean deleted = false;
-        deleted = bankingService.deleteUser(id);
+        deleted = userService.deleteUser(id);
 
         Map<String,Boolean> response = new HashMap<>();
         response.put("deleted",deleted);
