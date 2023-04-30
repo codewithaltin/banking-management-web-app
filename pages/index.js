@@ -178,7 +178,7 @@ export default function Index(session) {
             </div>
 
             <div className="w-full md:w-5/12 px-4 mr-auto ml-auto mt-32">
-              <div className="relative flex flex-col min-w-0 w-full mb-0 mt-48 md:mt-48">
+              <div className="relative flex flex-col min-w-0 w-full mb-0 mt-48 md:mt-4">
                 <img
                   alt="..."
                   src="/img/f-banking.png"
@@ -191,7 +191,7 @@ export default function Index(session) {
                 />
                 <img
                   alt="..."
-                  src="/img/invoice1.avif"
+                  src="/img/invoice1.jpg"
                   className="w-full align-middle rounded-lg absolute shadow-lg max-w-210-px left-40-px -top-225-px z-2"
                 />
                 <img
@@ -202,7 +202,7 @@ export default function Index(session) {
                 <img
                   alt="..."
                   src="/img/invoice2.jpg"
-                  className="w-full align-middle rounded absolute shadow-xl max-w-sm left-195-px top-95-px"
+                  className="w-full align-middle rounded absolute shadow-xl max-w-210-px left-195-px top-95-px"
                 />
               </div>
             </div>
