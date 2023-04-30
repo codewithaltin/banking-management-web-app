@@ -76,7 +76,6 @@ export default function Index(session) {
                     <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
                   </a>
                 </blockquote>
-
               </div>
             </div>
 
@@ -151,18 +150,21 @@ export default function Index(session) {
           <div className="flex flex-wrap items-center">
             <div className="w-full md:w-4/12 px-12 md:px-4 ml-auto mr-auto mt-48">
               <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
-                <img src="/img/invoice-logo.png" alt="..."
-                  className="fas fa-comments-dollar text-xl" />
+                <img
+                  src="/img/invoice-logo.png"
+                  alt="..."
+                  className="fas fa-comments-dollar text-xl"
+                />
               </div>
               <h3 className="text-3xl mb-2 font-semibold leading-normal text-blueGray-900">
                 Your Financial Invoice
               </h3>
               <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
                 We are pleased to provide you with an invoice for the banking
-                services that we provide to you. As a trusted financial institution,
-                we pride ourselves on offering a wide range of services that cater
-                to your individual banking needs and we are committed to
-                providing exceptional service to our clients.
+                services that we provide to you. As a trusted financial
+                institution, we pride ourselves on offering a wide range of
+                services that cater to your individual banking needs and we are
+                committed to providing exceptional service to our clients.
               </p>
 
               <a
