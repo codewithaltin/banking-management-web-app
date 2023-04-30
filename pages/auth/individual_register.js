@@ -84,7 +84,7 @@ export default function Register() {
     }
     const _user = await response.json();
     setResponseUser(_user);
-    navigate("login.js");
+    window.location.reload();
   };
   const handleChange = (event) => {
     const value = event.target.value;

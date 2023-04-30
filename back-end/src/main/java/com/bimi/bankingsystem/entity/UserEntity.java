@@ -30,6 +30,7 @@ public class UserEntity {
         this.emailId = emailId;
         this.phoneNumber = phoneNumber;
         this.password = password;
-        this.role = role;
+
+            this.role = role;
     }
 }

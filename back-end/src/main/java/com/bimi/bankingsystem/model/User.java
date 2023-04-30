@@ -21,6 +21,9 @@ public class User {
         this.emailId = emailId;
         this.phoneNumber = phoneNumber;
         this.password = password;
+        if(role == null  || role.equals(""))
+            this.role = "user";
+        else
         this.role = role;
     }
     public String getRole() {
