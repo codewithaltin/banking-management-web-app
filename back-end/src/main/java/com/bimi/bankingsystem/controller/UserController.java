@@ -14,9 +14,9 @@ import java.util.Map;
 @RequestMapping("/api/v1/")
 public class UserController {
 
-    private final BankingService userService;
+    private final UserService userService;
 
-    public UserController(BankingService userService) {
+    public UserController(UserService userService) {
         this.userService = userService;
     }
 
