@@ -1,4 +1,4 @@
-package com.bimi.bankingsystem.service;
+package com.bimi.bankingsystem.repository.service;
 
 import com.bimi.bankingsystem.model.Invoice;
 import com.bimi.bankingsystem.repository.InvoiceRepository;
