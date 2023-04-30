@@ -61,7 +61,7 @@ export default function Index(session) {
                   <h4 className="text-xl font-bold text-blueGray-900">
                     Get Individual/ Business Loan
                   </h4>
-                  <p className="text-md font-light mt-2 text-blueGray-900">
+                  <p className="text-md font-light mt-2 text-blueGray-900 mb-4">
                     Whether you're an individual looking to make a big purchase
                     or a business owner in need of funding, our loan options can
                     help you get the funds you need. Apply now and take the
@@ -70,9 +70,9 @@ export default function Index(session) {
                   <a
                     href="/loan-application"
                     target="_blank"
-                    className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
+                    className="font-bold  text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
                   >
-                    GET LOAN{" "}
+                    Get Loan{" "}
                     <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
                   </a>
                 </blockquote>
