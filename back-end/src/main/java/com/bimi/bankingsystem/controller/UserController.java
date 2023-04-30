@@ -41,7 +41,12 @@ public class UserController {
     @DeleteMapping("/users/{id}")
     public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id) {
         boolean deleted = false;
+<<<<<<< HEAD
         deleted = bankingService.deleteUser(id);
+=======
+        deleted = userService.deleteUser(id);
+
+>>>>>>> 4b81ce4a99129fc72e1060046583204ee394d11d
         Map<String,Boolean> response = new HashMap<>();
         response.put("deleted",deleted);
         return ResponseEntity.ok(response);

@@ -1,6 +1,7 @@
 package com.bimi.bankingsystem.service;
 import com.bimi.bankingsystem.entity.UserEntity;
 import com.bimi.bankingsystem.model.User;
+import com.bimi.bankingsystem.entity.UserEntity;
 import com.bimi.bankingsystem.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
@@ -11,7 +12,7 @@ import java.util.stream.Collectors;
 
 @Service
 
-public class UserServiceImpl implements BankingService {
+public class UserServiceImpl implements UserService {
 
 
     private UserRepository userRepository;

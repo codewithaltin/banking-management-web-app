@@ -46,7 +46,7 @@ function Invoice() {
 
     note: Yup.string()
       .required("Note is required")
-      .min(50, "Note must be longer than 50 characters")
+      .min(10, "Note must be longer than 50 characters")
       .max(150, "note must be shorter than 150 characters."),
   });
 

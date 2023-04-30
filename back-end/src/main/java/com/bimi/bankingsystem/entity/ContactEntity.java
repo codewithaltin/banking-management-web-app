@@ -5,7 +5,7 @@ import jakarta.persistence.Table;
 
 import jakarta.persistence.*;
 @Entity
-@Table
+@Table(name = "contact")
 public class ContactEntity {
     @Id
     @SequenceGenerator(name = "contact_sequence", sequenceName = "contact_sequence", allocationSize = 1)
