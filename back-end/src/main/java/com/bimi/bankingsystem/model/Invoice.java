@@ -10,6 +10,9 @@ public class Invoice {
     @Column(name = "invoice_id")
     private Integer id;
 
+    @Column(name = "address")
+    private String address;
+
     @Column(name = "name")
     private String fullName;
 
@@ -46,6 +49,7 @@ public class Invoice {
 
     public Invoice(Integer id, String fullName, String country, Integer postCode, String email, String emailBill, String date, String item, Integer price, Integer qty, String note) {
         this.id = id;
+        this.address = address;
         this.fullName = fullName;
         this.country = country;
         this.postCode = postCode;
@@ -64,6 +68,14 @@ public class Invoice {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
     }
 
     public String getFullName() {
