@@ -1,9 +1,7 @@
 package com.bimi.bankingsystem.controller;
 
 import com.bimi.bankingsystem.model.Invoice;
-import com.bimi.bankingsystem.model.Loan;
-import com.bimi.bankingsystem.repository.service.InvoiceService;
-import com.bimi.bankingsystem.repository.service.LoanService;
+import com.bimi.bankingsystem.service.InvoiceService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
