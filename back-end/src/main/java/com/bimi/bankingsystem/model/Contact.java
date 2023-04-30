@@ -1,7 +1,7 @@
 package com.bimi.bankingsystem.model;
 
 
-import jakarta.persistence.*
+import jakarta.persistence.*;
 
 public class Contact {
 
