@@ -7,8 +7,8 @@ import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import UserNavbar from "components/Navbars/UserNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import { getSession } from "next-auth/react";
-import { createRoot } from "react-dom/client";
-import { BrowserRouter as Router } from "react-router-dom";
+// import { createRoot } from "react-dom/client";
+// import { BrowserRouter as Router } from "react-router-dom";
 
 export default function Index(session) {
   return (
@@ -67,7 +67,16 @@ export default function Index(session) {
                     help you get the funds you need. Apply now and take the
                     first step toward achieving your financial goals.
                   </p>
+                  <a
+                  href="/loan-application"
+                  target="_blank"
+                  className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
+                >
+                GET LOAN{" "}
+                <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
+              </a>
                 </blockquote>
+                
               </div>
             </div>
 

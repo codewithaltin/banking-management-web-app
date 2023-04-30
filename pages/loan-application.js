@@ -1,6 +1,6 @@
 import React from "react";
 import Link from "next/link";
-import Navbar from "components/Navbars/AuthNavbar.js";
+import Navbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 
 import { useForm } from "react-hook-form";

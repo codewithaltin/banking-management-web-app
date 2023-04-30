@@ -65,10 +65,10 @@ export default function Register() {
     lastName: "",
     email: "",
   });
-  const navigate = useNavigate();
-  const navigateHome = () => {
-    navigate("/");
-  };
+  // const navigate = useNavigate();
+  // const navigateHome = () => {
+  //   navigate("/");
+  // };
 
   const saveUser = async (e) => {
     //e.preventDefault();
@@ -84,7 +84,7 @@ export default function Register() {
     }
     const _user = await response.json();
     setResponseUser(_user);
-    navigate("login.js");
+    // navigate("login.js");
   };
   const handleChange = (event) => {
     const value = event.target.value;
@@ -93,9 +93,9 @@ export default function Register() {
 
   return (
     <>
-      <Routes>
+      {/* <Routes>
         <Route path="/" element={<Login />} />
-      </Routes>
+      </Routes> */}
       <div className="container mx-auto px-4 h-full">
         <div className="flex content-center items-center justify-center h-full">
           <div className="w-full lg:w-6/12 px-4">
