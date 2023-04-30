@@ -35,7 +35,9 @@ public class UserServiceImpl implements BankingService {
                 userEntity.getLastName(),
                 userEntity.getEmailId(),
                 userEntity.getPhoneNumber(),
-                userEntity.getPassword()
+                userEntity.getPassword(),
+                userEntity.getRole()
+
         )).collect(Collectors.toList());
         return users;
     }
@@ -64,6 +66,7 @@ public class UserServiceImpl implements BankingService {
         userEntity.setLastName(user.getLastName());
         userEntity.setPassword(user.getPassword());
         userEntity.setPhoneNumber(user.getPhoneNumber());
+        userEntity.setRole(user.getRole());
 
         userRepository.save(userEntity);
         return user;

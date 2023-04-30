@@ -10,6 +10,9 @@ const EditUser = ({ userId, setResponseUser }) => {
     firstName: "",
     lastName: "",
     emailId: "",
+    password: "",
+    phoneNumber: "",
+    role: "",
   });
 
   useEffect(() => {
@@ -117,12 +120,36 @@ const EditUser = ({ userId, setResponseUser }) => {
                     </div>
                     <div className="h-14 my-4">
                       <label className="block text-gray-600 text-sm font-normal">
-                        Email Id
+                        Email
                       </label>
                       <input
                         type="text"
                         name="emailId"
                         value={user.emailId}
+                        onChange={(e) => handleChange(e)}
+                        className="h-10 w-96 border mt-2 px-2 py-2"
+                      ></input>
+                    </div>
+                    <div className="h-14 my-4">
+                      <label className="block text-gray-600 text-sm font-normal">
+                        Phone Number
+                      </label>
+                      <input
+                        type="text"
+                        name="phoneNumber"
+                        value={user.phoneNumber}
+                        onChange={(e) => handleChange(e)}
+                        className="h-10 w-96 border mt-2 px-2 py-2"
+                      ></input>
+                    </div>
+                    <div className="h-14 my-4">
+                      <label className="block text-gray-600 text-sm font-normal">
+                        Role
+                      </label>
+                      <input
+                        type="text"
+                        name="role"
+                        value={user.role}
                         onChange={(e) => handleChange(e)}
                         className="h-10 w-96 border mt-2 px-2 py-2"
                       ></input>

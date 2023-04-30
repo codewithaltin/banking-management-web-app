@@ -9,19 +9,27 @@ public class User {
     private String emailId;
     private String phoneNumber;
     private String password;
+    private String role;
 
     public User() {
     }
 
-    public User(long id, String firstName, String lastName, String emailId, String phoneNumber, String password) {
+    public User(long id, String firstName, String lastName, String emailId, String phoneNumber, String password,String role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.emailId = emailId;
         this.phoneNumber = phoneNumber;
         this.password = password;
+        this.role = role;
+    }
+    public String getRole() {
+        return role;
     }
 
+    public void setRole(String role) {
+        this.role = role;
+    }
     public long getId() {
         return id;
     }
