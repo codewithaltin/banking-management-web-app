@@ -33,6 +33,7 @@ export default function UserTable({ user }) {
   }, [user, responseUser]);
 
   const deleteUser = (e, id) => {
+    {alert("Are you sure);}
     e.preventDefault();
     fetch(USER_API_BASE_URL + "/" + id, {
       method: "DELETE",
