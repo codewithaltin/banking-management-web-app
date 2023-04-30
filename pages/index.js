@@ -26,7 +26,7 @@ export default function Index(session) {
               </p>
               <div className="mt-12 flex justify-center">
                 <a
-                  href="/auth/individual_register"
+                  href="futur_ai"
                   target="_blank"
                   className="get-started text-blueGray-100 font-bold px-6 py-4 rounded-lg outline-none focus:outline-none mr-1 mb-1 bg-blueGray-100 active:bg-blueGray-100 bg-opacity-20 capitalize text-m shadow hover:shadow-lg ease-linear transition-all duration-"
                 >
