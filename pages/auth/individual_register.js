@@ -58,12 +58,16 @@ export default function Register() {
     firstName: "",
     lastName: "",
     emailId: "",
+    phoneNumber: "",
+    password: "",
   });
   const [responseUser, setResponseUser] = useState({
     id: "",
     firstName: "",
     lastName: "",
     email: "",
+    phoneNumber: "",
+    password: "",
   });
   // const navigate = useNavigate();
   // const navigateHome = () => {
@@ -159,10 +163,10 @@ export default function Register() {
                       onChange={(e) => handleChange(e)}
                     />
                   </div>
-                  <small role="alert" className="text-red-500 mb-2 block">
+                  <small role="alert" className="text-red-500 mb-2 mr-20 ">
                     {errors.firstName?.message}
                   </small>
-                  <small role="alert" className="block text-red-500 mb-2 ">
+                  <small role="alert" className="  text-red-500 mb-2 ">
                     {errors.lastName?.message}
                   </small>
                   <div className="relative w-full mb-3">

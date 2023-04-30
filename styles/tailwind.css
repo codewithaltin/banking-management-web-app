@@ -2362,7 +2362,9 @@ select {
 .mr-4 {
   margin-right: 1rem;
 }
-
+.mr-20 {
+  margin-right: 8.5rem;
+}
 .mb-4 {
   margin-bottom: 1rem;
 }

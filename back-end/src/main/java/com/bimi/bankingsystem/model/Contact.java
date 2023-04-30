@@ -1,11 +1,8 @@
 package com.bimi.bankingsystem.model;
 
 
-<<<<<<< HEAD
-import jakarta.persistence.*;
+import jakarta.persistence.*
 
-=======
->>>>>>> 4b81ce4a99129fc72e1060046583204ee394d11d
 public class Contact {
 
     private long id;
