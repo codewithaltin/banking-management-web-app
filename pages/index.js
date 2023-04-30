@@ -151,7 +151,8 @@ export default function Index(session) {
           <div className="flex flex-wrap items-center">
             <div className="w-full md:w-4/12 px-12 md:px-4 ml-auto mr-auto mt-48">
               <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
-                <i className="fas fa-comments-dollar text-xl"></i>
+                <img src="/img/invoice-logo.png" alt="..."
+                  className="fas fa-comments-dollar text-xl" />
               </div>
               <h3 className="text-3xl mb-2 font-semibold leading-normal text-blueGray-900">
                 Your Financial Invoice
@@ -175,7 +176,7 @@ export default function Index(session) {
             </div>
 
             <div className="w-full md:w-5/12 px-4 mr-auto ml-auto mt-32">
-              <div className="relative flex flex-col min-w-0 w-full mb-6 mt-48 md:mt-0">
+              <div className="relative flex flex-col min-w-0 w-full mb-0 mt-48 md:mt-48">
                 <img
                   alt="..."
                   src="/img/f-banking.png"
@@ -188,23 +189,18 @@ export default function Index(session) {
                 />
                 <img
                   alt="..."
-                  src="/img/money-time.jpg"
-                  className="w-full align-middle rounded-lg absolute shadow-lg max-w-180-px left-40-px -top-225-px z-2"
+                  src="/img/invoice1.avif"
+                  className="w-full align-middle rounded-lg absolute shadow-lg max-w-210-px left-40-px -top-225-px z-2"
                 />
                 <img
                   alt="..."
                   src="/img/simplify-finance.jpg"
-                  className="w-full align-middle rounded-lg absolute shadow-2xl max-w-200-px -left-50-px top-25-px"
+                  className="w-full align-middle rounded-lg absolute shadow-2xl max-w-210-px -left-50-px top-25-px"
                 />
                 <img
                   alt="..."
-                  src="/img/bussiness-agreement.png"
-                  className="w-full align-middle rounded absolute shadow-lg max-w-580-px -left-20-px top-210-px"
-                />
-                <img
-                  alt="..."
-                  src="/img/banking-card.jpg"
-                  className="w-full align-middle rounded absolute shadow-xl max-w-120-px left-195-px top-95-px"
+                  src="/img/invoice2.jpg"
+                  className="w-full align-middle rounded absolute shadow-xl max-w-sm left-195-px top-95-px"
                 />
               </div>
             </div>
