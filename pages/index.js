@@ -68,15 +68,15 @@ export default function Index(session) {
                     first step toward achieving your financial goals.
                   </p>
                   <a
-                  href="/loan-application"
-                  target="_blank"
-                  className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
-                >
-                GET LOAN{" "}
-                <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
-              </a>
+                    href="/loan-application"
+                    target="_blank"
+                    className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
+                  >
+                    GET LOAN{" "}
+                    <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
+                  </a>
                 </blockquote>
-                
+
               </div>
             </div>
 
@@ -154,22 +154,22 @@ export default function Index(session) {
                 <i className="fas fa-comments-dollar text-xl"></i>
               </div>
               <h3 className="text-3xl mb-2 font-semibold leading-normal text-blueGray-900">
-                Simplify your life
+                Your Financial Invoice
               </h3>
               <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-                Looking for a way to simplify your finances and keep your money
-                at your fingertips? Everyday Checking is the solution. Whether
-                you're paying bills, depositing a check, or making a purchase,
-                Everyday Checking streamlines your financial life and gives you
-                greater control over your money.
+                We are pleased to provide you with an invoice for the banking
+                services that we provide to you. As a trusted financial institution,
+                we pride ourselves on offering a wide range of services that cater
+                to your individual banking needs and we are committed to
+                providing exceptional service to our clients.
               </p>
 
               <a
-                href="https://www.creative-tim.com/learning-lab/tailwind/nextjs/alerts/notus?ref=nnjs-index"
+                href="/invoice_details"
                 target="_blank"
                 className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
               >
-                View More{" "}
+                Settle your Invoice{" "}
                 <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
               </a>
             </div>
