@@ -5,8 +5,8 @@ import PropTypes from "prop-types";
 import EditUser from "./EditUser";
 import Contact from "./Contact";
 
-export default function UserTable({ user }) {
-  const USER_API_BASE_URL = "http://localhost:8080/api/v1/users";
+export default function ContactTable({ user }) {
+  const USER_API_BASE_URL = "http://localhost:8080/api/v1/contact";
   const [users, setUsers] = useState(null);
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState(null);
