@@ -129,7 +129,7 @@ export default function Sidebar() {
               </li>
               <li className="items-center">
                 <Link
-                  href="/admin/userlist"
+                  href="/admin/contactlist"
                   className={
                     "text-xs uppercase py-3 font-bold block " +
                     (router.pathname.indexOf("/admin/contactlist") !== -1
