@@ -17,7 +17,7 @@ const schema = yup
       .string()
       .email("Please enter a valid e-mail")
       .required("Email is required."),
-    "text-area": yup
+    "text   ": yup
       .string()
       .required("Some text is required.")
       .min(5, "Text must be longer than 5 characters")
@@ -135,18 +135,19 @@ export default function Contact() {
                   <div className="relative w-full mb-3">
                   <label
                     className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="text-area"
+                    htmlFor="text"
                   >
                     Text
                   </label>
                   <textarea
-                    {...register("text-area")}
-                    id="text-area"
+                    {...register("text")}
+                    id="text"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Type your message right here"
                     rows="5"
                     cols="40"
                     value={contact.text}
+
                     onChange={(e) => handleChange(e)}
                   />
                   <small role="alert" className="text-red-500 ">
