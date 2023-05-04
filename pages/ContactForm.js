@@ -51,7 +51,7 @@ export default function Contact() {
   //   navigate("/");
   // };ss
 
-  const saveUser = async (e) => {
+  const saveContact = async (e) => {
     //e.preventDefault();
     const response = await fetch(CONTACT_API_BASE_URL, {
       method: "POST",
@@ -69,7 +69,7 @@ export default function Contact() {
   };
   const handleChange = (event) => {
     const value = event.target.value;
-    setContact({ ...user, [event.target.name]: value });
+    setContacts({ ...contact, [event.target.name]: value });
   };
 
   return (
@@ -89,7 +89,7 @@ export default function Contact() {
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                 
-                <form onSubmit={handleSubmit(saveUser)}>
+                <form onSubmit={handleSubmit(saveContact)}>
                   {" "}
                   <div className="relative w-full mb-3">
                     <label
@@ -105,6 +105,8 @@ export default function Contact() {
                     focus:outline-none focus:ring w-full ease-linear
                     transition-all duration-150"
                       placeholder="Full name"
+                      value={contact.fullName}
+                      onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.fullName?.message}
@@ -122,6 +124,8 @@ export default function Contact() {
                       type="email"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s example@gmail.com"
+                      value={contact.email}
+                      onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.email?.message}
@@ -142,6 +146,8 @@ export default function Contact() {
                     placeholder="Type your message right here"
                     rows="5"
                     cols="40"
+                    value={contact.text}
+                    onChange={(e) => handleChange(e)}
                   />
                   <small role="alert" className="text-red-500 ">
                     {errors["text-area"]?.message}
