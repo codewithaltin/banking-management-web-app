@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 // components
-import EditUser from "./EditUser";
 import Contact from "./Contact";
 
 export default function ContactTable({ contact }) {
@@ -47,10 +46,6 @@ export default function ContactTable({ contact }) {
     });
   };
 
-  const editUser = (e, id) => {
-    e.preventDefault();
-    setUserId(id);
-  };
   return (
     <>
       <div className=" w-28 h-28 mt-16">.</div>
@@ -111,14 +106,12 @@ export default function ContactTable({ contact }) {
                   contact={contact}
                     key={contact.id}
                     deleteUser={deleteUser}
-                    editUser={editUser}
                   />
                 ))}
               </tbody>
             )}
           </table>
         </div>
-        <EditUser contactId={contactId} setResponseContact={setResponseContact} />
       </div>
     </>
   );

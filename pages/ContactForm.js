@@ -17,7 +17,7 @@ const schema = yup
       .string()
       .email("Please enter a valid e-mail")
       .required("Email is required."),
-    "text   ": yup
+    "text": yup
       .string()
       .required("Some text is required.")
       .min(5, "Text must be longer than 5 characters")
@@ -147,11 +147,10 @@ export default function Contact() {
                     rows="5"
                     cols="40"
                     value={contact.text}
-
                     onChange={(e) => handleChange(e)}
                   />
                   <small role="alert" className="text-red-500 ">
-                    {errors["text-area"]?.message}
+                    {errors["text"]?.message}
                   </small>
                 </div>
                   
