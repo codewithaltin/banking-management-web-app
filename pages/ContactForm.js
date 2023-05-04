@@ -1,10 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import Auth from "layouts/Auth.js";
-const phoneReg = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 const schema = yup
   .object()
@@ -18,10 +17,6 @@ const schema = yup
       .string()
       .email("Please enter a valid e-mail")
       .required("Email is required."),
-    phoneNumber: yup
-      .string()
-      .required("Phone number is required")
-      .matches(phoneReg, "Phone Number is not valid."),
     "text-area": yup
       .string()
       .required("Some text is required.")
@@ -35,7 +30,47 @@ export default function Contact() {
     watch,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
-  const onSubmit = (data) => console.log(data);
+  
+  const CONTACT_API_BASE_URL = "http://localhost:8080/api/v1/contact";
+
+  const [isOpen, setIsOpen] = useState(false);
+  const [contact, setContacts] = useState({
+    id: "",
+    fullName: "",
+    email: "",
+    text: "",
+  });
+  const [responseContact, setResponseContact] = useState({
+    id: "",
+    fullName: "",
+    email: "",
+    text: "",
+  });
+  // const navigate = useNavigate();
+  // const navigateHome = () => {
+  //   navigate("/");
+  // };ss
+
+  const saveUser = async (e) => {
+    //e.preventDefault();
+    const response = await fetch(CONTACT_API_BASE_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(contact),
+    });
+    if (!response.ok) {
+      throw new Error("Something went wrong");
+    }
+    const _contact = await response.json();
+    setResponseContact(_contact);
+    window.location.reload();
+  };
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setContact({ ...user, [event.target.name]: value });
+  };
 
   return (
     <>
@@ -54,7 +89,7 @@ export default function Contact() {
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                 
-                <form onSubmit={handleSubmit(onSubmit)}>
+                <form onSubmit={handleSubmit(saveUser)}>
                   {" "}
                   <div className="relative w-full mb-3">
                     <label

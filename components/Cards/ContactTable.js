@@ -5,43 +5,43 @@ import PropTypes from "prop-types";
 import EditUser from "./EditUser";
 import Contact from "./Contact";
 
-export default function ContactTable({ user }) {
-  const USER_API_BASE_URL = "http://localhost:8080/api/v1/contact";
-  const [users, setUsers] = useState(null);
+export default function ContactTable({ contact }) {
+  const CONTACT_API_BASE_URL = "http://localhost:8080/api/v1/contact";
+  const [contacts, setContacts] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [userId, setUserId] = useState(null);
-  const [responseUser, setResponseUser] = useState(null);
+  const [contactId, setContactId] = useState(null);
+  const [responseContact, setResponseContact] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await fetch(USER_API_BASE_URL, {
+        const response = await fetch(CONTACT_API_BASE_URL, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
         });
-        const users = await response.json();
-        setUsers(users);
+        const contacts = await response.json();
+        setContacts(contacts);
       } catch (error) {
         console.log(error);
       }
       setLoading(false);
     };
     fetchData();
-  }, [user, responseUser]);
+  }, [contact, responseContact]);
 
   const deleteUser = (e, id) => {
     let confirmed = confirm("Are you sure you wanna delete this user?");
     if (!confirmed) return;
     e.preventDefault();
-    fetch(USER_API_BASE_URL + "/" + id, {
+    fetch(CONTACT_API_BASE_URL + "/" + id, {
       method: "DELETE",
     }).then((res) => {
-      if (users) {
-        setUsers((prevElement) => {
-          return prevElement.filter((user) => user.id !== id);
+      if (contacts) {
+        setContacts((prevElement) => {
+          return prevElement.filter((user) => contact.id !== id);
         });
       }
     });
@@ -106,10 +106,10 @@ export default function ContactTable({ user }) {
             </thead>
             {!loading && (
               <tbody>
-                {users?.map((user) => (
+                {contacts?.map((contact) => (
                   <Contact
-                    user={user}
-                    key={user.id}
+                  contact={contact}
+                    key={contact.id}
                     deleteUser={deleteUser}
                     editUser={editUser}
                   />
@@ -118,7 +118,7 @@ export default function ContactTable({ user }) {
             )}
           </table>
         </div>
-        <EditUser userId={userId} setResponseUser={setResponseUser} />
+        <EditUser contactId={contactId} setResponseContact={setResponseContact} />
       </div>
     </>
   );

@@ -1,20 +1,20 @@
 import React from "react";
 
-const Contact = ({ user, deleteUser, editUser }) => {
+const Contact = ({ contact, deleteUser, editUser }) => {
   return (
-    <tr key={user.id}>
+    <tr key={contact.id}>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
-        {user.fullName}
+        {contact.fullName}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
-        {user.email}
+        {contact.email}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
-        {user.text}
+        {contact.text}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         <a
-          onClick={(e, id) => editUser(e, user.id)}
+          onClick={(e, id) => editUser(e, contact.id)}
           className="text-indigo-600 hover:text-indigo-800 cursor-pointer"
         >
           Edit
@@ -22,7 +22,7 @@ const Contact = ({ user, deleteUser, editUser }) => {
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         <a
-          onClick={(e, id) => deleteUser(e, user.id)}
+          onClick={(e, id) => deleteUser(e, contact.id)}
           className="text-indigo-600 hover:text-indigo-800 cursor-pointer"
         >
           Delete
