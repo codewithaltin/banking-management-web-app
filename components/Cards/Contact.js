@@ -1,6 +1,6 @@
 import React from "react";
 
-const Contact = ({ contact, deleteUser, editUser }) => {
+const Contact = ({ contact, deleteContact}) => {
   return (
     <tr key={contact.id}>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
@@ -14,7 +14,7 @@ const Contact = ({ contact, deleteUser, editUser }) => {
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         <a
-          onClick={(e, id) => deleteUser(e, contact.id)}
+          onClick={(e, id) => deleteContact(e, contact.id)}
           className="text-indigo-600 hover:text-indigo-800 cursor-pointer"
         >
           Delete

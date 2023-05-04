@@ -31,8 +31,8 @@ export default function ContactTable({ contact }) {
     fetchData();
   }, [contact, responseContact]);
 
-  const deleteUser = (e, id) => {
-    let confirmed = confirm("Are you sure you wanna delete this user?");
+  const deleteContact = (e, id) => {
+    let confirmed = confirm("Are you sure you wanna delete this contact form?");
     if (!confirmed) return;
     e.preventDefault();
     fetch(CONTACT_API_BASE_URL + "/" + id, {
@@ -40,7 +40,7 @@ export default function ContactTable({ contact }) {
     }).then((res) => {
       if (contacts) {
         setContacts((prevElement) => {
-          return prevElement.filter((user) => contact.id !== id);
+          return prevElement.filter((contact) => contact.id !== id);
         });
       }
     });
@@ -105,7 +105,7 @@ export default function ContactTable({ contact }) {
                   <Contact
                   contact={contact}
                     key={contact.id}
-                    deleteUser={deleteUser}
+                    deleteContact={deleteContact}
                   />
                 ))}
               </tbody>
