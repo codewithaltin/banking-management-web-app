@@ -74,10 +74,7 @@ export default function Register() {
                                 <hr className="mt-6 border-b-1 border-blueGray-300" />
                             </div> */}
 
-                            <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                                {/* <div className="text-blueGray-400 text-center mb-3 font-bold">
-                                    <small>Or sign up with credentials</small>
-                                </div> */}
+                            {/* <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                                 <form onSubmit={handleSubmit(onSubmit)}>
                                     {" "}
                                     <div className="relative w-full mb-3">
@@ -90,9 +87,9 @@ export default function Register() {
                                         <input
                                             {...register("fullName")}
                                             className="border-0 px-3 py-3 placeholder-blueGray-300
-                    text-blueGray-900 bg-white rounded text-sm shadow
-                    focus:outline-none focus:ring w-full ease-linear
-                    transition-all duration-150"
+                                            text-blueGray-900 bg-white rounded text-sm shadow
+                                            focus:outline-none focus:ring w-full ease-linear
+                                                transition-all duration-150"
                                             placeholder="p.s Altin Morina"
                                         />
                                         <small role="alert" className="text-red-500 ">
@@ -198,7 +195,79 @@ export default function Register() {
                                         />
                                     </div>
                                 </form>
+                            </div> */}
+
+
+
+                            return (
+                            <div key="Payment">
+                                <div className="App-payment">
+                                    <Card
+                                        number={number}
+                                        name={name}
+                                        expiry={expiry}
+                                        cvc={cvc}
+                                        focused={focused}
+                                        callback={this.handleCallback}
+                                    />
+                                    <form ref={c => (this.form = c)} onSubmit={this.handleSubmit}>
+                                        <div className="form-group">
+                                            <input
+                                                type="tel"
+                                                name="number"
+                                                className="form-control"
+                                                placeholder="Card Number"
+                                                pattern="[\d| ]{16,22}"
+                                                required
+                                                onChange={this.handleInputChange}
+                                                onFocus={this.handleInputFocus}
+                                            />
+                                        </div>
+                                        <div className="form-group">
+                                            <input
+                                                type="text"
+                                                name="name"
+                                                className="form-control"
+                                                placeholder="Name"
+                                                required
+                                                onChange={this.handleInputChange}
+                                                onFocus={this.handleInputFocus}
+                                            />
+                                        </div>
+                                        <div className="row">
+                                            <div className="col-6">
+                                                <input
+                                                    type="tel"
+                                                    name="expiry"
+                                                    className="form-control"
+                                                    placeholder="Valid Thru"
+                                                    pattern="\d\d/\d\d"
+                                                    required
+                                                    onChange={this.handleInputChange}
+                                                    onFocus={this.handleInputFocus}
+                                                />
+                                            </div>
+                                            <div className="col-6">
+                                                <input
+                                                    type="tel"
+                                                    name="cvc"
+                                                    className="form-control"
+                                                    placeholder="CVC"
+                                                    pattern="\d{3,4}"
+                                                    required
+                                                    onChange={this.handleInputChange}
+                                                    onFocus={this.handleInputFocus}
+                                                />
+                                            </div>
+                                        </div>
+                                        <input type="hidden" name="issuer" value={issuer} />
+                                        <div className="form-actions">
+                                            <button className="btn btn-primary btn-block">PAY</button>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
+                            );
                         </div>
                     </div>
                 </div>

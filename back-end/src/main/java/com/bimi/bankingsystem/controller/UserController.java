@@ -2,13 +2,10 @@ package com.bimi.bankingsystem.controller;
 
 import com.bimi.bankingsystem.model.User;
 import com.bimi.bankingsystem.service.BankingService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
