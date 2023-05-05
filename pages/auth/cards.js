@@ -1,14 +1,13 @@
 import React from 'react';
 import Card from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
-//import "../../styles/cards.css"
+
 
 
 import {
   formatCreditCardNumber,
   formatExpirationDate,
   formatCVC,
-  formatFormData,
 } from './utils';
 
 import Auth from "layouts/Auth.js";
