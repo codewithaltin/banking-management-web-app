@@ -6,6 +6,7 @@ import com.bimi.bankingsystem.service.CardService;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v1")
@@ -27,15 +28,20 @@ public class CardsController {
         return cardService.findAllCards();
     }
 
+    @GetMapping("/cards/{id}")
+    public Optional<Cards> findCardsByID(@PathVariable ("id") int id) {
+        return cardService.findById(id);
+    }
 
-    @PutMapping("cards/{id}")
+
+    @PutMapping("/cards/{id}")
     public Cards updateCards(@RequestBody Cards cards) {
         return cardService.updateCards(cards);
     }
 
-    @DeleteMapping("cards/{id}")
-    public void deleteCards(@PathVariable("cvc") int cvc) {
-        cardService.deleteCards(cvc);
+    @DeleteMapping("/cards/{id}")
+    public void deleteCards(@PathVariable("id") int id) {
+        cardService.deleteCards(id);
     }
 
 }
