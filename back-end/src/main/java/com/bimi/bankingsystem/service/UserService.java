@@ -1,10 +1,10 @@
 package com.bimi.bankingsystem.service;
 
 import com.bimi.bankingsystem.model.User;
+import java.util.*;
 
-import java.util.List;
+public interface UserService {
 
-public interface BankingService {
     User saveUser(User user);
 
     List<User> getAllUsers();
@@ -12,7 +12,8 @@ public interface BankingService {
 
     User getUserById(Long id);
 
-    void deleteUser(Long id);
+    boolean deleteUser(Long id);
 
     User updateUser(Long id, User user);
+
 }

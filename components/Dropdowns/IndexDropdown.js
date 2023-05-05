@@ -19,7 +19,7 @@ const IndexDropdown = () => {
   return (
     <>
       <a
-        className="text-blueGray-100  hover:text-blueGray-700 text-xs font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+        className="text-blueGray-100  hover:text-blueGray-00 text-xs font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
         href="#pablo"
         ref={btnDropdownRef}
         onClick={(e) => {
@@ -107,7 +107,6 @@ const IndexDropdown = () => {
         >
           Business Register
         </Link>
-
         <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
         <span
           className={

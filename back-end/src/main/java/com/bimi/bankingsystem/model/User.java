@@ -2,19 +2,37 @@ package com.bimi.bankingsystem.model;
 
 import jakarta.persistence.*;
 
-@Entity
-@Table(name = "\"user\"") //WE DO THESE QUOTES TO GET AWAY FROM RESERVERD WORD IN POSTGRESQL USER
 public class User {
-    @Id
-    @SequenceGenerator(name = "user_sequence", sequenceName = "user_sequence", allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "user_sequence")
-    @Column(updatable = false)
     private long id;
     private String firstName;
     private String lastName;
     private String emailId;
+    private String phoneNumber;
+    private String password;
+    private String role;
 
+    public User() {
+    }
 
+    public User(long id, String firstName, String lastName, String emailId, String phoneNumber, String password,String role) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.emailId = emailId;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+        if(role == null  || role.equals(""))
+            this.role = "user";
+        else
+        this.role = role;
+    }
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
     public long getId() {
         return id;
     }
@@ -47,13 +65,19 @@ public class User {
         this.emailId = emailId;
     }
 
-    public User() {
+    public String getPhoneNumber() {
+        return phoneNumber;
     }
 
-    public User(long id, String firstName, String lastName, String emailId) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.emailId = emailId;
+    public void setPhoneNumber(String phoneNumber) {
+        this.phoneNumber = phoneNumber;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }
