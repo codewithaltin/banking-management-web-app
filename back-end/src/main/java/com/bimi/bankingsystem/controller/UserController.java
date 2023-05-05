@@ -5,7 +5,7 @@ import com.bimi.bankingsystem.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
+import java.util.*;
 
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
