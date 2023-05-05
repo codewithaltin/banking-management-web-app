@@ -20,9 +20,10 @@ public class CardsImpl implements CardService{
         return cardsRepository.findAll();
     }
 
+
     @Override
-    public Optional<Cards> findBycvc(int cvc) {
-        return cardsRepository.findBycvc(cvc);
+    public Optional<Cards> findById(int id) {
+        return cardsRepository.findById(id);
     }
 
 
@@ -37,7 +38,7 @@ public class CardsImpl implements CardService{
     }
 
     @Override
-    public void deleteCards(int cvc) {
-        cardsRepository.deleteBycvc(cvc);
+    public void deleteCards(int id) {
+        cardsRepository.deleteById(id);
     }
 }

@@ -8,15 +8,11 @@ import java.util.Optional;
 public interface CardService {
     List<Cards> findAllCards();
 
-    Optional<Cards> findBycvc(int cvc);
+    Optional<Cards> findById(int id);
 
     Cards saveCards(Cards card);
 
     Cards updateCards(Cards card);
 
-    void deleteCards(int cvc);
+    void deleteCards(int id);
 }
-
-
-
-

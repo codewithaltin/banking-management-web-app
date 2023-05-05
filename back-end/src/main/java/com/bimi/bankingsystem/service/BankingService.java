@@ -9,6 +9,7 @@ public interface BankingService {
 
     List<User> getAllUsers();
 
+
     User getUserById(Long id);
 
     void deleteUser(Long id);
