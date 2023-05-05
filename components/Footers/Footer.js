@@ -26,9 +26,15 @@ export default function Footer() {
         <div className="container mx-auto px-4">
           <div className="flex flex-wrap text-center lg:text-left">
             <div className="w-full lg:w-6/12 px-4">
-              <h4 className="text-3xl font-semibold">Let's keep in touch!</h4>
+            
+              <h4 className="text-3xl font-semibold">
+                <a href="/ContactForm">
+                    Contact Us
+                </a>
+             </h4>
+
               <h5 className="text-lg mt-0 mb-2 text-blueGray-600">
-                  Stay up-to-date about "FuturBanking" by following us on platforms below.
+                  We love questions and feedback - and we're always happy to help!
               </h5>
               <div className="mt-6 lg:mb-0 mb-6">
                 <a className="btn-github" href="https://github.com/altinim/banking-managment">
