@@ -6,9 +6,14 @@ import jakarta.persistence.*;
 @Table(name = "cards")
 public class Cards {
 
-    @Cvc
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "enp_cvc")
+    @Id
+    @SequenceGenerator(name = "client_sequence", sequenceName = "client_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "client_sequence")
+    @Column(updatable = false)
+    private int id;
+
+
+    @Column(name = "cvc")
     private int cvc;
 
     @Column(name = "card_Number")
@@ -19,8 +24,6 @@ public class Cards {
 
     @Column(name = "valid")
     private int valid;
-    @Id
-    private Long id;
 
 
     public Cards() {
@@ -64,13 +67,5 @@ public class Cards {
 
     public void setCvc(int cvc) {
         this.cvc = cvc;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public Long getId() {
-        return id;
     }
 }
