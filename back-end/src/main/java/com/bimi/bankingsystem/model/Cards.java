@@ -23,14 +23,14 @@ public class Cards {
     private String name;
 
     @Column(name = "valid")
-    private int valid;
+    private String valid;
 
 
     public Cards() {
     }
 
 
-    public Cards(String cardNumber, String name, int valid, int cvc) {
+    public Cards(String cardNumber, String name, String valid, int cvc) {
         this.cvc = cvc;
         this.cardNumber = cardNumber;
         this.name = name;
@@ -53,11 +53,11 @@ public class Cards {
         this.name = name;
     }
 
-    public int getValid() {
+    public String getValid() {
         return valid;
     }
 
-    public void setValid(int valid) {
+    public void setValid(String valid) {
         this.valid = valid;
     }
 
