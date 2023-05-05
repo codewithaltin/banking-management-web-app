@@ -1,6 +1,6 @@
 import React from "react";
 
-import Navbar from "components/Navbars/AuthNavbar.js";
+import Navbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 
 export default function Profile() {
@@ -50,7 +50,7 @@ export default function Profile() {
                     <div className="relative">
                       <img
                         alt="..."
-                        src="/img/team-2-800x800.jpg"
+                        src="/img/blank-profile-picture.webp"
                         className="shadow-xl rounded-full h-auto align-middle border-none absolute -m-16 -ml-20 lg:-ml-16 max-w-150-px"
                       />
                     </div>

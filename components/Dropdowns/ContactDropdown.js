@@ -1,7 +1,7 @@
 import React from "react";
 import { createPopper } from "@popperjs/core";
 
-const UserDropdown = () => {
+const ContactDropdown = () => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
@@ -85,4 +85,4 @@ const UserDropdown = () => {
   );
 };
 
-export default UserDropdown;
+export default ContactDropdown;
