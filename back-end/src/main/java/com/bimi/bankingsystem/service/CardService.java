@@ -12,7 +12,7 @@ public interface CardService {
 
     Cards saveCards(Cards card);
 
-    Cards updateCards(Cards card);
+    Cards updateCards(Integer id, Cards card);
 
     void deleteCards(int id);
 }

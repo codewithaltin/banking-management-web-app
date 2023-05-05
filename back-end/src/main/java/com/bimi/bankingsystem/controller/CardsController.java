@@ -35,8 +35,8 @@ public class CardsController {
 
 
     @PutMapping("/cards/{id}")
-    public Cards updateCards(@RequestBody Cards cards) {
-        return cardService.updateCards(cards);
+    public Cards updateCards(@PathVariable Integer id, @RequestBody Cards cards) {
+        return cardService.updateCards(id, cards);
     }
 
     @DeleteMapping("/cards/{id}")
