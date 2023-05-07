@@ -1,4 +1,6 @@
-This is a System For Banking Managment for Lab Course 1 on Web Programmming.
+# FuturBanking: A Comprehensive Web-Based Banking System.
+
+## A Lab Course 1 Project That Empowers You to Manage Your Finances Online
 
 To run the project simply run:
 npm run dev;
