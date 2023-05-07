@@ -19,3 +19,6 @@ This project is being created with several different technologies, and to make t
 
 ### Excecuting
 To run the project simply run: ***npm run dev***;
+
+### Homepage View
+![main](https://user-images.githubusercontent.com/101337214/236708229-31ec49e8-8392-4e37-ae1d-11e91f40b713.png)
