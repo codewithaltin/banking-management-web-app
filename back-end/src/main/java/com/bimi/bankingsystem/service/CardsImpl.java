@@ -3,6 +3,7 @@ package com.bimi.bankingsystem.service;
 import com.bimi.bankingsystem.model.Cards;
 import com.bimi.bankingsystem.repository.CardsRepository;
 import org.springframework.stereotype.Service;
+
 import java.util.List;
 import java.util.Optional;
 
@@ -33,8 +34,14 @@ public class CardsImpl implements CardService{
     }
 
     @Override
-    public Cards updateCards(Cards card) {
-        return cardsRepository.save(card);
+    public Cards updateCards(Integer id, Cards card) {
+        Cards cardObj = cardsRepository.findById(id).get();
+        cardObj.setName(card.getName());
+        cardObj.setCardNumber(card.getCardNumber());
+        cardObj.setCvc(card.getCvc());
+        cardObj.setValid(card.getValid());
+
+        return cardsRepository.save(cardObj);
     }
 
     @Override

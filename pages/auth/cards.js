@@ -18,6 +18,12 @@ export default class cards extends React.Component {
     cvc: "",
     issuer: "",
     focused: "",
+    cardNumber: "",
+    name: "",
+    valid: "",
+    cvc: "",
+    issuer: "",
+    focused: "",
     formData: null,
   };
 
@@ -55,20 +61,30 @@ export default class cards extends React.Component {
         return acc;
       }, {});
 
-    console.log(formData);
+    const response = fetch(CARDS_API_BASE_URL, {
+      method: "POST",
+      headers: headers,
+      body: JSON.stringify(formData),
+    });
+
+    if (!response.ok) {
+      throw new Error("Something went wrong");
+    }
+
     this.setState({ formData });
     this.form.reset();
   };
 
   render() {
-    const { name, number, expiry, cvc, focused, issuer, formData } = this.state;
+    const { name, cardNumber, valid, cvc, focused, issuer, formData } =
+      this.state;
 
     return (
       <div>
         <Card
-          number={number}
+          number={cardNumber}
           name={name}
-          expiry={expiry}
+          expiry={valid}
           cvc={cvc}
           focused={focused}
           callback={this.handleCallback}
@@ -81,7 +97,7 @@ export default class cards extends React.Component {
           <div className="p-2 w-1/2">
             <input
               type="tel"
-              name="number"
+              name="cardNumber"
               className="w-full rounded-lg"
               placeholder="Card Number"
               pattern="[\d| ]{16,22}"
@@ -104,7 +120,7 @@ export default class cards extends React.Component {
           <div className="p-2 w-1/2">
             <input
               type="tel"
-              name="expiry"
+              name="valid"
               className="w-full rounded-lg"
               placeholder="Valid Thru"
               pattern="\d\d/\d\d"
@@ -157,7 +173,7 @@ cards.layout = Auth;
 //   state = {
 //     number: '',
 //     name: '',
-//     expiry: '',
+//     valid: '',
 //     cvc: '',
 //     issuer: '',
 //     focused: '',
@@ -179,7 +195,7 @@ cards.layout = Auth;
 //   handleInputChange = ({ target }) => {
 //     if (target.name === 'number') {
 //       target.value = formatCreditCardNumber(target.value);
-//     } else if (target.name === 'expiry') {
+//     } else if (target.name === 'valid') {
 //       target.value = formatExpirationDate(target.value);
 //     } else if (target.name === 'cvc') {
 //       target.value = formatCVC(target.value);
