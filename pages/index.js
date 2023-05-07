@@ -2,7 +2,7 @@
 import React from "react";
 import Link from "next/link";
 
-import IndexNavbar from "components/Navbars/IndexNavbar.js";
+import IndexNavbarLight from "components/Navbars/IndexNavbar_light.js";
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import UserNavbar from "components/Navbars/UserNavbar.js";
 import Footer from "components/Footers/Footer.js";
@@ -13,22 +13,22 @@ import { getSession } from "next-auth/react";
 export default function Index(session) {
   return (
     <>
-      <IndexNavbar />
-      <section className="header relative pt-16 items-center flex h-screen max-h-860-px bg-cover">
-        <div className="container justify-center mx-auto items-center flex flex-wrap">
-          <div className="w-full md:w-8/12 lg:w-6/12 xl:w-6/12 px-4">
-            <div className="pt-32 sm:pt-0">
-              <h1 className="text-5xl font-bold text-center leading-normal capitalize mt-0 mb-2 text-blueGray-100">
+      <IndexNavbarLight />
+      <section className="header relative pt-16 items-center flex h-screen max-h-1200-px bg-cover-blur">
+        <div className="container mx-auto ">
+          <div className="w-full  px-4">
+            <div className="pt-32 sm:pt-0 w-full ">
+              <h1 className="text-6xl font-heavy leading-normal  capitalize mt-0 mb-2 text-costum-dark">
                 Digital Banking Service
               </h1>
-              <p className="mt-2 text-lg leading-relaxed capitalize text-center text-blueGray-100">
+              <p className="mt-2 text-xl leading-relaxed capitalize  text-costum-black">
                 Banking that fits your lifestyle and supports your ambitions!
               </p>
-              <div className="mt-12 flex justify-center">
+              <div className="mt-12 ">
                 <a
                   href="/auth/individual_register"
                   target="_blank"
-                  className="get-started text-blueGray-100 font-bold px-6 py-4 rounded-lg outline-none focus:outline-none mr-1 mb-1 bg-blueGray-100 active:bg-blueGray-100 bg-opacity-20 capitalize text-m shadow hover:shadow-lg ease-linear transition-all duration-"
+                  className="get-started text-blueGray-100 font-heavy px-6 py-4 rounded-lg outline-none focus:outline-none mr-1 mb-1 bg-black hover:bg-blueGray-100  bg-opacity-20 capitalize text-m shadow-lg hover:shadow-lg ease-linear transition-all duration-"
                 >
                   GET STARTED
                 </a>
@@ -511,7 +511,7 @@ export default function Index(session) {
                 here to help you achieve your goals.
               </p>
               <a
-                href="#"
+                href="./auth/cards.js"
                 className="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg"
               >
                 Register Now

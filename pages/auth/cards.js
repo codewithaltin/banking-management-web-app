@@ -1,25 +1,23 @@
-import React from 'react';
+import React from "react";
 import Card from "react-credit-cards";
 import "react-credit-cards/es/styles-compiled.css";
-
-
 
 import {
   formatCreditCardNumber,
   formatExpirationDate,
   formatCVC,
-} from './utils';
+} from "./utils";
 
 import Auth from "layouts/Auth.js";
 
 export default class cards extends React.Component {
   state = {
-    number: '',
-    name: '',
-    expiry: '',
-    cvc: '',
-    issuer: '',
-    focused: '',
+    number: "",
+    name: "",
+    expiry: "",
+    cvc: "",
+    issuer: "",
+    focused: "",
     formData: null,
   };
 
@@ -36,23 +34,22 @@ export default class cards extends React.Component {
   };
 
   handleInputChange = ({ target }) => {
-    if (target.name === 'number') {
+    if (target.name === "number") {
       target.value = formatCreditCardNumber(target.value);
-    } else if (target.name === 'expiry') {
+    } else if (target.name === "expiry") {
       target.value = formatExpirationDate(target.value);
-    } else if (target.name === 'cvc') {
+    } else if (target.name === "cvc") {
       target.value = formatCVC(target.value);
     }
 
     this.setState({ [target.name]: target.value });
   };
 
-
-  handleSubmit = e => {
+  handleSubmit = (e) => {
     e.preventDefault();
     const { issuer } = this.state;
     const formData = [...e.target.elements]
-      .filter(d => d.name)
+      .filter((d) => d.name)
       .reduce((acc, d) => {
         acc[d.name] = d.value;
         return acc;
@@ -76,8 +73,10 @@ export default class cards extends React.Component {
           focused={focused}
           callback={this.handleCallback}
         />
-        <form ref={c => (this.form = c)} onSubmit={this.handleSubmit}
-          className="relative py-6 flex flex-col items-center"
+        <form
+          ref={(c) => (this.form = c)}
+          onSubmit={this.handleSubmit}
+          className="relative py-6  flex flex-col items-center"
         >
           <div className="p-2 w-1/2">
             <input
@@ -127,8 +126,8 @@ export default class cards extends React.Component {
             />
           </div>
           <input type="hidden" name="issuer" value={issuer} />
-          <div className="p-2 w-1/2 ">
-            <button className="bg-white w-full rounded-lg">Submit</button>
+          <div className="p-2 w-1/2 flex justify-center">
+            <button className="bg-white px-4 py-2 rounded-lg">Submit</button>
           </div>
         </form>
       </div>
@@ -136,22 +135,13 @@ export default class cards extends React.Component {
   }
 }
 
-cards.layout = Auth
-
-
-
-
-
-
-
-
+cards.layout = Auth;
 
 // import React from "react";
 // import { useForm } from "react-hook-form";
 // import { yupResolver } from "@hookform/resolvers/yup";
 // import * as yup from "yup";
 // import Auth from "layouts/Auth.js";
-
 
 // import Card from "react-credit-cards";
 // import "react-credit-cards/es/styles-compiled.css";
@@ -198,7 +188,6 @@ cards.layout = Auth
 //     this.setState({ [target.name]: target.value });
 //   };
 
-
 //   handleSubmit = e => {
 //     e.preventDefault();
 //     const { issuer } = this.state;
@@ -215,7 +204,6 @@ cards.layout = Auth
 //   };
 
 //
-
 
 // const phoneReg =
 //     /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -258,4 +246,3 @@ cards.layout = Auth
 
 //
 // }
-

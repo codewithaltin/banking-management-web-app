@@ -92,9 +92,6 @@ export default function UserTable({ user }) {
                 >
                   Email
                 </th>
-                <th className="px-6 align-middle border bg-blueGray-200 border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left ">
-                  Password
-                </th>
                 <th className="px-6 align-middle border  bg-blueGray-200 border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left ">
                   Phone number
                 </th>
