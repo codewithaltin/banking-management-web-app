@@ -334,11 +334,11 @@ export default function Index(session) {
                 </span>
               </div> */}
               <a
-                href="#"
+                href="auth/cards"
                 target="_blank"
                 className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
               >
-                View all{" "}
+                Get your Physical Card{" "}
                 <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
               </a>
             </div>

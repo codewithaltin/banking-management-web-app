@@ -42,7 +42,7 @@ const schema = yup
       .required("Confirm Password field is required."),
   })
   .required();
-export default function Register() {
+export default function addemploye() {
   const {
     register,
     handleSubmit,
@@ -50,57 +50,30 @@ export default function Register() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
+  const departamentOptions = [
+    "Costumer Service",
+    "IT",
+    "Sales",
+    "Operations",
+    "Marketing",
+  ];
+  const jobTitleOptions = [
+    "Banking Operations Manager",
+    "Banking Customer Service Representative",
+    "Banking Sales Representative",
+    "Banking Marketing Manager",
+    "Banking IT Manager",
+  ];
+  const onOptionChangeHandler = (event) => {
+    console.log("User Selected Value - ", event.target.value);
+  };
+
   const USER_API_BASE_URL = "http://localhost:8080/api/v1/users";
 
   const [isOpen, setIsOpen] = useState(false);
-  const [user, setUser] = useState({
-    id: "",
-    firstName: "",
-    lastName: "",
-    emailId: "",
-    phoneNumber: "",
-    password: "",
-  });
-  const [responseUser, setResponseUser] = useState({
-    id: "",
-    firstName: "",
-    lastName: "",
-    email: "",
-    phoneNumber: "",
-    password: "",
-  });
-  // const navigate = useNavigate();
-  // const navigateHome = () => {
-  //   navigate("/");
-  // };
-
-  const saveUser = async (e) => {
-    //e.preventDefault();
-    const response = await fetch(USER_API_BASE_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    });
-    if (!response.ok) {
-      throw new Error("Something went wrong");
-    }
-    const _user = await response.json();
-    setResponseUser(_user);
-    window.location.reload();
-    alert("Registered Succesfully!");
-  };
-  const handleChange = (event) => {
-    const value = event.target.value;
-    setUser({ ...user, [event.target.name]: value });
-  };
 
   return (
     <>
-      {/* <Routes>
-        <Route path="/" element={<Login />} />
-      </Routes> */}
       <div className="container mx-auto px-4 h-full">
         <div className="flex content-center items-center justify-center h-full">
           <div className="w-full lg:w-6/12 px-4">
@@ -108,36 +81,15 @@ export default function Register() {
               <div className="rounded-t mb-0 px-6 py-6">
                 <div className="text-center mb-3">
                   <h6 className="text-blueGray-500 text-sm font-bold">
-                    Sign up with
+                    Add Employee
                   </h6>
                 </div>
-                <div className="btn-wrapper text-center">
-                  <button
-                    className="bg-white active:bg-blueGray-50 text-blueGray-700 px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-                    type="button"
-                  >
-                    <img alt="..." className="w-5 mr-1" src="/img/github.svg" />
-                    Github
-                  </button>
-                  <button
-                    className="bg-white active:bg-blueGray-50 text-blueGray-700 px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-                    type="button"
-                  >
-                    <img alt="..." className="w-5 mr-1" src="/img/fb.png" />
-                    Facebook
-                  </button>
-                </div>
+
                 <hr className="mt-6 border-b-1 border-blueGray-300" />
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                <div className="text-blueGray-400 text-center mb-3 font-bold">
-                  <small>Or sign up with credentials</small>
-                </div>
-                <form onSubmit={handleSubmit(saveUser)}>
-                  <label
-                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
+                <form>
+                  <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                     Full Name
                   </label>
                   <div className="flex w-full  mb-3">
@@ -149,8 +101,6 @@ export default function Register() {
                     transition-all duration-150"
                       placeholder="First Name"
                       name="firstName"
-                      value={user.firstName}
-                      onChange={(e) => handleChange(e)}
                     />
                     <input
                       {...register("lastName")}
@@ -160,8 +110,6 @@ export default function Register() {
                     focus:outline-none focus:ring w-1/2  ease-linear
                     transition-all duration-150"
                       placeholder="Last Name"
-                      value={user.lastName}
-                      onChange={(e) => handleChange(e)}
                     />
                   </div>
                   <small role="alert" className="text-red-500 mb-2 mr-20 ">
@@ -183,18 +131,13 @@ export default function Register() {
                       name="emailId"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s example@gmail.com"
-                      value={user.emailId}
-                      onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.emailId?.message}
                     </small>
                   </div>
                   <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
+                    <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                       Phone number
                     </label>
                     <input
@@ -202,49 +145,55 @@ export default function Register() {
                       type="tel"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s 049-588-814"
-                      value={user.phoneNumber}
-                      onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.phoneNumber?.message}
                     </small>
                   </div>
                   <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      Password
+                    <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                      Address
                     </label>
                     <input
-                      {...register("password")}
-                      type="password"
+                      type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Password"
-                      value={user.password}
-                      onChange={(e) => handleChange(e)}
+                      placeholder="p.s Idriz Gjilani Street Entry 07"
                     />
                     <small role="alert" className="text-red-500 ">
-                      {errors.password?.message}
+                      {errors.phoneNumber?.message}
                     </small>
                   </div>
                   <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      Confirm Password
+                    <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                      Department
                     </label>
-                    <input
-                      {...register("confirmPassword")}
-                      type="password"
+
+                    <select
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Comfirm Password"
-                    />
-                    <small role="alert" className="text-red-500 ">
-                      {errors.confirmPassword?.message}
-                    </small>
+                      onChange={onOptionChangeHandler}
+                    >
+                      <option>Select</option>
+                      {departamentOptions.map((option, index) => {
+                        return <option key={index}>{option}</option>;
+                      })}
+                    </select>
                   </div>
+                  <div className="relative w-full mb-3">
+                    <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                      Job title
+                    </label>
+
+                    <select
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      onChange={onOptionChangeHandler}
+                    >
+                      <option>Select</option>
+                      {jobTitleOptions.map((option, index) => {
+                        return <option key={index}>{option}</option>;
+                      })}
+                    </select>
+                  </div>
+
                   <div>
                     <label className="inline-flex items-center cursor-pointer">
                       <input
@@ -273,7 +222,6 @@ export default function Register() {
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="submit"
                       value="Submit"
-                      onClick={handleChange}
                     />
                   </div>
                 </form>
@@ -285,14 +233,3 @@ export default function Register() {
     </>
   );
 }
-
-Register.layout = Auth;
-/*
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Register />
-    </BrowserRouter>
-  </React.StrictMode>
-);
-*/
