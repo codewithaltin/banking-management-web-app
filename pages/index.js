@@ -362,6 +362,16 @@ export default function Index(session) {
                   we've partnered with. Join us in giving back to your community
                   and make a difference today!
                 </p>
+
+                <a
+                    href="/loan-application"
+                    target="_blank"
+                    className="font-bold  text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
+                  >
+                    Donate Online{" "}
+                    <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
+                  </a>
+                
                 <ul className="list-none mt-6">
                   <li className="py-2">
                     <div className="flex items-center">
