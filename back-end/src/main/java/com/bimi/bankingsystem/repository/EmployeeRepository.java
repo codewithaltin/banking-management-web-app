@@ -1,9 +1,9 @@
 package com.bimi.bankingsystem.repository;
 
-import com.bimi.bankingsystem.entity.EmployeeEntity;
+import com.bimi.bankingsystem.model.Employee;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EmployeeRepository extends JpaRepository<EmployeeEntity, Long> {
+public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 }

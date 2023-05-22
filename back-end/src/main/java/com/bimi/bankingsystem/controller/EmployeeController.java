@@ -1,8 +1,8 @@
 package com.bimi.bankingsystem.controller;
 
 
-import com.bimi.bankingsystem.model.User;
-import com.bimi.bankingsystem.service.UserService;
+import com.bimi.bankingsystem.model.Employee;
+import com.bimi.bankingsystem.service.EmployeeService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,44 +13,43 @@ import java.util.*;
 @RequestMapping("/api/v1/")
 public class EmployeeController {
 
-    private final EmployeeController employeeController;
+    private final EmployeeService employeeService;
 
-    public EmployeeController(UserService userService) {
-        this.userService = userService;
+    public EmployeeController(EmployeeService employeeService) {
+        this.employeeService = employeeService;
+    }
+    @PostMapping("/employee")
+    public Employee saveEmployee(@RequestBody Employee e) {
+        return employeeService.addEmployee(e);
     }
 
-    @PostMapping("/users")
-    public User saveUser(@RequestBody User user) {
-        return userService.saveUser(user);
+    @GetMapping("/employee")
+    public List<Employee> getAllEmployees() {
+        return employeeService.getAllEmployees();
     }
 
-    @GetMapping("/users")
-    public List<User> getAllUsers() {
-        return userService.getAllUsers();
+    @GetMapping("/employee/{id}")
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") Long id) {
+        Employee e = null;
+        e = employeeService.getEmployeeById(id);
+        return ResponseEntity.ok(e);
     }
 
-    @GetMapping("/users/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
-        User user = null;
-        user = userService.getUserById(id);
-        return ResponseEntity.ok(user);
-    }
-
-    @DeleteMapping("/users/{id}")
+    @DeleteMapping("/employee/{id}")
     public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id) {
         boolean deleted = false;
-        deleted = userService.deleteUser(id);
+        deleted = employeeService.deleteEmployee(id);
 
         Map<String,Boolean> response = new HashMap<>();
         response.put("deleted",deleted);
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/users/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable("id") Long id,
-                                           @RequestBody User user) {
-        user = userService.updateUser(id,user);
-        return ResponseEntity.ok(user);
+    @PutMapping("/epmloyee/{id}")
+    public ResponseEntity<Employee> updateEmployee(@PathVariable("id") Long id,
+                                           @RequestBody Employee e) {
+        e = employeeService.updateEmployee(id,e);
+        return ResponseEntity.ok(e);
     }
 
 }

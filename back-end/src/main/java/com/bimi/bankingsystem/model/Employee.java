@@ -1,21 +1,64 @@
 package com.bimi.bankingsystem.model;
 
+
+import jakarta.persistence.*;
+import lombok.*;
+
+@Getter
+@Setter
+@Entity
+@Table(name = "employee")
 public class Employee {
+    @Id
+    @SequenceGenerator(name="course_sequence",sequenceName = "course_sequence",allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "course_sequence")
+    @Column(updatable = false)
+    @NonNull
     private long id;
+
+    @NonNull
+    @Column
     private String firstName;
+
+    @NonNull
+    @Column
     private String lastName;
+    @NonNull
+    @Column
     private String email;
+
+    @NonNull
+    @Column
     private String phoneNumber;
+
+    @NonNull
+    @Column
     private String address;
+
+    @NonNull
+    @Column
     private String department;
+
+    @NonNull
+    @Column
     private String jobTitle;
+
+    @NonNull
+    @Column
     private String salary;
+
+    @NonNull
+    @Column
     private String startDate;
+
+    @NonNull
+    @Column
     private String endDate;
 
-    public Employee(){
+    public Employee() {
 
     }
+
     public Employee(long id, String firstName, String lastName, String email, String phoneNumber, String address, String department, String jobTitle, String salary, String startDate, String endDate) {
         this.id = id;
         this.firstName = firstName;
@@ -30,91 +73,5 @@ public class Employee {
         this.endDate = endDate;
     }
 
-    public long getId() {
-        return id;
-    }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public String getFirstName() {
-        return firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getDepartment() {
-        return department;
-    }
-
-    public void setDepartment(String department) {
-        this.department = department;
-    }
-
-    public String getJobTitle() {
-        return jobTitle;
-    }
-
-    public void setJobTitle(String jobTitle) {
-        this.jobTitle = jobTitle;
-    }
-
-    public String getSalary() {
-        return salary;
-    }
-
-    public void setSalary(String salary) {
-        this.salary = salary;
-    }
-
-    public String getStartDate() {
-        return startDate;
-    }
-
-    public void setStartDate(String startDate) {
-        this.startDate = startDate;
-    }
-
-    public String getEndDate() {
-        return endDate;
-    }
-
-    public void setEndDate(String endDate) {
-        this.endDate = endDate;
-    }
 }
