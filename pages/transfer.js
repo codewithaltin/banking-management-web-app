@@ -5,8 +5,6 @@ import * as yup from "yup";
 
 // components
 
-import CardSettings from "components/Cards/CardSettings.js";
-import CardProfile from "components/Cards/CardProfile.js";
 
 // layout for page
 
@@ -61,7 +59,6 @@ const schema = yup
   })
   .required();
 
-  const onSubmit = (data) => console.log(data);
 
 export default function Transfer() {
 
@@ -71,6 +68,9 @@ export default function Transfer() {
         watch,
         formState: { errors },
       } = useForm({ resolver: yupResolver(schema) });
+
+      const TRANSFER_API_BASE_URL = "http://localhost:8080/api/v1/transfer";
+
     
     const [transfer, setTransfers] = useState({
     id: "",
@@ -99,6 +99,23 @@ export default function Transfer() {
     text: "",
   });
 
+  const saveTransfer = async (e) => {
+    //e.preventDefault();
+    const response = await fetch(TRANSFER_API_BASE_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(transfer),
+    });
+    if (!response.ok) {
+      throw new Error("Something went wrong");
+    }
+    const _transfer = await response.json();
+    setResponseContact(_transfer);
+    window.location.reload();
+  };
+
       const handleChange = (event) => {
         const value = event.target.value;
         setTransfers({ ...transfer, [event.target.name]: value });
@@ -116,7 +133,7 @@ export default function Transfer() {
           </div>
         </div>
         <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-          <form onSubmit={handleSubmit(onSubmit)}>
+          <form onSubmit={handleSubmit(saveTransfer)}>
             <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
               Your Information
             </h6>
