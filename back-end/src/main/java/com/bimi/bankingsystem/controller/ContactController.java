@@ -37,7 +37,6 @@ public class ContactController {
         contact = contactService.getContactById(id);
         return ResponseEntity.ok(contact);
     }
-
     @DeleteMapping("/contact/{id}")
     public ResponseEntity<Map<String,Boolean>> deleteContact(@PathVariable("id") Long id) {
         boolean deleted = false;
@@ -52,6 +51,7 @@ public class ContactController {
         contact = contactService.updateContact(id,contact);
         return ResponseEntity.ok(contact);
     }
+
 
 
 }

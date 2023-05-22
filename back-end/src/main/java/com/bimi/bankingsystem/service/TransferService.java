@@ -1,6 +1,8 @@
 package com.bimi.bankingsystem.service;
 
+import com.bimi.bankingsystem.entity.ContactEntity;
 import com.bimi.bankingsystem.entity.TransferEntity;
+import com.bimi.bankingsystem.model.Contact;
 import com.bimi.bankingsystem.model.Transfer;
 import com.bimi.bankingsystem.repository.TransferRepository;
 import org.springframework.beans.BeanUtils;
@@ -54,6 +56,31 @@ public class TransferService {
         Transfer contact = new Transfer();
         BeanUtils.copyProperties(transferEntity, contact);
         return contact;
+    }
+
+    public boolean deleteTransfer(Integer id) {
+        TransferEntity transfer =  transferRepository.findById(id).get();
+        transferRepository.delete(transfer);
+        return true;
+    }
+
+
+    public Transfer updateTransfer(Integer id, Transfer transfer) {
+        TransferEntity transferEntity =
+                transferRepository.findById(id).get();
+        transferEntity.setFirstName(transfer.getFirstName());
+        transferEntity.setLastName(transfer.getLastName());
+        transferEntity.setAccountNumber(transfer.getAccountNumber());
+        transferEntity.setAmount(transfer.getAmount());
+        transferEntity.setDate(transfer.getDate());
+        transferEntity.setReciverAccountNumber(transfer.getReciverAccountNumber());
+        transferEntity.setCity(transfer.getCity());
+        transferEntity.setCountry(transfer.getCountry());
+        transferEntity.setPostCode(transfer.getPostCode());
+        transferEntity.setDescription(transfer.getDescription());
+
+        transferRepository.save(transferEntity);
+        return transfer;
     }
 
 
