@@ -175,6 +175,14 @@ export default function Index(session) {
                 Settle your Invoice{" "}
                 <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
               </a>
+              <a
+                href="/transfer"
+                target="_blank"
+                className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
+              >
+                Do a transfer{" "}
+                <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
+              </a>
             </div>
 
             <div className="w-full md:w-5/12 px-4 mr-auto ml-auto mt-32">
@@ -334,11 +342,11 @@ export default function Index(session) {
                 </span>
               </div> */}
               <a
-                href="auth/cards"
+                href="#"
                 target="_blank"
                 className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
               >
-                Get your Physical Card{" "}
+                {" "}
                 <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
               </a>
             </div>
