@@ -35,7 +35,7 @@ const schema = yup
     amount: yup
      .string().required("Amount of transfer is required"),
     date: yup
-      .string().required("Date is required."),
+      .string().required("Date is required"),
     reciverAccountNumber: yup
       .string()
       .matches(/^[0-9]+$/, "Must be only digits")
@@ -207,7 +207,7 @@ export default function Transfer() {
                   </small>
                 </div>
               </div>
-              <div className="mb-4 text-sm font-bold">
+              <div className="mb-4 ">
                   <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                     Date 
                   </label>
