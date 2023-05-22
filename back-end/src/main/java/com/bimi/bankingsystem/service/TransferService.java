@@ -1,8 +1,6 @@
 package com.bimi.bankingsystem.service;
 
-import com.bimi.bankingsystem.entity.ContactEntity;
 import com.bimi.bankingsystem.entity.TransferEntity;
-import com.bimi.bankingsystem.model.Contact;
 import com.bimi.bankingsystem.model.Transfer;
 import com.bimi.bankingsystem.repository.TransferRepository;
 import org.springframework.beans.BeanUtils;

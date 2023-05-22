@@ -112,7 +112,7 @@ export default function Transfer() {
       throw new Error("Something went wrong");
     }
     const _transfer = await response.json();
-    setResponseContact(_transfer);
+    setResponseTransfer(_transfer);
     window.location.reload();
   };
 
