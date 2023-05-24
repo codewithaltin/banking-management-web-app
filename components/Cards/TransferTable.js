@@ -48,7 +48,7 @@ export default function TransferTable({ transfer }) {
 
   return (
     <>
-      <div className=" w-28 h-28 mt-16"></div>
+      <div className=" w-28 h-28 mt-16">.</div>
       <div
         className={
           "relative flex flex-col min-w-0 break-words w-full mb-6 mt-16 shadow-lg rounded "
@@ -66,21 +66,6 @@ export default function TransferTable({ transfer }) {
           <table className="items-center w-full bg-transparent border-collapse">
             <thead>
               <tr>
-                <th
-                  className={
-                    "px-6 align-middle bg-blueGray-200 border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
-                  }
-                >
-                  First Name
-                </th>
-                
-                <th
-                  className={
-                    "px-6 align-middle border border-solid bg-blueGray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
-                  }
-                >
-                  Last Name
-                </th>
                 <th
                   className={
                     "px-6 align-middle border border-solid bg-blueGray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
@@ -110,31 +95,7 @@ export default function TransferTable({ transfer }) {
                     "px-6 align-middle border border-solid bg-blueGray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
                   }
                 >
-                  Account Number
-                </th>
-
-                <th
-                  className={
-                    "px-6 align-middle border border-solid bg-blueGray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
-                  }
-                >
-                  City
-                </th>
-
-                <th
-                  className={
-                    "px-6 align-middle border border-solid bg-blueGray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
-                  }
-                >
-                  Country
-                </th>
-
-                <th
-                  className={
-                    "px-6 align-middle border border-solid bg-blueGray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
-                  }
-                >
-                  Postal Code
+                  Reciver Account Number
                 </th>
 
                 <th
@@ -145,7 +106,6 @@ export default function TransferTable({ transfer }) {
                   Description
                 </th>
 
-                
                 <th
                   colSpan={2}
                   className={

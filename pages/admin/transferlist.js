@@ -10,6 +10,6 @@ const transferlist = () => {
     </>
   );
 };
-transferlist.layout = Auth;
+transferlist.layout = Admin;
 
 export default transferlist;
