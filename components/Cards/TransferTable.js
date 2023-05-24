@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import Transfer from "./Transfer";
 
 export default function TransferTable({ transfer }) {
-  const CONTACT_API_BASE_URL = "http://localhost:8080/api/v1/transfer";
+  const TRANSFER_API_BASE_URL = "http://localhost:8080/api/v1/transfer";
   const [transfers, setTransfers] = useState(null);
   const [loading, setLoading] = useState(true);
   const [transferId, setTransferId] = useState(null);

@@ -70,9 +70,7 @@ public class TransferEntity {
     public void setAccountNumber(long accountNumber) {
         this.accountNumber = accountNumber;
     }
-    public int getAmount() {
-        return amount;
-    }
+    public int getAmount() {return amount;}
     public void setAmount(int amount) {
         this.amount = amount;
     }
