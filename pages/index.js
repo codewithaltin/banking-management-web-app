@@ -236,42 +236,30 @@ export default function Index(session) {
                 target="_blank"
                 className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
               >
-                Settle your Invoice{" "}
+                Set a saving goal{" "}
                 <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
               </a>
-              <a
-                href="/transfer"
-                target="_blank"
-                className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
-              >
-                Do a transfer{" "}
-                <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
-              </a>
+              
             </div>
 
-            <div className="w-full md:w-5/12 px-4 mr-auto ml-auto mt-32">
+            <div className="w-full md:w-8/12 px-8 mr-px ml-px mt-32">
               <div className="relative flex flex-col min-w-0 w-full mb-0 mt-48 md:mt-4">
                 
+  
+              <div className="relative flex flex-col min-w-0 w-full mb-0 mt-48 md:mt-4">
+                
+                <div className="w-full md:w-6/12 mr-auto px-4 pt-24 md:pt-0">
                 <img
                   alt="..."
-                  src="/img/OIP.jpg"
-                  className="w-full align-middle rounded-lg absolute shadow-lg max-w-210-px left-260-px -top-160-px"
+                  className="max-w-full rounded-lg shadow-xl"
+                  style={{
+                    transform:
+                      "scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg)",
+                  }}
+                  src="/img/savings-banking-investments-piggy-bank-credit.jpg"
                 />
-                <img
-                  alt="..."
-                  src="img\savings-banking-investments-piggy-bank-credit.jpg"
-                  className="w-full align-middle rounded-lg absolute shadow-lg max-w-210-px left-40-px -top-225-px z-2"
-                />
-                <img
-                  alt="..."
-                  src="/img/online-bank.jpg"
-                  className="w-full align-middle rounded-lg absolute shadow-2xl max-w-210-px -left-50-px top-25-px"
-                />
-                <img
-                  alt="..."
-                  src="/img/invoice2.jpg"
-                  className="w-full align-middle rounded absolute shadow-xl max-w-210-px left-195-px top-95-px"
-                />
+              </div>
+              </div>
               </div>
             </div>
           </div>
