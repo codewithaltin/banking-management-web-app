@@ -113,11 +113,11 @@ function Invoice() {
                           </h4>
                         </div>
                         <div className="pt-6 text-sm font-bold">
-                          <label className="block text-gray-700 text-sm font-bold mb-2">
+                          <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                             Street Address
                           </label>
                           <input
-                            className="mb-2 shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className=" mb-2 shadow appearance-none border-0 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="address"
                             name="address"
                             type="text"
@@ -132,10 +132,10 @@ function Invoice() {
                           </small>
                         </div>
                         <div className="flex justify-center items-center space-x-4 pt-2">
-                          <label className="block text-gray-700 text-sm font-bold mb-2 w-full mr-5">
+                          <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2 w-full mr-5">
                             Full Name
                             <input
-                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-3 leading-tight focus:outline-none focus:shadow-outline"
+                             className="shadow appearance-none border-0 rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:outline-none focus:shadow-outline"
                               name="name"
                               type="text"
                               placeholder="Name"
@@ -148,10 +148,10 @@ function Invoice() {
                               {errors.name?.message}
                             </small>
                           </label>
-                          <label className="block text-gray-700 text-sm font-bold mb-2 w-full mr-5">
+                          <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2 w-full mr-5">
                             Country
                             <input
-                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-2  leading-tight focus:outline-none focus:shadow-outline"
+                              className="shadow appearance-none border-0 rounded w-full py-2 px-3 text-gray-700 mb-2  leading-tight focus:outline-none focus:shadow-outline"
                               name="country"
                               type="text"
                               {...register("country")}
@@ -163,10 +163,10 @@ function Invoice() {
                               {errors.country?.message}
                             </small>
                           </label>
-                          <label className="block text-gray-700 text-sm font-bold mb-2 w-full  mr-5">
+                          <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2 w-full  mr-5">
                             Post Code
                             <input
-                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-2  leading-tight focus:outline-none focus:shadow-outline"
+                              className="shadow appearance-none border-0 rounded w-full py-2 px-3 text-gray-700 mb-2  leading-tight focus:outline-none focus:shadow-outline"
                               name="postCode"
                               type="number"
                               {...register("postCode")}
@@ -181,13 +181,13 @@ function Invoice() {
                         </div>
                         <div className="pb-2 text-sm font-bold">
                           <label
-                            className="block text-gray-700 text-sm font-bold mb-2"
+                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                             htmlFor="sender"
                           >
                             Your email address
                           </label>
                           <input
-                            className="mb-2 xshadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className="mb-3 xshadow appearance-none border-0 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="sender"
                             name="sender"
                             type="email"
@@ -200,11 +200,11 @@ function Invoice() {
                           >
                             {errors.sender?.message}
                           </small>
-                          <label className="block text-gray-700 text-sm font-bold my-3">
+                          <label className="block uppercase text-blueGray-600 text-xs font-bold mb-1">
                             Bill To
                           </label>
                           <textarea
-                            className=" shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className=" shadow appearance-none border-0 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="billTo"
                             name="billTo"
                             type="email"
@@ -219,11 +219,11 @@ function Invoice() {
                           </small>
                         </div>
                         <div className="mb-6 text-sm font-bold">
-                          <label className="block text-gray-700  text-sm font-bold mb-2">
+                          <label className="block uppercase text-blueGray-600 text-xs font-bold mb-1">
                             Due Date
                           </label>
                           <input
-                            className="shadow mb-2  appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                            className="shadow mb-2  appearance-none border-0 rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                             id="dueDate"
                             name="dueDate"
                             type="date"
@@ -238,10 +238,10 @@ function Invoice() {
                         </div>
 
                         <div className="flex justify-center items-center  space-x-4">
-                          <label className="block text-gray-700 text-sm font-bold mb-2 w-full mr-5">
+                          <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2 w-full mr-5">
                             Invoice Item
                             <input
-                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:outline-none focus:shadow-outline"
+                              className="shadow appearance-none border-0 rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:outline-none focus:shadow-outline"
                               name="itemDescription"
                               type="text"
                               {...register("itemDescription")}
@@ -253,10 +253,10 @@ function Invoice() {
                               {errors.itemDescription?.message}
                             </small>
                           </label>
-                          <label className="block text-gray-700 text-sm font-bold mb-2 w-full  mr-5">
+                          <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2 w-full  mr-5">
                             Unit Price
                             <input
-                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:outline-none focus:shadow-outline"
+                              className="shadow appearance-none border-0 rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:outline-none focus:shadow-outline"
                               name="price"
                               type="number"
                               {...register("price")}
@@ -268,10 +268,10 @@ function Invoice() {
                               {errors.price?.message}
                             </small>
                           </label>
-                          <label className="block text-gray-700 text-sm font-bold mb-2 w-full mr-5">
+                          <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2 w-full mr-5">
                             Quantity
                             <input
-                              className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:outline-none focus:shadow-outline"
+                              className="shadow appearance-none border-0 rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:outline-none focus:shadow-outline"
                               name="qty"
                               type="number"
                               {...register("qty")}
@@ -297,13 +297,13 @@ function Invoice() {
                                                     Add Item
                                                 </button> */}
                         <div className="my-6 flex flex-col text-sm font-bold">
-                          <label className="block text-gray-700 text-sm font-bold mb-2 w-full">
+                          <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2 w-full">
                             Invoice Notes
                           </label>
                           <textarea
                             id="note"
                             name="note"
-                            className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:outline-none focus:shadow-outline"
+                            className="shadow appearance-none border-0 rounded w-full py-2 px-3 text-gray-700 mb-2 leading-tight focus:outline-none focus:shadow-outline"
                             {...register("note")}
                           />
                           <small
