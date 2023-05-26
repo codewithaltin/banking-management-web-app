@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Navbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
@@ -49,14 +49,58 @@ const schema = yup
   })
   .required();
 
-export default function saveLoan() {
+export default function Loan() {
     const {
       register,
       handleSubmit,
       watch,
       formState: { errors },
     } = useForm({ resolver: yupResolver(schema) });
-    const onSubmit = (data) => console.log(data);
+
+    const LOAN_API_BASE_URL = "http://localhost:8080/api/v1/loan";
+
+    const [isOpen, setIsOpen] = useState(false);
+    const [loan, setLoan] = useState({
+      loan_id: "",
+      name: "",
+      email: "",
+      phone: "",
+      address: "",
+      amount: "",
+      income: "",
+      purpouse: "",
+    });
+    const [responseLoan, setResponseLoan] = useState({
+      loan_id: "",
+      name: "",
+      email: "",
+      phone: "",
+      address: "",
+      amount: "",
+      income: "",
+      purpouse: "",
+    });
+
+    const saveLoan = async (e) => {
+      //e.preventDefault();
+      const response = await fetch(LOAN_API_BASE_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(loan),
+      });
+      if (!response.ok) {
+        throw new Error("Something went wrong");
+      }
+      const _loan = await response.json();
+      setResponseLoan(_loan);
+      window.location.reload();
+    };
+    const handleChange = (event) => {
+      const value = event.target.value;
+      setLoan({ ...loan, [event.target.name]: value });
+    };
 
     return( 
     <>
@@ -151,7 +195,7 @@ export default function saveLoan() {
                   </p>
 
 
-                  <form onSubmit={handleSubmit(onSubmit)}>
+                  <form onSubmit={handleSubmit(saveLoan)}>
                   {" "}
                   <div className="relative w-full mb-3 mt-8">
                     <label
