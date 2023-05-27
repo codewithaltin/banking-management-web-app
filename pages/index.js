@@ -412,7 +412,7 @@ export default function Index(session) {
             <div className="w-full md:w-4/12 px-12 md:px-4 ml-auto mr-auto mt-48">
               <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
                 <img
-                  src="/img/invoice-logo.png"
+                  src="/img/beneficiary-logo.jpg"
                   alt="..."
                   className="fas fa-comments-dollar text-xl"
                 />
@@ -443,27 +443,22 @@ export default function Index(session) {
               <div className="relative flex flex-col min-w-0 w-full mb-0 mt-48 md:mt-4">
                 <img
                   alt="..."
-                  src="/img/f-banking.png"
-                  className="w-full align-middle rounded absolute shadow-lg max-w-100-px left-145-px -top-29-px z-3"
-                />
-                <img
-                  alt="..."
-                  src="/img/strong-finance1.jpg"
+                  src="/img/1beneficiary.jpg"
                   className="w-full align-middle rounded-lg absolute shadow-lg max-w-210-px left-260-px -top-160-px"
                 />
                 <img
                   alt="..."
-                  src="/img/invoice1.jpg"
-                  className="w-full align-middle rounded-lg absolute shadow-lg max-w-210-px left-40-px -top-225-px z-2"
+                  src="/img/4beneficiary.jpg"
+                  className="mt-12 w-full align-middle rounded-lg absolute shadow-lg max-w-210-px left-40-px -top-225-px z-2"
                 />
                 <img
                   alt="..."
-                  src="/img/simplify-finance.jpg"
+                  src="/img/3beneficiary.jpg"
                   className="w-full align-middle rounded-lg absolute shadow-2xl max-w-210-px -left-50-px top-25-px"
                 />
                 <img
                   alt="..."
-                  src="/img/invoice2.jpg"
+                  src="/img/2beneficiary.jpg"
                   className="w-full align-middle rounded absolute shadow-xl max-w-210-px left-195-px top-95-px"
                 />
               </div>
