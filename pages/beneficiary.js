@@ -13,53 +13,85 @@ export default Beneficiary;
 
 function Beneficiary() {
     const validationSchema = Yup.object().shape({
-        address: Yup.string()
-            .required("Address is required")
-            .min(5, "Address must be longer than 5 characters"),
 
-        name: Yup.string()
+        firstName: Yup.string()
             .required("Name is required")
             .min(5, "Name must be longer than 5 characters")
-            .max(50, "Name must be shorter than 50 characters."),
+            .max(20, "Name must be shorter than 20 characters."),
+
+        surname: Yup.string()
+            .required("Last Name is required")
+            .min(5, "Last Name must be longer than 5 characters")
+            .max(20, "Last Name must be shorter than 20 characters."),
+
+        secondName: Yup.string()
+            .required("Name is required")
+            .min(5, "Name must be longer than 5 characters")
+            .max(20, "Name must be shorter than 20 characters."),
+
+        middleName: Yup.string()
+            .required("Middle name is required")
+            .min(3, "Middle name must be longer than 3 characters")
+            .max(20, "Middle name must be shorter than 20 characters."),
+
+        secondSurname: Yup.string()
+            .required("Last Name is required")
+            .min(5, "Last Name must be longer than 5 characters")
+            .max(20, "Last Name must be shorter than 20 characters."),
+
+        email: Yup.string()
+            .required("Email is required.")
+            .email("Please enter a valid e-mail"),
+
+        gender: Yup.string()
+            .required("Gender is required"),
 
         country: Yup.string()
-            .required("Country is required")
-            .min(4, "Country Name must be longer than 4 characters")
-            .max(50, "Country Name must be shorter than 50 characters."),
+            .required("Country is required"),
 
-        postCode: Yup.string().required("Post Code is required"),
+        city: Yup.string()
+            .required("City is required"),
 
-        sender: Yup.string()
-            .required("Email is required.")
-            .email("Please enter a valid e-mail"),
+        relatedPerson: Yup.string()
+            .required("Select one"),
 
-        billTo: Yup.string()
-            .required("Email is required.")
-            .email("Please enter a valid e-mail"),
+        postalCode: Yup.number()
+            .required("Post Code is required")
+            .min(1, "Min is 1%")
+            .typeError("Invalid postal code"),
 
-        dueDate: Yup.string().required("Date is required."),
+        date: Yup.string()
+            .required("Date is required."),
 
-        itemDescription: Yup.string().required("Add an Item"),
+        address: Yup.string()
+            .required("Address is required")
+            .min(5, "Address must be longer than 5 characters")
+            .max(100, "Address must not be shorter than 100 characters"),
 
-        price: Yup.string().required("Price is required"),
-
-        qty: Yup.string()
-            .required("Quantity is required")
-            .min(1, "Add at least one quantity"),
-
-        note: Yup.string()
-            .required("Note is required")
-            .min(10, "Note must be longer than 50 characters")
-            .max(30, "note must be shorter than 30 characters."),
+        percentage: Yup.number()
+            .required("Percentage is equired")
+            .min(1, "Min is 1%")
+            .max(100, "Max is 100%")
+            .typeError("Invalid percentage"),
     });
 
     function onSubmit(data) {
         // display form data on success
         reset({
-            address: "",
-            name: "",
+            firstName: "",
+            surname: "",
+            secondName: "",
+            middleName: "",
+            secondSurname: "",
+            email: "",
+            gender: "",
             country: "",
-            postCode: "",
+            city: "",
+            relatedPerson: "",
+            postalCode: "",
+            date: "",
+            address: "",
+            percentage: "",
         });
         // alert("SUCCESS!! :-)\n\n");
         // return false;
@@ -83,6 +115,16 @@ function Beneficiary() {
     ];
 
     const countries = [
+        {
+            id: 'ks',
+            name: 'Kosova',
+            cities: ['Prishtina', 'Prizren', 'Gjakova', 'Peja', 'Gjilan', 'Mitrovica', 'Ferizaj', 'Mitrovica', 'Rahovec', 'Podujeva'],
+        },
+        {
+            id: 'al',
+            name: 'Albania',
+            cities: ['Tirana', 'Durres', 'Vlora', 'Elbasan', 'Shkoder', 'Korce', 'Fier', 'Berat', 'Lushnje', 'Pogradec'],
+        },
         {
             id: 'us',
             name: 'United States',
@@ -209,16 +251,6 @@ function Beneficiary() {
             cities: ['Istanbul', 'Ankara', 'Izmir', 'Bursa', 'Antalya', 'Adana', 'Gaziantep', 'Konya', 'Mersin', 'Diyarbakir',
             ],
         },
-        {
-            id: 'ko',
-            name: 'Kosovo',
-            cities: ['Prishtina', 'Prizren', 'Gjakova', 'Peja', 'Gjilan', 'Mitrovica', 'Ferizaj', 'Mitrovica', 'Rahovec', 'Podujeva'],
-        },
-        {
-            id: 'al',
-            name: 'Albania',
-            cities: ['Tirana', 'Durres', 'Vlora', 'Elbasan', 'Shkoder', 'Korce', 'Fier', 'Berat', 'Lushnje', 'Pogradec'],
-        },
     ];
 
     const [selectedCountry, setSelectedCountry] = useState('');
@@ -242,9 +274,6 @@ function Beneficiary() {
 
     const { register, handleSubmit, reset, formState } = useForm(formOptions);
     const { errors } = formState;
-
-
-    const [percentage, setPercentage] = useState('');
 
     const handleChange = (e) => {
         setPercentage(e.target.value);
@@ -283,7 +312,7 @@ function Beneficiary() {
                                     <div className="flex-auto p-10 lg:p-10">
                                         <div className="rounded-t mb-o px-4 py-2">
                                             <form onSubmit={handleSubmit(onSubmit)}>
-                                                <div className="mt-6 mb-12">
+                                                <div className="mt-3 mb-12">
                                                     <h4 className="text-4xl font-semibold text-center">
                                                         Beneficiary
                                                     </h4>
@@ -300,29 +329,29 @@ function Beneficiary() {
                                                             name="firstName"
                                                             type="text"
                                                             placeholder="Name"
-                                                            {...register("name")}
+                                                            {...register("firstName")}
                                                         />
                                                         <small
                                                             role="alert"
                                                             className=" font-medium text-red-500 normal-case"
                                                         >
-                                                            {errors.name?.message}
+                                                            {errors.firstName?.message}
                                                         </small>
                                                     </label>
                                                     <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2 w-full mr-5">
                                                         Last Name
                                                         <input
                                                             className="shadow appearance-none border-0 rounded w-full py-2 px-3 placeholder-blueGray-300 focus:ring duration-150 ease-linear text-gray-700 mb-2 mt-1 leading-tight focus:outline-none focus:shadow-outline"
-                                                            name="country"
+                                                            name="surname"
                                                             type="text"
                                                             placeholder="Surname"
-                                                            {...register("country")}
+                                                            {...register("surname")}
                                                         />
                                                         <small
                                                             role="alert"
                                                             className=" font-medium text-red-500 normal-case"
                                                         >
-                                                            {errors.country?.message}
+                                                            {errors.surname?.message}
                                                         </small>
                                                     </label>
                                                 </div>
@@ -344,7 +373,7 @@ function Beneficiary() {
                                                             role="alert"
                                                             className=" font-medium text-red-500 normal-case"
                                                         >
-                                                            {errors.name?.message}
+                                                            {errors.secondName?.message}
                                                         </small>
                                                     </label>
                                                     <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2 w-full mr-5">
@@ -360,46 +389,46 @@ function Beneficiary() {
                                                             role="alert"
                                                             className=" font-medium text-red-500 normal-case"
                                                         >
-                                                            {errors.country?.message}
+                                                            {errors.middleName?.message}
                                                         </small>
                                                     </label>
                                                     <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2 w-full mr-5">
                                                         Last Name
                                                         <input
                                                             className="shadow appearance-none border-0 rounded w-full py-2 px-3 placeholder-blueGray-300 focus:ring duration-150 ease-linear text-gray-700 mb-2 mt-1 leading-tight focus:outline-none focus:shadow-outline"
-                                                            name="country"
+                                                            name="secondSurname"
                                                             type="text"
                                                             placeholder="Surname"
-                                                            {...register("bSurnames")}
+                                                            {...register("secondSurnames")}
                                                         />
                                                         <small
                                                             role="alert"
                                                             className=" font-medium text-red-500 normal-case"
                                                         >
-                                                            {errors.country?.message}
+                                                            {errors.secondSurname?.message}
                                                         </small>
                                                     </label>
                                                 </div>
                                                 <div className="pb-2 mt-3 text-sm font-bold">
                                                     <label
                                                         className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                                        htmlFor="sender"
+                                                        htmlFor="email"
                                                     >
                                                         Email Address
                                                     </label>
                                                     <input
                                                         className="xshadow appearance-none border-0 rounded w-full py-2 px-3 placeholder-blueGray-300 focus:ring duration-150 ease-linear text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                                        id="sender"
-                                                        name="sender"
+                                                        id="email"
+                                                        name="email"
                                                         type="email"
                                                         placeholder="Who is this invoice from? (required)"
-                                                        {...register("sender")}
+                                                        {...register("email")}
                                                     />
                                                     <small
                                                         role="alert"
                                                         className="font-medium text-red-500 "
                                                     >
-                                                        {errors.sender?.message}
+                                                        {errors.email?.message}
                                                     </small>
                                                 </div>
 
@@ -407,17 +436,29 @@ function Beneficiary() {
                                                     <label htmlFor="gender" className="block uppercase text-blueGray-600 text-xs font-bold mb-2 w-full mr-5"
                                                     >
                                                         Gender:
-                                                        <select id="gender" className="shadow appearance-none border-0 rounded w-full py-2 px-3 placeholder-blueGray-300 focus:ring duration-150 ease-linear text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline">
+                                                        <select id="gender" className="shadow appearance-none border-0 rounded w-full py-2 px-3 placeholder-blueGray-300 focus:ring duration-150 ease-linear text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                                                            {...register("gender")}
+                                                        >
+                                                            <option value="">Select Country</option>
                                                             {genders.map((gender) => (
                                                                 <option key={gender.id} value={gender.id}>
                                                                     {gender.name}
                                                                 </option>
                                                             ))}
                                                         </select>
+                                                        <small
+                                                            role="alert"
+                                                            className="font-medium text-red-500 normal-case"
+                                                        >
+                                                            {errors.gender?.message}
+                                                        </small>
                                                     </label>
                                                     <label htmlFor="country" className="block uppercase text-blueGray-600 text-xs font-bold mb-2 w-full mr-5">
                                                         Country:
-                                                        <select id="country" className="shadow appearance-none border-0 rounded w-full py-2 px-3 placeholder-blueGray-300 focus:ring duration-150 ease-linear text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline" onChange={handleCountryChange}>
+                                                        <select id="country" className="shadow appearance-none border-0 rounded w-full py-2 px-3 placeholder-blueGray-300 focus:ring duration-150 ease-linear text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                                                            {...register("country")}
+                                                            onChange={handleCountryChange}
+                                                        >
                                                             <option value="">Select Country</option>
                                                             {countries.map((country) => (
                                                                 <option key={country.id} value={country.id}>
@@ -425,14 +466,20 @@ function Beneficiary() {
                                                                 </option>
                                                             ))}
                                                         </select>
+                                                        <small
+                                                            role="alert"
+                                                            className="font-medium text-red-500 normal-case"
+                                                        >
+                                                            {errors.country?.message}
+                                                        </small>
                                                     </label>
                                                     {selectedCountry && (
                                                         <label htmlFor="city" className="block uppercase text-blueGray-600 text-xs font-bold mb-2 w-full mr-5">
                                                             City:
-
                                                             <select
                                                                 id="city"
                                                                 className="shadow appearance-none border-0 rounded w-full py-2 px-3 placeholder-blueGray-300 focus:ring duration-150 ease-linear text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                                                                {...register("city")}
                                                                 value={selectedCity}
                                                                 onChange={handleCityChange}
                                                             >
@@ -443,6 +490,12 @@ function Beneficiary() {
                                                                     </option>
                                                                 ))}
                                                             </select>
+                                                            <small
+                                                                role="alert"
+                                                                className="font-medium text-red-500 normal-case"
+                                                            >
+                                                                {errors.city?.message}
+                                                            </small>
                                                         </label>
                                                     )}
                                                 </div>
@@ -451,6 +504,7 @@ function Beneficiary() {
                                                     <label htmlFor="relatedPerson" className="block uppercase text-blueGray-600  text-xs font-bold mb-2 w-full mr-5">
                                                         Related Person:
                                                         <select id="relatedPerson" className="shadow appearance-none border-0 rounded w-full py-2 px-3 placeholder-blueGray-300 focus:ring duration-150 ease-linear text-gray-700 mb-2 mt-1 leading-tight focus:outline-none focus:shadow-outline"
+                                                            {...register("relatedPerson")}
                                                         >
                                                             <option value="">Related Person</option>
                                                             {relatedPeople.map((person) => (
@@ -459,6 +513,12 @@ function Beneficiary() {
                                                                 </option>
                                                             ))}
                                                         </select>
+                                                        <small
+                                                            role="alert"
+                                                            className="font-medium text-red-500 normal-case"
+                                                        >
+                                                            {errors.relatedPerson?.message}
+                                                        </small>
                                                     </label>
                                                     <label className="block uppercase text-blueGray-600  text-xs font-bold mb-2 w-full mr-5">
                                                         Postal Code
@@ -472,23 +532,23 @@ function Beneficiary() {
                                                             role="alert"
                                                             className=" font-medium text-red-500 normal-case"
                                                         >
-                                                            {errors.name?.message}
+                                                            {errors.postalCode?.message}
                                                         </small>
                                                     </label>
                                                     <label className="block uppercase text-blueGray-600  text-xs font-bold mb-2 w-full mr-5">
                                                         Date of Birth
                                                         <input
                                                             className="shadow appearance-none border-0 rounded w-full py-2 px-3 placeholder-blueGray-300 focus:ring duration-150 ease-linear text-gray-700 mb-2 mt-1 leading-tight focus:outline-none focus:shadow-outline"
-                                                            id="dueDate"
-                                                            name="dueDate"
+                                                            id="date"
+                                                            name="date"
                                                             type="date"
-                                                            {...register("dueDate")}
+                                                            {...register("date")}
                                                         />
                                                         <small
                                                             role="alert"
-                                                            className=" font-medium text-red-500 "
+                                                            className=" font-medium text-red-500 normal-case"
                                                         >
-                                                            {errors.dueDate?.message}
+                                                            {errors.date?.message}
                                                         </small>
                                                     </label>
                                                 </div>
@@ -497,7 +557,7 @@ function Beneficiary() {
                                                         Street Address
                                                     </label>
                                                     <input
-                                                        className=" mb-4 shadow appearance-none border-0 rounded w-full py-2 px-3 placeholder-blueGray-300 focus:ring duration-150 ease-linear text-gray-700 leading-tight focus:outline-none focus:shadow-outline "
+                                                        className="mb-2 xshadow appearance-none border-0 rounded w-full py-2 px-3 placeholder-blueGray-300 focus:ring duration-150 ease-linear text-gray-700 leading-tight focus:outline-none focus:shadow-outline "
                                                         id="address"
                                                         name="address"
                                                         type="text"
@@ -511,24 +571,27 @@ function Beneficiary() {
                                                         {errors.address?.message}
                                                     </small>
                                                 </div>
-
                                                 <div>
-                                                    <label htmlFor="percentage" className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                                                    <label htmlFor="percentage" className="block uppercase text-blueGray-600 text-xs font-bold mb-2 mt-4">
                                                         Percentage:
                                                     </label>
                                                     <div className="flex">
                                                         <input
-                                                            type="text"
+                                                            type="number"
                                                             id="percentage"
-                                                            className=" mb-4 shadow appearance-none border-0 rounded w-3/12 py-2 px-3 placeholder-blueGray-300 focus:ring duration-150 ease-linear text-gray-700 leading-tight focus:outline-none focus:shadow-outline "
+                                                            className=" mb-2 shadow appearance-none border-0 rounded w-3/12 py-2 px-3 placeholder-blueGray-300 focus:ring duration-150 ease-linear text-gray-700 leading-tight focus:outline-none focus:shadow-outline "
+                                                            {...register("percentage")}
                                                             placeholder="Enter percentage"
-                                                            value={percentage}
-                                                            onChange={handleChange}
                                                         />
-                                                        <span className="mb-4 flex items-center bg-gray-200 font-heavy text-2xl text-gray-800 px-3 rounded-r-md">%</span>
+                                                        <span className="ml-2 mb-4 flex items-center bg-gray-200 font-heavy text-2xl text-gray-800 px-3 rounded-r-md">%</span>
                                                     </div>
+                                                    <small
+                                                        role="alert"
+                                                        className=" font-medium text-red-500 "
+                                                    >
+                                                        {errors.percentage?.message}
+                                                    </small>
                                                 </div>
-
                                                 <div className="mt-6 flex items-center justify-around">
                                                     <button
                                                         className="btn btn-secondary bg-red-700 active:bg-blueGray-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
