@@ -53,6 +53,18 @@ function Beneficiary() {
             .max(30, "note must be shorter than 30 characters."),
     });
 
+    function onSubmit(data) {
+        // display form data on success
+        reset({
+            address: "",
+            name: "",
+            country: "",
+            postCode: "",
+        });
+        // alert("SUCCESS!! :-)\n\n");
+        // return false;
+    }
+
     const formOptions = { resolver: yupResolver(validationSchema) };
 
     const genders = [
@@ -61,17 +73,152 @@ function Beneficiary() {
     ];
 
     const relatedPeople = [
-        { id: 'parent', name: 'Parent' },
-        { id: 'sibling', name: 'Sibling' },
-        { id: 'spouse', name: 'Spouse' },
-        // Add more related people as needed
+        { id: 'Father', name: 'Father' },
+        { id: 'Mother', name: 'Mother' },
+        { id: 'Brother', name: 'Brother' },
+        { id: 'Sister', name: 'Sister' },
+        { id: 'Uncle', name: 'Uncle' },
+        { id: 'Aunt', name: 'Aunt' },
+        { id: 'Cousine', name: 'Cousine' },
     ];
 
     const countries = [
-        { id: 'us', name: 'United States', cities: ['New York', 'Los Angeles', 'Chicago'] },
-        { id: 'ca', name: 'Canada', cities: ['Toronto', 'Vancouver', 'Montreal'] },
-        { id: 'uk', name: 'United Kingdom', cities: ['London', 'Manchester', 'Edinburgh'] },
-        // Add more countries with their respective cities
+        {
+            id: 'us',
+            name: 'United States',
+            cities: ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix', 'Philadelphia', 'San Antonio', 'San Diego', 'Dallas', 'San Jose',
+            ],
+        },
+        {
+            id: 'ca',
+            name: 'Canada',
+            cities: ['Toronto', 'Vancouver', 'Montreal', 'Calgary', 'Edmonton', 'Ottawa', 'Winnipeg', 'Quebec City', 'Hamilton', 'Kitchener',
+            ],
+        },
+        {
+            id: 'uk',
+            name: 'United Kingdom',
+            cities: ['London', 'Manchester', 'Edinburgh', 'Birmingham', 'Glasgow', 'Leeds', 'Liverpool', 'Newcastle', 'Sheffield', 'Bristol',
+            ],
+        },
+        {
+            id: 'de',
+            name: 'Germany',
+            cities: ['Berlin', 'Munich', 'Hamburg', 'Frankfurt', 'Cologne', 'Stuttgart', 'Düsseldorf', 'Dortmund', 'Essen', 'Leipzig',
+            ],
+        },
+        {
+            id: 'fr',
+            name: 'France',
+            cities: ['Paris', 'Marseille', 'Lyon', 'Toulouse', 'Nice', 'Nantes', 'Strasbourg', 'Montpellier', 'Bordeaux', 'Lille',
+            ],
+        },
+        {
+            id: 'jp',
+            name: 'Japan',
+            cities: ['Tokyo', 'Osaka', 'Kyoto', 'Yokohama', 'Sapporo', 'Nagoya', 'Fukuoka', 'Kobe', 'Kawasaki', 'Saitama',
+            ],
+        },
+        {
+            id: 'au',
+            name: 'Australia',
+            cities: ['Sydney', 'Melbourne', 'Brisbane', 'Perth', 'Adelaide', 'Gold Coast', 'Newcastle', 'Canberra', 'Sunshine Coast', 'Wollongong',
+            ],
+        },
+        {
+            id: 'it',
+            name: 'Italy',
+            cities: ['Rome', 'Milan', 'Venice', 'Florence', 'Naples', 'Turin', 'Bologna', 'Genoa', 'Verona', 'Palermo',
+            ],
+        },
+        {
+            id: 'es',
+            name: 'Spain',
+            cities: ['Madrid', 'Barcelona', 'Seville', 'Valencia', 'Málaga', 'Bilbao', 'Alicante', 'Córdoba', 'Granada', 'Murcia',
+            ],
+        },
+        {
+            id: 'kr',
+            name: 'South Korea',
+            cities: ['Seoul', 'Busan', 'Incheon', 'Daegu', 'Daejeon', 'Gwangju', 'Suwon', 'Ulsan', 'Seongnam', 'Cheonan',
+            ],
+        },
+        {
+            id: 'nl',
+            name: 'Netherlands',
+            cities: ['Amsterdam', 'Rotterdam', 'The Hague', 'Utrecht', 'Eindhoven', 'Tilburg', 'Groningen', 'Almere', 'Breda', 'Nijmegen',
+            ],
+        },
+        {
+            id: 'br',
+            name: 'Brazil',
+            cities: ['São Paulo', 'Rio de Janeiro', 'Brasília', 'Salvador', 'Fortaleza', 'Belo Horizonte', 'Manaus', 'Curitiba', 'Recife', 'Porto Alegre',
+            ],
+        },
+        {
+            id: 'mx',
+            name: 'Mexico',
+            cities: ['Mexico City', 'Guadalajara', 'Monterrey', 'Puebla', 'Tijuana', 'León', 'Juárez', 'Zapopan', 'Mérida', 'San Luis Potosí',
+            ],
+        },
+        {
+            id: 'ar',
+            name: 'Argentina',
+            cities: ['Buenos Aires', 'Córdoba', 'Rosario', 'Mendoza', 'Tucumán', 'La Plata', 'Mar del Plata', 'Salta', 'Santa Fe', 'San Juan',
+            ],
+        },
+        {
+            id: 'in',
+            name: 'India',
+            cities: ['Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Chennai', 'Kolkata', 'Ahmedabad', 'Pune', 'Surat', 'Jaipur',
+            ],
+        },
+        {
+            id: 'ch',
+            name: 'Switzerland',
+            cities: ['Zurich', 'Geneva', 'Bern', 'Basel', 'Lausanne', 'Lucerne', 'St. Gallen', 'Lugano', 'Biel', 'Thun',
+            ],
+        },
+        {
+            id: 'se',
+            name: 'Sweden',
+            cities: ['Stockholm', 'Gothenburg', 'Malmö', 'Uppsala', 'Västerås', 'Örebro', 'Linköping', 'Helsingborg', 'Jönköping', 'Norrköping',
+            ],
+        },
+        {
+            id: 'no',
+            name: 'Norway',
+            cities: ['Oslo', 'Bergen', 'Trondheim', 'Stavanger', 'Drammen', 'Fredrikstad', 'Kristiansand', 'Tromsø', 'Sandnes', 'Sarpsborg',
+            ],
+        },
+        {
+            id: 'dk',
+            name: 'Denmark',
+            cities: ['Copenhagen', 'Aarhus', 'Odense', 'Aalborg', 'Frederiksberg', 'Esbjerg', 'Gentofte', 'Gladsaxe', 'Randers', 'Kolding',
+            ],
+        },
+        {
+            id: 'pl',
+            name: 'Poland',
+            cities: ['Warsaw', 'Krakow', 'Wroclaw', 'Poznan', 'Gdansk', 'Szczecin', 'Bydgoszcz', 'Lublin', 'Katowice', 'Bialystok',
+            ],
+        },
+        {
+            id: 'tr',
+            name: 'Turkey',
+            cities: ['Istanbul', 'Ankara', 'Izmir', 'Bursa', 'Antalya', 'Adana', 'Gaziantep', 'Konya', 'Mersin', 'Diyarbakir',
+            ],
+        },
+        {
+            id: 'ko',
+            name: 'Kosovo',
+            cities: ['Prishtina', 'Prizren', 'Gjakova', 'Peja', 'Gjilan', 'Mitrovica', 'Ferizaj', 'Mitrovica', 'Rahovec', 'Podujeva'],
+        },
+        {
+            id: 'al',
+            name: 'Albania',
+            cities: ['Tirana', 'Durres', 'Vlora', 'Elbasan', 'Shkoder', 'Korce', 'Fier', 'Berat', 'Lushnje', 'Pogradec'],
+        },
     ];
 
     const [selectedCountry, setSelectedCountry] = useState('');
@@ -96,17 +243,12 @@ function Beneficiary() {
     const { register, handleSubmit, reset, formState } = useForm(formOptions);
     const { errors } = formState;
 
-    function onSubmit(data) {
-        // display form data on success
-        reset({
-            address: "",
-            name: "",
-            country: "",
-            postCode: "",
-        });
-        // alert("SUCCESS!! :-)\n\n");
-        // return false;
-    }
+
+    const [percentage, setPercentage] = useState('');
+
+    const handleChange = (e) => {
+        setPercentage(e.target.value);
+    };
 
     return (
         <>
@@ -369,6 +511,24 @@ function Beneficiary() {
                                                         {errors.address?.message}
                                                     </small>
                                                 </div>
+
+                                                <div>
+                                                    <label htmlFor="percentage" className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                                                        Percentage:
+                                                    </label>
+                                                    <div className="flex">
+                                                        <input
+                                                            type="text"
+                                                            id="percentage"
+                                                            className=" mb-4 shadow appearance-none border-0 rounded w-3/12 py-2 px-3 placeholder-blueGray-300 focus:ring duration-150 ease-linear text-gray-700 leading-tight focus:outline-none focus:shadow-outline "
+                                                            placeholder="Enter percentage"
+                                                            value={percentage}
+                                                            onChange={handleChange}
+                                                        />
+                                                        <span className="mb-4 flex items-center bg-gray-200 font-heavy text-2xl text-gray-800 px-3 rounded-r-md">%</span>
+                                                    </div>
+                                                </div>
+
                                                 <div className="mt-6 flex items-center justify-around">
                                                     <button
                                                         className="btn btn-secondary bg-red-700 active:bg-blueGray-500 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
