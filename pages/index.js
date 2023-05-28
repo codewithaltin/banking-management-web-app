@@ -215,22 +215,17 @@ export default function Index(session) {
               </div>
             </div>
           </div>
+          </div>
+
+
+
+          
 
           <div className="container mx-auto overflow-hidden pb-20">
             <div className="flex flex-wrap items-center">
               <div className="w-full md:w-4/12 px-12 md:px-4 ml-auto mr-auto mt-48">
                 <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
 
-              <a
-                href="/savingform"
-                target="_blank"
-                className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
-              >
-                Set a saving goal{" "}
-                <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
-              </a>
-              
-            </div>
                 </div>
                 <h3 className="text-3xl mb-2 font-semibold leading-normal text-blueGray-900">
                   Empower Your Savings Journey with FuturBank
