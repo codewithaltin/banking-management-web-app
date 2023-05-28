@@ -193,6 +193,28 @@ export default function Sidebar() {
 
               <li className="items-center">
                 <Link
+                  href="/auth/GoalsList"
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (router.pathname.indexOf("/admin/tables") !== -1
+                      ? "text-lightBlue-500 hover:text-lightBlue-600"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
+                >
+                  <i
+                    className={
+                      "fas fa-table mr-2 text-sm " +
+                      (router.pathname.indexOf("/auth/GoalsList") !== -1
+                        ? "opacity-75"
+                        : "text-blueGray-300")
+                    }
+                  ></i>{" "}
+                  Savings Goals
+                </Link>
+              </li>
+
+              <li className="items-center">
+                <Link
                   href="/admin/tables"
                   className={
                     "text-xs uppercase py-3 font-bold block " +
