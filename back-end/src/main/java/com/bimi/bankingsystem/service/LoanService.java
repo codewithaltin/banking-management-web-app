@@ -37,7 +37,6 @@ public class LoanService {
 
     public boolean deleteLoan(Integer id){
         loanRepository.deleteById(id);
-
         return true;
     }
 }

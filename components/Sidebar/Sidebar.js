@@ -106,6 +106,7 @@ export default function Sidebar() {
                   Dashboard
                 </Link>
               </li>
+
               <li className="items-center">
                 <Link
                   href="/admin/userlist"
@@ -125,6 +126,27 @@ export default function Sidebar() {
                     }
                   ></i>{" "}
                   User List
+                </Link>
+              </li>
+              <li className="items-center">
+                <Link
+                  href="/admin/employeelist"
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (router.pathname.indexOf("/admin/employeelist") !== -1
+                      ? "text-lightBlue-500 hover:text-lightBlue-600"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
+                >
+                  <i
+                    className={
+                      "fas fa-table mr-2 text-sm " +
+                      (router.pathname.indexOf("/admin/employeelist") !== -1
+                        ? "opacity-75"
+                        : "text-blueGray-300")
+                    }
+                  ></i>{" "}
+                  Employee List
                 </Link>
               </li>
               <li className="items-center">

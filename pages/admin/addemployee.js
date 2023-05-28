@@ -10,39 +10,8 @@ import { BrowserRouter } from "react-router-dom";
 const phoneReg =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
-const schema = yup
-  .object()
-  .shape({
-    firstName: yup
-      .string()
-      .required("First Name is required.")
-      .min(5, "First name must be longer than 5 characters")
-      .max(50, "First name must be shorter than 30 characters."),
-    lastName: yup
-      .string()
-      .required("Last Name is required.")
-      .min(5, "Last name must be longer than 5 characters")
-      .max(50, "Last name must be shorter than 50 characters."),
-    emailId: yup
-      .string()
-      .email("Please enter a valid e-mail")
-      .required("Email is required."),
-    phoneNumber: yup
-      .string()
-      .required("Phone number is required")
-      .matches(phoneReg, "Phone Number is not valid."),
-    password: yup
-      .string()
-      .required("Password is required.")
-      .min(5, "Password must be 5 characters long")
-      .max(35, "Password must be shorter than 35 characters"),
-    confirmPassword: yup
-      .string()
-      .oneOf([yup.ref("password"), null], "Passwords do not match.")
-      .required("Confirm Password field is required."),
-  })
-  .required();
-export default function addemploye() {
+const schema = yup.object().shape({}).required();
+export default function addemployee() {
   const {
     register,
     handleSubmit,
@@ -68,9 +37,49 @@ export default function addemploye() {
     console.log("User Selected Value - ", event.target.value);
   };
 
-  const USER_API_BASE_URL = "http://localhost:8080/api/v1/users";
+  const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/v1/employee";
 
   const [isOpen, setIsOpen] = useState(false);
+  const [employee, setEmployee] = useState({
+    id: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    departament: "",
+    jobTitle: "",
+    salary: 0,
+  });
+  const [responseEmployee, setResponseEmployee] = useState({
+    id: "",
+    firstName: "",
+    lastName: "",
+    email: "",
+    phoneNumber: "",
+    departament: "",
+    jobTitle: "",
+    salary: 0,
+  });
+  const saveEmployee = async (e) => {
+    const response = await fetch(EMPLOYEE_API_BASE_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(employee),
+    });
+    if (!response.ok) {
+      throw new Error("Something went wrong");
+    }
+    const _employee = await response.json();
+    setResponseEmployee(_employee);
+    window.location.reload();
+    alert("Registered Succesfully!");
+  };
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setEmployee({ ...employee, [event.target.name]: value });
+  };
 
   return (
     <>
@@ -88,7 +97,7 @@ export default function addemploye() {
                 <hr className="mt-6 border-b-1 border-blueGray-300" />
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                <form>
+                <form onSubmit={handleSubmit(saveEmployee)}>
                   <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                     Full Name
                   </label>
@@ -101,6 +110,7 @@ export default function addemploye() {
                     transition-all duration-150"
                       placeholder="First Name"
                       name="firstName"
+                      onChange={(e) => handleChange(e)}
                     />
                     <input
                       {...register("lastName")}
@@ -110,6 +120,7 @@ export default function addemploye() {
                     focus:outline-none focus:ring w-1/2  ease-linear
                     transition-all duration-150"
                       placeholder="Last Name"
+                      onChange={(e) => handleChange(e)}
                     />
                   </div>
                   <small role="alert" className="text-red-500 mb-2 mr-20 ">
@@ -126,11 +137,12 @@ export default function addemploye() {
                       Email
                     </label>
                     <input
-                      {...register("emailId")}
+                      {...register("email")}
                       type="email"
-                      name="emailId"
+                      name="email"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s example@gmail.com"
+                      onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.emailId?.message}
@@ -143,8 +155,10 @@ export default function addemploye() {
                     <input
                       {...register("phoneNumber")}
                       type="tel"
+                      name="tel"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s 049-588-814"
+                      onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.phoneNumber?.message}
@@ -158,6 +172,8 @@ export default function addemploye() {
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s Idriz Gjilani Street Entry 07"
+                      name="address"
+                      onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.phoneNumber?.message}
@@ -170,9 +186,9 @@ export default function addemploye() {
 
                     <select
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      onChange={onOptionChangeHandler}
+                      onChange={(e) => handleChange(e)}
+                      name="departament"
                     >
-                      <option>Select</option>
                       {departamentOptions.map((option, index) => {
                         return <option key={index}>{option}</option>;
                       })}
@@ -185,43 +201,77 @@ export default function addemploye() {
 
                     <select
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      onChange={onOptionChangeHandler}
+                      name="jobTitle"
+                      onChange={(e) => handleChange(e)}
                     >
-                      <option>Select</option>
                       {jobTitleOptions.map((option, index) => {
                         return <option key={index}>{option}</option>;
                       })}
                     </select>
                   </div>
 
-                  <div>
-                    <label className="inline-flex items-center cursor-pointer">
-                      <input
-                        {...register("category")}
-                        id="customCheckLogin"
-                        type="checkbox"
-                        className="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
-                      />
-                      <small role="alert" className="text-red-500 ">
-                        {errors.category?.message}
-                      </small>
-                      <span className="ml-2 text-sm font-semibold text-blueGray-600">
-                        I agree with the{" "}
-                        <a
-                          href="#pablo"
-                          className="text-lightBlue-500"
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          Privacy Policy
-                        </a>
-                      </span>
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      Salary
                     </label>
+                    <input
+                      {...register("salary")}
+                      type="number"
+                      name="salary"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="500"
+                      onChange={(e) => handleChange(e)}
+                    />
+                    <small role="alert" className="text-red-500 ">
+                      {errors.emailId?.message}
+                    </small>
                   </div>
+
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      Start Agreement Date
+                    </label>
+                    <input
+                      type="date"
+                      name="startDate"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="500"
+                      onChange={(e) => handleChange(e)}
+                    />
+                    <small role="alert" className="text-red-500 ">
+                      {errors.emailId?.message}
+                    </small>
+                    <label
+                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      {" "}
+                      End Agreement Date
+                    </label>
+                    <input
+                      type="date"
+                      name="endDate"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="500"
+                      onChange={(e) => handleChange(e)}
+                    />
+                    <small role="alert" className="text-red-500 ">
+                      {errors.emailId?.message}
+                    </small>
+                  </div>
+
                   <div className="text-center mt-6">
                     <input
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="submit"
                       value="Submit"
+                      onChange={saveEmployee}
                     />
                   </div>
                 </form>

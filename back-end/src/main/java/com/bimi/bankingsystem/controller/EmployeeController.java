@@ -1,55 +1,42 @@
 package com.bimi.bankingsystem.controller;
 
-
 import com.bimi.bankingsystem.model.Employee;
 import com.bimi.bankingsystem.service.EmployeeService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1")
 public class EmployeeController {
 
-    private final EmployeeService employeeService;
+    private  EmployeeService employeeService;
 
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
     @PostMapping("/employee")
-    public Employee saveEmployee(@RequestBody Employee e) {
+    public Employee createLoan(@RequestBody Employee e){
         return employeeService.addEmployee(e);
     }
 
     @GetMapping("/employee")
-    public List<Employee> getAllEmployees() {
+    public List<Employee> getAllEmployees(){
         return employeeService.getAllEmployees();
     }
 
-    @GetMapping("/employee/{id}")
-    public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") Long id) {
-        Employee e = null;
-        e = employeeService.getEmployeeById(id);
-        return ResponseEntity.ok(e);
-    }
 
     @DeleteMapping("/employee/{id}")
-    public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id) {
-        boolean deleted = false;
-        deleted = employeeService.deleteEmployee(id);
-
-        Map<String,Boolean> response = new HashMap<>();
-        response.put("deleted",deleted);
-        return ResponseEntity.ok(response);
+    public boolean deleteEmployee(@PathVariable Long id){
+        return employeeService.deleteEmployee(id);
     }
 
-    @PutMapping("/epmloyee/{id}")
-    public ResponseEntity<Employee> updateEmployee(@PathVariable("id") Long id,
-                                           @RequestBody Employee e) {
-        e = employeeService.updateEmployee(id,e);
-        return ResponseEntity.ok(e);
+    @PutMapping("/employee/{id}")
+    public Employee updateEmployee(@PathVariable Long id,@RequestBody Employee e) {
+        return employeeService.updateEmployee(id,e);
+
     }
+
 
 }

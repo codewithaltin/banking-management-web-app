@@ -1,6 +1,5 @@
 package com.bimi.bankingsystem.model;
 
-
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -59,7 +58,7 @@ public class Employee {
 
     }
 
-    public Employee(long id, String firstName, String lastName, String email, String phoneNumber, String address, String department, String jobTitle, String salary, String startDate, String endDate) {
+    public Employee(Long id, String firstName, String lastName, String email, String phoneNumber, String address, String department, String jobTitle, String salary, String startDate, String endDate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -72,6 +71,5 @@ public class Employee {
         this.startDate = startDate;
         this.endDate = endDate;
     }
-
 
 }

@@ -1,9 +1,7 @@
 package com.bimi.bankingsystem.service;
 
 import com.bimi.bankingsystem.model.Employee;
-import com.bimi.bankingsystem.model.Loan;
 import com.bimi.bankingsystem.repository.EmployeeRepository;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -34,23 +32,20 @@ public class EmployeeService {
        return true;
     }
     public Employee updateEmployee(Long id, Employee e){
-        Employee employeeEntity =
+        Employee employee =
                 er.findById(id).get();
-        employeeEntity.setFirstName(e.getFirstName());
-        employeeEntity.setLastName(e.getLastName());
-        employeeEntity.setAddress(e.getAddress());
-        employeeEntity.setEmail(e.getEmail());
-        employeeEntity.setPhoneNumber(e.getPhoneNumber());
-        employeeEntity.setDepartment(e.getDepartment());
-        employeeEntity.setJobTitle(e.getJobTitle());
-        employeeEntity.setSalary(e.getSalary());
-        employeeEntity.setStartDate(e.getStartDate());
-        employeeEntity.setEndDate(e.getEndDate());
+        employee.setFirstName(e.getFirstName());
+        employee.setLastName(e.getLastName());
+        employee.setAddress(e.getAddress());
+        employee.setEmail(e.getEmail());
+        employee.setPhoneNumber(e.getPhoneNumber());
+        employee.setDepartment(e.getDepartment());
+        employee.setJobTitle(e.getJobTitle());
+        employee.setSalary(e.getSalary());
+        employee.setStartDate(e.getStartDate());
+        employee.setEndDate(e.getEndDate());
 
-        return er.save(employeeEntity);
-
-
-
+        return er.save(employee);
 
     }
 
