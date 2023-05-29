@@ -9,8 +9,8 @@ import lombok.*;
 @Table(name = "savingGoal")
 public class SavingGoal {
     @Id
-    @SequenceGenerator(name="course_sequence",sequenceName = "course_sequence",allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "course_sequence")
+    @SequenceGenerator(name="savingGoal_sequence",sequenceName = "savingGoal_sequence",allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "savingGoal_sequence")
     @Column(updatable = false)
     @NonNull
     private long id;
