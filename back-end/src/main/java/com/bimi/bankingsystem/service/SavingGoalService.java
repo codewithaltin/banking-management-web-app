@@ -2,9 +2,11 @@ package com.bimi.bankingsystem.service;
 
 import com.bimi.bankingsystem.model.SavingGoal;
 import com.bimi.bankingsystem.repository.SavingGoalRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+@Service
 public class SavingGoalService {
 
     private SavingGoalRepository savingGoalRepository;

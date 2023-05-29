@@ -5,71 +5,55 @@ import * as yup from "yup";
 
 import Auth from "layouts/Auth.js";
 
-const schema = yup
-  .object()
-  .shape({
-    fullName: yup
-      .string()
-      .required("Full Name is required.")
-      .min(5, "Full name must be longer than 5 characters")
-      .max(50, "Full name must be shorter than 50 characters."),
-    email: yup
-      .string()
-      .email("Please enter a valid e-mail")
-      .required("Email is required."),
-    "text": yup
-      .string()
-      .required("Some text is required.")
-      .min(5, "Text must be longer than 5 characters")
-  })
-  .required();
-export default function Contact() {
-  const {
-    register,
-    handleSubmit,
-    watch,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
+export default function SavingGoal() {
+
+    const {
+      register,
+      handleSubmit,
+      watch,
+      formState: { errors },
+    } = useForm({ });
+    
   
-  const CONTACT_API_BASE_URL = "http://localhost:8080/api/v1/contact";
+  const SAVINGGOAL_API_BASE_URL = "http://localhost:8080/api/v1/savingGoal";
 
   const [isOpen, setIsOpen] = useState(false);
-  const [contact, setContacts] = useState({
+  const [savingGoal, setSavingGoals] = useState({
     id: "",
-    fullName: "",
-    email: "",
-    text: "",
+    savingReason: "",
+    amount: "",
+    date: "",
+    goalName: "",
+    goalDescription: "",
   });
-  const [responseContact, setResponseContact] = useState({
+  const [responseSavingGoal, setResponseSavingGoal] = useState({
     id: "",
-    fullName: "",
-    email: "",
-    text: "",
+    savingReason: "",
+    amount: "",
+    date: "",
+    goalName: "",
+    goalDescription: "",
   });
   // const navigate = useNavigate();
   // const navigateHome = () => {
   //   navigate("/");
   // };ss
 
-  const saveContact = async (e) => {
+  const saveSavingGoals = async (e) => {
     //e.preventDefault();
-    const response = await fetch(CONTACT_API_BASE_URL, {
+    const response = await fetch(SAVINGGOAL_API_BASE_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(contact),
+      body: JSON.stringify(savingGoal),
     });
     if (!response.ok) {
       throw new Error("Something went wrong");
     }
-    const _contact = await response.json();
-    setResponseContact(_contact);
+    const _savingGoal = await response.json();
+    setResponseSavingGoal(_savingGoal);
     window.location.reload();
-  };
-  const handleChange = (event) => {
-    const value = event.target.value;
-    setContacts({ ...contact, [event.target.name]: value });
   };
 
 
@@ -84,6 +68,11 @@ export default function Contact() {
   
   const onOptionChangeHandler = (event) => {
     console.log("User Selected Value - ", event.target.value);
+  };
+
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setSavingGoals({ ...savingGoal, [event.target.name]: value });
   };
 
   return (
@@ -170,16 +159,18 @@ export default function Contact() {
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                 
-                <form onSubmit={handleSubmit(saveContact)}>
+                <form onSubmit={handleSubmit(saveSavingGoals)}>
                   {" "}
                   <div className="relative w-full mb-3">
                     <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                       What are you saving for?
                     </label>
-
+                 
                     <select
+                   
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      onChange={onOptionChangeHandler}
+                      onChange={handleChange}
+                      name="savingReason"
                     >
                       <option>Select</option>
                       {SavingOptions.map((option, index) => {
@@ -197,10 +188,10 @@ export default function Contact() {
                     Amount
                   </label>
                   <input
-                  {... register("amount")}
+                    {... register("amount")}
                     type="text"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                  
+                    onChange={(e) => handleChange(e)}
                   />
                   
                 </div>
@@ -216,7 +207,7 @@ export default function Contact() {
                     name="dueDate"
                     type="date"
                     {... register("date")}
-       
+                    onChange={(e) => handleChange(e)}
                   />
                  
               </div>
@@ -229,16 +220,13 @@ export default function Contact() {
                       Goal name
                     </label>
                     <input
-                      {...register("email")}
+                      {... register("goalName")}
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s VacayGoal"
-                      value={contact.email}
                       onChange={(e) => handleChange(e)}
                     />
-                    <small role="alert" className="text-red-500 ">
-                      {errors.email?.message}
-                    </small>
+                    
                   </div>
                   
                   <div className="relative w-full mb-3">
@@ -249,22 +237,19 @@ export default function Contact() {
                     Description
                   </label>
                   <textarea
-                    {...register("text")}
+                  {... register("goalDescription")}
                     id="text"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Write a short description about your saving goal"
                     rows="5"
                     cols="40"
-                    value={contact.text}
                     onChange={(e) => handleChange(e)}
                   />
-                  <small role="alert" className="text-red-500 ">
-                    {errors["text"]?.message}
-                  </small>
                 </div>
                   
                   <div className="text-center mt-6">
                     <input
+                    
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="submit"
                       value="Submit"
@@ -280,4 +265,4 @@ export default function Contact() {
   );
 }
 
-Contact.layout = Auth;
+SavingGoal.layout = Auth;

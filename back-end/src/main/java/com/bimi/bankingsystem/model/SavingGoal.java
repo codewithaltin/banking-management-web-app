@@ -6,7 +6,7 @@ import lombok.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "savingGoal")
+@Table(name = "saving_goal")
 public class SavingGoal {
     @Id
     @SequenceGenerator(name="savingGoal_sequence",sequenceName = "savingGoal_sequence",allocationSize = 1)

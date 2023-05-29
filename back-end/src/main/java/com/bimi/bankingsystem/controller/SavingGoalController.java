@@ -1,6 +1,5 @@
 package com.bimi.bankingsystem.controller;
 
-import com.bimi.bankingsystem.model.Contact;
 import com.bimi.bankingsystem.model.SavingGoal;
 import com.bimi.bankingsystem.service.SavingGoalService;
 import org.springframework.http.ResponseEntity;
@@ -10,6 +9,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+@CrossOrigin(value = "http://localhost:3000")
+@RestController
+@RequestMapping("/api/v1/")
 public class SavingGoalController {
 
     private SavingGoalService savingGoalService;
