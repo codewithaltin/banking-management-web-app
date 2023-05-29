@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import Navbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
@@ -57,7 +57,51 @@ export default function Donate() {
       watch,
       formState: { errors },
     } = useForm({ resolver: yupResolver(schema) });
-    const onSubmit = (data) => console.log(data);
+
+    const DONATION_API_BASE_URL = "http://localhost:8080/api/v1/donation";
+
+    const [isOpen, setIsOpen] = useState(false);
+    const [donation, setDonation] = useState({
+      id: "",
+      fullName: "",
+      email: "",
+      phoneNumber: "",
+      address: "",
+      donationAmount: "",
+      cardInformation: "",
+      comment: "",
+    });
+    const [responseDonation, setResponseDonation] = useState({
+      id: "",
+      fullName: "",
+      email: "",
+      phoneNumber: "",
+      address: "",
+      donationAmount: "",
+      cardInformation: "",
+      comment: "",
+    });
+
+    const saveDonation = async (e) => {
+      //e.preventDefault();
+      const response = await fetch(DONATION_API_BASE_URL, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(donation),
+      });
+      if (!response.ok) {
+        throw new Error("Something went wrong");
+      }
+      const _donation = await response.json();
+      setResponseDonation(_donation);
+      window.location.reload();
+    };
+    const handleChange = (event) => {
+      const value = event.target.value;
+      setDonation({ ...donation, [event.target.name]: value });
+    };
 
     return( 
     <>
@@ -152,7 +196,7 @@ export default function Donate() {
                   </p>
 
 
-                  <form onSubmit={handleSubmit(onSubmit)}>
+                  <form onSubmit={handleSubmit(saveDonation)}>
                   {" "}
                   <div className="relative w-full mb-3 mt-8">
                     <label

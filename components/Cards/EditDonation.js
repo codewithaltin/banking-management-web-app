@@ -9,7 +9,7 @@ const EditDonation = ({ donationId, setResponseDonation }) => {
     id: "",
     name: "",
     email: "",
-    phone: "",
+    phoneNumber: "",
     address: "",
     donationAmount: "",
     cardInformation: "",
@@ -162,7 +162,7 @@ const EditDonation = ({ donationId, setResponseDonation }) => {
                       <input
                         type="text"
                         name="cardInformation"
-                        value={loan.cardInformation}
+                        value={donation.cardInformation}
                         onChange={(e) => handleChange(e)}
                         className="h-10 w-96 border mt-2 px-2 py-2"
                       ></input>
