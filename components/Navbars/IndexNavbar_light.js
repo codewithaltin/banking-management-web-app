@@ -53,6 +53,15 @@ export default function Navbar(props) {
                   Business
                 </Link>{" "}
               </li>{" "}
+              <li className="flex items-center">
+                {" "}
+                <Link
+                  href="/auth/feedback"
+                  className="text-costum-dark  text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                >
+                  Feedback
+                </Link>{" "}
+              </li>
               <li>
                 <IndexDropdown />
               </li>
