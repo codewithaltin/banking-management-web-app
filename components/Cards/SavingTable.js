@@ -3,8 +3,14 @@ import PropTypes from "prop-types";
 
 // components
 import Savings from "./Savings";
+import AddGoal from "./AddGoal";
 
 export default function SavingTable({ savingGoal }) {
+
+    <main>
+        <AddGoal />
+      </main>
+
   const SAVINGGOAL_API_BASE_URL = "http://localhost:8080/api/v1/savingGoal";
   const [savingGoals, setSavingGoals] = useState(null);
   const [loading, setLoading] = useState(true);
