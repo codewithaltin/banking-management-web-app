@@ -15,9 +15,6 @@ const Savings = ({ savingGoal, deleteSavingGoal}) => {
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
         {savingGoal.goalName}
       </td>
-      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
-        {savingGoal.goalDescription}
-      </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         <a
           onClick={(e, id) => deleteSavingGoal(e, savingGoal.id)}
