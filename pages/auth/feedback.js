@@ -22,10 +22,10 @@ const schema = yup
             .required("Last Name is required.")
             .min(5, "Last name must be longer than 5 characters")
             .max(50, "Last name must be shorter than 50 characters."),
-        emailId: yup
+        feedbackTittle: yup
             .string()
-            .email("Please enter a valid e-mail")
-            .required("Feedback title is required."),
+            // .email("Please enter a Feedback Tittle")
+            .required("Feedback tittle is required."),
         phoneNumber: yup
             .string()
             .required("Phone number is required")
@@ -33,12 +33,8 @@ const schema = yup
         password: yup
             .string()
             .required("Attachment is required.")
-            .min(5, "Password must be 5 characters long")
-            .max(35, "Password must be shorter than 35 characters"),
-        confirmPassword: yup
-            .string()
-            .oneOf([yup.ref("password"), null], "Passwords do not match.")
-            .required("Confirm Password field is required."),
+        // .min(5, "Password must be 5 characters long")
+        // .max(35, "Password must be shorter than 35 characters"),
     })
     .required();
 
@@ -57,7 +53,7 @@ export default function Register() {
         id: "",
         firstName: "",
         lastName: "",
-        emailId: "",
+        feedbackTittle: "",
         phoneNumber: "",
         password: "",
     });
@@ -110,30 +106,6 @@ export default function Register() {
                 <div className="flex content-center items-center justify-center h-full">
                     <div className="w-full lg:w-6/12 px-4">
                         <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
-                            {/* <div className="rounded-t mb-0 px-6 py-6">
-                                <div className="text-center mb-3">
-                                    <h6 className="text-blueGray-500 text-sm font-bold">
-                                        Sign up with
-                                    </h6>
-                                </div>
-                                <div className="btn-wrapper text-center">
-                                    <button
-                                        className="bg-white active:bg-blueGray-50 text-blueGray-700 px-4 py-2 rounded outline-none focus:outline-none mr-2 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-                                        type="button"
-                                    >
-                                        <img alt="..." className="w-5 mr-1" src="/img/github.svg" />
-                                        Github
-                                    </button>
-                                    <button
-                                        className="bg-white active:bg-blueGray-50 text-blueGray-700 px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-                                        type="button"
-                                    >
-                                        <img alt="..." className="w-5 mr-1" src="/img/fb.png" />
-                                        Facebook
-                                    </button>
-                                </div>
-                                <hr className="mt-6 border-b-1 border-blueGray-300" />
-                            </div> */}
                             <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                                 <div className="text-blueGray-400 text-center mb-3 font-bold">
                                     {/* <small>Or sign up with credentials</small> */}
@@ -184,12 +156,6 @@ export default function Register() {
                                             <option>Bug Report</option>
                                             <option>Feature Request</option>
                                             <option>General Feedback</option>
-                                            {/* <option>Nonprofil Organization</option>
-                                            <option>Goverment Entity</option> */}
-                                            {/* <option>Select</option>
-                                            {options.map((option, index) => {
-                                                return <option key={index}>{option}</option>;
-                                            })} */}
                                         </select>
                                     </div>
 
@@ -201,16 +167,16 @@ export default function Register() {
                                             Feedback Title
                                         </label>
                                         <input
-                                            // {...register("emailId")}
-                                            // type="email"
-                                            // name="emailId"
+                                            {...register("feedbackTittle")}
+                                            type="text"
+                                            name="feedbackTittle"
                                             className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                            placeholder="p.s Something is incorrect"
+                                            placeholder="p.s I can't pay"
                                         // value={user.emailId}
                                         // onChange={(e) => handleChange(e)}
                                         />
                                         <small role="alert" className="text-red-500 ">
-                                            {errors.emailId?.message}
+                                            {errors.feedbackTittle?.message}
                                         </small>
                                     </div>
                                     <div className="relative w-full mb-3">
@@ -247,9 +213,9 @@ export default function Register() {
                                         // value={user.password}
                                         // onChange={(e) => handleChange(e)}
                                         />
-                                        <small role="alert" className="text-red-500 ">
+                                        {/* <small role="alert" className="text-red-500 ">
                                             {errors.password?.message}
-                                        </small>
+                                        </small> */}
                                     </div>
                                     <div className="relative w-full mb-3">
                                         <label
@@ -264,7 +230,7 @@ export default function Register() {
                                         </div>
                                     </div>
                                     <div>
-                                        <label className="inline-flex items-center cursor-pointer">
+                                        <label className="inline-flex items-center cursor-pointer my-4">
                                             <input
                                                 {...register("category")}
                                                 id="customCheckLogin"
