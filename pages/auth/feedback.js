@@ -2,12 +2,11 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Routes, Route, useNavigate } from "react-router-dom";
 import Auth from "layouts/Auth.js";
 import { BrowserRouter } from "react-router-dom";
 import PropTypes from "prop-types";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import cards from "./cards";
+import Rate from "components/Rate/rate.js";
 
 
 const phoneReg =
@@ -36,7 +35,7 @@ const schema = yup
             .matches(phoneReg, "Phone Number is not valid."),
         password: yup
             .string()
-            .required("Password is required.")
+            .required("Attachment is required.")
             .min(5, "Password must be 5 characters long")
             .max(35, "Password must be shorter than 35 characters"),
         confirmPassword: yup
@@ -99,61 +98,61 @@ export default function Register() {
         setUser({ ...user, [event.target.name]: value });
     };
 
-    const Rate = ({ count, rating, color, onRating }) => {
-        const [hoverRating, setHoverRating] = useState(0);
+    // const Rate = ({ count, rating, color, onRating }) => {
+    //     const [hoverRating, setHoverRating] = useState(0);
 
-        const getColor = index => {
-            if (hoverRating >= index) {
-                return color.filled;
-            } else if (!hoverRating && rating >= index) {
-                return color.filled
-            }
+    //     const getColor = index => {
+    //         if (hoverRating >= index) {
+    //             return color.filled;
+    //         } else if (!hoverRating && rating >= index) {
+    //             return color.filled
+    //         }
 
-            return color.unfilled;
-        }
+    //         return color.unfilled;
+    //     }
 
-        const starRating = useMemo(() => {
-            return Array(count)
-                .fill(0)
-                .map((_, i) => i + 1)
-                .map(idx => (
-                    <FontAwesomeIcon
-                        key={idx}
-                        className="cursor-pointer"
-                        icon="star"
-                        onClick={() => onRating(idx)}
-                        style={{ color: getColor(idx) }}
-                        onMouseEnter={() => setHoverRating(idx)}
-                        onMouseLeave={() => setHoverRating(0)}
-                    />
-                ));
-        }, [count, rating, hoverRating]);
+    //     const starRating = useMemo(() => {
+    //         return Array(count)
+    //             .fill(0)
+    //             .map((_, i) => i + 1)
+    //             .map(idx => (
+    //                 <FontAwesomeIcon
+    //                     key={idx}
+    //                     className="cursor-pointer"
+    //                     icon="star"
+    //                     onClick={() => onRating(idx)}
+    //                     style={{ color: getColor(idx) }}
+    //                     onMouseEnter={() => setHoverRating(idx)}
+    //                     onMouseLeave={() => setHoverRating(0)}
+    //                 />
+    //             ));
+    //     }, [count, rating, hoverRating]);
 
-        return (
-            <div>
-                {starRating}
-            </div>
-        )
-    }
+    //     return (
+    //         <div>
+    //             {starRating}
+    //         </div>
+    //     )
+    // }
 
-    Rate.propType = {
-        count: PropTypes.number,
-        rating: PropTypes.number,
-        onChange: PropTypes.func,
-        color: {
-            filled: PropTypes.string,
-            unfilled: PropTypes.string,
-        }
-    }
+    // Rate.propType = {
+    //     count: PropTypes.number,
+    //     rating: PropTypes.number,
+    //     onChange: PropTypes.func,
+    //     color: {
+    //         filled: PropTypes.string,
+    //         unfilled: PropTypes.string,
+    //     }
+    // }
 
-    Rate.defaultProps = {
-        count: 5,
-        rating: 0,
-        color: {
-            filled: "#f5eb3b",
-            unfilled: "DCDCDC"
-        }
-    }
+    // Rate.defaultProps = {
+    //     count: 5,
+    //     rating: 0,
+    //     color: {
+    //         filled: "#f5eb3b",
+    //         unfilled: "DCDCDC"
+    //     }
+    // }
 
     // const FeedbackForm = () => {
     //     const [rating, setRating] = useState(0);
@@ -325,16 +324,15 @@ export default function Register() {
                                                 Rating
                                             </label>
                                             <Rate rating={rating} onRating={rate => setRating(rate)} />
+                                            <p>Rating - {rating}</p>
+                                            {/* <Rate rating={rating} onRating={rate => setRating(rate)} /> */}
 
                                             {/* <input
                                         {...register("confirmPassword")}
                                         type="text"
                                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                         placeholder="Comfirm Password"
-                                    /> */}
-                                            {/* <small role="alert" className="text-red-500 ">
-                                        {errors.confirmPassword?.message}
-                                    </small> */}
+                                            /> */}
                                         </div>
                                         <div>
                                             <label className="inline-flex items-center cursor-pointer">
