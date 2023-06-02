@@ -50,10 +50,6 @@ public class Beneficiary {
     @Column(name = "percentage")
     private Integer percentage;
 
-    public String getFirstName() {
-        return firstName;
-    }
-
     public Beneficiary () {
 
     }
@@ -73,6 +69,10 @@ public class Beneficiary {
         this.date = date;
         this.address = address;
         this.percentage = percentage;
+    }
+
+    public String getFirstName() {
+        return firstName;
     }
 
     public void setFirstName(String firstName) {
