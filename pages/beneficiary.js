@@ -439,7 +439,7 @@ function Beneficiary() {
                                                         <select id="gender" className="shadow appearance-none border-0 rounded w-full py-2 px-3 placeholder-blueGray-300 focus:ring duration-150 ease-linear text-gray-700 mt-1 leading-tight focus:outline-none focus:shadow-outline"
                                                             {...register("gender")}
                                                         >
-                                                            <option value="">Select Country</option>
+                                                            <option value="">Select Gender</option>
                                                             {genders.map((gender) => (
                                                                 <option key={gender.id} value={gender.id}>
                                                                     {gender.name}
@@ -583,7 +583,7 @@ function Beneficiary() {
                                                             {...register("percentage")}
                                                             placeholder="Enter percentage"
                                                         />
-                                                        <span className="ml-2 mb-4 flex items-center bg-gray-200 font-heavy text-2xl text-gray-800 px-3 rounded-r-md">%</span>
+                                                        <span className="ml-2 mb-4 flex items-center font-heavy text-2xl text-gray-800 px-3 rounded-r-md">%</span>
                                                     </div>
                                                     <small
                                                         role="alert"
