@@ -60,24 +60,24 @@ export default function Loan() {
     const LOAN_API_BASE_URL = "http://localhost:8080/api/v1/loan";
 
     const [isOpen, setIsOpen] = useState(false);
-    const [loan, setLoan] = useState({
+    const [loan, setLoans] = useState({
       loan_id: "",
-      name: "",
+      fullName: "",
       email: "",
-      phone: "",
+      phoneNumber: "",
       address: "",
-      amount: "",
-      income: "",
+      phoneNumber: "",
+      monthlyIncome: "",
       purpouse: "",
     });
     const [responseLoan, setResponseLoan] = useState({
       loan_id: "",
-      name: "",
+      fullName: "",
       email: "",
-      phone: "",
+      phoneNumber: "",
       address: "",
-      amount: "",
-      income: "",
+      phoneNumber: "",
+      monthlyIncome: "",
       purpouse: "",
     });
 
@@ -99,7 +99,7 @@ export default function Loan() {
     };
     const handleChange = (event) => {
       const value = event.target.value;
-      setLoan({ ...loan, [event.target.name]: value });
+      setLoans({ ...loan, [event.target.name]: value });
     };
 
     return( 

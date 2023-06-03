@@ -1,5 +1,5 @@
 import React from 'react'
-import LoanTable from "components/Cards/LoanTable";
+import LoanTable from "components/Cards/LoanTable.js";
 import Admin from "layouts/Admin.js";
 
 const loanlist = () => {
