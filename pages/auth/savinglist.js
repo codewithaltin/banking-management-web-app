@@ -8,7 +8,9 @@ import User from "layouts/User";
 const savinglist = () => {
   return (
     <>
-      <SavingTable />;
+            
+      <SavingTable />
+
     </>
   );
 };

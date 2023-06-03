@@ -28,7 +28,7 @@ export default function User({ children }) {
       </div>
         <div className="px-4 md:px-10 mx-auto w-full -m-24">
           {children}
-          <FooterSmall/>
+          
         </div>
       </div>
     </>

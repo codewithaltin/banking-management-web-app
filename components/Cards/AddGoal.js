@@ -6,7 +6,7 @@ import SavingTable from "./SavingTable";
 const AddGoal = () => {
     const SAVINGGOAL_API_BASE_URL = "http://localhost:8080/api/v1/savingGoal";
 
-    const [isOpen, setIsOpen] = useState(false);
+    const [isDialogOpen, setDialogOpen] = useState(false);
     const [savingGoal, setSavingGoals] = useState({
       id: "",
       savingReason: "",
@@ -25,16 +25,16 @@ const AddGoal = () => {
     });
 
   function closeModal() {
-    setIsOpen(false);
+    setDialogOpen(false);
   }
 
   function openModal() {
-    setIsOpen(true);
+    setDialogOpen(true);
   }
 
   const handleChange = (event) => {
     const value = event.target.value;
-    setUser({ ...user, [event.target.name]: value });
+    setSavingGoals({ ...savingGoal, [event.target.name]: value });
   };
 
   const saveSavingGoals = async (e) => {
@@ -64,7 +64,7 @@ const AddGoal = () => {
         goalName: "",
         goalDescription: "",
     });
-    setIsOpen(false);
+    closeModal();
   };
 
   return (
@@ -78,14 +78,14 @@ const AddGoal = () => {
           </button>
         </div>
       </div>
-      <Transition appear show={isOpen} as={Fragment}>
+      <Transition appear show={isDialogOpen} as={React.Fragment}>
         <Dialog
           as="div"
           className="fixed inset-0 z-10 overflow-y-auto"
           onClose={closeModal}>
           <div className="min-h-screen px-4 text-center">
             <Transition.Child
-              as={Fragment}
+              as={React.Fragment}
               enter="ease-out duration-300"
               enterFrom="opacity-0 scale-95"
               enterTo="opacity-100 scale-100"
@@ -156,18 +156,18 @@ const AddGoal = () => {
                         className="h-10 w-96 border mt-2 px-2 py-2"></input>
                     </div>
                     <div className="h-14 my-4 space-x-4 pt-4">
-                      <button
-                        onClick={saveSavingGoals}
-                        className="rounded text-white font-semibold bg-green-400 hover:bg-green-700 py-2 px-6">
-                        Save
-                      </button>
-                      <button
-                        onClick={reset}
-                        className="rounded text-white font-semibold bg-red-400 hover:bg-red-700 py-2 px-6">
-                        Close
-                      </button>
-                    </div>
+                  <button
+                    onClick={saveSavingGoals}
+                    className="rounded text-white font-semibold bg-green-400 hover:bg-green-700 py-2 px-6">
+                    Save
+                  </button>
+                  <button
+                    onClick={reset}
+                    className="rounded text-white font-semibold bg-red-400 hover:bg-red-700 py-2 px-6">
+                    Close
+                  </button>
                   </div>
+                </div>
                 </div>
               </div>
             </Transition.Child>

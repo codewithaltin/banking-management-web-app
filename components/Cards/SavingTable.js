@@ -9,15 +9,22 @@ import CardTable from "./CardTable";
 
 export default function SavingTable({ savingGoal, color }) {
 
-    <main>
-        <AddGoal />
-      </main>
 
   const SAVINGGOAL_API_BASE_URL = "http://localhost:8080/api/v1/savingGoal";
   const [savingGoals, setSavingGoals] = useState(null);
   const [loading, setLoading] = useState(true);
   const [savingGoalId, setSavingGoalId] = useState(null);
   const [responseSavingGoal, setResponseSavingGoal] = useState(null);
+  const [isDialogOpen, setDialogOpen] = useState(false);
+
+  const handleOpenDialog = () => {
+    setDialogOpen(true);
+  };
+
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
+  };
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -73,12 +80,13 @@ export default function SavingTable({ savingGoal, color }) {
                 Saving Goals
               </h3>
               <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-              <button
+              <button  onClick={handleOpenDialog}
                 className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
                 type="button"
               >
                 Add Goal
               </button>
+              {isDialogOpen && <AddGoal isDialogOpen={handleOpenDialog} />}
             </div>
             </div>
             </div>
