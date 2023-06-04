@@ -175,6 +175,14 @@ export default function Index(session) {
                 Settle your Invoice{" "}
                 <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
               </a>
+              <a
+                href="/transfer"
+                target="_blank"
+                className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
+              >
+                Do a transfer{" "}
+                <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
+              </a>
             </div>
 
             <div className="w-full md:w-5/12 px-4 mr-auto ml-auto mt-32">
@@ -207,6 +215,65 @@ export default function Index(session) {
               </div>
             </div>
           </div>
+          </div>
+
+
+
+          
+
+          <div className="container mx-auto overflow-hidden pb-20">
+            <div className="flex flex-wrap items-center">
+              <div className="w-full md:w-4/12 px-12 md:px-4 ml-auto mr-auto mt-48">
+                <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
+
+                </div>
+                <h3 className="text-3xl mb-2 font-semibold leading-normal text-blueGray-900">
+                  Empower Your Savings Journey with FuturBank
+                </h3>
+                <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
+                  Set your sights on your financial goals with FuturBank.
+                  Define your targets, track your progress, and watch your savings grow.
+                  Take control of your future today and make your dreams a reality. Start saving with us now.
+                </p>
+
+                <a
+                  href="/SavingGoal"
+                  target="_blank"
+                  className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
+                >
+                  Set a saving goal{" "}
+                  <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
+                </a>
+
+              </div>
+
+              <div className="w-full md:w-8/12 px-8 mr-px ml-px mt-32">
+                <div className="relative flex flex-col min-w-0 w-full mb-0 mt-48 md:mt-4">
+
+
+                  <div className="relative flex flex-col min-w-0 w-full mb-0 mt-48 md:mt-4">
+
+                    <div className="w-full md:w-6/12 mr-auto px-4 pt-24 md:pt-0">
+                      <img
+                        alt="..."
+                        className="max-w-full rounded-lg shadow-xl"
+                        style={{
+                          transform:
+                            "scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg)",
+                        }}
+                        src="/img/savings-banking-investments-piggy-bank-credit.jpg"
+                      />
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
 
           <div className="flex flex-wrap items-center pt-32">
             <div className="w-full md:w-6/12 px-4 mr-auto ml-auto mt-32">
@@ -286,6 +353,7 @@ export default function Index(session) {
                       </p>
                     </div>
                   </a>
+                  
                 </div>
               </div>
             </div>
@@ -295,17 +363,13 @@ export default function Index(session) {
                 <i className="far fa-credit-card text-xl"></i>
               </div>
               <h3 className="text-3xl mb-2 font-semibold leading-normal text-blueGray-900">
-                Financial Empowerment
+                Payments
               </h3>
               <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-800">
-                “FuturBanking” is all-in-one solution for individuals looking to
-                manage their finances effectively. Users can easily compare
-                different insurance plans, purchase policies, and manage their
-                coverage online, all from a single platform.
+                You can perform utility payments such as Electricity, Insurance, Pre-paid Service and Mobile Top-Up.
               </p>
               <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-800">
-                Furthermore, our platform can be a valuable resource for
-                individuals seeking financial tips and investment guidance.
+                Simplify your life and stay connected, insured, and powered up with us.
               </p>
               {/* <div className="block pb-6">
                 <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white  last:mr-0 mr-2 mt-2">
@@ -334,13 +398,72 @@ export default function Index(session) {
                 </span>
               </div> */}
               <a
-                href="#"
+                href="/payments"
                 target="_blank"
                 className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
               >
-                View all{" "}
+                Pay effortlessly{" "}
                 <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
               </a>
+            </div>
+          </div>
+       
+
+        <div className="container mx-auto overflow-hidden pb-20">
+          <div className="flex flex-wrap items-center">
+            <div className="w-full md:w-4/12 px-12 md:px-4 ml-auto mr-auto mt-48">
+              <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
+                <img
+                  src="/img/beneficiary-logo.jpg"
+                  alt="..."
+                  className="fas fa-comments-dollar text-xl"
+                />
+              </div>
+              <h3 className="text-3xl mb-2 font-semibold leading-normal text-blueGray-900">
+                Do Your Beneficiary
+              </h3>
+              <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
+                Are you looking to transfer funds to a friend or relative? With the convenience
+                of online banking facilities provided by our bank, it's now easier
+                than ever. Using our banking, you can effortlessly transfer
+                funds to individuals holding accounts within your bank or even accounts held in
+                other banks. To initiate a transfer, simply add the bank account details of the
+                recipient, ensuring they can receive the funds securely.
+              </p>
+
+              <a
+                href="/beneficiary"
+                target="_blank"
+                className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
+              >
+                Name your Beneficiary{" "}
+                <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
+              </a>
+            </div>
+
+            <div className="w-full md:w-5/12 px-4 mr-auto ml-auto mt-32">
+              <div className="relative flex flex-col min-w-0 w-full mb-0 mt-48 md:mt-4">
+                <img
+                  alt="..."
+                  src="/img/1beneficiary.jpg"
+                  className="w-full align-middle rounded-lg absolute shadow-lg max-w-210-px left-260-px -top-160-px"
+                />
+                <img
+                  alt="..."
+                  src="/img/4beneficiary.jpg"
+                  className="mt-12 w-full align-middle rounded-lg absolute shadow-lg max-w-210-px left-40-px -top-225-px z-2"
+                />
+                <img
+                  alt="..."
+                  src="/img/3beneficiary.jpg"
+                  className="w-full align-middle rounded-lg absolute shadow-2xl max-w-210-px -left-50-px top-25-px"
+                />
+                <img
+                  alt="..."
+                  src="/img/2beneficiary.jpg"
+                  className="w-full align-middle rounded absolute shadow-xl max-w-210-px left-195-px top-95-px"
+                />
+              </div>
             </div>
           </div>
         </div>

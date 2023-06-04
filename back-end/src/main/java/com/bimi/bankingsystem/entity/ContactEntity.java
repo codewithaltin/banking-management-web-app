@@ -8,7 +8,7 @@ import jakarta.persistence.*;
 @Table(name = "contact")
 public class ContactEntity {
     @Id
-    @SequenceGenerator(name = "contact_sequence", sequenceName = "contact_sequence", allocationSize = 1)
+    @SequenceGenerator(name =   "contact_sequence", sequenceName = "contact_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contact_sequence")
     @Column(updatable = false)
     private long id;

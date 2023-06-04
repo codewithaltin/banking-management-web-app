@@ -37,7 +37,6 @@ public class ContactController {
         contact = contactService.getContactById(id);
         return ResponseEntity.ok(contact);
     }
-
     @DeleteMapping("/contact/{id}")
     public ResponseEntity<Map<String,Boolean>> deleteContact(@PathVariable("id") Long id) {
         boolean deleted = false;
@@ -48,10 +47,11 @@ public class ContactController {
 
     @PutMapping("/contact/{id}")
     public ResponseEntity<Contact> updateContact(@PathVariable("id") Integer id,
-                                                 @RequestBody Contact contact) {
+                                                 @RequestBody Contact contact){
         contact = contactService.updateContact(id,contact);
         return ResponseEntity.ok(contact);
     }
+
 
 
 }
