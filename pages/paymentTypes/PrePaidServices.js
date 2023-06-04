@@ -89,7 +89,7 @@ export default function PrePaidServices() {
                   </h6>
                   
                    <p className="text-blueGray-500 text-lg font-bold">
-                    Effortless banking. Skip the lines, save time.
+                    Your virtual branch. Instant access, no waiting.
                    </p>
                   
                 </div>

@@ -5,7 +5,7 @@ import * as yup from "yup";
 
 import Auth from "layouts/Auth.js";
 
-export default function MobilePayments() {
+export default function CollectorPayments() {
 
     const {
       register,
@@ -15,56 +15,57 @@ export default function MobilePayments() {
     } = useForm({ });
     
   
-  const MOBILEPAYMENTS_API_BASE_URL = "http://localhost:8080/api/v1/institutionPayments";
+  const COLLECTORPAYMENTS_API_BASE_URL = "http://localhost:8080/api/v1/institutionPayments";
 
   const [isOpen, setIsOpen] = useState(false);
-  const [mobilePayments, setMobilePayments] = useState({
+  const [collectorPayments, setCollectorPayments] = useState({
     id: "",
-    serviceProvider: "",
-    code: "",
-    mobilePhoneNumber: "",
+    collector: "",
+    serialNo: "",
+    uniref: "",
     amount: "",
+    description:""
   });
-  const [responseMobilePayments, setResponseMobilePayments] = useState({
+  const [responseCollectorPayments, setResponseCollectorPayments] = useState({
     id: "",
-    serviceProvider: "",
-    code: "",
-    mobilePhoneNumber: "",
+    collector: "",
+    serialNo: "",
+    uniref: "",
     amount: "",
+    description:""
   });
   // const navigate = useNavigate();
   // const navigateHome = () => {
   //   navigate("/");
-  // };
+  // };ss
 
-  const saveMobilePayments = async (e) => {
+  const saveCollectorPayments = async (e) => {
     //e.preventDefault();
-    const response = await fetch(MOBILEPAYMENTS_API_BASE_URL, {
+    const response = await fetch(COLLECTORPAYMENTS_API_BASE_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(mobilePayments),
+      body: JSON.stringify(collectorPayments),
     });
     if (!response.ok) {
       throw new Error("Something went wrong");
     }
-    const _mobilePayments = await response.json();
-    setResponseMobilePayments(_mobilePayments);
+    const _collectorPayments = await response.json();
+    setResponseCollectorPayments(_collectorPayments);
     window.location.reload();
   };
 
-  const serviceProviderOption = [
-    "Ipko",
-    "Vala",
-  ];
 
-  const codeOption = [
-    "48",
-    "43",
-    "44",
-    "45",
-    "49",
+  const CollectorOption = [
+    "Public Organizations",
+    "Private Organizations",
+    "Municipalities",
+    "Education",
+    "Ministries",
+    "Prisons",
+    "Authorities",
+    "Other",
   ];
   
   const onOptionChangeHandler = (event) => {
@@ -73,7 +74,7 @@ export default function MobilePayments() {
 
   const handleChange = (event) => {
     const value = event.target.value;
-    setMobilePayments({ ...mobilePayments, [event.target.name]: value });
+    setInstitutionPayments({ ...institutionPayments, [event.target.name]: value });
   };
 
   return (
@@ -85,11 +86,11 @@ export default function MobilePayments() {
               <div className="rounded-t mb-0 px-6 py-6">
                 <div className="text-center mb-3">
                   <h6 className="text-blueGray-800 text-lg font-bold">
-                    Mobile Payments
+                    Collector Payments
                   </h6>
                   
                    <p className="text-blueGray-500 text-lg font-bold">
-                    Seamless banking. No lines, just convenience.
+                   Your branch on demand. Queue-free banking.
                    </p>
                   
                 </div>
@@ -98,11 +99,11 @@ export default function MobilePayments() {
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                 
-                <form onSubmit={handleSubmit(saveMobilePayments)}>
+                <form onSubmit={handleSubmit(saveCollectorPayments)}>
                   {" "}
                   <div className="relative w-full mb-3">
                     <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-                      Service Provider
+                      Collector
                     </label>
                  
                     <select
@@ -112,12 +113,26 @@ export default function MobilePayments() {
                       name="savingReason"
                     >
                       <option></option>
-                      {serviceProviderOption.map((option, index) => {
+                      {CollectorOption.map((option, index) => {
                         return <option key={index}>{option}</option>;
                       })}
                     </select>
                   </div>
-                  
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      Serial NO
+                    </label>
+                    <input
+                      {... register("goalName")}
+                      type="text"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      onChange={(e) => handleChange(e)}
+                    />
+                    
+                  </div>
                   <div className="flex flex-wrap">
               <div className="w-full lg:w-6/12 px-4">
                 <div className="relative w-full mb-3">
@@ -125,19 +140,15 @@ export default function MobilePayments() {
                     className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
-                    Number Code
+                    UNIREF
                   </label>
-                  <select
-                   
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      onChange={handleChange}
-                      name="savingReason"
-                    >
-                      <option></option>
-                      {codeOption.map((option, index) => {
-                        return <option key={index}>{option}</option>;
-                      })}
-                    </select>
+                  <input
+                    {... register("referenceNumber")}
+                    type="text"
+                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    onChange={(e) => handleChange(e)}
+                  />
+                  
                 </div>
               </div>
               <div className="w-full lg:w-6/12 px-4">
@@ -146,7 +157,7 @@ export default function MobilePayments() {
                     className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
-                    Mobile Phone Number
+                    Amount
                   </label>
                   <input
                     {... register("amount")}
@@ -157,12 +168,13 @@ export default function MobilePayments() {
                   
                 </div>
               </div>
-              <div className="relative w-full mb-3">
+            </div>
+            <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      Amount
+                      Description
                     </label>
                     <input
                       {... register("goalName")}
@@ -172,10 +184,6 @@ export default function MobilePayments() {
                     />
                     
                   </div>
-            </div>
-                  
-                  
-                  
                   <div className="text-center mt-6">
                     <input
                     
@@ -194,4 +202,4 @@ export default function MobilePayments() {
   );
 }
 
-MobilePayments.layout = Auth;
+CollectorPayments.layout = Auth;
