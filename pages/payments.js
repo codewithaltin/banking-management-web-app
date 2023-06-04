@@ -63,7 +63,7 @@ export default function payments() {
                         Phone, Water, Electricity, Insurance...
                       </p>
                       <a
-                  href="/SavingGoal"
+                  href="/paymentTypes/InstitutionPayments"
                   target="_blank"
                   className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
                 >
