@@ -170,6 +170,8 @@ export default function Sidebar() {
                   Contact Forms List
                 </Link>
               </li>
+
+
               <li className="items-center">
                 <Link
                   href="/admin/transferlist"
@@ -183,7 +185,6 @@ export default function Sidebar() {
                   <i
                     className={
                       "fas fa-table mr-2 text-sm " +
-                      (router.pathname.indexOf("/admin/transferlist") !== -1
                         ? "opacity-75"
                         : "text-blueGray-300")
                     }
@@ -191,6 +192,50 @@ export default function Sidebar() {
                   Transfers
                 </Link>
               </li>
+
+              <li className="items-center">
+                <Link
+                  href="/admin/loanlist"
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (router.pathname.indexOf("/admin/loanlist") !== -1
+                      ? "text-lightBlue-500 hover:text-lightBlue-600"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
+                >
+                  <i
+                    className={
+                      "fas fa-table mr-2 text-sm " +
+                        ? "opacity-75"
+                        : "text-blueGray-300")
+                    }
+                  ></i>{" "}
+                  Loan List
+                </Link>
+              </li>
+
+              <li className="items-center">
+                <Link
+                  href="/admin/donationlist"
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (router.pathname.indexOf("/admin/donationlist") !== -1
+                      ? "text-lightBlue-500 hover:text-lightBlue-600"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
+                >
+                  <i
+                    className={
+                      "fas fa-table mr-2 text-sm " +
+                        ? "opacity-75"
+                        : "text-blueGray-300")
+                    }
+                  ></i>{" "}
+                  Donation List
+                </Link>
+              </li>
+
+
               <li className="items-center">
                 <Link
                   href="/admin/settings"

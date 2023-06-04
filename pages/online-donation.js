@@ -10,6 +10,7 @@ import * as yup from "yup";
 import Auth from "layouts/Auth.js";
 const phoneReg = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
+
 const schema = yup
   .object()
   .shape({
@@ -33,23 +34,23 @@ const schema = yup
     amount: yup
       .number()
       .typeError('Input must be a number')
-      .required("Loan Amount is required")
-      .min(2000, "Loan amount must be greater than €2000")
-      .max(50000, "Loan amount must be lower than €50000"),
-    income: yup
-      .number()
-      .typeError('Input must be a number')
-      .required("Monthly incomes are required")
-      .min(500, "Monthly incomes must be greater than €500"),
+      .required("Donation Amount is required")
+      .min(10, "Donation amount must be greater than €10")
+      .max(25000, "Donation amount must be lower than €25000"),
+    cardinfo: yup
+      .string()
+      .required("Card Info is required")
+      .min(16, "Card Info must be at least 16 characters"),
     purpose: yup
       .string()
-      .required("Loan purpose is required")
+      .required("Comment is required")
       .min(20, "Purpose must be at least 20 characters"),
     
   })
   .required();
 
-export default function Loan() {
+
+export default function Donate() {
     const {
       register,
       handleSubmit,
@@ -57,49 +58,49 @@ export default function Loan() {
       formState: { errors },
     } = useForm({ resolver: yupResolver(schema) });
 
-    const LOAN_API_BASE_URL = "http://localhost:8080/api/v1/loan";
+    const DONATION_API_BASE_URL = "http://localhost:8080/api/v1/donation";
 
     const [isOpen, setIsOpen] = useState(false);
-    const [loan, setLoans] = useState({
-      loan_id: "",
+    const [donation, setDonation] = useState({
+      id: "",
       fullName: "",
       email: "",
       phoneNumber: "",
       address: "",
-      phoneNumber: "",
-      monthlyIncome: "",
-      purpouse: "",
+      donationAmount: "",
+      cardInformation: "",
+      comment: "",
     });
-    const [responseLoan, setResponseLoan] = useState({
-      loan_id: "",
+    const [responseDonation, setResponseDonation] = useState({
+      id: "",
       fullName: "",
       email: "",
       phoneNumber: "",
       address: "",
-      phoneNumber: "",
-      monthlyIncome: "",
-      purpouse: "",
+      donationAmount: "",
+      cardInformation: "",
+      comment: "",
     });
 
-    const saveLoan = async (e) => {
+    const saveDonation = async (e) => {
       //e.preventDefault();
-      const response = await fetch(LOAN_API_BASE_URL, {
+      const response = await fetch(DONATION_API_BASE_URL, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(loan),
+        body: JSON.stringify(donation),
       });
       if (!response.ok) {
         throw new Error("Something went wrong");
       }
-      const _loan = await response.json();
-      setResponseLoan(_loan);
+      const _donation = await response.json();
+      setResponseDonation(_donation);
       window.location.reload();
     };
     const handleChange = (event) => {
       const value = event.target.value;
-      setLoans({ ...loan, [event.target.name]: value });
+      setDonation({ ...donation, [event.target.name]: value });
     };
 
     return( 
@@ -111,7 +112,7 @@ export default function Loan() {
           className="absolute top-0 w-full h-full bg-center bg-cover"
           style={{
             backgroundImage:
-              "url('/img/loan-application.jpg')",
+              "url('/img/donate.jpg')",
           }}
         >
           <span
@@ -124,10 +125,10 @@ export default function Loan() {
             <div className="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
               <div className="pr-12">
                 <h1 className="text-white font-semibold text-5xl">
-                    Apply for a Loan with Ease!
+                    Join Us in Making a Difference!
                 </h1>
                 <p className="mt-4 text-lg text-blueGray-200">
-                With just a few clicks, you can fill out our online application and get approved for the funds you need in no time. Apply now and take the first step toward achieving your financial goals.
+                    Together, let's ignite hope, inspire change, and make a lasting impact on the lives of families in need.
                 </p>
               </div>
             </div>
@@ -178,7 +179,7 @@ export default function Loan() {
           <div className="flex flex-wrap text-center justify-center">
             <div className="w-full lg:w-6/12 px-4">
               <h4 className="text-3xl font-semibold text-white">
-                Want to apply now?
+                Join the cause!
               </h4>
             </div>
           </div>
@@ -191,11 +192,11 @@ export default function Loan() {
               <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200">
                 <div className="flex-auto p-5 lg:p-10">
                   <p className="leading-relaxed mt-1 mb-4 text-blueGray-500">
-                    Complete this form and we will review your details.
+                    Please fill out the donation form below to complete your contribution.
                   </p>
 
 
-                  <form onSubmit={handleSubmit(saveLoan)}>
+                  <form onSubmit={handleSubmit(saveDonation)}>
                   {" "}
                   <div className="relative w-full mb-3 mt-8">
                     <label
@@ -272,9 +273,9 @@ export default function Loan() {
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="loan-amount"
+                      htmlFor="donation-amount"
                     >
-                      Loan Amount (€)
+                      Donation Amount (€)
                     </label>
                     <input
                       type="number"
@@ -290,18 +291,18 @@ export default function Loan() {
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="monthly-income"
+                      htmlFor="cardinfo"
                     >
-                      Monthly income (€)
+                      Card Information
                     </label>
                     <input
                       type="number"
-                      {...register("income")}
+                      {...register("cardinfo")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="p.s 800"
+                      placeholder="p.s 1214160204060810"
                     />
                     <small role="alert" className="text-red-500 ">
-                      {errors.income?.message}
+                      {errors.cardinfo?.message}
                     </small>
                   </div>
 
@@ -310,7 +311,7 @@ export default function Loan() {
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="message"
                     >
-                      Purpose of loan
+                      Comment
                     </label>
                     <textarea
                       rows="4"
