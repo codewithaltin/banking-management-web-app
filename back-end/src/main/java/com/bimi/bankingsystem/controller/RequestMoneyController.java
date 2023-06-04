@@ -15,22 +15,22 @@ public class RequestMoneyController {
         this.rqService = rqService;
     }
 
-    @PostMapping("/loan")
-    public RequestMoney createRequest(@RequestBody RequestMoney loan){
-        return rqService.requestMoney(loan);
+    @PostMapping("/requestmoney")
+    public RequestMoney createRequest(@RequestBody RequestMoney requestmoney){
+        return rqService.requestMoney(requestmoney);
     }
 
-    @GetMapping("/loan")
+    @GetMapping("/requestmoney")
     public List<RequestMoney> getAllRequests(){
         return rqService.getAllRequest();
     }
 
-    @PutMapping("loan/{id}")
-    public RequestMoney updateRequest(@PathVariable Long id,@RequestBody RequestMoney loan){
-        return rqService.updateRequest(id,loan);
+    @PutMapping("requestmoney/{id}")
+    public RequestMoney updateRequest(@PathVariable Long id,@RequestBody RequestMoney requestmoney){
+        return rqService.updateRequest(id,requestmoney);
     }
 
-    @DeleteMapping("loan/{id}")
+    @DeleteMapping("requestmoney/{id}")
     public boolean deleteRequest(@PathVariable Long id){
         return rqService.deleteRequest(id);
     }
