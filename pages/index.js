@@ -353,6 +353,7 @@ export default function Index(session) {
                       </p>
                     </div>
                   </a>
+                  
                 </div>
               </div>
             </div>
@@ -362,17 +363,13 @@ export default function Index(session) {
                 <i className="far fa-credit-card text-xl"></i>
               </div>
               <h3 className="text-3xl mb-2 font-semibold leading-normal text-blueGray-900">
-                Financial Empowerment
+                Payments
               </h3>
               <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-800">
-                “FuturBanking” is all-in-one solution for individuals looking to
-                manage their finances effectively. Users can easily compare
-                different insurance plans, purchase policies, and manage their
-                coverage online, all from a single platform.
+                You can perform utility payments such as Electricity, Insurance, Pre-paid Service and Mobile Top-Up.
               </p>
               <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-800">
-                Furthermore, our platform can be a valuable resource for
-                individuals seeking financial tips and investment guidance.
+                Simplify your life and stay connected, insured, and powered up with us.
               </p>
               {/* <div className="block pb-6">
                 <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white  last:mr-0 mr-2 mt-2">
@@ -401,11 +398,11 @@ export default function Index(session) {
                 </span>
               </div> */}
               <a
-                href="#"
+                href="/payments"
                 target="_blank"
                 className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
               >
-                {" "}
+                Pay effortlessly{" "}
                 <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
               </a>
             </div>
