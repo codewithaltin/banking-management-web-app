@@ -183,6 +183,15 @@ export default function Index(session) {
                 Do a transfer{" "}
                 <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
               </a>
+
+              <a
+                href="/bills"
+                target="_blank"
+                className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
+              >
+                Request Money{" "}
+                <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
+              </a>
             </div>
 
             <div className="w-full md:w-5/12 px-4 mr-auto ml-auto mt-32">
@@ -215,163 +224,150 @@ export default function Index(session) {
               </div>
             </div>
           </div>
-          </div>
+        </div>
 
+        <div className="container mx-auto overflow-hidden pb-20">
+          <div className="flex flex-wrap items-center">
+            <div className="w-full md:w-4/12 px-12 md:px-4 ml-auto mr-auto mt-48">
+              <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white"></div>
+              <h3 className="text-3xl mb-2 font-semibold leading-normal text-blueGray-900">
+                Empower Your Savings Journey with FuturBank
+              </h3>
+              <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
+                Set your sights on your financial goals with FuturBank. Define
+                your targets, track your progress, and watch your savings grow.
+                Take control of your future today and make your dreams a
+                reality. Start saving with us now.
+              </p>
 
+              <a
+                href="/SavingGoal"
+                target="_blank"
+                className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
+              >
+                Set a saving goal{" "}
+                <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
+              </a>
+            </div>
 
-          
-
-          <div className="container mx-auto overflow-hidden pb-20">
-            <div className="flex flex-wrap items-center">
-              <div className="w-full md:w-4/12 px-12 md:px-4 ml-auto mr-auto mt-48">
-                <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
-
-                </div>
-                <h3 className="text-3xl mb-2 font-semibold leading-normal text-blueGray-900">
-                  Empower Your Savings Journey with FuturBank
-                </h3>
-                <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-                  Set your sights on your financial goals with FuturBank.
-                  Define your targets, track your progress, and watch your savings grow.
-                  Take control of your future today and make your dreams a reality. Start saving with us now.
-                </p>
-
-                <a
-                  href="/SavingGoal"
-                  target="_blank"
-                  className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
-                >
-                  Set a saving goal{" "}
-                  <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
-                </a>
-
-              </div>
-
-              <div className="w-full md:w-8/12 px-8 mr-px ml-px mt-32">
+            <div className="w-full md:w-8/12 px-8 mr-px ml-px mt-32">
+              <div className="relative flex flex-col min-w-0 w-full mb-0 mt-48 md:mt-4">
                 <div className="relative flex flex-col min-w-0 w-full mb-0 mt-48 md:mt-4">
-
-
-                  <div className="relative flex flex-col min-w-0 w-full mb-0 mt-48 md:mt-4">
-
-                    <div className="w-full md:w-6/12 mr-auto px-4 pt-24 md:pt-0">
-                      <img
-                        alt="..."
-                        className="max-w-full rounded-lg shadow-xl"
-                        style={{
-                          transform:
-                            "scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg)",
-                        }}
-                        src="/img/savings-banking-investments-piggy-bank-credit.jpg"
-                      />
-                    </div>
+                  <div className="w-full md:w-6/12 mr-auto px-4 pt-24 md:pt-0">
+                    <img
+                      alt="..."
+                      className="max-w-full rounded-lg shadow-xl"
+                      style={{
+                        transform:
+                          "scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg)",
+                      }}
+                      src="/img/savings-banking-investments-piggy-bank-credit.jpg"
+                    />
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
 
-
-
-
-
-
-          <div className="flex flex-wrap items-center pt-32">
-            <div className="w-full md:w-6/12 px-4 mr-auto ml-auto mt-32">
-              <div className="justify-center flex flex-wrap relative">
-                <div className="my-4 w-full lg:w-6/12 px-4">
-                  <a href="#" target="_blank">
-                    <div className="bg-red-600 shadow-lg rounded-lg text-center p-8">
-                      <img
-                        alt="..."
-                        className="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                        src="/img/retirement.png"
-                      />
-                      <p className="text-lg text-white mt-4 font-semibold">
-                        Retirement Planning
-                      </p>
-                    </div>
-                  </a>
-                  <a href="#" target="_blank">
-                    <div className="bg-lightBlue-500 shadow-lg rounded-lg text-center p-8 mt-8">
-                      <img
-                        alt="..."
-                        className="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                        src="/img/property.png"
-                      />
-                      <p className="text-lg text-white mt-4 font-semibold">
-                        Mortgage
-                      </p>
-                    </div>
-                  </a>
-                  <a href="#" target="_blank">
-                    <div className="bg-blueGray-900 shadow-lg rounded-lg text-center p-8 mt-8">
-                      <img
-                        alt="..."
-                        className="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                        src="/img/piggy-b.png"
-                      />
-                      <p className="text-lg text-white mt-4 font-semibold">
-                        Saving Accounts
-                      </p>
-                    </div>
-                  </a>
-                </div>
-                <div className="my-4 w-full lg:w-6/12 px-4 lg:mt-16">
-                  <a href="#" target="_blank">
-                    <div className="bg-yellow-500 shadow-lg rounded-lg text-center p-8">
-                      <img
-                        alt="..."
-                        className="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                        src="/img/money.png"
-                      />
-                      <p className="text-lg text-white mt-4 font-semibold">
-                        Grow Wealth
-                      </p>
-                    </div>
-                  </a>
-                  <a href="#" target="_blank">
-                    <div className="bg-red-700 shadow-lg rounded-lg text-center p-8 mt-8">
-                      <img
-                        alt="..."
-                        className="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                        src="/img/risk-m.png"
-                      />
-                      <p className="text-lg text-white mt-4 font-semibold">
-                        Risk Management
-                      </p>
-                    </div>
-                  </a>
-                  <a href="#" target="_blank">
-                    <div className="bg-emerald-500 shadow-lg rounded-lg text-center p-8 mt-8">
-                      <img
-                        alt="..."
-                        className="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                        src="/img/euro.png"
-                      />
-                      <p className="text-lg text-white mt-4 font-semibold">
-                        Smart Money Moves
-                      </p>
-                    </div>
-                  </a>
-                  
-                </div>
+        <div className="flex flex-wrap items-center pt-32">
+          <div className="w-full md:w-6/12 px-4 mr-auto ml-auto mt-32">
+            <div className="justify-center flex flex-wrap relative">
+              <div className="my-4 w-full lg:w-6/12 px-4">
+                <a href="#" target="_blank">
+                  <div className="bg-red-600 shadow-lg rounded-lg text-center p-8">
+                    <img
+                      alt="..."
+                      className="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
+                      src="/img/retirement.png"
+                    />
+                    <p className="text-lg text-white mt-4 font-semibold">
+                      Retirement Planning
+                    </p>
+                  </div>
+                </a>
+                <a href="#" target="_blank">
+                  <div className="bg-lightBlue-500 shadow-lg rounded-lg text-center p-8 mt-8">
+                    <img
+                      alt="..."
+                      className="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
+                      src="/img/property.png"
+                    />
+                    <p className="text-lg text-white mt-4 font-semibold">
+                      Mortgage
+                    </p>
+                  </div>
+                </a>
+                <a href="#" target="_blank">
+                  <div className="bg-blueGray-900 shadow-lg rounded-lg text-center p-8 mt-8">
+                    <img
+                      alt="..."
+                      className="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
+                      src="/img/piggy-b.png"
+                    />
+                    <p className="text-lg text-white mt-4 font-semibold">
+                      Saving Accounts
+                    </p>
+                  </div>
+                </a>
+              </div>
+              <div className="my-4 w-full lg:w-6/12 px-4 lg:mt-16">
+                <a href="#" target="_blank">
+                  <div className="bg-yellow-500 shadow-lg rounded-lg text-center p-8">
+                    <img
+                      alt="..."
+                      className="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
+                      src="/img/money.png"
+                    />
+                    <p className="text-lg text-white mt-4 font-semibold">
+                      Grow Wealth
+                    </p>
+                  </div>
+                </a>
+                <a href="#" target="_blank">
+                  <div className="bg-red-700 shadow-lg rounded-lg text-center p-8 mt-8">
+                    <img
+                      alt="..."
+                      className="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
+                      src="/img/risk-m.png"
+                    />
+                    <p className="text-lg text-white mt-4 font-semibold">
+                      Risk Management
+                    </p>
+                  </div>
+                </a>
+                <a href="#" target="_blank">
+                  <div className="bg-emerald-500 shadow-lg rounded-lg text-center p-8 mt-8">
+                    <img
+                      alt="..."
+                      className="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
+                      src="/img/euro.png"
+                    />
+                    <p className="text-lg text-white mt-4 font-semibold">
+                      Smart Money Moves
+                    </p>
+                  </div>
+                </a>
               </div>
             </div>
+          </div>
 
-            <div className="w-full md:w-4/12 px-12 md:px-4 ml-auto mr-auto mt-48">
-              <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
-                <i className="far fa-credit-card text-xl"></i>
-              </div>
-              <h3 className="text-3xl mb-2 font-semibold leading-normal text-blueGray-900">
-                Payments
-              </h3>
-              <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-800">
-                You can perform utility payments such as Electricity, Insurance, Pre-paid Service and Mobile Top-Up.
-              </p>
-              <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-800">
-                Simplify your life and stay connected, insured, and powered up with us.
-              </p>
-              {/* <div className="block pb-6">
+          <div className="w-full md:w-4/12 px-12 md:px-4 ml-auto mr-auto mt-48">
+            <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
+              <i className="far fa-credit-card text-xl"></i>
+            </div>
+            <h3 className="text-3xl mb-2 font-semibold leading-normal text-blueGray-900">
+              Payments
+            </h3>
+            <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-800">
+              You can perform utility payments such as Electricity, Insurance,
+              Pre-paid Service and Mobile Top-Up.
+            </p>
+            <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-800">
+              Simplify your life and stay connected, insured, and powered up
+              with us.
+            </p>
+            {/* <div className="block pb-6">
                 <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white  last:mr-0 mr-2 mt-2">
                   Alerts
                 </span>
@@ -397,17 +393,16 @@ export default function Index(session) {
                   Tooltips
                 </span>
               </div> */}
-              <a
-                href="/payments"
-                target="_blank"
-                className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
-              >
-                Pay effortlessly{" "}
-                <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
-              </a>
-            </div>
+            <a
+              href="/payments"
+              target="_blank"
+              className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
+            >
+              Pay effortlessly{" "}
+              <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
+            </a>
           </div>
-       
+        </div>
 
         <div className="container mx-auto overflow-hidden pb-20">
           <div className="flex flex-wrap items-center">
@@ -423,11 +418,12 @@ export default function Index(session) {
                 Do Your Beneficiary
               </h3>
               <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-                Are you looking to transfer funds to a friend or relative? With the convenience
-                of online banking facilities provided by our bank, it's now easier
-                than ever. Using our banking, you can effortlessly transfer
-                funds to individuals holding accounts within your bank or even accounts held in
-                other banks. To initiate a transfer, simply add the bank account details of the
+                Are you looking to transfer funds to a friend or relative? With
+                the convenience of online banking facilities provided by our
+                bank, it's now easier than ever. Using our banking, you can
+                effortlessly transfer funds to individuals holding accounts
+                within your bank or even accounts held in other banks. To
+                initiate a transfer, simply add the bank account details of the
                 recipient, ensuring they can receive the funds securely.
               </p>
 
@@ -487,14 +483,14 @@ export default function Index(session) {
                 </p>
 
                 <a
-                    href="/online-donation"
-                    target="_blank"
-                    className="font-bold  text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
-                  >
-                    Donate Online{" "}
-                    <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
-                  </a>
-                
+                  href="/online-donation"
+                  target="_blank"
+                  className="font-bold  text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
+                >
+                  Donate Online{" "}
+                  <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
+                </a>
+
                 <ul className="list-none mt-6">
                   <li className="py-2">
                     <div className="flex items-center">

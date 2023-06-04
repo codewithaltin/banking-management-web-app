@@ -17,7 +17,7 @@ public class RequestMoney {
 
     @NonNull
     @Column
-    private String personsRequestingEmail;
+    private String requestedEmail;
     @NonNull
     @Column
     private String payeeEmail;
@@ -28,7 +28,7 @@ public class RequestMoney {
 
     public RequestMoney(@NonNull long id, @NonNull String personsRequestingEmail, @NonNull String payeeEmail, @NonNull double amount) {
         this.id = id;
-        this.personsRequestingEmail = personsRequestingEmail;
+        this.requestedEmail = personsRequestingEmail;
         this.payeeEmail = payeeEmail;
         this.amount = amount;
     }

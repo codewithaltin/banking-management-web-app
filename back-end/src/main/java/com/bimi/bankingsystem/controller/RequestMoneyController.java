@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(value = "http://localhost:3000")
 @RestController
 @RequestMapping("api/v1")
 public class RequestMoneyController {
@@ -15,22 +16,22 @@ public class RequestMoneyController {
         this.rqService = rqService;
     }
 
-    @PostMapping("/loan")
+    @PostMapping("/requestmoney")
     public RequestMoney createRequest(@RequestBody RequestMoney loan){
         return rqService.requestMoney(loan);
     }
 
-    @GetMapping("/loan")
+    @GetMapping("/requestmoney")
     public List<RequestMoney> getAllRequests(){
         return rqService.getAllRequest();
     }
 
-    @PutMapping("loan/{id}")
+    @PutMapping("requestmoney/{id}")
     public RequestMoney updateRequest(@PathVariable Long id,@RequestBody RequestMoney loan){
         return rqService.updateRequest(id,loan);
     }
 
-    @DeleteMapping("loan/{id}")
+    @DeleteMapping("requestmoney/{id}")
     public boolean deleteRequest(@PathVariable Long id){
         return rqService.deleteRequest(id);
     }
