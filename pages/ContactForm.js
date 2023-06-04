@@ -17,10 +17,10 @@ const schema = yup
       .string()
       .email("Please enter a valid e-mail")
       .required("Email is required."),
-    "text": yup
+    text: yup
       .string()
       .required("Some text is required.")
-      .min(5, "Text must be longer than 5 characters")
+      .min(5, "Text must be longer than 5 characters"),
   })
   .required();
 export default function Contact() {
@@ -30,7 +30,7 @@ export default function Contact() {
     watch,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
-  
+
   const CONTACT_API_BASE_URL = "http://localhost:8080/api/v1/contact";
 
   const [isOpen, setIsOpen] = useState(false);
@@ -84,11 +84,10 @@ export default function Contact() {
                     Contact Us
                   </h6>
                 </div>
-                  
+
                 <hr className="mt-6 border-b-1 border-blueGray-300" />
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                
                 <form onSubmit={handleSubmit(saveContact)}>
                   {" "}
                   <div className="relative w-full mb-3">
@@ -131,29 +130,27 @@ export default function Contact() {
                       {errors.email?.message}
                     </small>
                   </div>
-                  
                   <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="text"
-                  >
-                    Text
-                  </label>
-                  <textarea
-                    {...register("text")}
-                    id="text"
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Type your message right here"
-                    rows="5"
-                    cols="40"
-                    value={contact.text}
-                    onChange={(e) => handleChange(e)}
-                  />
-                  <small role="alert" className="text-red-500 ">
-                    {errors["text"]?.message}
-                  </small>
-                </div>
-                  
+                    <label
+                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="text"
+                    >
+                      Text
+                    </label>
+                    <textarea
+                      {...register("text")}
+                      id="text"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="Type your message right here"
+                      rows="5"
+                      cols="40"
+                      value={contact.text}
+                      onChange={(e) => handleChange(e)}
+                    />
+                    <small role="alert" className="text-red-500 ">
+                      {errors["text"]?.message}
+                    </small>
+                  </div>
                   <div className="text-center mt-6">
                     <input
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"

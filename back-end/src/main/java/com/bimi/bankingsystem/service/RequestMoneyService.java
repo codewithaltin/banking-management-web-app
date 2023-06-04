@@ -33,7 +33,7 @@ public class RequestMoneyService {
     public RequestMoney updateRequest(Long id, RequestMoney e){
         RequestMoney rm =
                 rmr.findById(id).get();
-        rm.setPersonsRequestingEmail(e.getPersonsRequestingEmail());
+        rm.setRequestedEmail(e.getRequestedEmail());
         rm.setPayeeEmail(e.getPayeeEmail());
         rm.setAmount(e.getAmount());
 
