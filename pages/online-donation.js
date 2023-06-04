@@ -31,17 +31,17 @@ const schema = yup
       .string()
       .required("Address is required")
       .min(7, "Address must be at least 7 characters"),
-    amount: yup
+    donationAmount: yup
       .number()
       .typeError('Input must be a number')
       .required("Donation Amount is required")
       .min(10, "Donation amount must be greater than €10")
       .max(25000, "Donation amount must be lower than €25000"),
-    cardinfo: yup
+    cardInformation: yup
       .string()
       .required("Card Info is required")
       .min(16, "Card Info must be at least 16 characters"),
-    purpose: yup
+    comment: yup
       .string()
       .required("Comment is required")
       .min(20, "Purpose must be at least 20 characters"),
@@ -210,6 +210,8 @@ export default function Donate() {
                       {...register("fullName")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s Ilir Gjika"
+                      value={donation.fullName}
+                      onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.fullName?.message}
@@ -228,6 +230,8 @@ export default function Donate() {
                       {...register("email")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s example@gmail.com"
+                      value={donation.email}
+                      onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.email?.message}
@@ -246,6 +250,8 @@ export default function Donate() {
                       {...register("phoneNumber")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s 045-630-886"
+                      value={donation.phoneNumber}
+                      onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.phoneNumber?.message}
@@ -264,6 +270,8 @@ export default function Donate() {
                       {...register("address")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s Sheshi Skënderbej"
+                      value={donation.address}
+                      onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.address?.message}
@@ -279,9 +287,11 @@ export default function Donate() {
                     </label>
                     <input
                       type="number"
-                      {...register("amount")}
+                      {...register("donationAmount")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s 15000"
+                      value={donation.donationAmount}
+                      onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.amount?.message}
@@ -297,9 +307,11 @@ export default function Donate() {
                     </label>
                     <input
                       type="number"
-                      {...register("cardinfo")}
+                      {...register("cardInformation")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s 1214160204060810"
+                      value={donation.cardInformation}
+                      onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.cardinfo?.message}
@@ -316,9 +328,11 @@ export default function Donate() {
                     <textarea
                       rows="4"
                       cols="80"
-                      {...register("purpose")}
+                      {...register("comment")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                       placeholder="Type a message..."
+                      value={donation.comment}
+                      onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.purpose?.message}
