@@ -5,7 +5,7 @@ import * as yup from "yup";
 
 import Auth from "layouts/Auth.js";
 
-export default function InstitutionPayments() {
+export default function PrePaidServices() {
 
     const {
       register,
@@ -15,21 +15,19 @@ export default function InstitutionPayments() {
     } = useForm({ });
     
   
-  const INSTITUTIONPAYMENTS_API_BASE_URL = "http://localhost:8080/api/v1/institutionPayments";
+  const PREPAIDSERVICES_API_BASE_URL = "http://localhost:8080/api/v1/prePaidServices";
 
   const [isOpen, setIsOpen] = useState(false);
-  const [institutionPayments, setInstitutionPayments] = useState({
+  const [prePaidServices, setPrePaidServices] = useState({
     id: "",
-    institution: "",
-    company: "",
-    referenceNumber: "",
+    operator: "",
+    product: "",
     amount: "",
   });
-  const [responseInstitutionPayments, setResponseInstitutionPayments] = useState({
+  const [responsePrePaidServices, setResponsePrePaidServices] = useState({
     id: "",
-    institution: "",
-    company: "",
-    referenceNumber: "",
+    operator: "",
+    product: "",
     amount: "",
   });
   // const navigate = useNavigate();
@@ -37,30 +35,35 @@ export default function InstitutionPayments() {
   //   navigate("/");
   // };ss
 
-  const saveInstitutionPayments = async (e) => {
+  const savePrePaidServices = async (e) => {
     //e.preventDefault();
-    const response = await fetch(INSTITUTIONPAYMENTS_API_BASE_URL, {
+    const response = await fetch(PREPAIDSERVICES_API_BASE_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(institutionPayments),
+      body: JSON.stringify(prePaidServices),
     });
     if (!response.ok) {
       throw new Error("Something went wrong");
     }
-    const _institutionPayments = await response.json();
-    setResponseInstitutionPayments(_institutionPayments);
+    const _prePaidServices = await response.json();
+    setResponsePrePaidServices(_prePaidServices);
     window.location.reload();
   };
 
 
-  const InstitutionOption = [
-    "Electricity",
-    "Water",
-    "Insurance",
-    "Education Fee",
-    "Heating",
+  const OperatorOption = [
+    "Ipko",
+    "Kujtesa",
+    "Telnet",
+    "Other",
+  ];
+
+  const ProductOption = [
+    "TV",
+    "Internet",
+    "DuoTv",
     "Other",
   ];
   
@@ -70,7 +73,7 @@ export default function InstitutionPayments() {
 
   const handleChange = (event) => {
     const value = event.target.value;
-    setInstitutionPayments({ ...institutionPayments, [event.target.name]: value });
+    setPrePaidServices({ ...prePaidServices, [event.target.name]: value });
   };
 
   return (
@@ -82,7 +85,7 @@ export default function InstitutionPayments() {
               <div className="rounded-t mb-0 px-6 py-6">
                 <div className="text-center mb-3">
                   <h6 className="text-blueGray-800 text-lg font-bold">
-                    Institution Payments
+                    Pre-Paid Services Payment
                   </h6>
                   
                    <p className="text-blueGray-500 text-lg font-bold">
@@ -95,11 +98,11 @@ export default function InstitutionPayments() {
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                 
-                <form onSubmit={handleSubmit(saveInstitutionPayments)}>
+                <form onSubmit={handleSubmit(savePrePaidServices)}>
                   {" "}
                   <div className="relative w-full mb-3">
                     <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-                      Institution
+                      Operator
                     </label>
                  
                     <select
@@ -109,17 +112,38 @@ export default function InstitutionPayments() {
                       name="savingReason"
                     >
                       <option></option>
-                      {InstitutionOption.map((option, index) => {
+                      {OperatorOption.map((option, index) => {
                         return <option key={index}>{option}</option>;
                       })}
                     </select>
                   </div>
+
+                  
+                  
+                  <div className="relative w-full mb-3">
+                    <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                      Product
+                    </label>
+                 
+                    <select
+                   
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      onChange={handleChange}
+                      name="savingReason"
+                    >
+                      <option></option>
+                      {ProductOption.map((option, index) => {
+                        return <option key={index}>{option}</option>;
+                      })}
+                    </select>
+                  </div>
+              
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      Company
+                      Amount
                     </label>
                     <input
                       {... register("goalName")}
@@ -129,42 +153,7 @@ export default function InstitutionPayments() {
                     />
                     
                   </div>
-                  <div className="flex flex-wrap">
-              <div className="w-full lg:w-6/12 px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Reference Number
-                  </label>
-                  <input
-                    {... register("referenceNumber")}
-                    type="text"
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    onChange={(e) => handleChange(e)}
-                  />
-                  
-                </div>
-              </div>
-              <div className="w-full lg:w-6/12 px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Amount
-                  </label>
-                  <input
-                    {... register("amount")}
-                    type="text"
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    onChange={(e) => handleChange(e)}
-                  />
-                  
-                </div>
-              </div>
-            </div>
+            
                   
                   
                   
@@ -186,4 +175,4 @@ export default function InstitutionPayments() {
   );
 }
 
-InstitutionPayments.layout = Auth;
+PrePaidServices.layout = Auth;
