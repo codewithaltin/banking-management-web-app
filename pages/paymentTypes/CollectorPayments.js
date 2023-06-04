@@ -37,7 +37,7 @@ export default function CollectorPayments() {
   // const navigate = useNavigate();
   // const navigateHome = () => {
   //   navigate("/");
-  // };ss
+  // };
 
   const saveCollectorPayments = async (e) => {
     //e.preventDefault();

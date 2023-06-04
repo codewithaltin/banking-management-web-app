@@ -84,7 +84,7 @@ export default function payments() {
                         Ministry, Municipality, Education, Public and Private Organizations
                       </p>
                       <a
-                  href="/SavingGoal"
+                  href="/paymentTypes/CollectorPayments"
                   target="_blank"
                   className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
                 >
@@ -107,7 +107,7 @@ export default function payments() {
                         Tv, Internet
                       </p>
                       <a
-                  href="/SavingGoal"
+                  href="/paymentTypes/PrePaidServices"
                   target="_blank"
                   className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
                 >
@@ -128,7 +128,7 @@ export default function payments() {
                         Ipko, Vala, Z Mobile
                       </p>
                       <a
-                  href="/SavingGoal"
+                  href="/paymentTypes/MobilePayments"
                   target="_blank"
                   className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
                 >
