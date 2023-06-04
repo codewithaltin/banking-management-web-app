@@ -20,17 +20,14 @@ public class RequestMoneyController {
     public RequestMoney createRequest(@RequestBody RequestMoney loan){
         return rqService.requestMoney(loan);
     }
-
     @GetMapping("/requestmoney")
     public List<RequestMoney> getAllRequests(){
         return rqService.getAllRequest();
     }
-
     @PutMapping("requestmoney/{id}")
     public RequestMoney updateRequest(@PathVariable Long id,@RequestBody RequestMoney loan){
         return rqService.updateRequest(id,loan);
     }
-
     @DeleteMapping("requestmoney/{id}")
     public boolean deleteRequest(@PathVariable Long id){
         return rqService.deleteRequest(id);
