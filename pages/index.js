@@ -586,9 +586,9 @@ export default function Index(session) {
 
                 <div className="w-full lg:w-4/12 px-4">
                   <h5 className="text-xl font-semibold pb-4 text-center">
-                    Profile Page
+                    Futur Banking Plus
                   </h5>
-                  <Link href="/profile" legacyBehavior>
+                  <Link href="/futurplus" legacyBehavior>
                     <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
                       <img
                         alt="..."

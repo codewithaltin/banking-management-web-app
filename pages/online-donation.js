@@ -8,6 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import Auth from "layouts/Auth.js";
+import Donation from "components/Cards/Donation";
 const phoneReg = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 
@@ -60,7 +61,7 @@ export default function Donate() {
 
     const DONATION_API_BASE_URL = "http://localhost:8080/api/v1/donation";
 
-    const [isOpen, setIsOpen] = useState(false);
+    // const [isOpen, setIsOpen] = useState(false);
     const [donation, setDonation] = useState({
       id: "",
       fullName: "",
@@ -359,3 +360,5 @@ export default function Donate() {
     <Footer />
   </>);
 }
+
+Donate.layout = Auth;
