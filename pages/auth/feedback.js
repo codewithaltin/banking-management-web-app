@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Auth from "layouts/Auth.js";
 import Rate from "components/Rate/rate.js";
+import { ChangeEvent } from 'react';
 
 
 const phoneReg =
@@ -93,7 +94,34 @@ export default function Register() {
         setUser({ ...user, [event.target.name]: value });
     };
 
+
+
+    const [file, setFile] = useState(null);
+
+    const handleFileChange = (e) => {
+        if (e.target.files) {
+            const uploadedFile = e.target.files[0];
+            setFile(uploadedFile);
+        }
+    };
+
+    const handleUploadClick = () => {
+        if (!file) {
+            return;
+        }
+
+        // Perform the file upload logic here
+        // You can access the uploaded file using the 'file' variable
+
+        // Reset the file state after uploading
+        setFile(null);
+    };
+
+
+
     const [rating, setRating] = useState(0);
+
+
 
 
 
@@ -201,21 +229,27 @@ export default function Register() {
                                     <div className="relative w-full mb-3">
                                         <label
                                             className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                            htmlFor="grid-password"
+                                        // htmlFor="grid-password"
                                         >
                                             Attachments
                                         </label>
+
                                         <input
-                                            // {...register("password")}
-                                            // type="password"
-                                            className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                            placeholder="Attachments"
-                                        // value={user.password}
-                                        // onChange={(e) => handleChange(e)}
+                                            // className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            // placeholder="Attachments"
+                                            type="file"
+                                            onChange={handleFileChange}
+
                                         />
-                                        {/* <small role="alert" className="text-red-500 ">
-                                            {errors.password?.message}
-                                        </small> */}
+                                        {/* {file && `${file.name} - ${file.type}`} */}
+
+                                        <button onClick={handleUploadClick}
+                                            className="bg-blueGray-800 text-white active:bg-blueGray-600 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-3 mb-2 w-full ease-linear transition-all duration-150"
+                                        >
+
+                                            Upload
+                                        </button>
+
                                     </div>
                                     <div className="relative w-full mb-3">
                                         <label
