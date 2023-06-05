@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Auth from "layouts/Auth.js";
 import Rate from "components/Rate/rate.js";
-import { ChangeEvent } from 'react';
+
 
 
 const phoneReg =
@@ -47,7 +47,7 @@ export default function Register() {
         formState: { errors },
     } = useForm({ resolver: yupResolver(schema) });
 
-    const USER_API_BASE_URL = "http://localhost:8080/api/v1/users";
+    // const USER_API_BASE_URL = "http://localhost:8080/api/v1/users";
 
     const [isOpen, setIsOpen] = useState(false);
     const [user, setUser] = useState({
@@ -238,13 +238,14 @@ export default function Register() {
                                             // className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             // placeholder="Attachments"
                                             type="file"
+                                            // className="bg-blueGray-800 text-white active:bg-blueGray-600 text-xs font-bold uppercase px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-3 mb-2 w-40 ease-linear transition-all duration-150"
                                             onChange={handleFileChange}
 
                                         />
                                         {/* {file && `${file.name} - ${file.type}`} */}
 
                                         <button onClick={handleUploadClick}
-                                            className="bg-blueGray-800 text-white active:bg-blueGray-600 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-3 mb-2 w-full ease-linear transition-all duration-150"
+                                            className="bg-blueGray-800 text-white active:bg-blueGray-600 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-3 mb-2 w-40 ease-linear transition-all duration-150"
                                         >
 
                                             Upload
