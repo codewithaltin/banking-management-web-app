@@ -13,7 +13,7 @@ export default function Landing() {
           className="absolute top-0 w-full h-full bg-center bg-cover"
           style={{
             backgroundImage:
-              "url('/img/loan-application.jpg')",
+              "url('/img/plus.jpg')",
           }}
         >
           <span
@@ -101,12 +101,12 @@ export default function Landing() {
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="field"
                     >
-                      Field 01
+                      Full Name
                     </label>
                     <input
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Field 01"
+                      placeholder="p.s Ilir Gjika"
                     />
                   </div>
 
@@ -115,12 +115,12 @@ export default function Landing() {
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="text"
                     >
-                      Field 02
+                      Email
                     </label>
                     <input
-                      type="text"
+                      type="email"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Field 02"
+                      placeholder="p.s example@gmail.com"
                     />
                   </div>
 
@@ -129,13 +129,12 @@ export default function Landing() {
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="message"
                     >
-                      Field 03
+                      Credit Card info
                     </label>
-                    <textarea
-                      rows="4"
-                      cols="80"
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
-                      placeholder="Field 03..."
+                    <input
+                      type="number"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="p.s 1214160204060810"
                     />
                   </div>
                   <div className="text-center mt-6">

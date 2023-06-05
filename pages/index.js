@@ -593,7 +593,7 @@ export default function Index(session) {
                       <img
                         alt="..."
                         className="align-middle border-none max-w-full h-auto rounded-lg"
-                        src="/img/profile.jpg"
+                        src="/img/futur-plus.jpg"
                       />
                     </div>
                   </Link>
