@@ -110,10 +110,6 @@ export default function Register() {
             return;
         }
 
-        // Perform the file upload logic here
-        // You can access the uploaded file using the 'file' variable
-
-        // Reset the file state after uploading
         setFile(null);
     };
 
@@ -149,9 +145,9 @@ export default function Register() {
                                         <input
                                             {...register("firstName")}
                                             className="border-0 px-3 py-3 mr-3 placeholder-blueGray-300
-                    text-blueGray-900 bg-white rounded text-sm shadow
-                    focus:outline-none focus:ring w-1/2 ease-linear
-                    transition-all duration-150"
+                                                        text-blueGray-900 bg-white rounded text-sm shadow
+                                                        focus:outline-none focus:ring w-1/2 ease-linear
+                                                        transition-all duration-150"
                                             placeholder="First Name"
                                             name="firstName"
                                             value={user.firstName}
@@ -161,9 +157,9 @@ export default function Register() {
                                             {...register("lastName")}
                                             name="lastName"
                                             className="border-0 px-3 py-3 mx-5 placeholder-blueGray-300
-                    text-blueGray-900 bg-white rounded text-sm shadow
-                    focus:outline-none focus:ring w-1/2  ease-linear
-                    transition-all duration-150"
+                                                        text-blueGray-900 bg-white rounded text-sm shadow
+                                                        focus:outline-none focus:ring w-1/2  ease-linear
+                                                        transition-all duration-150"
                                             placeholder="Last Name"
                                             value={user.lastName}
                                             onChange={(e) => handleChange(e)}
@@ -200,8 +196,6 @@ export default function Register() {
                                             name="feedbackTittle"
                                             className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             placeholder="p.s I can't pay"
-                                        // value={user.emailId}
-                                        // onChange={(e) => handleChange(e)}
                                         />
                                         <small role="alert" className="text-red-500 ">
                                             {errors.feedbackTittle?.message}
@@ -229,20 +223,15 @@ export default function Register() {
                                     <div className="relative w-full mb-3">
                                         <label
                                             className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                        // htmlFor="grid-password"
                                         >
                                             Attachments
                                         </label>
 
                                         <input
-                                            // className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                            // placeholder="Attachments"
                                             type="file"
-                                            // className="bg-blueGray-800 text-white active:bg-blueGray-600 text-xs font-bold uppercase px-3 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-3 mb-2 w-40 ease-linear transition-all duration-150"
                                             onChange={handleFileChange}
 
                                         />
-                                        {/* {file && `${file.name} - ${file.type}`} */}
 
                                         <button onClick={handleUploadClick}
                                             className="bg-blueGray-800 text-white active:bg-blueGray-600 text-xs font-bold uppercase px-4 py-2 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-3 mb-2 w-40 ease-linear transition-all duration-150"
@@ -255,7 +244,6 @@ export default function Register() {
                                     <div className="relative w-full mb-3">
                                         <label
                                             className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                                        // htmlFor="grid-password"
                                         >
                                             Rating
                                         </label>
