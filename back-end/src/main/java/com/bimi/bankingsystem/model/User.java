@@ -1,14 +1,25 @@
 package com.bimi.bankingsystem.model;
 
+import com.bimi.bankingsystem.common.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
+import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+import java.util.Collection;
+import java.util.List;
 
 @Entity
+@Data
+@Builder
+@AllArgsConstructor
 @Getter
 @Setter
 @Table ( name="users")
 
-public class User {
+public class User implements UserDetails {
     @Setter(AccessLevel.PROTECTED) @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
@@ -26,20 +37,46 @@ public class User {
     private String password;
     @NonNull
     private double balance;
-    @NonNull
-    private String role;
 
-    public User(long id, String firstName, String lastName, String emailId, String phoneNumber, String password,String role) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.emailId = emailId;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
-        this.role = role;
-    }
     public User(){
 
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return List.of(new SimpleGrantedAuthority(role.name()));
+    }
+
+    @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return emailId;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }

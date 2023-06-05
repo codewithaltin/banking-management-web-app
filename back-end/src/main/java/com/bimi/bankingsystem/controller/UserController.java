@@ -29,27 +29,19 @@ public class UserController {
     }
 
     @GetMapping("/users/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable("id") Long id) {
-        User user = null;
-        user = userService.getUserById(id);
-        return ResponseEntity.ok(user);
+    public List<User> getUserById(@PathVariable("id") Long id) {
+        return userService.getAllUsers();
     }
 
     @DeleteMapping("/users/{id}")
-    public ResponseEntity<?> deleteEmployee(@PathVariable("id") Long id) {
-        boolean deleted = false;
-        deleted = userService.deleteUser(id);
-
-        Map<String,Boolean> response = new HashMap<>();
-        response.put("deleted",deleted);
-        return ResponseEntity.ok(response);
+    public boolean deleteEmployee(@PathVariable("id") Long id) {
+        return userService.deleteUser(id);
     }
 
     @PutMapping("/users/{id}")
-    public ResponseEntity<User> updateUser(@PathVariable("id") Long id,
+    public User updateUser(@PathVariable("id") Long id,
                                            @RequestBody User user) {
-        user = userService.updateUser(id,user);
-        return ResponseEntity.ok(user);
+        return userService.updateUser(id,user);
     }
 
 }
