@@ -6,7 +6,7 @@ import lombok.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "institution_payment")
+@Table(name = "institution_payments")
 public class InstitutionPayment {
     @Id
     @SequenceGenerator(name="institutionPayment_sequence",sequenceName = "institutionPayment_sequence",allocationSize = 1)
