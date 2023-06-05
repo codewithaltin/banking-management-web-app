@@ -1,14 +1,11 @@
 package com.bimi.bankingsystem.service;
-import com.bimi.bankingsystem.entity.UserEntity;
 import com.bimi.bankingsystem.model.User;
-import com.bimi.bankingsystem.entity.UserEntity;
 import com.bimi.bankingsystem.repository.UserRepository;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Optional;
 
 @Service
 
@@ -23,63 +20,36 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User saveUser(User user) {
-
-        UserEntity userEntity = new UserEntity();
-        BeanUtils.copyProperties(user,userEntity);
-
-        userRepository.save(userEntity);
-        return user;
+        return userRepository.save(user);
     }
 
     @Override
     public List<User> getAllUsers() {
-
-        List<UserEntity> userEntities = userRepository.findAll();
-        List<User> users = userEntities.stream().map(userEntity -> new User(
-                userEntity.getId(),
-                userEntity.getFirstName(),
-                userEntity.getLastName(),
-                userEntity.getEmailId(),
-                userEntity.getPhoneNumber(),
-                userEntity.getPassword(),
-                userEntity.getRole()
-
-        )).collect(Collectors.toList());
-
-        return users;
+        return userRepository.findAll();
     }
 
     @Override
-    public User getUserById(Long id) {
-
-        UserEntity userEntity = userRepository.findById(id).get();
-        User user =  new User();
-        BeanUtils.copyProperties(userEntity,user);
-
-        return user;
+    public Optional<User> getUserById(Long id) {
+       return userRepository.findById(id);
     }
 
     @Override
     public boolean deleteUser(Long id) {
-
-        UserEntity user = userRepository.findById(id).get();
-
-        userRepository.delete(user);
-        return true;
+       userRepository.deleteById(id);
+       return true;
     }
 
     @Override
     public User updateUser(Long id, User user) {
-        UserEntity userEntity =
+        User u =
                 userRepository.findById(id).get();
-        userEntity.setEmailId(user.getEmailId());
-        userEntity.setFirstName(user.getFirstName());
-        userEntity.setLastName(user.getLastName());
-        userEntity.setPassword(user.getPassword());
-        userEntity.setPhoneNumber(user.getPhoneNumber());
+        u.setEmailId(user.getEmailId());
+        u.setFirstName(user.getFirstName());
+        u.setLastName(user.getLastName());
+        u.setPassword(user.getPassword());
+        u.setPhoneNumber(user.getPhoneNumber());
 
-        userRepository.save(userEntity);
-        return user;
+        return userRepository.save(u);
 
     }
 }

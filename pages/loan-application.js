@@ -22,7 +22,7 @@ const schema = yup
       .string()
       .email("Please enter a valid e-mail")
       .required("Email is required."),
-    phoneNumber: yup
+    phone: yup
       .string()
       .required("Phone number is required")
       .matches(phoneReg, "Phone Number is not valid."),
@@ -41,7 +41,7 @@ const schema = yup
       .typeError('Input must be a number')
       .required("Monthly incomes are required")
       .min(500, "Monthly incomes must be greater than €500"),
-    purpose: yup
+    purpouse: yup
       .string()
       .required("Loan purpose is required")
       .min(20, "Purpose must be at least 20 characters"),
@@ -64,20 +64,20 @@ export default function Loan() {
       loan_id: "",
       fullName: "",
       email: "",
-      phoneNumber: "",
+      phone: "",
       address: "",
-      phoneNumber: "",
-      monthlyIncome: "",
+      amount: "",
+      income: "",
       purpouse: "",
     });
     const [responseLoan, setResponseLoan] = useState({
       loan_id: "",
       fullName: "",
       email: "",
-      phoneNumber: "",
+      phone: "",
       address: "",
-      phoneNumber: "",
-      monthlyIncome: "",
+      amount: "",
+      income: "",
       purpouse: "",
     });
 
@@ -209,6 +209,8 @@ export default function Loan() {
                       {...register("fullName")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s Ilir Gjika"
+                      value={loan.fullName}
+                      onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.fullName?.message}
@@ -227,6 +229,8 @@ export default function Loan() {
                       {...register("email")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s example@gmail.com"
+                      value={loan.email}
+                      onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.email?.message}
@@ -242,9 +246,11 @@ export default function Loan() {
                     </label>
                     <input
                       type="tel"
-                      {...register("phoneNumber")}
+                      {...register("phone")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s 045-630-886"
+                      value={loan.phone}
+                      onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.phoneNumber?.message}
@@ -263,6 +269,8 @@ export default function Loan() {
                       {...register("address")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s Sheshi Skënderbej"
+                      value={loan.address}
+                      onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.address?.message}
@@ -281,6 +289,8 @@ export default function Loan() {
                       {...register("amount")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s 15000"
+                      value={loan.amount}
+                      onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.amount?.message}
@@ -299,6 +309,8 @@ export default function Loan() {
                       {...register("income")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s 800"
+                      value={loan.income}
+                      onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.income?.message}
@@ -315,9 +327,11 @@ export default function Loan() {
                     <textarea
                       rows="4"
                       cols="80"
-                      {...register("purpose")}
+                      {...register("purpouse")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                       placeholder="Type a message..."
+                      value={loan.purpouse}
+                      onChange={(e) => handleChange(e)}                      
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.purpose?.message}
