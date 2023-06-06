@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(value = "http://localhost:3000")
 @RestController
 @RequestMapping("api/v1")
 public class BeneficiaryController {
@@ -27,7 +28,7 @@ public class BeneficiaryController {
     }
 
     @PutMapping("beneficiary/{id}")
-    public Beneficiary updateClient(@PathVariable Integer id,@RequestBody Beneficiary beneficiary){
+    public Beneficiary updateBeneficiary(@PathVariable Integer id,@RequestBody Beneficiary beneficiary){
         return beneficiaryService.updateBeneficiary(id,beneficiary);
     }
 

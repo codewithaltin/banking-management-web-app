@@ -2,7 +2,7 @@ package com.bimi.bankingsystem.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table (name = "\"beneficiary\"")
+@Table (name = "beneficiary")
 public class Beneficiary {
 
     @Id
