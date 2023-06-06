@@ -6,7 +6,7 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
-@Table ( name="users")
+@Table ( name="user")
 
 public class User {
     @Setter(AccessLevel.PROTECTED) @Id
