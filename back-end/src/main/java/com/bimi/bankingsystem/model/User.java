@@ -3,7 +3,6 @@ package com.bimi.bankingsystem.model;
 import com.bimi.bankingsystem.common.enums.Role;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.boot.autoconfigure.security.servlet.UserDetailsServiceAutoConfiguration;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,10 +16,10 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
-@Table ( name="users")
+@Table ( name="user")
 
 public class User implements UserDetails {
-    @Setter(AccessLevel.PROTECTED) @Id
+    @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
     @NonNull
@@ -30,12 +29,12 @@ public class User implements UserDetails {
     @NonNull
     private String lastName;
     @NonNull
-    private String emailId;
-    @NonNull
+    private String email;
+
     private String phoneNumber;
     @NonNull
     private String password;
-    @NonNull
+
     private double balance;
 
     @Enumerated(EnumType.STRING)
@@ -57,7 +56,7 @@ public class User implements UserDetails {
 
     @Override
     public String getUsername() {
-        return emailId;
+        return email;
     }
 
     @Override
