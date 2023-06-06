@@ -1,10 +1,81 @@
 import React, { useState } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import * as yup from "yup";
+
 import Link from "next/link";
 import Navbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 
+import Auth from "layouts/Auth.js";
+export default function FuturPlus() {
 
-export default function Landing() {
+    const schema = yup
+  .object()
+  .shape({
+    fullName: yup
+    .string()
+    .required("Full Name is required.")
+    .min(5, "Full name must be longer than 5 characters")
+    .max(50, "Full name must be shorter than 50 characters."),
+    email: yup
+    .string()
+    .email("Please enter a valid e-mail")
+    .required("Email is required."),
+    cardInformation: yup
+    .string()
+    .required("Card Info is required")
+    .min(16, "Card Info must be at least 16 characters"),
+  })
+  .required();
+
+
+    const {
+        register,
+        handleSubmit,
+        watch,
+        formState: { errors },
+      } 
+      = useForm({ resolver: yupResolver(schema) });
+
+      const FUTURPLUS_API_BASE_URL = "http://localhost:8080/api/v1/futur_plus";
+
+      const [futur_plus, setFuturPlus1] = useState({
+        id: "",
+        fullName: "",
+        email:"",
+        cardInfo:"",
+      });
+      const [responseFuturPlus, setResponseFuturPlus] = useState({
+        id: "",
+        fullName: "",
+        email:"",
+        cardInfo:"",
+      });
+
+
+      const saveFuturPlus = async (e) => {
+        //e.preventDefault();
+        const response = await fetch(FUTURPLUS_API_BASE_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(futur_plus),
+        });
+        if (!response.ok) {
+          throw new Error("Something went wrong");
+        }
+        const _futur_plus = await response.json();
+        setResponseFuturPlus(_futur_plus);
+        window.location.reload();
+      };
+    
+          const handleChange = (event) => {
+            const value = event.target.value;
+            setFuturPlus1({ ...futur_plus, [event.target.name]: value });
+          };
+
     return <>
       <Navbar transparent />
       <main>
@@ -96,6 +167,9 @@ export default function Landing() {
                   <p className="leading-relaxed mt-1 mb-4 text-blueGray-500">
                     Complete this form and we will get back to you.
                   </p>
+
+                  <form onSubmit={handleSubmit(saveFuturPlus)}>
+
                   <div className="relative w-full mb-3 mt-8">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -105,8 +179,11 @@ export default function Landing() {
                     </label>
                     <input
                       type="text"
+                      {...register("fullName")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s Ilir Gjika"
+                      value={futur_plus.fullName}
+                      onChange={(e) => handleChange(e)}
                     />
                   </div>
 
@@ -119,8 +196,11 @@ export default function Landing() {
                     </label>
                     <input
                       type="email"
+                      {...register("email")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s example@gmail.com"
+                      value={futur_plus.email}
+                      onChange={(e) => handleChange(e)}
                     />
                   </div>
 
@@ -133,8 +213,11 @@ export default function Landing() {
                     </label>
                     <input
                       type="number"
+                      {...register("cardInfo")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s 1214160204060810"
+                      value={futur_plus.cardInfo}
+                      onChange={(e) => handleChange(e)}
                     />
                   </div>
                   <div className="text-center mt-6">
@@ -145,6 +228,7 @@ export default function Landing() {
                       Apply Now
                     </button>
                   </div>
+                  </form>
                 </div>
               </div>
             </div>
