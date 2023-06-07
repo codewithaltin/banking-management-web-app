@@ -1,7 +1,6 @@
 package com.bimi.bankingsystem.entity;
 
 import jakarta.persistence.*;
-import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "feedback")
@@ -11,7 +10,7 @@ public class FeedbackEntity {
     @SequenceGenerator(name = "client_sequence", sequenceName = "client_sequence", allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "client_sequence")
     @Column(updatable = false)
-    private Long id;
+    private long id;
 
     @Column(name = "first_name")
     private String firstName;
@@ -34,16 +33,14 @@ public class FeedbackEntity {
     @Column(name = "rating")
     private int rating;
 
-    @Transient
-    private MultipartFile file;
+//    @Transient
+//    private MultipartFile file;
 
     public FeedbackEntity() {
 
     }
 
-    public FeedbackEntity(Long id, String firstName, String lastName,
-                          String phoneNumber, String category, String feedbackTitle,
-                          String fileUrl, int rating, MultipartFile file) {
+    public FeedbackEntity(long id, String firstName, String lastName, String phoneNumber, String category, String feedbackTitle,  int rating) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -121,13 +118,13 @@ public class FeedbackEntity {
         this.rating = rating;
     }
 
-    public MultipartFile getFile() {
-        return file;
-    }
-
-    public void setFile(MultipartFile file) {
-        this.file = file;
-    }
+//    public MultipartFile getFile() {
+//        return file;
+//    }
+//
+//    public void setFile(MultipartFile file) {
+//        this.file = file;
+//    }
 
     public FeedbackEntity save(FeedbackEntity feedbackEntity) {
         return feedbackEntity;
