@@ -20,23 +20,23 @@ public class MobilePaymentController {
         this.mobilePaymentService = mobilePaymentService;
     }
 
-    @PostMapping("/savingGoal")
+    @PostMapping("/mobilePayment")
     public MobilePayment saveMobilePayments(@RequestBody MobilePayment mobilePayment){
         return mobilePaymentService.addMobilePayment(mobilePayment);
     }
 
-    @GetMapping("/savingGoal")
+    @GetMapping("/mobilePayment")
     public List<MobilePayment> getMobilePayment() {
         return mobilePaymentService.getMobilePayments();
     }
 
-    @GetMapping("/savingGoal/{id}")
+    @GetMapping("/mobilePayment/{id}")
     public ResponseEntity<MobilePayment> getMobilePaymentsById(@PathVariable("id") Long id) {
         MobilePayment mobilePayment = null;
         mobilePayment = mobilePaymentService.getMobilePaymentById(id);
         return ResponseEntity.ok(mobilePayment);
     }
-    @DeleteMapping("/savingGoal/{id}")
+    @DeleteMapping("/mobilePayment/{id}")
     public ResponseEntity<Map<String,Boolean>> deleteMobilePayment(@PathVariable("id") Long id) {
         boolean deleted = false;
         Map<String,Boolean> response = new HashMap<>();
@@ -44,7 +44,7 @@ public class MobilePaymentController {
         return ResponseEntity.ok(response);
     }
 
-    @PutMapping("/savingGoal/{id}")
+    @PutMapping("/mobilePayment/{id}")
     public ResponseEntity<MobilePayment> updateMobilePayment(@PathVariable("id") Long id,
                                                        @RequestBody MobilePayment mobilePayment){
         mobilePayment = mobilePaymentService.updateMobilePayments(id,mobilePayment);

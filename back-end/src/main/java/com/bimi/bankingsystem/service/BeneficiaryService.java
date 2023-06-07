@@ -28,6 +28,7 @@ public class BeneficiaryService {
 
         beneficiary1.setFirstName(beneficiary.getFirstName());
         beneficiary1.setSurname(beneficiary.getSurname());
+        beneficiary1.setSecondName(beneficiary.getSecondName());
         beneficiary1.setSecondSurname(beneficiary.getSecondSurname());
         beneficiary1.setMiddleName(beneficiary.getMiddleName());
         beneficiary1.setEmail(beneficiary.getEmail());
