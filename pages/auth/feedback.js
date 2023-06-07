@@ -213,6 +213,7 @@ export default function Register() {
                                             type="tel"
                                             className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             placeholder="p.s 049-588-814"
+                                            name="phoneNumber"
                                             value={user.phoneNumber}
                                             onChange={(e) => handleChange(e)}
                                         />
@@ -228,6 +229,7 @@ export default function Register() {
                                         </label>
 
                                         <input
+                                            name="attachments"
                                             type="file"
                                             onChange={handleFileChange}
 
@@ -243,6 +245,7 @@ export default function Register() {
                                     </div>
                                     <div className="relative w-full mb-3">
                                         <label
+                                            name="rating"
                                             className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                                         >
                                             Rating
