@@ -2,7 +2,7 @@ package com.bimi.bankingsystem.model;
 import jakarta.persistence.*;
 
 @Entity
-@Table (name = "\"loan\"")
+@Table (name = "loan")
 public class Loan {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -14,7 +14,7 @@ public class Loan {
 
     @Column(name = "email")
     private String email;
-    
+
     @Column(name = "phone")
     private Integer phoneNumber;
 
@@ -83,7 +83,6 @@ public class Loan {
     public void setAddress(String address) {
         this.address = address;
     }
-
     public double getLoanAmount() {
         return loanAmount;
     }

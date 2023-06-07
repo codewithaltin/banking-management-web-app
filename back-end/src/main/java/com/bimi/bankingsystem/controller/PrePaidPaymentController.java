@@ -1,9 +1,7 @@
 package com.bimi.bankingsystem.controller;
 
 import com.bimi.bankingsystem.model.PrePaidPayment;
-import com.bimi.bankingsystem.model.SavingGoal;
 import com.bimi.bankingsystem.service.PrePaidPaymentService;
-import com.bimi.bankingsystem.service.SavingGoalService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
