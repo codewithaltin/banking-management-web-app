@@ -4,6 +4,7 @@ import App from "next/app";
 import Head from "next/head";
 import Router from "next/router";
 import { SessionProvider } from "next-auth/react";
+import StepContext from "./step_context.js";
 
 import PageChange from "components/PageChange/PageChange.js";
 
@@ -56,20 +57,22 @@ export default class MyApp extends App {
           <Component {...pageProps} />
         </SessionProvider>
         */}
-        <React.Fragment>
-          {" "}
-          <Head>
-            <meta
-              name="viewport"
-              content="width=device-width, initial-scale=1, shrink-to-fit=no"
-            />
-            <title>Futur Banking</title>
-            <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
-          </Head>
-          <Layout>
-            <Component {...pageProps} />
-          </Layout>
-        </React.Fragment>
+        <StepContext>
+          <React.Fragment>
+            {" "}
+            <Head>
+              <meta
+                name="viewport"
+                content="width=device-width, initial-scale=1, shrink-to-fit=no"
+              />
+              <title>Futur Banking</title>
+              <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
+            </Head>
+            <Layout>
+              <Component {...pageProps} />
+            </Layout>
+          </React.Fragment>
+        </StepContext>
       </>
     );
   }

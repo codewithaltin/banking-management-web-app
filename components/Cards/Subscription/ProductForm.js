@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Auth from "layouts/Auth.js";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { multiStepContext } from "pages/step_context";
 
 const schema = yup
   .object()
@@ -25,6 +26,8 @@ export default function ProductForm() {
     watch,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+
+  const { setStep, userData, setUserData } = useContext(multiStepContext);
 
   const REQUEST_API_BASE_URL = "http://localhost:8080/api/v1/requestmoney";
 
@@ -69,7 +72,7 @@ export default function ProductForm() {
             <div className="rounded-t mb-0 px-6 py-6">
               <div className="text-center mb-3">
                 <h6 className="text-blueGray-500 text-sm font-bold">
-                  Request Money
+                  Set a product
                 </h6>
               </div>
 
@@ -85,13 +88,13 @@ export default function ProductForm() {
                     Product Name
                   </label>
                   <input
-                    {...register("requestedEmail")}
                     type="email"
                     name="requestedEmail"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Enter your email"
-                    onChange={(e) => handleChange(e)}
-                    value={request.requestedEmail}
+                    onChange={(e) =>
+                      setPlanData({ ...productData, planName: e.target.value })
+                    }
                   />
                   <small role="alert" className="text-red-500 ">
                     {errors.requestedEmail?.message}{" "}
@@ -160,7 +163,8 @@ export default function ProductForm() {
                     <input
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="submit"
-                      value="Request Money"
+                      value="Create Product"
+                      onClick={() => setStep(2)}
                     />
                   </div>
                 </div>

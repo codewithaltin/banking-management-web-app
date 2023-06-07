@@ -5,6 +5,8 @@ const step_context = () => {
   const [currentStep, setStep] = useState(1);
   const [userData, setUserData] = useState([]);
   const [finalData, setFinalData] = useState([]);
+
+  function submitData() {}
   return (
     <div>
       <multiStepContext.Provider
@@ -15,6 +17,7 @@ const step_context = () => {
           setUserData,
           finalData,
           setFinalData,
+          submitData,
         }}
       >
         <Subscribtion />
