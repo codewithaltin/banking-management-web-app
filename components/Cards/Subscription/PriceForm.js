@@ -25,7 +25,7 @@ export default function PriceForm() {
     watch,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
-  const { setStep, userData, setUserData, submitData } =
+  const { setStep, subscribtionData, setSubscribtionData, submitData } =
     useContext(multiStepContext);
 
   const REQUEST_API_BASE_URL = "http://localhost:8080/api/v1/requestmoney";
@@ -87,17 +87,18 @@ export default function PriceForm() {
                     Currency
                   </label>
                   <input
-                    {...register("requestedEmail")}
-                    type="number"
-                    name="requestedEmail"
+                    type="text"
+                    name="currency"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Enter your email"
-                    onChange={(e) => handleChange(e)}
-                    value={request.requestedEmail}
+                    onChange={(e) =>
+                      setSubscribtionData({
+                        ...subscribtionData,
+                        currency: e.target.value,
+                      })
+                    }
+                    defaultValue={subscribtionData["currency"]}
                   />
-                  <small role="alert" className="text-red-500 ">
-                    {errors.requestedEmail?.message}{" "}
-                  </small>{" "}
                 </div>
 
                 <div className="relative w-full mb-3">
@@ -108,13 +109,17 @@ export default function PriceForm() {
                     Price
                   </label>
                   <input
-                    {...register("amount")}
                     type="number"
-                    name="amount"
+                    name="price"
+                    placeholder="Enter the price"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    onChange={(e) => handleChange(e)}
-                    placeholder="Enter the amount"
-                    value={request.amount}
+                    onChange={(e) =>
+                      setSubscribtionData({
+                        ...subscribtionData,
+                        price: e.target.value,
+                      })
+                    }
+                    defaultValue={subscribtionData["price"]}
                   />
                   <small role="alert" className="text-red-500 ">
                     {errors["amount"]?.message}
@@ -128,17 +133,18 @@ export default function PriceForm() {
                     Fee
                   </label>
                   <input
-                    {...register("amount")}
                     type="number"
-                    name="amount"
+                    name="fee"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    onChange={(e) => handleChange(e)}
-                    placeholder="Enter the amount"
-                    value={request.amount}
+                    placeholder="Enter the fee"
+                    onChange={(e) =>
+                      setSubscribtionData({
+                        ...subscribtionData,
+                        fee: e.target.value,
+                      })
+                    }
+                    defaultValue={subscribtionData["fee"]}
                   />
-                  <small role="alert" className="text-red-500 ">
-                    {errors["amount"]?.message}
-                  </small>
                 </div>
                 <div className="relative w-full mb-3">
                   <label
@@ -150,20 +156,22 @@ export default function PriceForm() {
                   <input
                     {...register("amount")}
                     type="number"
-                    name="amount"
+                    name="months"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    onChange={(e) => handleChange(e)}
                     placeholder="Enter the amount"
-                    value={request.amount}
+                    onChange={(e) =>
+                      setSubscribtionData({
+                        ...subscribtionData,
+                        months: e.target.value,
+                      })
+                    }
+                    defaultValue={subscribtionData["months"]}
                   />
-                  <small role="alert" className="text-red-500 ">
-                    {errors["amount"]?.message}
-                  </small>
                 </div>
                 <div className="text-center mt-6 flex ">
                   <input
                     className=" bg-red-500 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                    type="submit"
+                    type="button"
                     value="Back"
                     onClick={() => setStep(2)}
                   />

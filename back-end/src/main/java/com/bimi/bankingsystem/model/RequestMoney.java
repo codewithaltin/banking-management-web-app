@@ -6,6 +6,7 @@ import lombok.*;
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
 @Table(name = "Money Requested")
 public class RequestMoney {
     @Id
@@ -26,12 +27,6 @@ public class RequestMoney {
     @Column
     private double amount ;
 
-    public RequestMoney(@NonNull long id, @NonNull String personsRequestingEmail, @NonNull String payeeEmail, @NonNull double amount) {
-        this.id = id;
-        this.requestedEmail = personsRequestingEmail;
-        this.payeeEmail = payeeEmail;
-        this.amount = amount;
-    }
 
     public RequestMoney() {
     }

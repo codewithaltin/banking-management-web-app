@@ -3,18 +3,22 @@ import Subscribtion from "./subscribtion";
 export const multiStepContext = React.createContext();
 const step_context = () => {
   const [currentStep, setStep] = useState(1);
-  const [userData, setUserData] = useState([]);
+  const [subscribtionData, setSubscribtionData] = useState([]);
   const [finalData, setFinalData] = useState([]);
 
-  function submitData() {}
+  function submitData() {
+    setFinalData((finalData) => [...finalData, subscribtionData]);
+    setSubscribtionData("");
+    setStep(1);
+  }
   return (
     <div>
       <multiStepContext.Provider
         value={{
           currentStep,
           setStep,
-          userData,
-          setUserData,
+          subscribtionData,
+          setSubscribtionData,
           finalData,
           setFinalData,
           submitData,

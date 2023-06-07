@@ -25,7 +25,8 @@ export default function PlanForm() {
     watch,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
-  const { setStep, planData, setPlanData } = useContext(multiStepContext);
+  const { setStep, subscribtionData, setSubscribtionData } =
+    useContext(multiStepContext);
 
   const REQUEST_API_BASE_URL = "http://localhost:8080/api/v1/requestmoney";
 
@@ -88,10 +89,14 @@ export default function PlanForm() {
                   <input
                     type="text"
                     name="planName"
+                    defaultValue={subscribtionData["planName"]}
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Enter Plan Name"
                     onChange={(e) =>
-                      setPlanData({ ...planData, planName: e.target.value })
+                      setSubscribtionData({
+                        ...subscribtionData,
+                        planName: e.target.value,
+                      })
                     }
                   />
                 </div>
@@ -103,48 +108,30 @@ export default function PlanForm() {
                     Plan Descrption
                   </label>
                   <input
-                    {...register("payeeEmail")}
-                    type="email"
-                    name="payeeEmail"
+                    type="text"
+                    name="planDesc"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Enter the email you are requesting money from"
-                    onChange={(e) => handleChange(e)}
-                    value={request.payeeEmail}
+                    onChange={(e) =>
+                      setSubscribtionData({
+                        ...subscribtionData,
+                        planDesc: e.target.value,
+                      })
+                    }
+                    defaultValue={subscribtionData["planDesc"]}
                   />
-                  <small role="alert" className="text-red-500 ">
-                    {errors.payeeEmail?.message}
-                  </small>
                 </div>
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Product Type
-                  </label>
-                  <input
-                    {...register("amount")}
-                    type="number"
-                    name="amount"
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    onChange={(e) => handleChange(e)}
-                    placeholder="Enter the amount"
-                    value={request.amount}
-                  />
-                  <small role="alert" className="text-red-500 ">
-                    {errors["amount"]?.message}
-                  </small>
-                </div>
+
                 <div className="text-center mt-6 flex">
                   <input
                     className="bg-red-500 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                    type="submit"
+                    type="button"
                     value="Back"
                     onClick={() => setStep(1)}
                   />
                   <input
                     className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                    type="submit"
+                    type="button"
                     value="Create plan"
                     onClick={() => setStep(3)}
                   />
