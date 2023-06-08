@@ -12,7 +12,12 @@ public interface FeedbackServ {
 
     FeedbackEntity saveFeedback(FeedbackEntity feedbackEntity);
 
-    FeedbackEntity updateFeedback(FeedbackEntity feedbackEntity);
+
+    //    @Override
+    //    public FeedbackEntity updateFeedback(FeedbackEntity feedbackEntity) {
+    //        return null;
+    //    }
+    FeedbackEntity updateFeedback(long id, FeedbackEntity feedbackEntity);
 
     void deleteFeedback(long id);
 
