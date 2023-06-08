@@ -80,25 +80,6 @@ public class FeedbackService implements FeedbackServ{
         return feedbackEntity.save(feedback1);
     }
 
-//    public FeedbackEntity updateFeedback(long id, FeedbackEntity feedbackEntity) {
-//        Optional<FeedbackEntity> optionalFeedback = feedbackRepository.findById(id);
-//
-//        if (optionalFeedback.isPresent()) {
-//            FeedbackEntity feedback1 = optionalFeedback.get();
-//            feedback1.setFirstName(feedbackEntity.getFirstName());
-//            feedback1.setLastName(feedbackEntity.getLastName());
-//            feedback1.setPhoneNumber(feedbackEntity.getPhoneNumber());
-//            feedback1.setCategory(feedbackEntity.getCategory());
-//            feedback1.setFeedbackTitle(feedbackEntity.getFeedbackTitle());
-//            feedback1.setRating(feedbackEntity.getRating());
-//
-//            return feedbackRepository.save(feedback1);
-//        } else {
-//            // Handle the case where the feedback with the given ID is not found
-//            // You can choose to return null or throw a custom exception, or handle it differently based on your requirements
-//            return null;
-//        }
-//    }
 //
 
     @Override
