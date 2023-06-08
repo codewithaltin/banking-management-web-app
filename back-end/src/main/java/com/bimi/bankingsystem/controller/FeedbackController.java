@@ -29,7 +29,7 @@ public class FeedbackController {
 
 
     @PutMapping("/feedback/{id}")
-        public FeedbackEntity updateFeedback(@PathVariable long id, @RequestBody FeedbackEntity feedbackEntity){
+        public FeedbackEntity updateFeedback(@PathVariable Long id, @RequestBody FeedbackEntity feedbackEntity){
             return feedbackService.updateFeedback(id, feedbackEntity);
         }
 
