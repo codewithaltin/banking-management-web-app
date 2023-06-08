@@ -31,11 +31,6 @@ const schema = yup
             .string()
             .required("Phone number is required")
             .matches(phoneReg, "Phone Number is not valid."),
-        password: yup
-            .string()
-            .required("Attachment is required.")
-        // .min(5, "Password must be 5 characters long")
-        // .max(35, "Password must be shorter than 35 characters"),
     })
     .required();
 
@@ -47,39 +42,42 @@ export default function Register() {
         formState: { errors },
     } = useForm({ resolver: yupResolver(schema) });
 
-    // const USER_API_BASE_URL = "http://localhost:8080/api/v1/users";
+    const FEEDBACK_API_BASE_URL = "http://localhost:8080/api/v1/feedback";
 
     const [isOpen, setIsOpen] = useState(false);
     const [user, setUser] = useState({
         id: "",
         firstName: "",
         lastName: "",
-        feedbackTittle: "",
+        category: "",
         phoneNumber: "",
-        password: "",
+        feedbackTittle: "",
+        uploadedFile: "",
+        rating: "",
     });
     const [responseUser, setResponseUser] = useState({
         id: "",
         firstName: "",
         lastName: "",
-        email: "",
+        category: "",
         phoneNumber: "",
-        password: "",
+        feedbackTittle: "",
+        uploadedFile: "",
+        rating: "",
     });
     // const navigate = useNavigate();
     // const navigateHome = () => {
-    //   navigate("/");
+    //     navigate("/");
     // };
 
     const saveUser = async (e) => {
         //e.preventDefault();
-        const response = await fetch(USER_API_BASE_URL, {
+        const response = await fetch(FEEDBACK_API_BASE_URL, {
             method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
+            headers: headers,
             body: JSON.stringify(user),
         });
+
         if (!response.ok) {
             throw new Error("Something went wrong");
         }
@@ -174,7 +172,9 @@ export default function Register() {
 
                                     <div className="relative w-full mb-3">
                                         {/* onChange={onOptionChangeHandler} */}
-                                        <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">category</label>
+                                        <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="grid-password">
+                                            category
+                                        </label>
                                         <select className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                                             <option>Select</option>
                                             <option>Bug Report</option>
