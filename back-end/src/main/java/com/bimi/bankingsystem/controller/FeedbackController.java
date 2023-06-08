@@ -28,13 +28,13 @@ public class FeedbackController {
     }
 
 
-    @PutMapping("feedback/{id}")
-        public FeedbackEntity updateFeedback(@RequestBody FeedbackEntity feedbackEntity){
-            return feedbackService.updateFeedback(feedbackEntity);
+    @PutMapping("/feedback/{id}")
+        public FeedbackEntity updateFeedback(@PathVariable long id, @RequestBody FeedbackEntity feedbackEntity){
+            return feedbackService.updateFeedback(id, feedbackEntity);
         }
 
     @DeleteMapping("feedback/{id}")
-    public void deleteFeedback(@PathVariable("id") Long id){
+    public void deleteFeedback(@PathVariable long id){
         feedbackService.deleteFeedback(id);
     }
 
