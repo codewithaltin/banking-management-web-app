@@ -9,15 +9,7 @@ import ProductList from "../ProductList";
 const schema = yup
   .object()
   .shape({
-    requestedEmail: yup
-      .string()
-      .email("Please enter a valid e-mail")
-      .required("Email is required."),
-    payeeEmail: yup
-      .string()
-      .email("Please enter a valid e-mail")
-      .required("Email is required."),
-    amount: yup.string().required("Some text is required."),
+    planName: yup.string().required("Plan name is required."),
   })
   .required();
 export default function PlanForm() {
@@ -30,37 +22,37 @@ export default function PlanForm() {
   const { setStep, subscribtionData, setSubscribtionData } =
     useContext(multiStepContext);
 
-  const REQUEST_API_BASE_URL = "http://localhost:8080/api/v1/product";
+  const PLAN_API_BASE_URL = "http://localhost:8080/api/v1/plan";
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const [request, setRequest] = useState({
+  const [plan, setPlan] = useState({
     planName: "",
     planDesc: "",
   });
-  const [responseRequest, setResponseRequest] = useState({
+  const [responsePlan, setResponsePlan] = useState({
     planName: "",
     planDesc: "",
   });
-  const saveRequest = async (e) => {
+  const savePlan = async (e) => {
     //e.preventDefault();
-    const response = await fetch(REQUEST_API_BASE_URL, {
+    const response = await fetch(PLAN_API_BASE_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(request),
+      body: JSON.stringify(plan),
     });
     if (!response.ok) {
       throw new Error("Something went wrong");
     }
-    const _reqeuest = await response.json();
-    setResponseRequest(_reqeuest);
-    window.location.reload();
+    const _plan = await response.json();
+    setResponsePlan(_plan);
+    setStep(3);
   };
   const handleChange = (event) => {
     const value = event.target.value;
-    setRequest({ ...request, [event.target.name]: value });
+    setPlan({ ...plan, [event.target.name]: value });
   };
 
   return (
@@ -78,7 +70,7 @@ export default function PlanForm() {
               <hr className="mt-6 border-b-1 border-blueGray-300" />
             </div>
             <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-              <form onSubmit={handleSubmit(saveRequest)}>
+              <form onSubmit={handleSubmit(savePlan)}>
                 <div className="relative w-full mb-3">
                   <label
                     className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -87,18 +79,17 @@ export default function PlanForm() {
                     Plan Name
                   </label>
                   <input
+                    {...register("planName")}
                     type="text"
                     name="planName"
-                    defaultValue={subscribtionData["planName"]}
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Enter Plan Name"
-                    onChange={(e) =>
-                      setSubscribtionData({
-                        ...subscribtionData,
-                        planName: e.target.value,
-                      })
-                    }
+                    value={plan.planName}
+                    onChange={(e) => handleChange(e)}
                   />
+                  <small role="alert" className="text-red-500 ">
+                    {errors.planName?.message}
+                  </small>
                 </div>
                 <div className="relative w-full mb-3">
                   <label
@@ -111,14 +102,9 @@ export default function PlanForm() {
                     type="text"
                     name="planDesc"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Enter the email you are requesting money from"
-                    onChange={(e) =>
-                      setSubscribtionData({
-                        ...subscribtionData,
-                        planDesc: e.target.value,
-                      })
-                    }
-                    defaultValue={subscribtionData["planDesc"]}
+                    placeholder="Enter a description for the plan"
+                    value={plan.planDesc}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
 
@@ -131,9 +117,8 @@ export default function PlanForm() {
                   />
                   <input
                     className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                    type="button"
+                    type="submit"
                     value="Create plan"
-                    onClick={() => setStep(3)}
                   />
                 </div>
               </form>
