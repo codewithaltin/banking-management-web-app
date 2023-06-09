@@ -7,7 +7,7 @@ import lombok.*;
 @Setter
 @Entity
 @AllArgsConstructor
-@Table(name = "product")
+@Table(name = "plan")
 public class Plan {
     @Id
     @SequenceGenerator(name="course_sequence",sequenceName = "course_sequence",allocationSize = 1)
