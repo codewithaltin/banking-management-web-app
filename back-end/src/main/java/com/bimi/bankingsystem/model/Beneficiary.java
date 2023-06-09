@@ -7,6 +7,7 @@ public class Beneficiary {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
 
     @Column(name = "firstName")
     private String firstName;

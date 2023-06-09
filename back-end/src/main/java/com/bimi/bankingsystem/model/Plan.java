@@ -8,7 +8,7 @@ import lombok.*;
 @Entity
 @AllArgsConstructor
 @Table(name = "product")
-public class Product {
+public class Plan {
     @Id
     @SequenceGenerator(name="course_sequence",sequenceName = "course_sequence",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "course_sequence")
@@ -16,17 +16,10 @@ public class Product {
     private long id;
     @Column
     @NonNull
-    private String name;
+    private String planName;
     @Column
-    private String desc;
-    @Column
-   private String type;
-    @Column
-   private String pageUrl;
-    @Column
-   private String imageUrl;
+    private String planDesc;
 
-
-   public Product() {
+    public Plan() {
     }
 }
