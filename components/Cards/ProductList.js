@@ -2,14 +2,13 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 // components
-import editProduct from "./editProduct";
-import User from "./User";
+import Product from "./Product";
 
-export default function ProductList({ user }) {
+export default function ProductList({ product }) {
   const PRODUCT_API_BASE_URL = "http://localhost:8080/api/v1/product";
   const [products, setProducts] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [userId, setUserId] = useState(null);
+  const [productId, setProductId] = useState(null);
   const [responseProduct, setResponseProduct] = useState(null);
 
   useEffect(() => {
@@ -30,18 +29,18 @@ export default function ProductList({ user }) {
       setLoading(false);
     };
     fetchData();
-  }, [user, responseProduct]);
+  }, [product, responseProduct]);
 
   const deleteProduct = (e, id) => {
-    let confirmed = confirm("Are you sure you wanna delete this user?");
+    let confirmed = confirm("Are you sure you wanna delete this product?");
     if (!confirmed) return;
     e.preventDefault();
-    fetch(USER_API_BASE_URL + "/" + id, {
+    fetch([PRODUCT_API_BASE_URL] + "/" + id, {
       method: "DELETE",
     }).then((res) => {
       if (products) {
         setProducts((prevElement) => {
-          return prevElement.filter((user) => user.id !== id);
+          return prevElement.filter((product) => product.id !== id);
         });
       }
     });
@@ -49,11 +48,10 @@ export default function ProductList({ user }) {
 
   const editProduct = (e, id) => {
     e.preventDefault();
-    setUserId(id);
+    setProductId(id);
   };
   return (
     <>
-      <div className=" w-28 h-28 mt-16">.</div>
       <div
         className={
           "relative flex flex-col min-w-0 break-words w-full mb-6 mt-16 shadow-lg rounded "
@@ -62,13 +60,13 @@ export default function ProductList({ user }) {
         <div className="rounded-t mb-0 px-4 py-3  border-0">
           <div className="flex flex-wrap items-center">
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-              <h3 className={"font-semibold text-lg "}>Users</h3>
+              <h3 className={"font-semibold text-lg "}>Products</h3>
             </div>
           </div>
         </div>
         <div className=" w-full overflow-x-auto flex justify-center  ">
           {/* Projects table */}
-          <table className="items-center w-full bg-transparent border-collapse">
+          <table className="items-center w-full bg-transparent border-collapse table-fixed ">
             <thead>
               <tr>
                 <th
@@ -95,12 +93,20 @@ export default function ProductList({ user }) {
                 <th className="px-6 align-middle border  bg-blueGray-200 border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left ">
                   Product Image Url
                 </th>
+                <th
+                  colSpan={2}
+                  className={
+                    " col-span-2 px-6  align-middle border min-w-full bg-blueGray-200 overflow-hidden border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
+                  }
+                >
+                  Actions
+                </th>
               </tr>
             </thead>
             {!loading && (
               <tbody>
                 {products?.map((product) => (
-                  <User
+                  <Product
                     product={product}
                     key={product.id}
                     deleteProduct={deleteProduct}

@@ -20,7 +20,7 @@ const subscribtion = () => {
   }
   return (
     <div className=" flex justify-center" style={{ width: "100%" }}>
-      <div style={{ width: "50%" }}>
+      <div style={{ width: "70%" }}>
         <div className="center-stepper">
           <Stepper activeStep={currentStep - 1} orientation="horizontal">
             <Step>

@@ -4,6 +4,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { multiStepContext } from "pages/step_context";
+import ProductList from "../ProductList";
+
 const schema = yup
   .object()
   .shape({
@@ -28,19 +30,17 @@ export default function PlanForm() {
   const { setStep, subscribtionData, setSubscribtionData } =
     useContext(multiStepContext);
 
-  const REQUEST_API_BASE_URL = "http://localhost:8080/api/v1/requestmoney";
+  const REQUEST_API_BASE_URL = "http://localhost:8080/api/v1/product";
 
   const [isOpen, setIsOpen] = useState(false);
 
   const [request, setRequest] = useState({
-    requestedEmail: "",
-    payeeEmail: "",
-    amount: "",
+    planName: "",
+    planDesc: "",
   });
   const [responseRequest, setResponseRequest] = useState({
-    requestedEmail: "",
-    payeeEmail: "",
-    amount: "",
+    planName: "",
+    planDesc: "",
   });
   const saveRequest = async (e) => {
     //e.preventDefault();
@@ -64,8 +64,8 @@ export default function PlanForm() {
   };
 
   return (
-    <div className="container mx-auto px-4 h-full">
-      <div className="flex content-center items-center justify-center h-full">
+    <div className="container mx-auto px-4">
+      <div className="flex content-center items-center justify-center h-full w-full">
         <div className="w-full lg:w-6/12 px-4">
           <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
             <div className="rounded-t mb-0 px-6 py-6">
@@ -140,6 +140,9 @@ export default function PlanForm() {
             </div>
           </div>
         </div>
+      </div>
+      <div className=" w-full">
+        <ProductList />
       </div>
     </div>
   );
