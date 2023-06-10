@@ -4,6 +4,9 @@ const Product = ({ product, deleteProduct, editProduct }) => {
   return (
     <tr key={product.id}>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
+        {product.id}
+      </td>
+      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
         {product.name}
       </td>
 

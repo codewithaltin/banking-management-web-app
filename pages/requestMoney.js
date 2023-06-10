@@ -18,7 +18,7 @@ const schema = yup
     amount: yup.string().required("Some text is required."),
   })
   .required();
-export default function bills() {
+export default function requestMoney() {
   const {
     register,
     handleSubmit,

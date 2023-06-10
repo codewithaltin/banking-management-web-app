@@ -10,6 +10,7 @@ import PageChange from "components/PageChange/PageChange.js";
 
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "styles/tailwind.css";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 Router.events.on("routeChangeStart", (url) => {
   console.log(`Loading: ${url}`);
@@ -30,9 +31,7 @@ Router.events.on("routeChangeError", () => {
 
 export default class MyApp extends App {
   componentDidMount() {
-    let comment = document.createComment(`
-
-`);
+    let comment = document.createComment(``);
     document.insertBefore(comment, document.documentElement);
   }
   static async getInitialProps({ Component, router, ctx }) {
@@ -44,6 +43,7 @@ export default class MyApp extends App {
 
     return { pageProps };
   }
+
   render() {
     const { Component, pageProps, session } = this.props;
 
@@ -51,7 +51,6 @@ export default class MyApp extends App {
 
     return (
       <>
-        {" "}
         {/*{" "}
         <SessionProvider session={session}>
           <Component {...pageProps} />
@@ -59,14 +58,13 @@ export default class MyApp extends App {
         */}
         <StepContext>
           <React.Fragment>
-            {" "}
             <Head>
               <meta
                 name="viewport"
                 content="width=device-width, initial-scale=1, shrink-to-fit=no"
               />
+
               <title>Futur Banking</title>
-              <script src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
             </Head>
             <Layout>
               <Component {...pageProps} />

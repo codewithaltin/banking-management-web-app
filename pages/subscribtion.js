@@ -7,7 +7,6 @@ import { multiStepContext } from "./step_context";
 
 const subscribtion = () => {
   const { currentStep, finalData } = useContext(multiStepContext);
-
   function showStep(step) {
     switch (step) {
       case 1:
