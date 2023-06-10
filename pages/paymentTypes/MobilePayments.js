@@ -4,6 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import Auth from "layouts/Auth.js";
+import { number } from "joi";
 
 export default function MobilePayments() {
 
@@ -15,7 +16,7 @@ export default function MobilePayments() {
     } = useForm({ });
     
   
-  const MOBILEPAYMENTS_API_BASE_URL = "http://localhost:8080/api/v1/institutionPayments";
+  const MOBILEPAYMENTS_API_BASE_URL = "http://localhost:8080/api/v1/mobilePayment";
 
   const [isOpen, setIsOpen] = useState(false);
   const [mobilePayments, setMobilePayments] = useState({
@@ -106,10 +107,9 @@ export default function MobilePayments() {
                     </label>
                  
                     <select
-                   
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={handleChange}
-                      name="savingReason"
+                      name="serviceProvider"
                     >
                       <option></option>
                       {serviceProviderOption.map((option, index) => {
@@ -128,10 +128,10 @@ export default function MobilePayments() {
                     Number Code
                   </label>
                   <select
-                   
+                   {...register("numberCode")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={handleChange}
-                      name="savingReason"
+                      name="numberCode"
                     >
                       <option></option>
                       {codeOption.map((option, index) => {
@@ -149,7 +149,7 @@ export default function MobilePayments() {
                     Mobile Phone Number
                   </label>
                   <input
-                    {... register("amount")}
+                    {... register("phoneNumber")}
                     type="text"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     onChange={(e) => handleChange(e)}
@@ -165,7 +165,7 @@ export default function MobilePayments() {
                       Amount
                     </label>
                     <input
-                      {... register("goalName")}
+                      {... register("amount")}
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={(e) => handleChange(e)}
@@ -173,12 +173,8 @@ export default function MobilePayments() {
                     
                   </div>
             </div>
-                  
-                  
-                  
                   <div className="text-center mt-6">
                     <input
-                    
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="submit"
                       value="Submit"

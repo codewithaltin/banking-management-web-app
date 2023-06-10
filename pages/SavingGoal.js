@@ -39,7 +39,8 @@ export default function SavingGoal() {
   //   navigate("/");
   // };ss
 
-  const saveSavingGoals = async (e) => {
+
+  const saveSavingGoals = async(e) => {
     //e.preventDefault();
     const response = await fetch(SAVINGGOAL_API_BASE_URL, {
       method: "POST",
