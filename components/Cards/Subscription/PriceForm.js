@@ -6,6 +6,7 @@ import * as yup from "yup";
 import { multiStepContext } from "pages/step_context";
 import ProductList from "../ProductList";
 import PlanList from "../PlanList";
+import SubscribtionList from "./SubscribtionList";
 const schema = yup
   .object()
   .shape({
@@ -186,6 +187,7 @@ export default function PriceForm() {
       <div className=" w-full">
         <ProductList />
         <PlanList />
+        <SubscribtionList />
       </div>
     </div>
   );

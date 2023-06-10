@@ -66,42 +66,42 @@ export default function ProductList({ product }) {
         </div>
         <div className=" w-full overflow-x-auto flex justify-center  ">
           {/* Projects table */}
-          <table className="items-center w-full bg-transparent border-collapse table-fixed ">
+          <table className="items-center w-full bg-transparent border-collapse table-fixed border-2 ">
             <thead>
               <tr>
                 <th
                   className={
-                    "px-6 align-middle bg-blueGray-200 border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
+                    "px-6 align-middle bg-blueGray-100 border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
                   }
                 >
-                  Product ID
+                  ID
                 </th>
                 <th
                   className={
-                    "px-6 align-middle bg-blueGray-200 border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
+                    "px-6 align-middle  border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
                   }
                 >
-                  Product Name
+                  Name
                 </th>
                 <th
                   className={
-                    "px-6 align-middle border bg-blueGray-200 border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
+                    "px-6 align-middle border bg-blueGray-100 border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
                   }
                 >
-                  Product Description
+                  Description
                 </th>
                 <th
                   className={
-                    "px-6 align-middle border border-solid bg-blueGray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
+                    "px-6 align-middle border border-solid  py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
                   }
                 >
-                  Product Type
+                  Type
                 </th>
 
                 <th
                   colSpan={3}
                   className={
-                    " col-span-2 px-6  align-middle border min-w-full bg-blueGray-200 overflow-hidden border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
+                    " col-span-2 px-6  align-middle border min-w-full  bg-blueGray-100 overflow-hidden border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-middle "
                   }
                 >
                   Actions
