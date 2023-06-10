@@ -19,8 +19,8 @@ public class Subscribtion {
     private String name;
     @NonNull
     private String price;
-    @Column
-    private String monthQuanity;
+
+    private double fee;
     @Column
     private long productId;
     @Column

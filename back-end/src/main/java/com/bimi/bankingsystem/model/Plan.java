@@ -19,6 +19,8 @@ public class Plan {
     private String planName;
     @Column
     private String planDesc;
+    @Column
+    private String monthQuanity;
 
     public Plan() {
     }

@@ -2,53 +2,53 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 // components
-import Product from "./Product";
+import Plan from "./Plan";
 
-export default function ProductList({ product }) {
-  const PRODUCT_API_BASE_URL = "http://localhost:8080/api/v1/product";
-  const [products, setProducts] = useState(null);
+export default function PLanList({ plan }) {
+  const PLAN_API_BASE_URL = "http://localhost:8080/api/v1/plan";
+  const [plans, setPlans] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [productId, setProductId] = useState(null);
-  const [responseProduct, setResponseProduct] = useState(null);
+  const [plansId, setPlansId] = useState(null);
+  const [responsePlan, setResponsePlan] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await fetch(PRODUCT_API_BASE_URL, {
+        const response = await fetch(PLAN_API_BASE_URL, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
         });
-        const products = await response.json();
-        setProducts(products);
+        const plans = await response.json();
+        setPlans(plans);
       } catch (error) {
         console.log(error);
       }
       setLoading(false);
     };
     fetchData();
-  }, [product, responseProduct]);
+  }, [plan, responsePlan]);
 
-  const deleteProduct = (e, id) => {
-    let confirmed = confirm("Are you sure you wanna delete this product?");
+  const deletePlan = (e, id) => {
+    let confirmed = confirm("Are you sure you wanna delete this plan?");
     if (!confirmed) return;
     e.preventDefault();
-    fetch([PRODUCT_API_BASE_URL] + "/" + id, {
+    fetch([PLAN_API_BASE_URL] + "/" + id, {
       method: "DELETE",
     }).then((res) => {
-      if (products) {
-        setProducts((prevElement) => {
-          return prevElement.filter((product) => product.id !== id);
+      if (plans) {
+        setPlans((prevElement) => {
+          return prevElement.filter((plan) => plan.id !== id);
         });
       }
     });
   };
 
-  const editProduct = (e, id) => {
+  const editPlan = (e, id) => {
     e.preventDefault();
-    setProductId(id);
+    setPlansId(id);
   };
   return (
     <>
@@ -60,13 +60,13 @@ export default function ProductList({ product }) {
         <div className="rounded-t mb-0 px-4 py-3  border-0">
           <div className="flex flex-wrap items-center">
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-              <h3 className={"font-semibold text-lg "}>Products</h3>
+              <h3 className={"font-semibold text-lg "}>Plans</h3>
             </div>
           </div>
         </div>
         <div className=" w-full overflow-x-auto flex justify-center  ">
           {/* Projects table */}
-          <table className="items-center w-full bg-transparent border-collapse table-fixed ">
+          <table className="items-center w-full bg-transparent border-collapse ">
             <thead>
               <tr>
                 <th
@@ -74,28 +74,28 @@ export default function ProductList({ product }) {
                     "px-6 align-middle bg-blueGray-200 border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
                   }
                 >
-                  Product ID
+                  Plan ID
                 </th>
                 <th
                   className={
                     "px-6 align-middle bg-blueGray-200 border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
                   }
                 >
-                  Product Name
+                  Plan Name
+                </th>
+                <th
+                  className={
+                    "px-6 align-middle bg-blueGray-200 border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
+                  }
+                >
+                  Plan Description
                 </th>
                 <th
                   className={
                     "px-6 align-middle border bg-blueGray-200 border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
                   }
                 >
-                  Product Description
-                </th>
-                <th
-                  className={
-                    "px-6 align-middle border border-solid bg-blueGray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
-                  }
-                >
-                  Product Type
+                  Month Quanity
                 </th>
 
                 <th
@@ -110,22 +110,19 @@ export default function ProductList({ product }) {
             </thead>
             {!loading && (
               <tbody>
-                {products?.map((product) => (
-                  <Product
-                    product={product}
-                    key={product.id}
-                    deleteProduct={deleteProduct}
-                    editProduct={editProduct}
+                {plans?.map((plan) => (
+                  <Plan
+                    plan={plan}
+                    key={plan.id}
+                    deletePlan={deletePlan}
+                    editPlan={editPlan}
                   />
                 ))}
               </tbody>
             )}
           </table>
         </div>
-        <editProduct
-          productId={productId}
-          setResponseProduct={setResponseProduct}
-        />
+        <editPlan plansId={plansId} setResponsePlan={setResponsePlan} />
       </div>
     </>
   );

@@ -4,7 +4,6 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { multiStepContext } from "pages/step_context";
-import ProductList from "../ProductList";
 
 const schema = yup
   .object()
@@ -29,10 +28,12 @@ export default function PlanForm() {
   const [plan, setPlan] = useState({
     planName: "",
     planDesc: "",
+    monthQuanity: "",
   });
   const [responsePlan, setResponsePlan] = useState({
     planName: "",
     planDesc: "",
+    monthQuanity: "",
   });
   const savePlan = async (e) => {
     //e.preventDefault();
@@ -105,9 +106,26 @@ export default function PlanForm() {
                     placeholder="Enter a description for the plan"
                     value={plan.planDesc}
                     onChange={(e) => handleChange(e)}
+                    maxLength={45}
                   />
                 </div>
-
+                <div className="relative w-full mb-3">
+                  <label
+                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlFor="grid-password"
+                  >
+                    Quanity of Months
+                  </label>
+                  <input
+                    {...register("amount")}
+                    type="number"
+                    name="monthQuanity"
+                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    placeholder="Enter the amount"
+                    value={plan.monthQuanity}
+                    onChange={(e) => handleChange(e)}
+                  />
+                </div>
                 <div className="text-center mt-6 flex">
                   <input
                     className="bg-red-500 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
@@ -134,9 +152,6 @@ export default function PlanForm() {
             </div>
           </div>
         </div>
-      </div>
-      <div className=" w-full">
-        <ProductList />
       </div>
     </div>
   );

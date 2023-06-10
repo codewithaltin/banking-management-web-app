@@ -4,23 +4,18 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { multiStepContext } from "pages/step_context";
-
-import Product from "../Product";
+import ProductList from "../ProductList";
+import PlanList from "../PlanList";
 const schema = yup
   .object()
   .shape({
-    requestedEmail: yup
-      .string()
-      .email("Please enter a valid e-mail")
-      .required("Email is required."),
-    payeeEmail: yup
-      .string()
-      .email("Please enter a valid e-mail")
-      .required("Email is required."),
-    amount: yup.string().required("Some text is required."),
+    price: yup.string().required("Price is required."),
+    name: yup.string().required("Name  is required."),
+    productId: yup.string().required("Product ID  is required."),
+    planId: yup.string().required("Plan ID  is required."),
   })
   .required();
-export default function PriceForm({ product }) {
+export default function PriceForm() {
   const {
     register,
     handleSubmit,
@@ -30,84 +25,58 @@ export default function PriceForm({ product }) {
   const { setStep, subscribtionData, setSubscribtionData, submitData } =
     useContext(multiStepContext);
 
-  const PRODUCT_API_BASE_URL = "http://localhost:8080/api/v1/product";
   const SUBSCRIBTION_API_BASE_URL = "http://localhost:8080/api/v1/subscribtion";
-  const [products, setProducts] = useState(null);
-  const [productId, setProductId] = useState(null);
-  const [responseProduct, setResponseProduct] = useState(null);
-  const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch(SUBSCRIBTION_API_BASE_URL, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const products = await response.json();
-        setProducts(products);
-      } catch (error) {
-        console.log(error);
-      }
-      setLoading(false);
-    };
-    fetchData();
-  }, [product, responseProduct]);
   const [isOpen, setIsOpen] = useState(false);
 
-  const productsOptions = [
-    products?.map((product) => <Product product={product} key={product.id} />),
-  ];
-  const [request, setRequest] = useState({
-    requestedEmail: "",
-    payeeEmail: "",
-    amount: "",
+  const [subscribtion, setSubscribtion] = useState({
+    name: "",
+    price: "",
+    productId: "",
+    planId: "",
   });
-  const [responseRequest, setResponseRequest] = useState({
-    requestedEmail: "",
-    payeeEmail: "",
-    amount: "",
+  const [responseSubscribtion, setResponseSubscribtion] = useState({
+    name: "",
+    price: "",
+    productId: "",
+    planId: "",
   });
-  const saveRequest = async (e) => {
+  const saveSubscribtion = async (e) => {
     //e.preventDefault();
-    const response = await fetch(REQUEST_API_BASE_URL, {
+    const response = await fetch(SUBSCRIBTION_API_BASE_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(request),
+      body: JSON.stringify(subscribtion),
     });
     if (!response.ok) {
       throw new Error("Something went wrong");
     }
-    const _reqeuest = await response.json();
-    setResponseRequest(_reqeuest);
+    const _subscribtion = await response.json();
+    setResponseSubscribtion(_subscribtion);
     window.location.reload();
   };
   const handleChange = (event) => {
     const value = event.target.value;
-    setRequest({ ...request, [event.target.name]: value });
+    setSubscribtion({ ...subscribtion, [event.target.name]: value });
   };
 
   return (
-    <div className="container mx-auto px-4 h-full">
-      <div className="flex content-center items-center justify-center h-full">
+    <div className="container mx-auto px-4">
+      <div className="flex content-center items-center justify-center h-full w-full">
         <div className="w-full lg:w-6/12 px-4">
           <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
             <div className="rounded-t mb-0 px-6 py-6">
               <div className="text-center mb-3">
                 <h6 className="text-blueGray-500 text-sm font-bold">
-                  Finish setting up your subscribtion
+                  Finish setting up your Subscribtion
                 </h6>
               </div>
-
               <hr className="mt-6 border-b-1 border-blueGray-300" />
             </div>
             <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-              <form onSubmit={handleSubmit(saveRequest)}>
+              <form onSubmit={handleSubmit(saveSubscribtion)}>
                 <div className="relative w-full mb-3">
                   <label
                     className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -116,42 +85,39 @@ export default function PriceForm({ product }) {
                     Subscribtion Name
                   </label>
                   <input
+                    {...register("name")}
                     type="text"
-                    name="currency"
+                    name="name"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Enter the subscribtion's name"
+                    value={subscribtion.name}
+                    onChange={(e) => handleChange(e)}
                   />
+
+                  <small role="alert" className="text-red-500 ">
+                    {errors.name?.message}
+                  </small>
                 </div>
 
                 <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
+                  <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                     Price
                   </label>
                   <input
+                    {...register("price")}
                     type="number"
                     name="price"
                     placeholder="Enter the price"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    onChange={(e) =>
-                      setSubscribtionData({
-                        ...subscribtionData,
-                        price: e.target.value,
-                      })
-                    }
-                    defaultValue={subscribtionData["price"]}
+                    value={subscribtion.price}
+                    onChange={(e) => handleChange(e)}
                   />
                   <small role="alert" className="text-red-500 ">
-                    {errors["amount"]?.message}
+                    {errors.price?.message}
                   </small>
                 </div>
                 <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
+                  <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                     Fee
                   </label>
                   <input
@@ -159,51 +125,44 @@ export default function PriceForm({ product }) {
                     name="fee"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     placeholder="Enter the fee"
-                    onChange={(e) =>
-                      setSubscribtionData({
-                        ...subscribtionData,
-                        fee: e.target.value,
-                      })
-                    }
-                    defaultValue={subscribtionData["fee"]}
+                    value={subscribtion.fee}
+                    onChange={(e) => handleChange(e)}
                   />
                 </div>
+
                 <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Quanity of Months
+                  <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                    Products ID
                   </label>
                   <input
-                    {...register("amount")}
+                    {...register("productId")}
                     type="number"
-                    name="months"
+                    name="productId"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Enter the amount"
-                    onChange={(e) =>
-                      setSubscribtionData({
-                        ...subscribtionData,
-                        months: e.target.value,
-                      })
-                    }
-                    defaultValue={subscribtionData["months"]}
+                    placeholder="Enter the product ID"
+                    value={subscribtion.productId}
+                    onChange={(e) => handleChange(e)}
                   />
+                  <small role="alert" className="text-red-500 ">
+                    {errors.productId?.message}
+                  </small>
                 </div>
                 <div className="relative w-full mb-3">
                   <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-                    Job title
+                    Plan's ID
                   </label>
-
-                  <select
+                  <input
+                    {...register("planId")}
+                    type="number"
+                    name="planId"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    name="jobTitle"
+                    placeholder="Enter the plan ID "
+                    value={subscribtion.planId}
                     onChange={(e) => handleChange(e)}
-                  >
-                    {productsOptions.map((option, index) => {
-                      return <option key={index}>{option}</option>;
-                    })}
-                  </select>
+                  />
+                  <small role="alert" className="text-red-500 ">
+                    {errors.planId?.message}
+                  </small>
                 </div>
 
                 <div className="text-center mt-6 flex ">
@@ -217,13 +176,16 @@ export default function PriceForm({ product }) {
                     className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                     type="submit"
                     value="Finish"
-                    onClick={submitData}
                   />
                 </div>
               </form>
             </div>
           </div>
         </div>
+      </div>{" "}
+      <div className=" w-full">
+        <ProductList />
+        <PlanList />
       </div>
     </div>
   );

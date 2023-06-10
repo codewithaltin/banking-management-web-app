@@ -34,11 +34,10 @@ public class SubscribtionService {
                 subRepository.findById(id).get();
         sub.setName(s.getName());
         sub.setPrice(s.getPrice());
-        sub.setMonthQuanity(s.getMonthQuanity());
         sub.setPrice(s.getPrice());
         sub.setPlanId(s.getPlanId());
         sub.setProductId(s.getProductId());
-
+        sub.setFee(s.getFee());
         return subRepository.save(sub);
 
     }

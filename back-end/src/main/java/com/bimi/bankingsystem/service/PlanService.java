@@ -36,7 +36,7 @@ public class PlanService {
                 planRepository.findById(id).get();
         plan.setPlanName(p.getPlanName());
         plan.setPlanDesc(p.getPlanDesc());
-
+        plan.setMonthQuanity(p.getMonthQuanity());
         return planRepository.save(plan);
 
     }
