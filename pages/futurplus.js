@@ -36,7 +36,7 @@ export default function FuturPlus() {
         watch,
         formState: { errors },
       } 
-      = useForm({ resolver: yupResolver(schema) });
+      = useForm({});
 
       const FUTURPLUS_API_BASE_URL = "http://localhost:8080/api/v1/futur_plus";
 
@@ -223,10 +223,12 @@ export default function FuturPlus() {
                   <div className="text-center mt-6">
                     <button
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                      type="button"
+                      type="submit"
+                      value="Submit"
                     >
                       Apply Now
                     </button>
+                    
                   </div>
                   </form>
                 </div>
@@ -239,3 +241,5 @@ export default function FuturPlus() {
     <Footer />
   </>;
 }
+
+FuturPlus.layout = Auth;
