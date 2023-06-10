@@ -122,6 +122,7 @@ export default function addemployee() {
                     transition-all duration-150"
                       placeholder="Last Name"
                       onChange={(e) => handleChange(e)}
+                      value={employee.firstName}
                       required
                     />
                   </div>
