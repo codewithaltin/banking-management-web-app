@@ -121,6 +121,15 @@ export default function PlanForm() {
                     value="Create plan"
                   />
                 </div>
+                <div className="w-full flex justify-center">
+                  <a
+                    className=" text-blueGray-800 cursor-pointer w-full text-center"
+                    onClick={() => setStep(3)}
+                  >
+                    {" "}
+                    Skip{" "}
+                  </a>
+                </div>
               </form>
             </div>
           </div>

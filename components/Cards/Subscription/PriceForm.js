@@ -1,9 +1,11 @@
-import React, { useState, useContext } from "react";
+import React, { useEffect, useState, useContext } from "react";
 import Auth from "layouts/Auth.js";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { multiStepContext } from "pages/step_context";
+
+import Product from "../Product";
 const schema = yup
   .object()
   .shape({
@@ -18,7 +20,7 @@ const schema = yup
     amount: yup.string().required("Some text is required."),
   })
   .required();
-export default function PriceForm() {
+export default function PriceForm({ product }) {
   const {
     register,
     handleSubmit,
@@ -28,10 +30,37 @@ export default function PriceForm() {
   const { setStep, subscribtionData, setSubscribtionData, submitData } =
     useContext(multiStepContext);
 
-  const REQUEST_API_BASE_URL = "http://localhost:8080/api/v1/requestmoney";
+  const PRODUCT_API_BASE_URL = "http://localhost:8080/api/v1/product";
+  const SUBSCRIBTION_API_BASE_URL = "http://localhost:8080/api/v1/subscribtion";
+  const [products, setProducts] = useState(null);
+  const [productId, setProductId] = useState(null);
+  const [responseProduct, setResponseProduct] = useState(null);
+  const [loading, setLoading] = useState(true);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(SUBSCRIBTION_API_BASE_URL, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const products = await response.json();
+        setProducts(products);
+      } catch (error) {
+        console.log(error);
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, [product, responseProduct]);
   const [isOpen, setIsOpen] = useState(false);
 
+  const productsOptions = [
+    products?.map((product) => <Product product={product} key={product.id} />),
+  ];
   const [request, setRequest] = useState({
     requestedEmail: "",
     payeeEmail: "",
@@ -71,7 +100,7 @@ export default function PriceForm() {
             <div className="rounded-t mb-0 px-6 py-6">
               <div className="text-center mb-3">
                 <h6 className="text-blueGray-500 text-sm font-bold">
-                  Set the price
+                  Finish setting up your subscribtion
                 </h6>
               </div>
 
@@ -84,20 +113,13 @@ export default function PriceForm() {
                     className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
-                    Currency
+                    Subscribtion Name
                   </label>
                   <input
                     type="text"
                     name="currency"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Enter your email"
-                    onChange={(e) =>
-                      setSubscribtionData({
-                        ...subscribtionData,
-                        currency: e.target.value,
-                      })
-                    }
-                    defaultValue={subscribtionData["currency"]}
+                    placeholder="Enter the subscribtion's name"
                   />
                 </div>
 
@@ -168,6 +190,22 @@ export default function PriceForm() {
                     defaultValue={subscribtionData["months"]}
                   />
                 </div>
+                <div className="relative w-full mb-3">
+                  <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                    Job title
+                  </label>
+
+                  <select
+                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    name="jobTitle"
+                    onChange={(e) => handleChange(e)}
+                  >
+                    {productsOptions.map((option, index) => {
+                      return <option key={index}>{option}</option>;
+                    })}
+                  </select>
+                </div>
+
                 <div className="text-center mt-6 flex ">
                   <input
                     className=" bg-red-500 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"

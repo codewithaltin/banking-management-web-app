@@ -126,28 +126,20 @@ export default function ProductForm() {
                     value={product.type}
                     onChange={(e) => handleChange(e)}
                   />
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      Product Image Url
-                    </label>
-                    <input
-                      type="text"
-                      name="imageUrl"
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Enter the image url"
-                      value={product.imageUrl}
-                      onChange={(e) => handleChange(e)}
-                    />
-                  </div>
+
                   <div className="text-center mt-6">
                     <input
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="submit"
                       value="Create Product"
                     />
+                    <a
+                      className=" text-blueGray-800 cursor-pointer mt-10"
+                      onClick={() => setStep(2)}
+                    >
+                      {" "}
+                      Skip{" "}
+                    </a>
                   </div>
                 </div>
               </form>
