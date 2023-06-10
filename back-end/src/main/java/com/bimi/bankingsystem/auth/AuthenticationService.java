@@ -6,11 +6,13 @@ import com.bimi.bankingsystem.config.JwtService;
 import com.bimi.bankingsystem.model.User;
 import com.bimi.bankingsystem.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+@Slf4j
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
@@ -21,6 +23,7 @@ public class AuthenticationService {
 
     public AuthenticationResponse register(RegisterRequest request) {
         var user = User.builder()
+//                .id(1L)
                 .firstName(request.getFirstName())
                 .lastName(request.getLastName())
                 .email(request.getEmail())
@@ -33,15 +36,18 @@ public class AuthenticationService {
     }
 
     public AuthenticationResponse authenticate(AuthenticationRequest request) {
-        authenticationManager.authenticate(
-                new UsernamePasswordAuthenticationToken(
-                        request.getEmail(),
-                        request.getPassword()
-                )
-        );
+//        authenticationManager.authenticate(
+//                new UsernamePasswordAuthenticationToken(
+//                        request.getEmail(),
+//                        request.getPassword()
+//                )
+//        );
+        log.info("AUTHENTICATED");
         var user = repository.findByEmail(request.getEmail())
                 .orElseThrow();
+        log.info("{}",user);
         var jwtToken =jwtService.generateToken(user);
+        log.info("{}",jwtToken);
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
