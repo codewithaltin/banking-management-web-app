@@ -56,7 +56,7 @@ export default function CollectorPayments() {
     window.location.reload();
   };
 
-
+  
   const CollectorOption = [
     "Public Organizations",
     "Private Organizations",

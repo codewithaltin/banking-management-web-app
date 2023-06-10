@@ -15,7 +15,7 @@
     "gulp": "^3.9.1",
     "gulp-append-prepend": "1.0.8",
     "joi": "^17.9.2",
-    "next": "^13.2.4",
+    "next": "^13.4.4",
     "next-auth": "^4.22.1",
     "react": "^18.2.0",
     "react-credit-cards": "^0.8.3",
