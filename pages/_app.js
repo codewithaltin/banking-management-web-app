@@ -56,21 +56,21 @@ export default class MyApp extends App {
           <Component {...pageProps} />
         </SessionProvider>
         */}
-        <StepContext>
-          <React.Fragment>
-            <Head>
-              <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1, shrink-to-fit=no"
-              />
+        {/* <StepContext> */}
+        <React.Fragment>
+          <Head>
+            <meta
+              name="viewport"
+              content="width=device-width, initial-scale=1, shrink-to-fit=no"
+            />
 
-              <title>Futur Banking</title>
-            </Head>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </React.Fragment>
-        </StepContext>
+            <title>Futur Banking</title>
+          </Head>
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+        </React.Fragment>
+        {/* </StepContext> */}
       </>
     );
   }

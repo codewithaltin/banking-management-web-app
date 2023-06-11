@@ -23,7 +23,7 @@ const schema = yup
       .required("Last Name is required.")
       .min(5, "Last name must be longer than 5 characters")
       .max(50, "Last name must be shorter than 50 characters."),
-    email: yup
+    emailId: yup
       .string()
       .email("Please enter a valid e-mail")
       .required("Email is required."),
@@ -57,7 +57,7 @@ export default function Register() {
     id: "",
     firstName: "",
     lastName: "",
-    email: "",
+    emailId: "",
     phoneNumber: "",
     password: "",
   });
@@ -65,7 +65,7 @@ export default function Register() {
     id: "",
     firstName: "",
     lastName: "",
-    email: "",
+    emailId: "",
     phoneNumber: "",
     password: "",
   });
@@ -177,16 +177,16 @@ export default function Register() {
                       Email
                     </label>
                     <input
-                      {...register("email")}
+                      {...register("emailId")}
                       type="email"
-                      name="email"
+                      name="emailId"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s example@gmail.com"
-                      value={user.email}
+                      value={user.emailId}
                       onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
-                      {errors.email?.message}
+                      {errors.emailId?.message}
                     </small>
                   </div>
                   <div className="relative w-full mb-3">

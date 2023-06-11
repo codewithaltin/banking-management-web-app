@@ -20,7 +20,7 @@ public class User {
     @NonNull
     private String lastName;
     @NonNull
-    private String email;
+    private String emailId;
     @NonNull
     private String phoneNumber;
     @NonNull
@@ -31,6 +31,6 @@ public class User {
     private String role;
 
     public User(){
-
+        role = "USER";
     }
 }

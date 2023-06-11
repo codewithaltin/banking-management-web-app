@@ -36,7 +36,7 @@ public class Employee {
 
     @NonNull
     @Column
-    private String department;
+    private String departament;
 
     @NonNull
     @Column
@@ -65,7 +65,7 @@ public class Employee {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.address = address;
-        this.department = department;
+        this.departament = department;
         this.jobTitle = jobTitle;
         this.salary = salary;
         this.startDate = startDate;
