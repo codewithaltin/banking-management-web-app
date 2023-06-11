@@ -37,6 +37,7 @@ public class User implements UserDetails {
 
     private double balance;
 
+    @NonNull
     @Enumerated(EnumType.STRING)
     private Role role;
 
