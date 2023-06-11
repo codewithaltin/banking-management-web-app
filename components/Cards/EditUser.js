@@ -2,7 +2,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { React, useState, useEffect, Fragment } from "react";
 
 const EditUser = ({ userId, setResponseUser }) => {
-  const USER_API_BASE_URL = "http://localhost:8080/api/v1/users";
+  const USER_API_BASE_URL = "http://localhost:8080/api/v1/user";
 
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState({
