@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 // components
-import Payments from "./Payments";
+import Payments from "./InstitutionPayments";
 import AddGoal from "./AddGoal";
 import TableDropdown from "components/Dropdowns/TableDropdown.js";
 import CardTable from "./CardTable";
+import CollectorPayments from "./CollectorPayments";
 
-export default function CollectorPaymentTable({ color }) {
+export default function CollectorPaymentTable({ collectorPayment, color }) {
 
   const COLLECTORPAYMENT_API_BASE_URL = "http://localhost:8080/api/v1/collectorPayment";
 
-  const [collectorPayment, setCollectorPayment] = useState(null);
+  const [collectorPayments, setCollectorPayment] = useState(null);
   const [loading, setLoading] = useState(true);
   const [collectorPaymentId, setCollectorPaymentId] = useState(null);
   const [responseCollectorPayment, setResponseCollectorPayment] = useState(null);
@@ -34,8 +35,8 @@ export default function CollectorPaymentTable({ color }) {
             "Content-Type": "application/json",
           },
         });
-        const collectorPayment = await response.json();
-        setCollectorPayment(collectorPayment);
+        const collectorPayments = await response.json();
+        setCollectorPayment(collectorPayments);
       } catch (error) {
         console.log(error);
       }
@@ -154,8 +155,8 @@ export default function CollectorPaymentTable({ color }) {
             </thead>
             {!loading && (
               <tbody>
-                {collectorPayment?.map((collectorPayment) => (
-                  <CollectorPaymentTable
+                {collectorPayments?.map((collectorPayment) => (
+                  <CollectorPayments
                   collectorPayment={collectorPayment}
                     key={collectorPayment.id}
                     deleteCollectorPayment={deleteCollectorPayment}

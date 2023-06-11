@@ -1,30 +1,28 @@
 import React from "react";
 
-const Transfer = ({ transfer, deleteTransfer}) => {
+const PrePaidServices = ({ prePaidService, deletePrePaidServices}) => {
   return (
-    <tr key={transfer.id}>
+    <tr key={prePaidService.id}>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
-        {transfer.accountNumber}
+        {prePaidService.operator}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
-        {transfer.amount}
+        {prePaidService.product}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
-        {transfer.date}
-      </td>
-      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
-        {transfer.reciverAccountNumber}
+        {prePaidService.amount}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         <a
-          onClick={(e, id) => deleteTransfer(e, transfer.id)}
+          onClick={(e, id) => deletePrePaidServices(e, prePaidService.id)}
           className="text-indigo-600 hover:text-indigo-800 cursor-pointer"
         >
           Delete
         </a>
       </td>
     </tr>
+    
   );
 };
 
-export default Transfer;
+export default PrePaidServices;

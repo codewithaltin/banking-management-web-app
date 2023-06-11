@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 // components
-import Payments from "./Payments";
+import MobilePayments from "./MobilePayments";
 import AddGoal from "./AddGoal";
 import TableDropdown from "components/Dropdowns/TableDropdown.js";
 import CardTable from "./CardTable";
 
-export default function MobilePaymentTable({ color }) {
+export default function MobilePaymentTable({ mobilePayment, color }) {
 
 
   const MOBILEPAYMENT_API_BASE_URL = "http://localhost:8080/api/v1/mobilePayment";
 
-  const [mobilePayment, setMobilePayment] = useState(null);
+  const [mobilePayments, setMobilePayment] = useState(null);
   const [loading, setLoading] = useState(true);
   const [mobilePaymentId, setMonbilePaymentId] = useState(null);
   const [responseMobilePayment, setResponseMobilePayment] = useState(null);
@@ -36,7 +36,7 @@ export default function MobilePaymentTable({ color }) {
           },
         });
         const mobilePayment = await response.json();
-        setInstitutionPayments(mobilePayment);
+        setMobilePayment(mobilePayment);
       } catch (error) {
         console.log(error);
       }
@@ -52,7 +52,7 @@ export default function MobilePaymentTable({ color }) {
     fetch(MOBILEPAYMENT_API_BASE_URL + "/" + id, {
       method: "DELETE",
     }).then((res) => {
-      if (mobilePayment) {
+      if (mobilePayments) {
         setMobilePayment((prevElement) => {
           return prevElement.filter((mobilePayment) => mobilePayment.id !== id);
         });
@@ -152,8 +152,8 @@ export default function MobilePaymentTable({ color }) {
             </thead>
             {!loading && (
               <tbody>
-                {mobilePayment?.map((mobilePayment) => (
-                  <MobilePaymentTable
+                {mobilePayments?.map((mobilePayment) => (
+                  <MobilePayments
                   mobilePayment={mobilePayment}
                     key={mobilePayment.id}
                     deleteMobilePayment={deleteMobilePayment}

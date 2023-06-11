@@ -2,17 +2,17 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 // components
-import Payments from "./Payments";
+import PrePaidServices from "./PrePaidServices";
 import AddGoal from "./AddGoal";
 import TableDropdown from "components/Dropdowns/TableDropdown.js";
 import CardTable from "./CardTable";
 
-export default function PrePaidServicesTable({ color }) {
+export default function PrePaidServicesTable({ prePaidService, color }) {
 
 
   const PREPAIDSERVICES_API_BASE_URL = "http://localhost:8080/api/v1/prePaidPayment";
 
-  const [prePaidServives, setPrePaidServives] = useState(null);
+  const [prePaidServices, setPrePaidServives] = useState(null);
   const [loading, setLoading] = useState(true);
   const [prePaidServivesId, setPrePaidServivesId] = useState(null);
   const [responsePrePaidServives, setResponsePrePaidServives] = useState(null);
@@ -28,15 +28,15 @@ useEffect(() => {
             "Content-Type": "application/json",
           },
         });
-        const prePaidServives = await response.json();
-        setPrePaidServives(prePaidServives);
+        const prePaidService = await response.json();
+        setPrePaidServives(prePaidService);
       } catch (error) {
         console.log(error);
       }
       setLoading(false);
     };
     fetchData();
-  }, [prePaidServives, responsePrePaidServives]);
+  }, [prePaidService, responsePrePaidServives]);
 
 const deletePrePaidServices = (e, id) => {
     let confirmed = confirm("Are you sure you wanna delete this payment ?");
@@ -45,7 +45,7 @@ const deletePrePaidServices = (e, id) => {
     fetch(PREPAIDSERVICES_API_BASE_URL + "/" + id, {
       method: "DELETE",
     }).then((res) => {
-      if (prePaidServives) {
+      if (prePaidServices) {
         setPrePaidServives((prevElement) => {
           return prevElement.filter((prePaidServives) => prePaidServives.id !== id);
         });
@@ -141,10 +141,10 @@ const deletePrePaidServices = (e, id) => {
               </thead>
             {!loading && (
               <tbody>
-                {prePaidServives?.map((prePaidServives) => (
-                  <PrePaidServicesTable
-                  prePaidServives={prePaidServives}
-                    key={prePaidServives.id}
+                {prePaidServices?.map((prePaidService) => (
+                  <PrePaidServices
+                  prePaidService={prePaidService}
+                    key={prePaidService.id}
                     deletePrePaidServices={deletePrePaidServices}
                   />
                 ))}

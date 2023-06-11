@@ -2,12 +2,13 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 // components
-import Payments from "./Payments";
-import AddGoal from "./AddGoal";
+import Payments from "./InstitutionPayments";
+import InstitutionPayments from "./InstitutionPayments";
 import TableDropdown from "components/Dropdowns/TableDropdown.js";
 import CardTable from "./CardTable";
 
-export default function InstitutionPaymentsTable({ color }) {
+
+export default function InstitutionPaymentsTable({ institutionPayment, color }) {
 
     const INSTITUTIONPAYMENTS_API_BASE_URL = "http://localhost:8080/api/v1/institutionPayments";
 
@@ -43,7 +44,7 @@ export default function InstitutionPaymentsTable({ color }) {
           setLoading(false);
         };
         fetchData();
-      }, [institutionPayments, responseInstitutionPayments]);
+      }, [institutionPayment, responseInstitutionPayments]);
 
       const deleteInstitutionPayment = (e, id) => {
         let confirmed = confirm("Are you sure you wanna delete this payment ?");
@@ -54,7 +55,7 @@ export default function InstitutionPaymentsTable({ color }) {
         }).then((res) => {
           if (institutionPayments) {
             setInstitutionPayments((prevElement) => {
-              return prevElement.filter((institutionPayments) => institutionPayments.id !== id);
+              return prevElement.filter((institutionPayment) => institutionPayment.id !== id);
             });
           }
         });
@@ -150,10 +151,10 @@ export default function InstitutionPaymentsTable({ color }) {
                 </thead>
                 {!loading && (
                   <tbody>
-                    {institutionPayments?.map((institutionPayments) => (
-                      <InstitutionPaymentsTable
-                      institutionPayments={institutionPayments}
-                        key={institutionPayments.id}
+                    {institutionPayments?.map((institutionPayment) => (
+                      <InstitutionPayments
+                      institutionPayment={institutionPayment}
+                        key={institutionPayment.id}
                         deleteInstitutionPayment={deleteInstitutionPayment}
                       />
                     ))}

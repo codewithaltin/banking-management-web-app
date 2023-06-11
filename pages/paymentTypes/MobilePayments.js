@@ -22,15 +22,15 @@ export default function MobilePayments() {
   const [mobilePayments, setMobilePayments] = useState({
     id: "",
     serviceProvider: "",
-    code: "",
-    mobilePhoneNumber: "",
+    numberCode: "",
+    phoneNumber: "",
     amount: "",
   });
   const [responseMobilePayments, setResponseMobilePayments] = useState({
     id: "",
     serviceProvider: "",
-    code: "",
-    mobilePhoneNumber: "",
+    numberCode: "",
+    phoneNumber: "",
     amount: "",
   });
   // const navigate = useNavigate();
