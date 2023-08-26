@@ -55,7 +55,7 @@ export default function CollectorPayments() {
     const _collectorPayments = await response.json();
     setResponseCollectorPayments(_collectorPayments);
     window.location.reload();
-  };
+  }; 
 
   
   const CollectorOption = [

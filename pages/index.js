@@ -226,11 +226,15 @@ export default function Index(session) {
           </div>
         </div>
 
-        <div className="container mx-auto overflow-hidden pb-20">
-          <div className="flex flex-wrap items-center">
-            <div className="w-full md:w-4/12 px-12 md:px-4 ml-auto mr-auto mt-48">
-              <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white"></div>
-              <h3 className="text-3xl mb-2 font-semibold leading-normal text-blueGray-900">
+
+        <div className="container mx-auto px-4 pb-32 pt-48">
+          <div className="items-center flex flex-wrap">
+            <div className="w-full md:w-5/12 ml-auto px-12 md:px-4">
+              <div className="md:pr-12">
+                <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
+                  
+                </div>
+                <h3 className="text-3xl mb-2 font-semibold leading-normal text-blueGray-900">
                 Empower Your Savings Journey with FuturBank
               </h3>
               <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
@@ -248,27 +252,25 @@ export default function Index(session) {
                 Set a saving goal{" "}
                 <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
               </a>
+                
+              </div>
             </div>
 
-            <div className="w-full md:w-8/12 px-8 mr-px ml-px mt-32">
-              <div className="relative flex flex-col min-w-0 w-full mb-0 mt-48 md:mt-4">
-                <div className="relative flex flex-col min-w-0 w-full mb-0 mt-48 md:mt-4">
-                  <div className="w-full md:w-6/12 mr-auto px-4 pt-24 md:pt-0">
-                    <img
-                      alt="..."
-                      className="max-w-full rounded-lg shadow-xl"
-                      style={{
-                        transform:
-                          "scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg)",
-                      }}
-                      src="/img/savings-banking-investments-piggy-bank-credit.jpg"
-                    />
-                  </div>
-                </div>
-              </div>
+            <div className="max-w-full md:w-6/12 mr-auto px-4 pt-24 md:pt-0">
+              <img
+                alt="..."
+                className="max-w-full rounded-lg shadow-xl"
+                style={{
+                  transform:
+                    "scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg)",
+                }}
+                src="/img/savings-banking-investments-piggy-bank-credit.jpg"
+              />
             </div>
           </div>
         </div>
+
+        
 
         <div className="flex flex-wrap items-center pt-32">
           <div className="w-full md:w-6/12 px-4 mr-auto ml-auto mt-32">
