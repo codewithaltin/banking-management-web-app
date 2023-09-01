@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Auth from "layouts/Auth.js";
+import Auth from "layouts/User";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";

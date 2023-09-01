@@ -35,8 +35,8 @@ public class Employee {
     private String address;
 
     @NonNull
-    @Column
-    private String departament;
+    @Enumerated(EnumType.STRING)
+    private Departaments departament;
 
     @NonNull
     @Column
@@ -58,7 +58,7 @@ public class Employee {
 
     }
 
-    public Employee(Long id, String firstName, String lastName, String email, String phoneNumber, String address, String department, String jobTitle, String salary, String startDate, String endDate) {
+    public Employee(Long id, String firstName, String lastName, String email, String phoneNumber, String address, Departaments department, String jobTitle, String salary, String startDate, String endDate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
