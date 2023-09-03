@@ -19,7 +19,7 @@ public class User {
     @NonNull
     private String lastName;
     @NonNull
-    private String emailId;
+    private String email;
     @NonNull
     private String phoneNumber;
     @NonNull
@@ -33,7 +33,7 @@ public class User {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = emailId;
+        this.email = email;
         this.phoneNumber = phoneNumber;
         this.password = password;
 
