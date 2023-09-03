@@ -33,7 +33,7 @@ public class User {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.emailId = emailId;
+        this.email = emailId;
         this.phoneNumber = phoneNumber;
         this.password = password;
 
