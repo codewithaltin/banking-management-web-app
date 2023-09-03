@@ -7,26 +7,21 @@ import lombok.*;
 @Setter
 @Entity
 @AllArgsConstructor
-@Table(name = "Money Requested")
-public class RequestMoney {
+@Table(name = "plan")
+public class Plan {
     @Id
     @SequenceGenerator(name="course_sequence",sequenceName = "course_sequence",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "course_sequence")
     @Column(updatable = false)
     private long id;
-
+    @Column
     @NonNull
+    private String planName;
     @Column
-    private String requestedEmail;
-    @NonNull
+    private String planDesc;
     @Column
-    private String payeeEmail;
+    private String monthQuanity;
 
-
-    @Column
-    private double amount ;
-
-
-    public RequestMoney() {
+    public Plan() {
     }
 }

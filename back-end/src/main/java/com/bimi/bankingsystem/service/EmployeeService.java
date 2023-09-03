@@ -39,7 +39,7 @@ public class EmployeeService {
         employee.setAddress(e.getAddress());
         employee.setEmail(e.getEmail());
         employee.setPhoneNumber(e.getPhoneNumber());
-        employee.setDepartment(e.getDepartment());
+        employee.setDepartament(e.getDepartament());
         employee.setJobTitle(e.getJobTitle());
         employee.setSalary(e.getSalary());
         employee.setStartDate(e.getStartDate());

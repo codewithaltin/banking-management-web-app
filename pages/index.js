@@ -185,7 +185,7 @@ export default function Index(session) {
               </a>
 
               <a
-                href="/bills"
+                href="/requestMoney"
                 target="_blank"
                 className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
               >

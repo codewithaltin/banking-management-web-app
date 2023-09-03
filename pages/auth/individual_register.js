@@ -95,7 +95,6 @@ export default function Register() {
     const value = event.target.value;
     setUser({ ...user, [event.target.name]: value });
   };
-
   return (
     <>
       {/* <Routes>
