@@ -101,12 +101,10 @@ export default function InstitutionPayments() {
                     <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                       Institution
                     </label>
-                 
                     <select
-                   
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={handleChange}
-                      name="savingReason"
+                      name="institution"
                     >
                       <option></option>
                       {InstitutionOption.map((option, index) => {
@@ -122,7 +120,7 @@ export default function InstitutionPayments() {
                       Company
                     </label>
                     <input
-                      {... register("goalName")}
+                      {... register("company")}
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={(e) => handleChange(e)}

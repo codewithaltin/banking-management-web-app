@@ -2,20 +2,56 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 // components
-import Savings from "./Savings";
+import PrePaidServices from "./PrePaidServices";
 import AddGoal from "./AddGoal";
 import TableDropdown from "components/Dropdowns/TableDropdown.js";
 import CardTable from "./CardTable";
 
-export default function SavingTable({ savingGoal, color }) {
+export default function PrePaidServicesTable({ prePaidService, color }) {
 
 
-  const SAVINGGOAL_API_BASE_URL = "http://localhost:8080/api/v1/savingGoal";
-  const [savingGoals, setSavingGoals] = useState(null);
+  const PREPAIDSERVICES_API_BASE_URL = "http://localhost:8080/api/v1/prePaidPayment";
+
+  const [prePaidServices, setPrePaidServives] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [savingGoalId, setSavingGoalId] = useState(null);
-  const [responseSavingGoal, setResponseSavingGoal] = useState(null);
-  const [isDialogOpen, setDialogOpen] = useState(false);
+  const [prePaidServivesId, setPrePaidServivesId] = useState(null);
+  const [responsePrePaidServives, setResponsePrePaidServives] = useState(null);
+
+
+useEffect(() => {
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(PREPAIDSERVICES_API_BASE_URL, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const prePaidService = await response.json();
+        setPrePaidServives(prePaidService);
+      } catch (error) {
+        console.log(error);
+      }
+      setLoading(false);
+    };
+    fetchData();
+  }, [prePaidService, responsePrePaidServives]);
+
+const deletePrePaidServices = (e, id) => {
+    let confirmed = confirm("Are you sure you wanna delete this payment ?");
+    if (!confirmed) return;
+    e.preventDefault();
+    fetch(PREPAIDSERVICES_API_BASE_URL + "/" + id, {
+      method: "DELETE",
+    }).then((res) => {
+      if (prePaidServices) {
+        setPrePaidServives((prevElement) => {
+          return prevElement.filter((prePaidServives) => prePaidServives.id !== id);
+        });
+      }
+    });
+  };
 
   const handleOpenDialog = () => {
     setDialogOpen(true);
@@ -25,45 +61,9 @@ export default function SavingTable({ savingGoal, color }) {
     setDialogOpen(false);
   };
 
-
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch(SAVINGGOAL_API_BASE_URL, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const savingGoals = await response.json();
-        setSavingGoals(savingGoals);
-      } catch (error) {
-        console.log(error);
-      }
-      setLoading(false);
-    };
-    fetchData();
-  }, [savingGoal, responseSavingGoal]);
-
-  const deleteSavingGoal = (e, id) => {
-    let confirmed = confirm("Are you sure you wanna delete this goal ?");
-    if (!confirmed) return;
-    e.preventDefault();
-    fetch(SAVINGGOAL_API_BASE_URL + "/" + id, {
-      method: "DELETE",
-    }).then((res) => {
-      if (savingGoals) {
-        setSavingGoals((prevElement) => {
-          return prevElement.filter((savingGoal) => savingGoal.id !== id);
-        });
-      }
-    });
-  };
-
-  return (
+    return(
     <>
-      <div
+    <div
         className={
           "relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded " +
           (color === "light" ? "bg-white" : "bg-blueGray-700 text-white")
@@ -77,18 +77,9 @@ export default function SavingTable({ savingGoal, color }) {
                   "font-semibold text-lg " +
                   (color === "light" ? "text-blueGray-700" : "text-white")
                 }>
-                Saving Goals
+                Pre Paid Payments
               </h3>
-              <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-              <a  
-                className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                href="/SavingGoal"
-              >
-                Add Goal
-              </a>
               
-              {isDialogOpen && <AddGoal isDialogOpen={handleOpenDialog} />}
-            </div>
             </div>
             </div>
         </div>
@@ -105,7 +96,17 @@ export default function SavingTable({ savingGoal, color }) {
                       : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 >
-                  Saving Reason
+                  Operator
+                </th>
+                <th
+                  className={
+                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                    (color === "light"
+                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                  }
+                >
+                  Product
                 </th>
                 <th
                   className={
@@ -117,26 +118,7 @@ export default function SavingTable({ savingGoal, color }) {
                 >
                   Amount
                 </th>
-                <th
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                >
-                  Date
-                </th>
-                <th
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                >
-                  Goal Name
-                </th>
+                
                 <th
                   className={
                     "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
@@ -156,14 +138,14 @@ export default function SavingTable({ savingGoal, color }) {
                   }
                 ></th>
               </tr>
-            </thead>
+              </thead>
             {!loading && (
               <tbody>
-                {savingGoals?.map((savingGoal) => (
-                  <Savings
-                  savingGoal={savingGoal}
-                    key={savingGoal.id}
-                    deleteSavingGoal={deleteSavingGoal}
+                {prePaidServices?.map((prePaidService) => (
+                  <PrePaidServices
+                  prePaidService={prePaidService}
+                    key={prePaidService.id}
+                    deletePrePaidServices={deletePrePaidServices}
                   />
                 ))}
               </tbody>
@@ -171,6 +153,10 @@ export default function SavingTable({ savingGoal, color }) {
           </table>
         </div>
       </div>
+
     </>
+
+                    
+
   );
 }

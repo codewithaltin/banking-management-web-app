@@ -1,9 +1,7 @@
 package com.bimi.bankingsystem.service;
 
 import com.bimi.bankingsystem.model.CollectorPayment;
-import com.bimi.bankingsystem.model.SavingGoal;
 import com.bimi.bankingsystem.repository.CollectorPaymentRepository;
-import com.bimi.bankingsystem.repository.SavingGoalRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;

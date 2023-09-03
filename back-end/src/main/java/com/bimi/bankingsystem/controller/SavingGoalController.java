@@ -45,7 +45,7 @@ public class SavingGoalController {
 
     @PutMapping("/savingGoal/{id}")
     public ResponseEntity<SavingGoal> updateSavingGoal(@PathVariable("id") Long id,
-                                                 @RequestBody SavingGoal savingGoal){
+                                                       @RequestBody SavingGoal savingGoal){
         savingGoal = savingGoalService.updateSavingGoals(id,savingGoal);
         return ResponseEntity.ok(savingGoal);
     }

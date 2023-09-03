@@ -97,15 +97,6 @@ export default function TransferTable({ transfer }) {
                 >
                   Reciver Account Number
                 </th>
-
-                <th
-                  className={
-                    "px-6 align-middle border border-solid bg-blueGray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
-                  }
-                >
-                  Description
-                </th>
-
                 <th
                   colSpan={2}
                   className={

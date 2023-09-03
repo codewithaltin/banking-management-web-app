@@ -2,21 +2,21 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 // components
-import Savings from "./Savings";
+import Payments from "./InstitutionPayments";
 import AddGoal from "./AddGoal";
 import TableDropdown from "components/Dropdowns/TableDropdown.js";
 import CardTable from "./CardTable";
+import CollectorPayments from "./CollectorPayments";
 
-export default function SavingTable({ savingGoal, color }) {
+export default function CollectorPaymentTable({ collectorPayment, color }) {
 
+  const COLLECTORPAYMENT_API_BASE_URL = "http://localhost:8080/api/v1/collectorPayment";
 
-  const SAVINGGOAL_API_BASE_URL = "http://localhost:8080/api/v1/savingGoal";
-  const [savingGoals, setSavingGoals] = useState(null);
+  const [collectorPayments, setCollectorPayment] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [savingGoalId, setSavingGoalId] = useState(null);
-  const [responseSavingGoal, setResponseSavingGoal] = useState(null);
-  const [isDialogOpen, setDialogOpen] = useState(false);
-
+  const [collectorPaymentId, setCollectorPaymentId] = useState(null);
+  const [responseCollectorPayment, setResponseCollectorPayment] = useState(null);
+ 
   const handleOpenDialog = () => {
     setDialogOpen(true);
   };
@@ -25,45 +25,47 @@ export default function SavingTable({ savingGoal, color }) {
     setDialogOpen(false);
   };
 
-
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await fetch(SAVINGGOAL_API_BASE_URL, {
+        const response = await fetch(COLLECTORPAYMENT_API_BASE_URL, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
         });
-        const savingGoals = await response.json();
-        setSavingGoals(savingGoals);
+        const collectorPayments = await response.json();
+        setCollectorPayment(collectorPayments);
       } catch (error) {
         console.log(error);
       }
       setLoading(false);
     };
     fetchData();
-  }, [savingGoal, responseSavingGoal]);
+  }, [collectorPayment, responseCollectorPayment]);
 
-  const deleteSavingGoal = (e, id) => {
-    let confirmed = confirm("Are you sure you wanna delete this goal ?");
+
+  const deleteCollectorPayment = (e, id) => {
+    let confirmed = confirm("Are you sure you wanna delete this payment ?");
     if (!confirmed) return;
     e.preventDefault();
-    fetch(SAVINGGOAL_API_BASE_URL + "/" + id, {
+    fetch(COLLECTORPAYMENT_API_BASE_URL + "/" + id, {
       method: "DELETE",
     }).then((res) => {
-      if (savingGoals) {
-        setSavingGoals((prevElement) => {
-          return prevElement.filter((savingGoal) => savingGoal.id !== id);
+      if (collectorPayment) {
+        setCollectorPayment((prevElement) => {
+          return prevElement.filter((collectorPayment) => collectorPayment.id !== id);
         });
       }
     });
   };
 
-  return (
-    <>
-      <div
+
+
+  return(
+  <>
+  <div
         className={
           "relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded " +
           (color === "light" ? "bg-white" : "bg-blueGray-700 text-white")
@@ -77,18 +79,9 @@ export default function SavingTable({ savingGoal, color }) {
                   "font-semibold text-lg " +
                   (color === "light" ? "text-blueGray-700" : "text-white")
                 }>
-                Saving Goals
+                Collector Payments
               </h3>
-              <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-              <a  
-                className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                href="/SavingGoal"
-              >
-                Add Goal
-              </a>
               
-              {isDialogOpen && <AddGoal isDialogOpen={handleOpenDialog} />}
-            </div>
             </div>
             </div>
         </div>
@@ -105,8 +98,29 @@ export default function SavingTable({ savingGoal, color }) {
                       : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 >
-                  Saving Reason
+                  Collector
                 </th>
+                <th
+                  className={
+                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                    (color === "light"
+                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                  }
+                >
+                  Serial Number
+                </th>
+                <th
+                  className={
+                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                    (color === "light"
+                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                  }
+                >
+                  UNIREF
+                </th>
+                
                 <th
                   className={
                     "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
@@ -116,27 +130,9 @@ export default function SavingTable({ savingGoal, color }) {
                   }
                 >
                   Amount
-                </th>
-                <th
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                >
-                  Date
-                </th>
-                <th
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                >
-                  Goal Name
-                </th>
+                </th>  
+
+
                 <th
                   className={
                     "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
@@ -159,11 +155,11 @@ export default function SavingTable({ savingGoal, color }) {
             </thead>
             {!loading && (
               <tbody>
-                {savingGoals?.map((savingGoal) => (
-                  <Savings
-                  savingGoal={savingGoal}
-                    key={savingGoal.id}
-                    deleteSavingGoal={deleteSavingGoal}
+                {collectorPayments?.map((collectorPayment) => (
+                  <CollectorPayments
+                  collectorPayment={collectorPayment}
+                    key={collectorPayment.id}
+                    deleteCollectorPayment={deleteCollectorPayment}
                   />
                 ))}
               </tbody>
@@ -171,6 +167,22 @@ export default function SavingTable({ savingGoal, color }) {
           </table>
         </div>
       </div>
-    </>
-  );
+      </>
+      );
 }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

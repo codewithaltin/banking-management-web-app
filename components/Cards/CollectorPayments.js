@@ -1,30 +1,31 @@
 import React from "react";
 
-const Transfer = ({ transfer, deleteTransfer}) => {
+const CollectorPayments = ({ collectorPayment, deleteCollectorPayment}) => {
   return (
-    <tr key={transfer.id}>
+    <tr key={collectorPayment.id}>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
-        {transfer.accountNumber}
+        {collectorPayment.collector}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
-        {transfer.amount}
+        {collectorPayment.company}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
-        {transfer.date}
+        {collectorPayment.referenceNumber}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
-        {transfer.reciverAccountNumber}
+        {collectorPayment.amount}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         <a
-          onClick={(e, id) => deleteTransfer(e, transfer.id)}
+          onClick={(e, id) => deleteCollectorPayment(e, collectorPayment.id)}
           className="text-indigo-600 hover:text-indigo-800 cursor-pointer"
         >
           Delete
         </a>
       </td>
     </tr>
+    
   );
 };
 
-export default Transfer;
+export default CollectorPayments;

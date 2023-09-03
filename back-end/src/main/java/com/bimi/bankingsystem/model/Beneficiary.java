@@ -7,7 +7,8 @@ public class Beneficiary {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    @Column(name = "beneficiary_id")
+    private Integer id;
 
     @Column(name = "firstName")
     private String firstName;
@@ -55,7 +56,8 @@ public class Beneficiary {
 
     }
 
-    public Beneficiary(String firstName, String surname, String secondName, String middleName, String secondSurname, String email, String gender, String country, String city, String relatedPerson, Integer postalCode, String date, String address, Integer percentage) {
+    public Beneficiary(Integer id, String firstName, String surname, String secondName, String middleName, String secondSurname, String email, String gender, String country, String city, String relatedPerson, Integer postalCode, String date, String address, Integer percentage) {
+        this.id = id;
         this.firstName = firstName;
         this.surname = surname;
         this.secondName = secondName;
@@ -72,6 +74,12 @@ public class Beneficiary {
         this.percentage = percentage;
     }
 
+    public Integer getId() {
+        return id;
+    }
+    public void setId(Integer id) {
+        this.id = id;
+    }
     public String getFirstName() {
         return firstName;
     }

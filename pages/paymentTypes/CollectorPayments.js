@@ -15,7 +15,7 @@ export default function CollectorPayments() {
     } = useForm({ });
     
   
-  const COLLECTORPAYMENTS_API_BASE_URL = "http://localhost:8080/api/v1/institutionPayments";
+  const COLLECTORPAYMENTS_API_BASE_URL = "http://localhost:8080/api/v1/collectorPayment";
 
   const [isOpen, setIsOpen] = useState(false);
   const [collectorPayments, setCollectorPayments] = useState({
@@ -24,7 +24,7 @@ export default function CollectorPayments() {
     serialNo: "",
     uniref: "",
     amount: "",
-    description:""
+    description:"",
   });
   const [responseCollectorPayments, setResponseCollectorPayments] = useState({
     id: "",
@@ -38,6 +38,7 @@ export default function CollectorPayments() {
   // const navigateHome = () => {
   //   navigate("/");
   // };
+  
 
   const saveCollectorPayments = async (e) => {
     //e.preventDefault();
@@ -54,9 +55,9 @@ export default function CollectorPayments() {
     const _collectorPayments = await response.json();
     setResponseCollectorPayments(_collectorPayments);
     window.location.reload();
-  };
+  }; 
 
-
+  
   const CollectorOption = [
     "Public Organizations",
     "Private Organizations",
@@ -74,7 +75,7 @@ export default function CollectorPayments() {
 
   const handleChange = (event) => {
     const value = event.target.value;
-    setInstitutionPayments({ ...institutionPayments, [event.target.name]: value });
+    setCollectorPayments({ ...collectorPayments, [event.target.name]: value });
   };
 
   return (
@@ -107,10 +108,9 @@ export default function CollectorPayments() {
                     </label>
                  
                     <select
-                   
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={handleChange}
-                      name="savingReason"
+                      name="collector"
                     >
                       <option></option>
                       {CollectorOption.map((option, index) => {
@@ -126,7 +126,7 @@ export default function CollectorPayments() {
                       Serial NO
                     </label>
                     <input
-                      {... register("goalName")}
+                      {... register("serialNo")}
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={(e) => handleChange(e)}
@@ -143,7 +143,7 @@ export default function CollectorPayments() {
                     UNIREF
                   </label>
                   <input
-                    {... register("referenceNumber")}
+                    {... register("uniref")}
                     type="text"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     onChange={(e) => handleChange(e)}
@@ -177,7 +177,7 @@ export default function CollectorPayments() {
                       Description
                     </label>
                     <input
-                      {... register("goalName")}
+                      {... register("description")}
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={(e) => handleChange(e)}

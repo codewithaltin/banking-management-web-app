@@ -152,10 +152,10 @@ export default function Sidebar() {
 
               <li className="items-center">
                 <Link
-                  href="/admin/contactlist"
+                  href="/admin/transferlist"
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (router.pathname.indexOf("/admin/contactlist") !== -1
+                    (router.pathname.indexOf("/admin/transferlist") !== -1
                       ? "text-lightBlue-500 hover:text-lightBlue-600"
                       : "text-blueGray-700 hover:text-blueGray-500")
                   }
@@ -163,12 +163,12 @@ export default function Sidebar() {
                   <i
                     className={
                       "fas fa-table mr-2 text-sm " +
-                      (router.pathname.indexOf("/admin/userlist") !== -1
+                      (router.pathname.indexOf("/admin/transferlist") !== -1
                         ? "opacity-75"
                         : "text-blueGray-300")
                     }
                   ></i>{" "}
-                  Contact Forms List
+                  Transfers List
                 </Link>
               </li>
 
@@ -197,6 +197,16 @@ export default function Sidebar() {
 
               <li className="items-center">
                 <Link
+                  href="/auth/Institutionpaymentslist"
+                  className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                >
+                  <i className="fas fa-newspaper text-blueGray-400 mr-2 text-sm"></i>{" "}
+                 Payments List
+                </Link>
+              </li>
+
+              <li className="items-center">
+                <Link
                   href="/admin/donationlist"
                   className={
                     "text-xs uppercase py-3 font-bold block " +
@@ -219,10 +229,10 @@ export default function Sidebar() {
 
               <li className="items-center">
                 <Link
-                  href="/admin/transferlist"
+                  href="/admin/contactlist"
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (router.pathname.indexOf("/admin/transferlist") !== -1
+                    (router.pathname.indexOf("/admin/contactlist") !== -1
                       ? "text-lightBlue-500 hover:text-lightBlue-600"
                       : "text-blueGray-700 hover:text-blueGray-500")
                   }
@@ -230,15 +240,38 @@ export default function Sidebar() {
                   <i
                     className={
                       "fas fa-table mr-2 text-sm " +
-                      (router.pathname.indexOf("/admin/transferlist") !== -1
+                      (router.pathname.indexOf("/admin/userlist") !== -1
                         ? "opacity-75"
                         : "text-blueGray-300")
                     }
                   ></i>{" "}
-                  Transfers List
+                  Contact Forms List
                 </Link>
               </li>
 
+              <li className="items-center">
+                <Link
+                  href="/auth/savinglist"
+                  className={
+                    "text-xs uppercase py-3 font-bold block " +
+                    (router.pathname.indexOf("/auth/savinglist") !== -1
+                      ? "text-lightBlue-500 hover:text-lightBlue-600"
+                      : "text-blueGray-700 hover:text-blueGray-500")
+                  }
+                >
+                  <i
+                    className={
+                      "fas fa-table mr-2 text-sm " +
+                      (router.pathname.indexOf("/auth/savinglist") !== -1
+                        ? "opacity-75"
+                        : "text-blueGray-300")
+                    }
+                  ></i>{" "}
+                  Savings Goals
+                </Link>
+              </li>
+
+              
           
               <li className="items-center">
                 <Link
@@ -262,27 +295,7 @@ export default function Sidebar() {
                 </Link>
               </li>
 
-              <li className="items-center">
-                <Link
-                  href="/auth/savinglist"
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (router.pathname.indexOf("/admin/tables") !== -1
-                      ? "text-lightBlue-500 hover:text-lightBlue-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                >
-                  <i
-                    className={
-                      "fas fa-table mr-2 text-sm " +
-                      (router.pathname.indexOf("/auth/savinglist") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
-                    }
-                  ></i>{" "}
-                  Savings Goals
-                </Link>
-              </li>
+              
 
               <li className="items-center">
                 <Link
