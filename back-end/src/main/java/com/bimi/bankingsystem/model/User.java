@@ -6,6 +6,7 @@ import lombok.*;
 @Entity
 @Getter
 @Setter
+@AllArgsConstructor
 @Table ( name="user")
 
 public class User {
@@ -40,6 +41,6 @@ public class User {
         this.role = role;
     }
     public User(){
-
+        role = "USER";
     }
 }

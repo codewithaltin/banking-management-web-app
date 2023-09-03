@@ -2,7 +2,6 @@ package com.bimi.bankingsystem.controller;
 
 import com.bimi.bankingsystem.model.User;
 import com.bimi.bankingsystem.service.UserService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -29,8 +28,8 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public List<User> getUserById(@PathVariable("id") Long id) {
-        return userService.getAllUsers();
+    public Optional<User> getUserById(@PathVariable("id") Long id) {
+        return userService.getUserById(id);
     }
 
     @DeleteMapping("/user/{id}")
