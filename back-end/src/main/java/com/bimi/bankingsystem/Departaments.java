@@ -1,10 +1,9 @@
-package com.bimi.bankingsystem.model;
+package com.bimi.bankingsystem;
 
 public enum Departaments {
     CostumerService,
     IT,
     Sales,
     Operations,
-    Marketing,
-
+    Marketing
 }

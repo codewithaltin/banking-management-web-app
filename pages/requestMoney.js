@@ -152,4 +152,4 @@ export default function requestMoney() {
     </div>
   );
 }
-bills.layout = Auth;
+requestMoney.layout = Auth;
