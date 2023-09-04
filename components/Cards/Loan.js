@@ -2,7 +2,7 @@ import React from "react";
 
 const Loan = ({loan, deleteLoan, editLoan}) => {
     return (
-    <tr key={loan.loan_id}>
+    <tr key={loan.id}>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
         {loan.fullName}
       </td>
@@ -27,7 +27,7 @@ const Loan = ({loan, deleteLoan, editLoan}) => {
 
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         <a
-          onClick={(e, id) => editLoan(e, loan.loan_id)}
+          onClick={(e, id) => editLoan(e, loan.id)}
           className="text-indigo-600 hover:text-indigo-800 cursor-pointer"
         >
           Edit
@@ -35,7 +35,7 @@ const Loan = ({loan, deleteLoan, editLoan}) => {
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         <a
-          onClick={(e, id) => deleteLoan(e, loan.loan_id)}
+          onClick={(e, id) => deleteLoan(e, loan.id)}
           className="text-indigo-600 hover:text-indigo-800 cursor-pointer"
         >
           Delete
