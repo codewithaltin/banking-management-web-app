@@ -39,8 +39,8 @@ const schema = yup
       .max(25000, "Donation amount must be lower than €25000"),
     cardInformation: yup
       .string()
-      .required("Card Info is required")
-      .min(16, "Card Info must be at least 16 characters"),
+      .required("Card Info is required"),
+      //.min(16, "Card Info must be at least 16 characters"),
     comment: yup
       .string()
       .required("Comment is required")
@@ -61,7 +61,7 @@ export default function Donate() {
     const DONATION_API_BASE_URL = "http://localhost:8080/api/v1/donation";
 
     const [isOpen, setIsOpen] = useState(false);
-    const [donation, setDonation] = useState({
+    const [donation, setDonations] = useState({
       id: "",
       fullName: "",
       email: "",
@@ -100,7 +100,7 @@ export default function Donate() {
     };
     const handleChange = (event) => {
       const value = event.target.value;
-      setDonation({ ...donation, [event.target.name]: value });
+      setDonations({ ...donation, [event.target.name]: value });
     };
 
     return( 

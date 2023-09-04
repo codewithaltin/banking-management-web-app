@@ -4,11 +4,13 @@ import com.bimi.bankingsystem.model.Donation;
 import com.bimi.bankingsystem.service.DonationService;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("api/v1")
 public class DonationController {
     private DonationService donationService;
 
