@@ -6,6 +6,7 @@ import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
+
 import java.util.Collection;
 import java.util.List;
 
@@ -21,18 +22,18 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
-
+//    @NonNull
     private long id;
-    @NonNull
+//    @NonNull
     private String firstName;
-    @NonNull
+//    @NonNull
     private String lastName;
     @NonNull
     private String email;
+
+    private String phoneNumber;
     @NonNull
     private String password;
-    @NonNull
-    private String phoneNumber;
 
     private double balance;
 

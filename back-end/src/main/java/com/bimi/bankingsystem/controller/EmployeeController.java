@@ -4,8 +4,10 @@ import com.bimi.bankingsystem.exception.UnauthorizedException;
 import com.bimi.bankingsystem.config.JwtService;
 import com.bimi.bankingsystem.model.Employee;
 import com.bimi.bankingsystem.service.EmployeeService;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Role;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -17,7 +19,7 @@ import java.util.*;
 @RequestMapping("/api/v1")
 public class EmployeeController {
 
-    private  EmployeeService employeeService;
+    private EmployeeService employeeService;
     @Autowired
     private JwtService jwtService;
 
@@ -28,7 +30,6 @@ public class EmployeeController {
     public Employee createLoan(@RequestBody Employee e){
         return employeeService.addEmployee(e);
     }
-
 
     @GetMapping("/employee")
     public ResponseEntity<List<Employee>> getAllEmployees(){
