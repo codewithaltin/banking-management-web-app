@@ -56,7 +56,7 @@ export default class MyApp extends App {
           <Component {...pageProps} />
         </SessionProvider>
         */}
-        <StepContext>
+        {/* <StepContext> */}
           <React.Fragment>
             <Head>
               <meta
@@ -70,7 +70,7 @@ export default class MyApp extends App {
               <Component {...pageProps} />
             </Layout>
           </React.Fragment>
-        </StepContext>
+        {/* </StepContext> */} 
       </>
     );
   }
