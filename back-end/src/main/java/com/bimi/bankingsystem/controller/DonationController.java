@@ -26,13 +26,20 @@ public class DonationController {
         return donationService.getAllDonations();
     }
 
+    @GetMapping("/donation/{id}")
+    public List<Donation> getDonationById(@PathVariable("id") Long id) {
+        Donation donation = null;
+        donation = donationService.getDonationById(id);
+        return donationService.getAllDonations();
+    }
+
     @PutMapping("/donation/{id}")
-    public Donation updateDonation(@PathVariable Integer id,@RequestBody Donation donation) {
+    public Donation updateDonation(@PathVariable ("id") Long id,@RequestBody Donation donation) {
         return donationService.updateDonation(id, donation);
     }
 
     @DeleteMapping("donation/{id}")
-    public boolean deleteDonation(@PathVariable Integer id){
+    public boolean deleteDonation(@PathVariable Long id){
         return donationService.deleteDonation(id);
     }
 
