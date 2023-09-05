@@ -7,28 +7,28 @@ import lombok.*;
 @Entity
 @Table(name = "futur_plus")
 public class FuturPlus {
+    @Setter(AccessLevel.PROTECTED)
     @Id
     @SequenceGenerator(name="futurplus_sequence",sequenceName = "futurplus_sequence",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "futurplus_sequence")
     @Column(updatable = false)
+
+    @NonNull
     private long id;
 
     @NonNull
-    @Column
     private String fullName;
 
     @NonNull
-    @Column
     private String email;
 
     @NonNull
-    @Column
-    private int cardInfo;
+    private Long cardInfo;
 
     public FuturPlus() {
     }
 
-    public FuturPlus(long id, @NonNull String fullName, @NonNull String email, @NonNull int cardInfo) {
+    public FuturPlus(@NonNull long id, @NonNull String fullName, @NonNull String email, @NonNull Long cardInfo) {
         this.id = id;
         this.fullName = fullName;
         this.email = email;

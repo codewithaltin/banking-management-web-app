@@ -8,9 +8,9 @@ import Navbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 
 import Auth from "layouts/Auth.js";
-export default function FuturPlus() {
 
-    const schema = yup
+
+  const schema = yup
   .object()
   .shape({
     fullName: yup
@@ -22,24 +22,24 @@ export default function FuturPlus() {
     .string()
     .email("Please enter a valid e-mail")
     .required("Email is required."),
-    cardInformation: yup
+    cardInfo: yup
     .string()
     .required("Card Info is required")
-    .min(16, "Card Info must be at least 16 characters"),
+    .matches(/^\d+$/, "Card Info must be a number")
   })
   .required();
 
-
+    export default function FuturPlus() {
     const {
         register,
         handleSubmit,
         watch,
         formState: { errors },
-      } 
-      = useForm({});
+      } = useForm({resolver: yupResolver(schema)});
 
       const FUTURPLUS_API_BASE_URL = "http://localhost:8080/api/v1/futur_plus";
 
+      const [isOpen, setIsOpen] = useState(false);
       const [futur_plus, setFuturPlus1] = useState({
         id: "",
         fullName: "",
@@ -71,10 +71,16 @@ export default function FuturPlus() {
         window.location.reload();
       };
     
-          const handleChange = (event) => {
-            const value = event.target.value;
-            setFuturPlus1({ ...futur_plus, [event.target.name]: value });
-          };
+          // const handleChange = (event) => {
+          //   const value = event.target.value;
+          //   setFuturPlus1({ ...futur_plus, [event.target.name]: value });
+          // };
+
+      const handleChange = (event) => {
+      const value = event.target.type === 'number' ? parseFloat(event.target.value) : event.target.value;
+      setFuturPlus1({ ...futur_plus, [event.target.name]: value });
+};
+
 
     return <>
       <Navbar transparent />
@@ -185,6 +191,9 @@ export default function FuturPlus() {
                       value={futur_plus.fullName}
                       onChange={(e) => handleChange(e)}
                     />
+                    <small role="alert" className="text-red-500 ">
+                      {errors.fullName?.message}
+                    </small>
                   </div>
 
                   <div className="relative w-full mb-3">
@@ -202,6 +211,9 @@ export default function FuturPlus() {
                       value={futur_plus.email}
                       onChange={(e) => handleChange(e)}
                     />
+                    <small role="alert" className="text-red-500 ">
+                      {errors.email?.message}
+                    </small>
                   </div>
 
                   <div className="relative w-full mb-3">
@@ -219,6 +231,9 @@ export default function FuturPlus() {
                       value={futur_plus.cardInfo}
                       onChange={(e) => handleChange(e)}
                     />
+                    <small role="alert" className="text-red-500 ">
+                      {errors.cardInfo?.message}
+                    </small>
                   </div>
                   <div className="text-center mt-6">
                     <button

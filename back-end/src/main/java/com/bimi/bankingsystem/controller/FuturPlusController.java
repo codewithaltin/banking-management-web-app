@@ -30,24 +30,19 @@ public class FuturPlusController {
     }
 
     @GetMapping("/futurPlus/{id}")
-    public ResponseEntity<FuturPlus> getFuturPlusById(@PathVariable("id") Long id) {
+    public List<FuturPlus> getFuturPlusById(@PathVariable("id") Long id) {
         FuturPlus futurPlus = null;
         futurPlus = futurPlusService.getFuturPlusById(id);
-        return ResponseEntity.ok(futurPlus);
+        return futurPlusService.getFuturPlus();
     }
 
     @DeleteMapping("/futurPlus/{id}")
-    public ResponseEntity<Map<String,Boolean>> deleteFuturPlus(@PathVariable("id") Long id) {
-        boolean deleted = false;
-        Map<String,Boolean> response = new HashMap<>();
-        response.put("deleted", deleted);
-        return ResponseEntity.ok(response);
+    public boolean deleteFuturPlus(@PathVariable Long id){
+        return futurPlusService.deleteFuturPlus(id);
     }
 
     @PutMapping("/futurPlus/{id}")
-    public ResponseEntity<FuturPlus> updateFuturPlus(@PathVariable("id") Long id,
-                                                       @RequestBody FuturPlus futurPlus){
-        futurPlus = futurPlusService.updateFuturPlus(id,futurPlus);
-        return ResponseEntity.ok(futurPlus);
+    public FuturPlus updateFuturPlus(@PathVariable("id") Long id,@RequestBody FuturPlus futurPlus){
+        return futurPlusService.updateFuturPlus(id,futurPlus);
     }
 }
