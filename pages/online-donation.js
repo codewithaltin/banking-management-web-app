@@ -38,7 +38,7 @@ const schema = yup
       .min(10, "Donation amount must be greater than €10")
       .max(25000, "Donation amount must be lower than €25000"),
     cardInformation: yup
-      .string()
+      .number()
       .required("Card Info is required"),
       //.min(16, "Card Info must be at least 16 characters"),
     comment: yup
@@ -82,7 +82,7 @@ export default function Donate() {
       comment: "",
     });
 
-    const saveDonation = async (e) => {
+    /* const saveDonation = async (e) => {
       //e.preventDefault();
       const response = await fetch(DONATION_API_BASE_URL, {
         method: "POST",
@@ -97,7 +97,31 @@ export default function Donate() {
       const _donation = await response.json();
       setResponseDonation(_donation);
       window.location.reload();
+    }; */
+
+    const saveDonation = async (e) => {
+      try {
+        const response = await fetch(DONATION_API_BASE_URL, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(donation),
+        });
+        
+        if (!response.ok) {
+          throw new Error("Failed to submit donation");
+        }
+    
+        const _donation = await response.json();
+        setResponseDonation(_donation);
+        window.location.reload();
+      } catch (error) {
+        console.error("Error:", error.message);
+        // Handle the error, e.g., display an error message to the user
+      }
     };
+    
     const handleChange = (event) => {
       const value = event.target.value;
       setDonations({ ...donation, [event.target.name]: value });
@@ -294,14 +318,14 @@ export default function Donate() {
                       onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
-                      {errors.amount?.message}
+                      {errors.donationAmount?.message}
                     </small>
                   </div>
 
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="cardinfo"
+                      htmlFor="cardInformation"
                     >
                       Card Information
                     </label>
@@ -314,7 +338,7 @@ export default function Donate() {
                       onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
-                      {errors.cardinfo?.message}
+                      {errors.cardInformation?.message}
                     </small>
                   </div>
 
@@ -335,7 +359,7 @@ export default function Donate() {
                       onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
-                      {errors.purpose?.message}
+                      {errors.comment?.message}
                     </small>
                   </div>
                   <div className="text-center mt-6">
