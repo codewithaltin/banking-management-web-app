@@ -7,6 +7,7 @@ import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import UserNavbar from "components/Navbars/UserNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import { getSession } from "next-auth/react";
+import { BrowserRouter } from "react-router-dom";
 // import { createRoot } from "react-dom/client";
 // import { BrowserRouter as Router } from "react-router-dom";
 

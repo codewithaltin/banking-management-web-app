@@ -7,6 +7,7 @@ import Auth from "layouts/Auth.js";
 import Login from "pages/auth/login.js";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
+import { useRouter } from "next/router";
 const phoneReg =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
@@ -43,6 +44,8 @@ const schema = yup
   })
   .required();
 export default function Register() {
+  const router = useRouter();
+
   const {
     register,
     handleSubmit,
@@ -88,7 +91,7 @@ export default function Register() {
     }
     const _user = await response.json();
     setResponseUser(_user);
-    window.location.reload();
+    router.push("login");
     alert("Registered Succesfully!");
   };
   const handleChange = (event) => {
