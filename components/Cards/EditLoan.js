@@ -6,7 +6,7 @@ const EditLoan = ({ loanId, setResponseLoan }) => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [loan, setLoan] = useState({
-    loan_id: "",
+    id: "",
     fullName: "",
     email: "",
     phoneNumber: "",

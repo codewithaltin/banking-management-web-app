@@ -22,7 +22,7 @@ const schema = yup
       .string()
       .email("Please enter a valid e-mail")
       .required("Email is required."),
-    phone: yup
+    phoneNumber: yup
       .string()
       .required("Phone number is required")
       .matches(phoneReg, "Phone Number is not valid."),
@@ -30,13 +30,13 @@ const schema = yup
       .string()
       .required("Address is required")
       .min(7, "Address must be at least 7 characters"),
-    amount: yup
+    loanAmount: yup
       .number()
       .typeError('Input must be a number')
       .required("Loan Amount is required")
       .min(2000, "Loan amount must be greater than €2000")
       .max(50000, "Loan amount must be lower than €50000"),
-    income: yup
+    monthlyIncome: yup
       .number()
       .typeError('Input must be a number')
       .required("Monthly incomes are required")
@@ -61,23 +61,23 @@ export default function Loan() {
 
     const [isOpen, setIsOpen] = useState(false);
     const [loan, setLoans] = useState({
-      loan_id: "",
+      id: "",
       fullName: "",
       email: "",
-      phone: "",
+      phoneNumber: "",
       address: "",
-      amount: "",
-      income: "",
+      loanAmount: "",
+      monthlyIncome: "",
       purpouse: "",
     });
     const [responseLoan, setResponseLoan] = useState({
-      loan_id: "",
+      id: "",
       fullName: "",
       email: "",
-      phone: "",
+      phoneNumber: "",
       address: "",
-      amount: "",
-      income: "",
+      loanAmount: "",
+      monthlyIncome: "",
       purpouse: "",
     });
 
@@ -246,10 +246,10 @@ export default function Loan() {
                     </label>
                     <input
                       type="tel"
-                      {...register("phone")}
+                      {...register("phoneNumber")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s 045-630-886"
-                      value={loan.phone}
+                      value={loan.phoneNumber}
                       onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
@@ -286,14 +286,14 @@ export default function Loan() {
                     </label>
                     <input
                       type="number"
-                      {...register("amount")}
+                      {...register("loanAmount")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s 15000"
-                      value={loan.amount}
+                      value={loan.loanAmount}
                       onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
-                      {errors.amount?.message}
+                      {errors.loanAmount?.message}
                     </small>
                   </div>
 
@@ -306,14 +306,14 @@ export default function Loan() {
                     </label>
                     <input
                       type="number"
-                      {...register("income")}
+                      {...register("monthlyIncome")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s 800"
-                      value={loan.income}
+                      value={loan.monthlyIncome}
                       onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
-                      {errors.income?.message}
+                      {errors.monthlyIncome?.message}
                     </small>
                   </div>
 
