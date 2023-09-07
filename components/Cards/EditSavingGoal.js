@@ -1,41 +1,38 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { React, useState, useEffect, Fragment } from "react";
 
-const EditLoan = ({ loanId, setResponseLoan }) => {
-  const LOAN_API_BASE_URL = "http://localhost:8080/api/v1/loan";
+const EditSavingGoal = ({ savingGoalId, setResponseSavingGoal }) => {
+  const SAVINGGOAL_API_BASE_URL = "http://localhost:8080/api/v1/savingGoal";
 
   const [isOpen, setIsOpen] = useState(false);
-  const [loan, setLoan] = useState({
+  const [savingGoal, setSavingGoal] = useState({
     id: "",
-    fullName: "",
-    email: "",
-    phoneNumber: "",
-    address: "",
-    loanAmount: "",
-    monthlyIncome: "",
-    purpouse: "",
+    savingReason: "",
+    amount: "",
+    goalName: "",
+    date: "",
   });
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(LOAN_API_BASE_URL + "/" + loanId, {
+        const response = await fetch(SAVINGGOAL_API_BASE_URL + "/" + savingGoalId, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
         });
-        const _loan = await response.json();
-        setLoan(_loan);
+        const _user = await response.json();
+        setSavingGoal(_user);
         setIsOpen(true);
       } catch (error) {
         console.log(error);
       }
     };
-    if (loanId) {
+    if (savingGoalId) {
       fetchData();
     }
-  }, [loanId]);
+  }, [savingGoalId]);
 
   function closeModal() {
     setIsOpen(false);
@@ -47,7 +44,7 @@ const EditLoan = ({ loanId, setResponseLoan }) => {
 
   const handleChange = (event) => {
     const value = event.target.value;
-    setLoan({ ...loan, [event.target.name]: value });
+    setSavingGoal({ ...savingGoal, [event.target.name]: value });
   };
 
   const reset = (e) => {
@@ -55,20 +52,20 @@ const EditLoan = ({ loanId, setResponseLoan }) => {
     setIsOpen(false);
   };
 
-  const updateLoan = async (e) => {
+  const updateSavingGoal = async (e) => {
     e.preventDefault();
-    const response = await fetch(LOAN_API_BASE_URL + "/" + loanId, {
+    const response = await fetch(SAVINGGOAL_API_BASE_URL + "/" + savingGoalId, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(loan),
+      body: JSON.stringify(savingGoal),
     });
     if (!response.ok) {
       throw new Error("Something went wrong");
     }
-    const _loan = await response.json();
-    setResponseLoan(_loan);
+    const _savingGoal = await response.json();
+    setResponseSavingGoal(_savingGoal);
     reset(e);
   };
 
@@ -91,99 +88,61 @@ const EditLoan = ({ loanId, setResponseLoan }) => {
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
                 >
-                  Update Loan
+                  Update Saving Goal
                 </Dialog.Title>
                 <div className="flex max-w-md max-auto">
                   <div className="py-2">
                     <div className="h-14 my-4">
                       <label className="block text-gray-600 text-sm font-normal">
-                        Full Name
+                        Saving Reason
                       </label>
                       <input
                         type="text"
-                        name="fullName"
-                        value={loan.fullName}
+                        name="savingReason"
+                        value={savingGoal.savingReason}
                         onChange={(e) => handleChange(e)}
                         className="h-10 w-96 border mt-2 px-2 py-2"
                       ></input>
                     </div>
                     <div className="h-14 my-4">
                       <label className="block text-gray-600 text-sm font-normal">
-                        Email
+                        Amount
                       </label>
                       <input
-                        type="text"
-                        name="email"
-                        value={loan.email}
+                        type="number"
+                        name="amount"
+                        value={savingGoal.amount}
                         onChange={(e) => handleChange(e)}
                         className="h-10 w-96 border mt-2 px-2 py-2"
                       ></input>
                     </div>
                     <div className="h-14 my-4">
                       <label className="block text-gray-600 text-sm font-normal">
-                        Phone Number
+                        Goal Name
                       </label>
                       <input
                         type="text"
-                        name="phoneNumber"
-                        value={loan.phoneNumber}
+                        name="goalName"
+                        value={savingGoal.goalName}
                         onChange={(e) => handleChange(e)}
                         className="h-10 w-96 border mt-2 px-2 py-2"
                       ></input>
                     </div>
                     <div className="h-14 my-4">
                       <label className="block text-gray-600 text-sm font-normal">
-                        Address
+                        Date
                       </label>
                       <input
-                        type="text"
-                        name="address"
-                        value={loan.address}
+                        type="date"
+                        name="date"
+                        value={savingGoal.date}
                         onChange={(e) => handleChange(e)}
                         className="h-10 w-96 border mt-2 px-2 py-2"
                       ></input>
                     </div>
-                    <div className="h-14 my-4">
-                      <label className="block text-gray-600 text-sm font-normal">
-                        Loan Amount
-                      </label>
-                      <input
-                        type="text"
-                        name="loanAmount"
-                        value={loan.loanAmount}
-                        onChange={(e) => handleChange(e)}
-                        className="h-10 w-96 border mt-2 px-2 py-2"
-                      ></input>
-                    </div>
-                    <div className="h-14 my-4">
-                      <label className="block text-gray-600 text-sm font-normal">
-                        Monthly Income
-                      </label>
-                      <input
-                        type="text"
-                        name="monthlyIncome"
-                        value={loan.monthlyIncome}
-                        onChange={(e) => handleChange(e)}
-                        className="h-10 w-96 border mt-2 px-2 py-2"
-                      ></input>
-                    </div>
-                    <div className="h-14 my-4">
-                      <label className="block text-gray-600 text-sm font-normal">
-                        Purpouse
-                      </label>
-                      <input
-                        type="text"
-                        name="purpouse"
-                        value={loan.purpouse}
-                        onChange={(e) => handleChange(e)}
-                        className="h-10 w-96 border mt-2 px-2 py-2"
-                      ></input>
-                    </div>
-
-
                     <div className="h-14 my-4 space-x-4 pt-4">
                       <button
-                        onClick={updateLoan}
+                        onClick={updateSavingGoal}
                         className=" bg-emerald-400 hover:bg-emerald-600 rounded text-white font-semibold   py-2 px-6"
                       >
                         Update
@@ -206,4 +165,4 @@ const EditLoan = ({ loanId, setResponseLoan }) => {
   );
 };
 
-export default EditLoan;
+export default EditSavingGoal;

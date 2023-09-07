@@ -10,10 +10,11 @@ public interface UserService {
     List<User> getAllUsers();
 
 
-    Optional<User> getUserById(Long id);
+    User getUserById(Long id);
 
     boolean deleteUser(Long id);
 
     User updateUser(Long id, User user);
 
+    void addSavingGoalToUser(Long userId, Long savingGoalId);
 }

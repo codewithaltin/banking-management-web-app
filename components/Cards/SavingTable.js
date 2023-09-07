@@ -6,6 +6,7 @@ import Savings from "./Savings";
 import AddGoal from "./AddGoal";
 import TableDropdown from "components/Dropdowns/TableDropdown.js";
 import CardTable from "./CardTable";
+import EditSavingGoal from "./EditSavingGoal";
 
 export default function SavingTable({ savingGoal, color }) {
 
@@ -47,7 +48,7 @@ export default function SavingTable({ savingGoal, color }) {
   }, [savingGoal, responseSavingGoal]);
 
   const deleteSavingGoal = (e, id) => {
-    let confirmed = confirm("Are you sure you wanna delete this goal ?");
+    let confirmed = confirm("Are you sure you wanna delete this Saving Goal?");
     if (!confirmed) return;
     e.preventDefault();
     fetch(SAVINGGOAL_API_BASE_URL + "/" + id, {
@@ -60,6 +61,13 @@ export default function SavingTable({ savingGoal, color }) {
       }
     });
   };
+
+  const editSavingGoal = (e, id) => {
+    e.preventDefault();
+    setSavingGoalId(id);
+  };
+
+  
 
   return (
     <>
@@ -161,15 +169,17 @@ export default function SavingTable({ savingGoal, color }) {
               <tbody>
                 {savingGoals?.map((savingGoal) => (
                   <Savings
-                  savingGoal={savingGoal}
+                    savingGoal={savingGoal}
                     key={savingGoal.id}
                     deleteSavingGoal={deleteSavingGoal}
+                    editSavingGoal={editSavingGoal}
                   />
                 ))}
               </tbody>
             )}
           </table>
         </div>
+        <EditSavingGoal savingGoalId={savingGoalId} setResponseSavingGoal={setResponseSavingGoal} />
       </div>
     </>
   );

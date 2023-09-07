@@ -29,7 +29,7 @@ export default function DonationTable({ donation }) {
         setLoading(false);
       };
       fetchData();
-    }, [donations, responseDonation]);
+    }, [donation, responseDonation]);
 
     const deleteDonation = (e, id) => {
         let confirmed = confirm("Are you sure you wanna delete this donation?");
@@ -38,7 +38,7 @@ export default function DonationTable({ donation }) {
         fetch(DONATION_API_BASE_URL + "/" + id, {
             method: "DELETE",
           }).then((res) => {
-            if (res.ok) {
+            if (donations) {
               setDonations((prevElement) => {
                 return prevElement.filter((donation) => donation.id !== id);
               });

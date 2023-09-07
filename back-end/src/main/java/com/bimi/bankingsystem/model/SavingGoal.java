@@ -1,7 +1,11 @@
 package com.bimi.bankingsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -34,6 +38,10 @@ public class SavingGoal {
     @Column
     private String goalDescription;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id", referencedColumnName = "id")
+    private User user;
+
 
     public SavingGoal() {
 
@@ -48,4 +56,3 @@ public class SavingGoal {
         this.goalDescription = goalDescription;
     }
 }
-
