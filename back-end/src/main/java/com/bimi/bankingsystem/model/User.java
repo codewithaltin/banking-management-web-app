@@ -1,7 +1,12 @@
 package com.bimi.bankingsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
+
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -12,15 +17,14 @@ import lombok.*;
 public class User {
     @Setter(AccessLevel.PROTECTED) @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(updatable = false)
-    @NonNull
+    @Column(name="id")
     private long id;
     @NonNull
     private String firstName;
     @NonNull
     private String lastName;
     @NonNull
-    private String email;
+    private String emailId;
     @NonNull
     private String phoneNumber;
     @NonNull
@@ -30,17 +34,32 @@ public class User {
     @NonNull
     private String role;
 
+    public Set<SavingGoal> getSavingGoals() {
+        return savingGoals;
+    }
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private Set<SavingGoal> savingGoals;
+
+
+
     public User(long id, String firstName, String lastName, String emailId, String phoneNumber, String password,String role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.email = email;
+        this.emailId = emailId;
         this.phoneNumber = phoneNumber;
         this.password = password;
-
         this.role = role;
     }
     public User(){
         role = "USER";
     }
+
+    public void addSavingGoals(SavingGoal savingGoal) {
+        savingGoals.add(savingGoal);
+        savingGoal.setUser(this);
+    }
+
 }

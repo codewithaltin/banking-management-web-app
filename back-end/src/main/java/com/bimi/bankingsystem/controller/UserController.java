@@ -1,5 +1,6 @@
 package com.bimi.bankingsystem.controller;
 
+
 import com.bimi.bankingsystem.model.User;
 import com.bimi.bankingsystem.service.UserService;
 import org.springframework.web.bind.annotation.*;
@@ -28,7 +29,7 @@ public class UserController {
     }
 
     @GetMapping("/user/{id}")
-    public Optional<User> getUserById(@PathVariable("id") Long id) {
+    public User getUserById(@PathVariable("id") Long id) {
         return userService.getUserById(id);
     }
 
@@ -41,6 +42,12 @@ public class UserController {
     public User updateUser(@PathVariable("id") Long id,
                            @RequestBody User user) {
         return userService.updateUser(id,user);
+    }
+
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESSOR')")
+    @PostMapping("{userId}/savingGoal/{savingGoalId}")
+    public void addSavingGoalToUser(@PathVariable Long userId, @PathVariable Long savingGoalId) {
+        userService.addSavingGoalToUser(userId, savingGoalId);
     }
 
 }

@@ -1,11 +1,12 @@
 package com.bimi.bankingsystem.service;
+import com.bimi.bankingsystem.exception.NotFoundException;
+import com.bimi.bankingsystem.model.SavingGoal;
 import com.bimi.bankingsystem.model.User;
 import com.bimi.bankingsystem.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 
@@ -13,6 +14,7 @@ public class UserServiceImpl implements UserService {
 
 
     private UserRepository userRepository;
+    private SavingGoalService savingGoalService;
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -29,8 +31,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Optional<User> getUserById(Long id) {
-       return userRepository.findById(id);
+    public User getUserById(Long id) {
+        try {
+            return userRepository.findById(id).orElseThrow(() -> new NotFoundException("User with id " + id + " not found"));
+        } catch (NotFoundException ex) {
+            System.out.println("User could not be found, id: " + id);
+            throw ex;
+        }
     }
 
     @Override
@@ -43,7 +50,7 @@ public class UserServiceImpl implements UserService {
     public User updateUser(Long id, User user) {
         User u =
                 userRepository.findById(id).get();
-        u.setEmail(user.getEmail());
+        u.setEmailId(user.getEmailId());
         u.setFirstName(user.getFirstName());
         u.setLastName(user.getLastName());
         u.setPassword(user.getPassword());
@@ -51,5 +58,16 @@ public class UserServiceImpl implements UserService {
 
         return userRepository.save(u);
 
+    }
+
+    @Override
+    public void addSavingGoalToUser(Long userId, Long savingGoalId) {
+        SavingGoal savingGoal = savingGoalService.getSavingGoalsById(savingGoalId);
+
+        User user = getUserById(userId);
+
+        user.addSavingGoals(savingGoal);
+
+        saveUser(user);
     }
 }

@@ -26,7 +26,6 @@ public class EmployeeController {
         return employeeService.getAllEmployees();
     }
 
-
     @DeleteMapping("/employee/{id}")
     public boolean deleteEmployee(@PathVariable Long id){
         return employeeService.deleteEmployee(id);
