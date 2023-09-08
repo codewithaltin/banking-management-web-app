@@ -10,22 +10,7 @@ import { useSession, signIn, signOut } from "next-auth/react";
 
 import Auth from "layouts/Auth.js";
 
-const USER_API_BASE_URL = "http://localhost:8080/api/v1/auth/authenticate";
-
-const schema = yup
-  .object()
-  .shape({
-    email: yup
-      .string()
-      .email("Please enter a valid e-mail")
-      .required("Email is required."),
-    password: yup
-      .string()
-      .required("Password is required.")
-      .min(5, "Password must be 5 characters long")
-      .max(35, "Password must be shorter than 35 characters"),
-  })
-  .required();
+const LOGIN_API_BASE_URL = "http://localhost:8080/api/v1/auth/authenticate";
 
 export default function Login() {
   const router = useRouter();
@@ -40,29 +25,27 @@ export default function Login() {
     copy[e.target.name] = e.target.value;
     setState(copy);
   }
+
   async function handleSubmit() {
     console.log(state);
-    const res = await fetch(USER_API_BASE_URL, {
+    const res = await fetch(LOGIN_API_BASE_URL, {
       method: "POST",
       body: JSON.stringify(state),
       headers: {
         "Content-Type": "application/json",
+        credentials: "omit",
       },
     });
     if (res.ok) {
+      console.log(state);
+
       const json = await res.json();
       localStorage.setItem("token", json.token);
-      router.push("/");
     } else {
       alert("Bad credentials");
     }
+    router.push("individual_register");
   }
-  const {
-    register,
-    watch,
-    formState: { errors },
-  } = useForm({ resolver: yupResolver(schema) });
-  const onSubmit = (data) => console.log(data);
 
   return (
     <>
@@ -104,9 +87,9 @@ export default function Login() {
                       onChange={handleChange}
                       name="password"
                     />
-                    <small role="alert" className="text-red-500 ">
+                    {/* <small role="alert" className="text-red-500 ">
                       {errors.password?.message}
-                    </small>
+                    </small> */}
                   </div>
                   <div>
                     <label className="inline-flex items-center cursor-pointer">

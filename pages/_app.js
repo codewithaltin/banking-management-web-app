@@ -63,8 +63,6 @@ export default class MyApp extends App {
           </Head>
           <Layout>
             <Component {...pageProps} />
-          
-            </Link>
           </Layout>
         </React.Fragment>
       </>

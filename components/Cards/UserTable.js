@@ -6,7 +6,7 @@ import EditUser from "./EditUser";
 import User from "./User";
 
 export default function UserTable({ user }) {
-  const USER_API_BASE_URL = "http://localhost:8080/api/v1/users";
+  const USER_API_BASE_URL = "http://localhost:8080/api/v1/auth/user";
   const [users, setUsers] = useState(null);
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState(null);
