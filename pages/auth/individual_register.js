@@ -13,6 +13,12 @@ const phoneReg =
 const schema = yup
   .object()
   .shape({
+    accountNumber: yup
+      .string()
+      .matches(/^[0-9]+$/, "Must be only digits")
+      .required("Account number is required.")
+      .min(16, "Account number must be exactly 16 characters")
+      .max(16, "Account number must be exactly 16 characters"),
     firstName: yup
       .string()
       .required("First Name is required.")
@@ -55,6 +61,7 @@ export default function Register() {
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState({
     id: "",
+    accountNumber: "",
     firstName: "",
     lastName: "",
     emailId: "",
@@ -63,6 +70,7 @@ export default function Register() {
   });
   const [responseUser, setResponseUser] = useState({
     id: "",
+    accountNumber: "",
     firstName: "",
     lastName: "",
     emailId: "",
@@ -133,6 +141,24 @@ export default function Register() {
                   <small>Or sign up with credentials</small>
                 </div>
                 <form onSubmit={handleSubmit(saveUser)}>
+                <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      Account number
+                    </label>
+                    <input
+                      {...register("accountNumber")}
+                      type="tel"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      value={user.accountNumber}
+                      onChange={(e) => handleChange(e)}
+                    />
+                    <small role="alert" className="text-red-500 ">
+                      {errors.accountNumber?.message}
+                    </small>
+                  </div>
                   <label
                     className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                     htmlFor="grid-password"

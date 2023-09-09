@@ -1,7 +1,15 @@
 package com.bimi.bankingsystem.model;
 
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "transfer")
 public class Transfer {
 
+    @Id
+    @SequenceGenerator(name =   "transfer_sequence", sequenceName = "transfer_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transfer_sequence")
+    @Column(updatable = false)
     private long id;
     private String firstName;
     private String lastName;

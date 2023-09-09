@@ -99,6 +99,29 @@ export default function Transfer() {
     text: "",
   });
 
+  const executeTransferMethod = async () => {
+    try {
+      const response = await fetch(TRANSFER_API_BASE_URL, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(transfer), 
+      });
+  
+      if (!response.ok) {
+        // Handle any errors if needed
+        console.error('Transfer failed');
+      } else {
+        console.log('Transfer executed successfully!');
+        location.reload();
+      }
+    } catch (error) {
+ 
+      console.error('An error occurred:', error);
+    }
+  };
+
   const saveTransfer = async (e) => {
     //e.preventDefault();
     const response = await fetch(TRANSFER_API_BASE_URL, {
@@ -133,7 +156,7 @@ export default function Transfer() {
           </div>
         </div>
         <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-          <form onSubmit={handleSubmit(saveTransfer)}>
+          <form onSubmit={handleSubmit(executeTransferMethod)}>
             <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
               Your Information
             </h6>
