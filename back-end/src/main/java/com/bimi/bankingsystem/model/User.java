@@ -36,6 +36,9 @@ public class User {
     @NonNull
     private String role;
 
+<<<<<<< HEAD
+    public User(long id, String firstName, String lastName, String email, String phoneNumber, String password,String role) {
+=======
     public Set<SavingGoal> getSavingGoals() {
         return savingGoals;
     }
@@ -46,7 +49,7 @@ public class User {
 
 
 
-    public User(long id, String firstName, String lastName, String emailId,long accountNumber, String phoneNumber, String password,String role) {
+    public User(long id, String firstName, String lastName, String emailId, String phoneNumber, String password,String role) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
