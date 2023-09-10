@@ -1,7 +1,6 @@
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import LayoutAuthenticated from "../components/layout-authenticated.js";
-import styles from "../styles/styles.module.css";
 
 export default function User() {
   const [content, setContent] = useState(null);
@@ -13,7 +12,7 @@ export default function User() {
 
   async function fetchContent() {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/user`,
+      `${process.env.NEXT_PUBLIC_API_URL}/api/v1/auth/user/1`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -29,9 +28,9 @@ export default function User() {
 
   return (
     <LayoutAuthenticated>
-      <div className={styles.container}>
-        <h1 className={styles.title}>User</h1>
-        {content && <p>{content}</p>}
+      <div>
+        <h1>User</h1>
+        {content}
       </div>
     </LayoutAuthenticated>
   );

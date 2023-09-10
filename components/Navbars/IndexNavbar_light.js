@@ -1,11 +1,39 @@
 import React from "react";
 import Link from "next/link";
-
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 // components
 
 import IndexDropdown from "components/Dropdowns/IndexDropdown.js";
 
 export default function Navbar(props) {
+  const [profile, setProfile] = useState();
+  const router = useRouter();
+  const USER_API_BASE_URL = "http://localhost:8080/api/v1/auth/user";
+  useEffect(() => {
+    fetchProfile();
+  }, []);
+
+  async function fetchProfile() {
+    const res = await fetch(USER_API_BASE_URL, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
+    if (res.ok) {
+      const json = await res.json();
+      setProfile(json);
+    } else {
+      router.push("/auth/login");
+    }
+  }
+
+  function logout() {
+    localStorage.removeItem("token");
+    router.push("/");
+  }
+
   const [navbarOpen, setNavbarOpen] = React.useState(false);
 
   return (
@@ -67,7 +95,13 @@ export default function Navbar(props) {
                   className="text-costum-dark  hover:text-blueGray-00 text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
                 >
                   Sign In
-                </Link>{" "}
+                </Link>
+                <Link
+                  href="/auth/login"
+                  className="text-costum-dark  hover:text-blueGray-00 text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                >
+                  Welcome
+                </Link>
               </li>
             </ul>
           </div>

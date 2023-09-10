@@ -26,14 +26,14 @@ export default function Login() {
     setState(copy);
   }
 
-  async function handleSubmit() {
+  async function handleSubmit(event) {
+    event.preventDefault();
     console.log(state);
     const res = await fetch(LOGIN_API_BASE_URL, {
       method: "POST",
       body: JSON.stringify(state),
       headers: {
         "Content-Type": "application/json",
-        credentials: "omit",
       },
     });
     if (res.ok) {
@@ -44,7 +44,7 @@ export default function Login() {
     } else {
       alert("Bad credentials");
     }
-    router.push("individual_register");
+    router.push("/");
   }
 
   return (
@@ -108,7 +108,7 @@ export default function Login() {
                     <input
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="submit"
-                      onClick={handleSubmit}
+                      onClick={(event) => handleSubmit(event)}
                     />
                     Sign In
                   </div>
