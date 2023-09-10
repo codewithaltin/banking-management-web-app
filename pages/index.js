@@ -1,7 +1,6 @@
 import React from "react";
 import App from "./App";
-import { BrowserRouter } from "react-router-dom";
-import { createRoot } from "react-dom/client";
+import BrowserRouter from "next/router";
 
 export default function Index() {
   return (
