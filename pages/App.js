@@ -2,10 +2,9 @@ import React from "react";
 import Link from "next/link";
 import IndexNavbarLight from "components/Navbars/IndexNavbar_light.js";
 import Footer from "components/Footers/Footer.js";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
-// import { createRoot } from "react-dom/client";
-// import { BrowserRouter as Router } from "react-router-dom";
 function App() {
   return (
     <div>

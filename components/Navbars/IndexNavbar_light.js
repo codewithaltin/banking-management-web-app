@@ -7,32 +7,20 @@ import { useState, useEffect } from "react";
 import IndexDropdown from "components/Dropdowns/IndexDropdown.js";
 
 export default function Navbar(props) {
-  const [profile, setProfile] = useState();
-  const router = useRouter();
-  const USER_API_BASE_URL = "http://localhost:8080/api/v1/auth/user";
-  useEffect(() => {
-    fetchProfile();
-  }, []);
+  // const router = useRouter();
+  // const USER_API_BASE_URL = "http://localhost:8080/api/v1/auth/user";
+  // const [profile, setProfile] = useState();
 
-  async function fetchProfile() {
-    const res = await fetch(USER_API_BASE_URL, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    });
-    if (res.ok) {
-      const json = await res.json();
-      setProfile(json);
-    } else {
-      router.push("/auth/login");
-    }
-  }
-
-  function logout() {
-    localStorage.removeItem("token");
-    router.push("/");
-  }
+  // useEffect(() => {
+  //   (async () => {
+  //     const response = await fetch(USER_API_BASE_URL, {
+  //       credentials: "include",
+  //     });
+  //     const content = await response.json();
+  //     console.log(content);
+  //   })();
+  // });
+  // console.log(profile);
 
   const [navbarOpen, setNavbarOpen] = React.useState(false);
 
@@ -63,24 +51,16 @@ export default function Navbar(props) {
             id="example-navbar-warning"
           >
             <ul className="flex flex-col lg:flex-row list-none align-center mr-auto">
-              <li className="flex items-center">
+              {/* <li className="flex items-center">
                 {" "}
                 <Link
-                  href="/auth/individual_register"
+                  href="/auth/register"
                   className="text-costum-dark  text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
                 >
                   Individual
                 </Link>{" "}
-              </li>
-              <li className="flex items-center">
-                {" "}
-                <Link
-                  href="/auth/business_register"
-                  className="text-costum-dark  text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
-                >
-                  Business
-                </Link>{" "}
-              </li>{" "}
+              </li> */}
+
               <li>
                 <IndexDropdown />
               </li>
@@ -100,7 +80,7 @@ export default function Navbar(props) {
                   href="/auth/login"
                   className="text-costum-dark  hover:text-blueGray-00 text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
                 >
-                  Welcome
+                  {/* Welcome {profile.firstName} */}
                 </Link>
               </li>
             </ul>

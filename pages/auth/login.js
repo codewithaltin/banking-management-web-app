@@ -25,10 +25,9 @@ export default function Login() {
     copy[e.target.name] = e.target.value;
     setState(copy);
   }
-
+  const email = state.email;
   async function handleSubmit(event) {
     event.preventDefault();
-    console.log(state);
     const res = await fetch(LOGIN_API_BASE_URL, {
       method: "POST",
       body: JSON.stringify(state),
@@ -37,14 +36,12 @@ export default function Login() {
       },
     });
     if (res.ok) {
-      console.log(state);
-
       const json = await res.json();
       localStorage.setItem("token", json.token);
+      router.push({ pathname: "/profile", query: { email: email } }, "profile");
     } else {
-      alert("Bad credentials");
+      alert("Bad credentials!");
     }
-    router.push("/");
   }
 
   return (
@@ -110,7 +107,6 @@ export default function Login() {
                       type="submit"
                       onClick={(event) => handleSubmit(event)}
                     />
-                    Sign In
                   </div>
                 </form>
               </div>

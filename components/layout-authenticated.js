@@ -32,7 +32,7 @@ export default function LayoutAuthenticated(props) {
   return (
     <div>
       <div>
-        <p>Signed in as: {profile && profile.username}</p>
+        <p>Signed in as: {profile}</p>
         <p>
           <button onClick={logout}>Log out</button>
         </p>

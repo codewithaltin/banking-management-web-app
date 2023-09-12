@@ -45,7 +45,9 @@ const schema = yup
   .required();
 export default function Register() {
   const router = useRouter();
-
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const {
     register,
     handleSubmit,
@@ -91,7 +93,7 @@ export default function Register() {
     }
     const _user = await response.json();
     setResponseUser(_user);
-    router.push("login");
+    await router.push("login");
     alert("Registered Succesfully!");
   };
   const handleChange = (event) => {

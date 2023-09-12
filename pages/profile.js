@@ -2,8 +2,41 @@ import React from "react";
 
 import Navbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
-
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 export default function Profile() {
+  const router = useRouter();
+  const [profile, setProfile] = useState();
+  const email = router.query.email;
+  const USER_API_BASE_URL = `http://localhost:8080/api/v1/auth/user/${email}`;
+
+  useEffect(() => {
+    fetchProfile();
+  }, []);
+
+  async function fetchProfile() {
+    const res = await fetch(USER_API_BASE_URL, {
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: "Bearer " + localStorage.getItem("token"),
+      },
+    });
+    if (res.ok) {
+      const json = await res.json();
+      setProfile(json);
+    } else {
+      router.push("/signin");
+    }
+  }
+  if (profile == undefined) return;
+
+  console.log(profile.firstName);
+
+  function logout() {
+    localStorage.removeItem("token");
+    router.push("/");
+  }
+
   return (
     <>
       <Navbar transparent />
@@ -96,7 +129,7 @@ export default function Profile() {
                 </div>
                 <div className="text-center mt-12">
                   <h3 className="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
-                    Jenna Stones
+                    {profile.firstName + " " + profile.lastName}
                   </h3>
                   <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
                     <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>{" "}

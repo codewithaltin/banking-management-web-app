@@ -43,7 +43,7 @@ public class AuthenticationService {
 //                        request.getPassword()
 //                )
 //        );
-        log.info("AUTHENTICATED");
+       log.info("AUTHENTICATED");
         var user = repository.findByEmail(request.getEmail())
                 .orElseThrow();
         log.info("{}",user);
