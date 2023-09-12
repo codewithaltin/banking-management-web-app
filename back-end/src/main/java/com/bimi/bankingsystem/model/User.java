@@ -36,9 +36,6 @@ public class User {
     @NonNull
     private String role;
 
-<<<<<<< HEAD
-    public User(long id, String firstName, String lastName, String email, String phoneNumber, String password,String role) {
-=======
     public Set<SavingGoal> getSavingGoals() {
         return savingGoals;
     }

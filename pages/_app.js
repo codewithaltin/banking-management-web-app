@@ -12,7 +12,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "styles/tailwind.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-Router.events.on("routeChangeStart", (url) => {
+Router.events.on("routeChangeStart", (url) => { 
   console.log(`Loading: ${url}`);
   document.body.classList.add("body-page-transition");
   ReactDOM.render(
@@ -57,7 +57,6 @@ export default class MyApp extends App {
         </SessionProvider>
         */}
         {/* <StepContext> */}
-<<<<<<< HEAD
         <React.Fragment>
           <Head>
             <meta
@@ -71,22 +70,6 @@ export default class MyApp extends App {
             <Component {...pageProps} />
           </Layout>
         </React.Fragment>
-=======
-          <React.Fragment>
-            <Head>
-              <meta
-                name="viewport"
-                content="width=device-width, initial-scale=1, shrink-to-fit=no"
-              />
-
-              <title>Futur Banking</title>
-            </Head>
-            <Layout>
-              <Component {...pageProps} />
-            </Layout>
-          </React.Fragment>
-        {/* </StepContext> */} 
->>>>>>> f3177e905e0e03a3b4f0e65f81587dd7eb450432
       </>
     );
   }

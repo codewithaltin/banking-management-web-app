@@ -76,6 +76,18 @@ public class TransferService {
         return true;
     }
 
+    public User findReceiver(long number){
+        User receiver = null;
+
+        List<User> users = userServiceImp.getAllUsers();
+        for (User value : users) {
+            if (number == value.getAccountNumber()) {
+                receiver = value;
+            }
+        }
+        return receiver;
+    }
+
     public User findByAccountNumber(long number){
 
         User user = null;
@@ -89,25 +101,33 @@ public class TransferService {
         return user;
     }
 
+
+
     public void transferAmount(Transfer transferRequest) {
-        // Retrieve the sender's user from the database using the sender's account number
+
         User sender = this.findByAccountNumber(transferRequest.getAccountNumber());
+
+        User receiver = this.findReceiver(transferRequest.getReciverAccountNumber());
+
 
         if (sender == null) {
             throw new IllegalArgumentException("Sender account not found.");
         }
 
-        // Check if the sender has sufficient balance
+
         if (sender.getBalance() < transferRequest.getAmount()) {
             throw new IllegalArgumentException("Insufficient balance.");
         }
 
-        // Deduct the amount from the sender's balance
-        double newBalance = sender.getBalance() - transferRequest.getAmount();
-        sender.setBalance(newBalance);
+        double senderBalance = sender.getBalance() - transferRequest.getAmount();
+        sender.setBalance(senderBalance);
 
-        // Update the sender's balance in the database
+        double receiverBalance = receiver.getBalance() + transferRequest.getAmount();
+        receiver.setBalance(receiverBalance);
+
+
         userRepository.save(sender);
+        userRepository.save(receiver);
     }
 
 
