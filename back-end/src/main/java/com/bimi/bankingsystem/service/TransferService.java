@@ -1,13 +1,11 @@
 package com.bimi.bankingsystem.service;
 
-import com.bimi.bankingsystem.entity.TransferEntity;
-import com.bimi.bankingsystem.model.Loan;
+
 import com.bimi.bankingsystem.model.Transfer;
 import com.bimi.bankingsystem.model.User;
 import com.bimi.bankingsystem.repository.TransferRepository;
 import com.bimi.bankingsystem.repository.UserRepository;
 import org.springframework.beans.BeanUtils;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -26,12 +24,6 @@ public class TransferService {
         this.userRepository = userRepository;
         this.transferRepository = transferRepository;}
 
-    /*public Transfer saveTransfer(Transfer transfer) {
-        Transfer transferEntity = new Transfer();
-        BeanUtils.copyProperties(transfer, transferEntity);
-        transferRepository.save(transferEntity);
-        return transfer;
-    }*/
 
     public Transfer saveTransfer(Transfer transfer){
         return transferRepository.save(transfer);
@@ -146,7 +138,4 @@ public class TransferService {
         return transfer;
     }
 
-
-    public void transferAmount(long accountNumber, int amount) {
-    }
 }

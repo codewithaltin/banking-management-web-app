@@ -36,11 +36,8 @@ public class InstitutionPaymentController {
         return ResponseEntity.ok(institutionPayment);
     }
     @DeleteMapping("/institutionPayments/{id}")
-    public ResponseEntity<Map<String,Boolean>> deleteSavingGoal(@PathVariable("id") Long id) {
-        boolean deleted = false;
-        Map<String,Boolean> response = new HashMap<>();
-        response.put("deleted", deleted);
-        return ResponseEntity.ok(response);
+    public boolean deleteSavingGoal(@PathVariable("id") Long id) {
+        return institutionPaymentService.deleteInstitutionPayments(id);
     }
 
     @PutMapping("/institutionPayments/{id}")

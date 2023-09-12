@@ -2,6 +2,7 @@ package com.bimi.bankingsystem.service;
 
 import com.bimi.bankingsystem.exception.NotFoundException;
 import com.bimi.bankingsystem.model.SavingGoal;
+import com.bimi.bankingsystem.model.Transfer;
 import com.bimi.bankingsystem.model.User;
 import com.bimi.bankingsystem.repository.SavingGoalRepository;
 import org.springframework.stereotype.Service;
@@ -33,8 +34,9 @@ public class SavingGoalService {
         }
     }
 
-    public boolean deleteSavingGoal(Long id){
-        savingGoalRepository.deleteById(id);
+    public boolean deleteSavingGoal(Long id) {
+        SavingGoal savingGoal =  savingGoalRepository.findById(id).get();
+        savingGoalRepository.delete(savingGoal);
         return true;
     }
     public SavingGoal updateSavingGoals(Long id, SavingGoal e){

@@ -37,11 +37,8 @@ public class TransferController {
     }
 
     @DeleteMapping("/transfer/{id}")
-    public ResponseEntity<Map<String,Boolean>> deleteTransfer(@PathVariable("id") Long id) {
-        boolean deleted = false;
-        Map<String,Boolean> response = new HashMap<>();
-        response.put("deleted", deleted);
-        return ResponseEntity.ok(response);
+    public boolean deleteTransfer(@PathVariable("id") Integer id) {
+        return transferService.deleteTransfer(id);
     }
 
 
