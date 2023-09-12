@@ -14,16 +14,6 @@ import Auth from "layouts/Auth.js";
 const schema = yup
   .object()
   .shape({
-    firstName: yup
-      .string()
-      .required("First Name is required.")
-      .min(2, "First name must be longer than 2 characters")
-      .max(50, "First name must be shorter than 50 characters."),
-    lastName: yup
-      .string()
-      .required("Last Name is required.")
-      .min(3, "Last name must be longer than 3 characters")
-      .max(50, "Last name must be shorter than 50 characters."),
     accountNumber: yup
       .string()
       .matches(/^[0-9]+$/, "Must be only digits")
@@ -74,8 +64,6 @@ export default function Transfer() {
     
     const [transfer, setTransfers] = useState({
     id: "",
-    firstName: "",
-    lastName:"",
     accountNumber:"",
     amount: "",
     date:"",
@@ -87,8 +75,6 @@ export default function Transfer() {
   });
   const [responseTransfer, setResponseTransfer] = useState({
     id: "",
-    firstName: "",
-    lastName:"",
     accountNumber:"",
     amount: "",
     date:"",

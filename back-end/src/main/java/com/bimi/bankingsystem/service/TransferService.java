@@ -45,8 +45,6 @@ public class TransferService {
                 .stream()
                 .map(contactEntity -> new Transfer(
                         contactEntity.getId(),
-                        contactEntity.getFirstName(),
-                        contactEntity.getLastName(),
                         contactEntity.getAccountNumber(),
                         contactEntity.getAmount(),
                         contactEntity.getDate(),
@@ -135,8 +133,6 @@ public class TransferService {
     public Transfer updateTransfer(Integer id, Transfer transfer) {
         Transfer transferEntity =
                 transferRepository.findById(id).get();
-        transferEntity.setFirstName(transfer.getFirstName());
-        transferEntity.setLastName(transfer.getLastName());
         transferEntity.setAccountNumber(transfer.getAccountNumber());
         transferEntity.setAmount(transfer.getAmount());
         transferEntity.setDate(transfer.getDate());
