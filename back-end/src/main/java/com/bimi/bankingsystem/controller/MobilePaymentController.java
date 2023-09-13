@@ -37,11 +37,8 @@ public class MobilePaymentController {
         return ResponseEntity.ok(mobilePayment);
     }
     @DeleteMapping("/mobilePayment/{id}")
-    public ResponseEntity<Map<String,Boolean>> deleteMobilePayment(@PathVariable("id") Long id) {
-        boolean deleted = false;
-        Map<String,Boolean> response = new HashMap<>();
-        response.put("deleted", deleted);
-        return ResponseEntity.ok(response);
+    public boolean deleteMobilePayment(@PathVariable("id") Long id) {
+        return mobilePaymentService.deleteMobilePayments(id);
     }
 
     @PutMapping("/mobilePayment/{id}")

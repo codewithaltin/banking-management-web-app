@@ -50,7 +50,7 @@ export default function CollectorPayments() {
       body: JSON.stringify(collectorPayments),
     });
     if (!response.ok) {
-      throw new Error("Something went wrong");
+      console.error("Something went wrong");
     }
     const _collectorPayments = await response.json();
     setResponseCollectorPayments(_collectorPayments);

@@ -37,11 +37,8 @@ public class CollectorPaymentController {
         return ResponseEntity.ok(collectorPayment);
     }
     @DeleteMapping("/collectorPayment/{id}")
-    public ResponseEntity<Map<String,Boolean>> deleteCollectorPayment(@PathVariable("id") Long id) {
-        boolean deleted = false;
-        Map<String,Boolean> response = new HashMap<>();
-        response.put("deleted", deleted);
-        return ResponseEntity.ok(response);
+    public boolean deleteCollectorPayment(@PathVariable("id") Long id) {
+        return collectorPaymentService.deleteCollectorPayments(id);
     }
 
     @PutMapping("/collectorPayment/{id}")
