@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 // components
 import EditUser from "./EditUser";
 import User from "./User";
-
+import Swal from "sweetalert2";
 export default function UserTable({ user }) {
   const USER_API_BASE_URL = "http://localhost:8080/api/v1/auth/user";
   const [users, setUsers] = useState(null);
@@ -31,10 +31,27 @@ export default function UserTable({ user }) {
     };
     fetchData();
   }, [user, responseUser]);
+  let dialogValue = false;
 
+  const ConfirmDialogAlert = (e, id) => {
+    if (dialogValue) return true;
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteUser(e, id);
+        Swal.fire("Deleted!", "Deleted Succesfully!", "success");
+      }
+    });
+    return dialogValue;
+  };
   const deleteUser = (e, id) => {
-    let confirmed = confirm("Are you sure you wanna delete this user?");
-    if (!confirmed) return;
     e.preventDefault();
     fetch(USER_API_BASE_URL + "/" + id, {
       method: "DELETE",
@@ -114,7 +131,7 @@ export default function UserTable({ user }) {
                   <User
                     user={user}
                     key={user.id}
-                    deleteUser={deleteUser}
+                    ConfirmDialogAlert={ConfirmDialogAlert}
                     editUser={editUser}
                   />
                 ))}

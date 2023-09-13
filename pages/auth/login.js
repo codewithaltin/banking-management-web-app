@@ -7,8 +7,10 @@ import { useState } from "react";
 import { useRouter } from "next/router";
 // layout for page
 import { useSession, signIn, signOut } from "next-auth/react";
+import Swal from "sweetalert2";
 
 import Auth from "layouts/Auth.js";
+import { async } from "rxjs";
 
 const LOGIN_API_BASE_URL = "http://localhost:8080/api/v1/auth/authenticate";
 
@@ -25,6 +27,21 @@ export default function Login() {
     copy[e.target.name] = e.target.value;
     setState(copy);
   }
+  const SuccessfulAlert = () => {
+    Swal.fire({
+      icon: "success",
+      title: "Succesfully logged in!",
+      showConfirmButton: false,
+      timer: 800,
+    });
+  };
+  const WrongCredentialsAlert = () => {
+    Swal.fire({
+      icon: "error",
+      title: "Log in failed",
+      text: "Wrong credentials!",
+    });
+  };
   const email = state.email;
   async function handleSubmit(event) {
     event.preventDefault();
@@ -37,16 +54,21 @@ export default function Login() {
     });
     if (res.ok) {
       const json = await res.json();
+      SuccessfulAlert();
       localStorage.setItem("token", json.token);
-      router.push({ pathname: "/profile", query: { email: email } }, "profile");
+      await router.push(
+        { pathname: "/profile", query: { email: email } },
+        "profile"
+      );
     } else {
-      alert("Bad credentials!");
+      WrongCredentialsAlert();
     }
   }
 
   return (
     <>
       <div className="container mx-auto px-4 h-full">
+        {" "}
         <div className="flex content-center items-center justify-center h-full">
           <div className="w-full lg:w-4/12 px-4">
             <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">

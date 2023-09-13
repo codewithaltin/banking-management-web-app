@@ -7,21 +7,6 @@ import { useState, useEffect } from "react";
 import IndexDropdown from "components/Dropdowns/IndexDropdown.js";
 
 export default function Navbar(props) {
-  // const router = useRouter();
-  // const USER_API_BASE_URL = "http://localhost:8080/api/v1/auth/user";
-  // const [profile, setProfile] = useState();
-
-  // useEffect(() => {
-  //   (async () => {
-  //     const response = await fetch(USER_API_BASE_URL, {
-  //       credentials: "include",
-  //     });
-  //     const content = await response.json();
-  //     console.log(content);
-  //   })();
-  // });
-  // console.log(profile);
-
   const [navbarOpen, setNavbarOpen] = React.useState(false);
 
   return (

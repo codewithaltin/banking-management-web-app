@@ -6,6 +6,10 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
 function App() {
+  // useEffect(() => {
+  //   Swal.fire("My sweet alert");
+  // }, []);
+
   return (
     <div>
       {" "}
@@ -17,6 +21,7 @@ function App() {
               <h1 className="text-6xl font-heavy leading-normal  capitalize mt-0 mb-2 text-costum-dark">
                 Digital Banking Service
               </h1>
+
               <p className="mt-2 text-xl leading-relaxed capitalize  text-costum-black">
                 Banking that fits your lifestyle and supports your ambitions!
               </p>

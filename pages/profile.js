@@ -25,12 +25,10 @@ export default function Profile() {
       const json = await res.json();
       setProfile(json);
     } else {
-      router.push("/signin");
+      // router.push("/");
     }
   }
   if (profile == undefined) return;
-
-  console.log(profile.firstName);
 
   function logout() {
     localStorage.removeItem("token");
@@ -131,18 +129,6 @@ export default function Profile() {
                   <h3 className="text-4xl font-semibold leading-normal mb-2 text-blueGray-700 mb-2">
                     {profile.firstName + " " + profile.lastName}
                   </h3>
-                  <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
-                    <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>{" "}
-                    Los Angeles, California
-                  </div>
-                  <div className="mb-2 text-blueGray-600 mt-10">
-                    <i className="fas fa-briefcase mr-2 text-lg text-blueGray-400"></i>
-                    Solution Manager - Creative Tim Officer
-                  </div>
-                  <div className="mb-2 text-blueGray-600">
-                    <i className="fas fa-university mr-2 text-lg text-blueGray-400"></i>
-                    University of Computer Science
-                  </div>
                 </div>
                 <div className="mt-10 py-10 border-t border-blueGray-200 text-center">
                   <div className="flex flex-wrap justify-center">
@@ -154,13 +140,6 @@ export default function Profile() {
                         warm, intimate feel with a solid groove structure. An
                         artist of considerable range.
                       </p>
-                      <a
-                        href="#pablo"
-                        className="font-normal text-lightBlue-500"
-                        onClick={(e) => e.preventDefault()}
-                      >
-                        Show more
-                      </a>
                     </div>
                   </div>
                 </div>
