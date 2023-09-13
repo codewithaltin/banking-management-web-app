@@ -7,9 +7,10 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
+//@CrossOrigin(origins = "*", allowedHeaders = "*")
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1/auth")
 public class UserController {
 
     private final UserService userService;
@@ -28,9 +29,13 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    @GetMapping("/user/{id}")
-    public User getUserById(@PathVariable("id") Long id) {
-        return userService.getUserById(id);
+//    @GetMapping("/user/{id}")
+//    public Optional<User> getUserById(@PathVariable("id") Long id) {
+//        return userService.getUserById(id);
+//    }
+    @GetMapping("/user/{email}")
+    public Optional<User> getUserByEmail(@PathVariable("email") String email) {
+        return userService.getUserByEmail(email);
     }
 
     @DeleteMapping("/user/{id}")

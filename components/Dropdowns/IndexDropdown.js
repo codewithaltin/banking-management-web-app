@@ -19,7 +19,7 @@ const IndexDropdown = () => {
   return (
     <>
       <a
-        className="text-costum-dark  text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+        className="text-white text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
         href="#pablo"
         ref={btnDropdownRef}
         onClick={(e) => {
@@ -27,7 +27,7 @@ const IndexDropdown = () => {
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
         }}
       >
-        Dashboard
+        settings
       </a>
       <div
         ref={popoverDropdownRef}
@@ -41,15 +41,24 @@ const IndexDropdown = () => {
             "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-800"
           }
         >
-          Admin Layout
+          Transfers
         </span>
+
         <Link
-          href="/admin/dashboard"
+          href="/transfer"
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
         >
-          Dashboard
+          Send Money
+        </Link>
+        <Link
+          href="/trasnfer"
+          className={
+            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+          }
+        >
+          Request Money
         </Link>
         <Link
           href="/admin/settings"
@@ -108,29 +117,6 @@ const IndexDropdown = () => {
           Business Register
         </Link>
         <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
-        <span
-          className={
-            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-800"
-          }
-        >
-          No Layout
-        </span>
-        <Link
-          href="/landing"
-          className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-          }
-        >
-          Landing
-        </Link>
-        <Link
-          href="/profile"
-          className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-          }
-        >
-          Profile
-        </Link>
       </div>
     </>
   );

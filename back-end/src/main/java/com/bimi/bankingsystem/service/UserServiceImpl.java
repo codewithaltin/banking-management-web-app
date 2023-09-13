@@ -30,14 +30,13 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
 
+//    @Override
+//    public Optional<User> getUserById(Long id) {
+//       return userRepository.findById(id);
+//    }
     @Override
-    public User getUserById(Long id) {
-        try {
-            return userRepository.findById(id).orElseThrow(() -> new NotFoundException("User with id " + id + " not found"));
-        } catch (NotFoundException ex) {
-            System.out.println("User could not be found, id: " + id);
-            throw ex;
-        }
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
     }
 
     @Override
@@ -50,10 +49,11 @@ public class UserServiceImpl implements UserService {
     public User updateUser(Long id, User user) {
         User u =
                 userRepository.findById(id).get();
-        u.setEmailId(user.getEmailId());
+        u.setEmail(user.getEmail());
         u.setFirstName(user.getFirstName());
         u.setLastName(user.getLastName());
         u.setPassword(user.getPassword());
+        u.setPhoneNumber(user.getPhoneNumber());
         u.setPhoneNumber(user.getPhoneNumber());
 
         return userRepository.save(u);

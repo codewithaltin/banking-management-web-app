@@ -55,6 +55,12 @@ export default function Navbar(props) {
                 >
                   Business
                 </Link>{" "}
+                <Link
+                  href="/admin/dashboard"
+                  className="text-blueGray-100 hover:text-blueGray-200 text-xs font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                >
+                  Dashboard
+                </Link>
               </li>{" "}
             </ul>
             <ul className="flex flex-col lg:flex-row list-none lg:ml-auto"></ul>

@@ -1,6 +1,7 @@
 import React from "react";
 import Link from "next/link";
-
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 // components
 
 import IndexDropdown from "components/Dropdowns/IndexDropdown.js";
@@ -35,24 +36,16 @@ export default function Navbar(props) {
             id="example-navbar-warning"
           >
             <ul className="flex flex-col lg:flex-row list-none align-center mr-auto">
-              <li className="flex items-center">
+              {/* <li className="flex items-center">
                 {" "}
                 <Link
-                  href="/auth/individual_register"
+                  href="/auth/register"
                   className="text-costum-dark  text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
                 >
                   Individual
                 </Link>{" "}
-              </li>
-              <li className="flex items-center">
-                {" "}
-                <Link
-                  href="/auth/business_register"
-                  className="text-costum-dark  text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
-                >
-                  Business
-                </Link>{" "}
-              </li>{" "}
+              </li> */}
+
               <li>
                 <IndexDropdown />
               </li>
@@ -67,7 +60,13 @@ export default function Navbar(props) {
                   className="text-costum-dark  hover:text-blueGray-00 text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
                 >
                   Sign In
-                </Link>{" "}
+                </Link>
+                <Link
+                  href="/auth/login"
+                  className="text-costum-dark  hover:text-blueGray-00 text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                >
+                  {/* Welcome {profile.firstName} */}
+                </Link>
               </li>
             </ul>
           </div>

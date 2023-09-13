@@ -7,18 +7,13 @@ import Auth from "layouts/Auth.js";
 import Login from "pages/auth/login.js";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
+import { useRouter } from "next/router";
 const phoneReg =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 const schema = yup
   .object()
   .shape({
-    accountNumber: yup
-      .string()
-      .matches(/^[0-9]+$/, "Must be only digits")
-      .required("Account number is required.")
-      .min(16, "Account number must be exactly 16 characters")
-      .max(16, "Account number must be exactly 16 characters"),
     firstName: yup
       .string()
       .required("First Name is required.")
@@ -29,7 +24,7 @@ const schema = yup
       .required("Last Name is required.")
       .min(5, "Last name must be longer than 5 characters")
       .max(50, "Last name must be shorter than 50 characters."),
-    emailId: yup
+    email: yup
       .string()
       .email("Please enter a valid e-mail")
       .required("Email is required."),
@@ -49,6 +44,10 @@ const schema = yup
   })
   .required();
 export default function Register() {
+  const router = useRouter();
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
   const {
     register,
     handleSubmit,
@@ -56,24 +55,22 @@ export default function Register() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const USER_API_BASE_URL = "http://localhost:8080/api/v1/user";
+  const USER_API_BASE_URL = "http://localhost:8080/api/v1/auth/register";
 
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState({
     id: "",
-    accountNumber: "",
     firstName: "",
     lastName: "",
-    emailId: "",
+    email: "",
     phoneNumber: "",
     password: "",
   });
   const [responseUser, setResponseUser] = useState({
     id: "",
-    accountNumber: "",
     firstName: "",
     lastName: "",
-    emailId: "",
+    email: "",
     phoneNumber: "",
     password: "",
   });
@@ -96,13 +93,14 @@ export default function Register() {
     }
     const _user = await response.json();
     setResponseUser(_user);
-    window.location.reload();
+    await router.push("login");
     alert("Registered Succesfully!");
   };
   const handleChange = (event) => {
     const value = event.target.value;
     setUser({ ...user, [event.target.name]: value });
   };
+
   return (
     <>
       {/* <Routes>
@@ -141,24 +139,6 @@ export default function Register() {
                   <small>Or sign up with credentials</small>
                 </div>
                 <form onSubmit={handleSubmit(saveUser)}>
-                <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      Account number
-                    </label>
-                    <input
-                      {...register("accountNumber")}
-                      type="tel"
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      value={user.accountNumber}
-                      onChange={(e) => handleChange(e)}
-                    />
-                    <small role="alert" className="text-red-500 ">
-                      {errors.accountNumber?.message}
-                    </small>
-                  </div>
                   <label
                     className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                     htmlFor="grid-password"
@@ -203,16 +183,16 @@ export default function Register() {
                       Email
                     </label>
                     <input
-                      {...register("emailId")}
+                      {...register("email")}
                       type="email"
-                      name="emailId"
+                      name="email"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s example@gmail.com"
-                      value={user.emailId}
+                      value={user.email}
                       onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
-                      {errors.emailId?.message}
+                      {errors.email?.message}
                     </small>
                   </div>
                   <div className="relative w-full mb-3">

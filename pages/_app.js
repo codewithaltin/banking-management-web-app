@@ -1,18 +1,17 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import App from "next/app";
 import Head from "next/head";
-import Router from "next/router";
 import { SessionProvider } from "next-auth/react";
 import StepContext from "./step_context.js";
 
 import PageChange from "components/PageChange/PageChange.js";
-
+import { useRouter } from "next/router";
+import Link from "next/link";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "styles/tailwind.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-Router.events.on("routeChangeStart", (url) => { 
+Router.events.on("routeChangeStart", (url) => {
   console.log(`Loading: ${url}`);
   document.body.classList.add("body-page-transition");
   ReactDOM.render(
