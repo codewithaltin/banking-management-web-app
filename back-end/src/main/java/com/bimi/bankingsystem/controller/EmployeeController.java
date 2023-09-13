@@ -16,7 +16,7 @@ import java.util.*;
 
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/auth/")
 public class EmployeeController {
 
     private EmployeeService employeeService;
@@ -33,10 +33,10 @@ public class EmployeeController {
 
     @GetMapping("/employee")
     public ResponseEntity<List<Employee>> getAllEmployees(){
-        //TODO here is where the authorization is happening
-        if(!jwtService.getRoles("USER")){
-            throw new UnauthorizedException("Unauthorized user");
-        }
+//        //TODO here is where the authorization is happening
+//        if(!jwtService.getRoles("USER")){
+//            throw new UnauthorizedException("Unauthorized user");
+//        }
 
         return ResponseEntity.ok(employeeService.getAllEmployees());
     }

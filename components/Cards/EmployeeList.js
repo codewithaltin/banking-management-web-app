@@ -6,7 +6,7 @@ import EditEmployee from "./EditEmployee";
 import Employee from "./Employee";
 
 export default function EmployeeList({ employee, color }) {
-  const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/v1/employee";
+  const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/v1/auth/employee";
   const [employees, setemployees] = useState(null);
   const [loading, setLoading] = useState(true);
   const [employeeId, setemployeeId] = useState(null);

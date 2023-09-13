@@ -12,7 +12,6 @@ function App() {
 
   return (
     <div>
-      {" "}
       <IndexNavbarLight />
       <section className="header relative pt-16 items-center flex h-screen max-h-1200-px bg-cover-blur">
         <div className="container mx-auto ">

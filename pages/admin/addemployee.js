@@ -37,7 +37,7 @@ export default function addemployee() {
     console.log("User Selected Value - ", event.target.value);
   };
 
-  const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/v1/employee";
+  const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/v1/auth/employee";
 
   const [isOpen, setIsOpen] = useState(false);
   const [employee, setEmployee] = useState({
@@ -49,7 +49,6 @@ export default function addemployee() {
     departament: "",
     jobTitle: "",
     startDate: "",
-
     endDate: "",
     salary: 0,
   });
