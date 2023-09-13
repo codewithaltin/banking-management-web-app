@@ -175,23 +175,6 @@ export default function Index(session) {
                 Settle your Invoice{" "}
                 <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
               </a>
-              <a
-                href="/transfer"
-                target="_blank"
-                className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
-              >
-                Do a transfer{" "}
-                <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
-              </a>
-
-              <a
-                href="/requestMoney"
-                target="_blank"
-                className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
-              >
-                Request Money{" "}
-                <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
-              </a>
             </div>
 
             <div className="w-full md:w-5/12 px-4 mr-auto ml-auto mt-32">
@@ -573,14 +556,14 @@ export default function Index(session) {
               <div className="flex flex-wrap">
                 <div className="w-full lg:w-4/12 px-4">
                   <h5 className="text-xl font-semibold pb-4 text-center">
-                    Login Page
+                    Do a transfer
                   </h5>
-                  <Link href="/auth/individual_register" legacyBehavior>
+                  <Link href="/transfer" legacyBehavior>
                     <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
                       <img
                         alt="..."
                         className="align-middle border-none max-w-full h-auto rounded-lg"
-                        src="/img/login.jpg"
+                        src="/img/transfer-cover.png"
                       />
                     </div>
                   </Link>
@@ -603,14 +586,14 @@ export default function Index(session) {
 
                 <div className="w-full lg:w-4/12 px-4">
                   <h5 className="text-xl font-semibold pb-4 text-center">
-                    Landing Page
+                    Request Money
                   </h5>
-                  <Link href="/landing" legacyBehavior>
+                  <Link href="/requestMoney" legacyBehavior>
                     <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
                       <img
                         alt="..."
                         className="align-middle border-none max-w-full h-auto rounded-lg"
-                        src="/img/landing.jpg"
+                        src="/img/request-monie.png"
                       />
                     </div>
                   </Link>
