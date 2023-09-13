@@ -27,15 +27,13 @@ public class User implements UserDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
-    @Column(name="id")
     private long id;
 
     private String firstName;
 
     private String lastName;
     @NonNull
-    private String emailId;
-    @NonNull
+    private String email;
     private long accountNumber;
     @NonNull
     private String phoneNumber;
@@ -43,31 +41,16 @@ public class User implements UserDetails {
     private String password;
 
     private double balance;
-    @NonNull
-    private String role;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<SavingGoal> savingGoals;
 
 
-
-    public User(long id, String firstName, String lastName, String emailId, String phoneNumber, String password,String role) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.emailId = emailId;
-        this.accountNumber = accountNumber;
-        this.phoneNumber = phoneNumber;
-        this.password = password;
-        this.role = role;
-    }
-
     @Enumerated(EnumType.STRING)
     private Role role;
 
     public User(){
-        role = "USER";
     }
 
     public void addSavingGoals(SavingGoal savingGoal) {

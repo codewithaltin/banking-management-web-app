@@ -43,7 +43,7 @@ public class TransferController {
 
 
 
-     @PostMapping("/transfer")
+    @PostMapping("/transfer")
     public ResponseEntity<String> performTransfer(@RequestBody Transfer transfer) {
         try {
             // Call the transfer service to perform the transfer
@@ -57,7 +57,7 @@ public class TransferController {
 
     @PutMapping("/transfer/{id}")
     public ResponseEntity<Transfer> updateTransfer(@PathVariable("id") Integer id,
-                                                 @RequestBody Transfer transfer) {
+                                                   @RequestBody Transfer transfer) {
         transfer = transferService.updateTransfer(id,transfer);
         return ResponseEntity.ok(transfer);
     }

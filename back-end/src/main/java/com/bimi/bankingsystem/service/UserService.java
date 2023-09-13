@@ -10,7 +10,7 @@ public interface UserService {
     List<User> getAllUsers();
 
 
-//    Optional<User> getUserById(Long id);
+    Optional<User> getUserById(Long id);
 
     Optional<User> getUserByEmail(String email);
 
@@ -18,5 +18,5 @@ public interface UserService {
 
     User updateUser(Long id, User user);
 
-    void addSavingGoalToUser(Long userId, Long savingGoalId);
+//    void addSavingGoalToUser(Long userId, Long savingGoalId);
 }
