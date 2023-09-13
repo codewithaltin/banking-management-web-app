@@ -19,13 +19,13 @@ public class TransferController {
 
     public TransferController(TransferService transferService){this.transferService = transferService;}
 
-    @PostMapping("/transfer")
+    //@PostMapping("/transfer")
     public Transfer saveTransfer(@RequestBody Transfer transfer){
         return transferService.saveTransfer(transfer);
     }
 
     @GetMapping("/transfer")
-    public List<TransferEntity> getAllTransfers() {
+    public List<Transfer> getAllTransfers() {
         return transferService.getAllTransfers();
     }
 
@@ -37,11 +37,22 @@ public class TransferController {
     }
 
     @DeleteMapping("/transfer/{id}")
-    public ResponseEntity<Map<String,Boolean>> deleteTransfer(@PathVariable("id") Long id) {
-        boolean deleted = false;
-        Map<String,Boolean> response = new HashMap<>();
-        response.put("deleted", deleted);
-        return ResponseEntity.ok(response);
+    public boolean deleteTransfer(@PathVariable("id") Integer id) {
+        return transferService.deleteTransfer(id);
+    }
+
+
+
+     @PostMapping("/transfer")
+    public ResponseEntity<String> performTransfer(@RequestBody Transfer transfer) {
+        try {
+            // Call the transfer service to perform the transfer
+            transferService.transferAmount(transfer);
+            saveTransfer(transfer);
+            return ResponseEntity.ok("Transferred successfully.");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
     }
 
     @PutMapping("/transfer/{id}")

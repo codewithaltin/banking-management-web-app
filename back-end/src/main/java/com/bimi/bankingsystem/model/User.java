@@ -25,6 +25,8 @@ public class User {
     @NonNull
     private String emailId;
     @NonNull
+    private long accountNumber;
+    @NonNull
     private String phoneNumber;
     @NonNull
     private String password;
@@ -38,8 +40,16 @@ public class User {
     private Set<SavingGoal> savingGoals;
 
 
-    public Set<SavingGoal> getSavingGoals() {
-        return savingGoals;
+
+    public User(long id, String firstName, String lastName, String emailId, String phoneNumber, String password,String role) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.emailId = emailId;
+        this.accountNumber = accountNumber;
+        this.phoneNumber = phoneNumber;
+        this.password = password;
+        this.role = role;
     }
 
     public User(){

@@ -12,7 +12,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import "styles/tailwind.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 
-Router.events.on("routeChangeStart", (url) => {
+Router.events.on("routeChangeStart", (url) => { 
   console.log(`Loading: ${url}`);
   document.body.classList.add("body-page-transition");
   ReactDOM.render(
