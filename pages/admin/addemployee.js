@@ -48,6 +48,9 @@ export default function addemployee() {
     phoneNumber: "",
     departament: "",
     jobTitle: "",
+    startDate: "",
+
+    endDate: "",
     salary: 0,
   });
   const [responseEmployee, setResponseEmployee] = useState({
@@ -58,6 +61,8 @@ export default function addemployee() {
     phoneNumber: "",
     departament: "",
     jobTitle: "",
+    startDate: "",
+    endDate: "",
     salary: 0,
   });
   const saveEmployee = async (e) => {
@@ -111,6 +116,7 @@ export default function addemployee() {
                       placeholder="First Name"
                       name="firstName"
                       onChange={(e) => handleChange(e)}
+                      required
                     />
                     <input
                       {...register("lastName")}
@@ -121,6 +127,8 @@ export default function addemployee() {
                     transition-all duration-150"
                       placeholder="Last Name"
                       onChange={(e) => handleChange(e)}
+                      value={employee.firstName}
+                      required
                     />
                   </div>
                   <small role="alert" className="text-red-500 mb-2 mr-20 ">
@@ -143,6 +151,7 @@ export default function addemployee() {
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s example@gmail.com"
                       onChange={(e) => handleChange(e)}
+                      required
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.emailId?.message}
@@ -155,10 +164,11 @@ export default function addemployee() {
                     <input
                       {...register("phoneNumber")}
                       type="tel"
-                      name="tel"
+                      name="phoneNumber"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s 049-588-814"
                       onChange={(e) => handleChange(e)}
+                      required
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.phoneNumber?.message}
@@ -174,6 +184,7 @@ export default function addemployee() {
                       placeholder="p.s Idriz Gjilani Street Entry 07"
                       name="address"
                       onChange={(e) => handleChange(e)}
+                      required
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.phoneNumber?.message}
@@ -183,7 +194,6 @@ export default function addemployee() {
                     <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                       Department
                     </label>
-
                     <select
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={(e) => handleChange(e)}
@@ -224,6 +234,7 @@ export default function addemployee() {
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="500"
                       onChange={(e) => handleChange(e)}
+                      required
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.emailId?.message}
@@ -243,6 +254,7 @@ export default function addemployee() {
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="500"
                       onChange={(e) => handleChange(e)}
+                      required
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.emailId?.message}
@@ -251,7 +263,6 @@ export default function addemployee() {
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      {" "}
                       End Agreement Date
                     </label>
                     <input
@@ -260,6 +271,7 @@ export default function addemployee() {
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="500"
                       onChange={(e) => handleChange(e)}
+                      required
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.emailId?.message}

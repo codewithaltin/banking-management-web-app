@@ -12,7 +12,6 @@ const User = ({ user, ConfirmDialogAlert, editUser }) => {
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         {user.email}
       </td>
-
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         {user.phoneNumber}
       </td>

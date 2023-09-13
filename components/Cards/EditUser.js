@@ -1,8 +1,43 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { React, useState, useEffect, Fragment } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
 
+import * as yup from "yup";
+
+const phoneReg =
+  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+const schema = yup
+  .object()
+  .shape({
+    firstName: yup
+      .string()
+      .required("First Name is required.")
+      .min(2, "First name must be longer than 5 characters")
+      .max(50, "First name must be shorter than 30 characters."),
+    lastName: yup
+      .string()
+      .required("Last Name is required.")
+      .min(2, "Last name must be longer than 5 characters")
+      .max(50, "Last name must be shorter than 50 characters."),
+    emailId: yup
+      .string()
+      .email("Please enter a valid e-mail")
+      .required("Email is required."),
+    phoneNumber: yup
+      .string()
+      .required("Phone number is required")
+      .matches(phoneReg, "Phone Number is not valid."),
+  })
+  .required();
 const EditUser = ({ userId, setResponseUser }) => {
-  const USER_API_BASE_URL = "http://localhost:8080/api/v1/users";
+  const USER_API_BASE_URL = "http://localhost:8080/api/v1/user";
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
 
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState({
@@ -72,7 +107,7 @@ const EditUser = ({ userId, setResponseUser }) => {
   };
 
   return (
-    <div className="min-h-screen absolute top-1/2 right-1/4">
+    <div className="min-h-screen absolute top-1/2 right-1/4 ">
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" m onClose={closeModal}>
           <div className="px-4 text-center">
@@ -94,11 +129,12 @@ const EditUser = ({ userId, setResponseUser }) => {
                 </Dialog.Title>
                 <div className="flex max-w-md max-auto">
                   <div className="py-2">
-                    <div className="h-14 my-4">
+                    <div className="h-14 my-1">
                       <label className="block text-gray-600 text-sm font-normal">
                         First Name
                       </label>
                       <input
+                        {...register("firstName")}
                         type="text"
                         name="firstName"
                         value={user.firstName}
@@ -106,23 +142,31 @@ const EditUser = ({ userId, setResponseUser }) => {
                         className="h-10 w-96 border mt-2 px-2 py-2"
                       ></input>
                     </div>
-                    <div className="h-14 my-4">
+                    <small role="alert" className="text-red-500">
+                      {errors.firstName?.message}
+                    </small>
+                    <div className="h-14 my-1">
                       <label className="block text-gray-600 text-sm font-normal">
                         Last Name
                       </label>
                       <input
                         type="text"
+                        {...register("lastName")}
                         name="lastName"
                         value={user.lastName}
                         onChange={(e) => handleChange(e)}
                         className="h-10 w-96 border mt-2 px-2 py-2"
                       ></input>
                     </div>
-                    <div className="h-14 my-4">
+                    <small role="alert" className="  text-red-500">
+                      {errors.lastName?.message}
+                    </small>
+                    <div className="h-14 my-1">
                       <label className="block text-gray-600 text-sm font-normal">
                         Email
                       </label>
                       <input
+                        {...register("emailId")}
                         type="text"
                         name="emailId"
                         value={user.emailId}
@@ -130,11 +174,15 @@ const EditUser = ({ userId, setResponseUser }) => {
                         className="h-10 w-96 border mt-2 px-2 py-2"
                       ></input>
                     </div>
-                    <div className="h-14 my-4">
+                    <small role="alert" className="  text-red-500 ">
+                      {errors.emailId?.message}
+                    </small>
+                    <div className="h-14 my-1">
                       <label className="block text-gray-600 text-sm font-normal">
                         Phone Number
                       </label>
                       <input
+                        {...register("phoneNumber")}
                         type="text"
                         name="phoneNumber"
                         value={user.phoneNumber}
@@ -142,21 +190,12 @@ const EditUser = ({ userId, setResponseUser }) => {
                         className="h-10 w-96 border mt-2 px-2 py-2"
                       ></input>
                     </div>
-                    <div className="h-14 my-4">
-                      <label className="block text-gray-600 text-sm font-normal">
-                        Role
-                      </label>
-                      <input
-                        type="text"
-                        name="role"
-                        value={user.role}
-                        onChange={(e) => handleChange(e)}
-                        className="h-10 w-96 border mt-2 px-2 py-2"
-                      ></input>
-                    </div>
+                    <small role="alert" className="text-red-500  ">
+                      {errors.phoneNumber?.message}
+                    </small>
                     <div className="h-14 my-4 space-x-4 pt-4">
                       <button
-                        onClick={updateUser}
+                        onClick={handleSubmit(updateUser)}
                         className=" bg-emerald-400 hover:bg-emerald-600 rounded text-white font-semibold   py-2 px-6"
                       >
                         Update

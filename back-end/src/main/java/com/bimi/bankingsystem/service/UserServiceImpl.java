@@ -1,11 +1,12 @@
 package com.bimi.bankingsystem.service;
+import com.bimi.bankingsystem.exception.NotFoundException;
+import com.bimi.bankingsystem.model.SavingGoal;
 import com.bimi.bankingsystem.model.User;
 import com.bimi.bankingsystem.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 
@@ -13,6 +14,7 @@ public class UserServiceImpl implements UserService {
 
 
     private UserRepository userRepository;
+    private SavingGoalService savingGoalService;
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -56,5 +58,16 @@ public class UserServiceImpl implements UserService {
 
         return userRepository.save(u);
 
+    }
+
+    @Override
+    public void addSavingGoalToUser(Long userId, Long savingGoalId) {
+        SavingGoal savingGoal = savingGoalService.getSavingGoalsById(savingGoalId);
+
+        User user = getUserById(userId);
+
+        user.addSavingGoals(savingGoal);
+
+        saveUser(user);
     }
 }

@@ -1,24 +1,17 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import Auth from "layouts/Auth.js";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { multiStepContext } from "pages/step_context";
 
 const schema = yup
   .object()
   .shape({
-    requestedEmail: yup
-      .string()
-      .email("Please enter a valid e-mail")
-      .required("Email is required."),
-    payeeEmail: yup
-      .string()
-      .email("Please enter a valid e-mail")
-      .required("Email is required."),
-    amount: yup.string().required("Some text is required."),
+    name: yup.string().required("Products name is required."),
   })
   .required();
-export default function bills() {
+export default function ProductForm() {
   const {
     register,
     handleSubmit,
@@ -26,39 +19,44 @@ export default function bills() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const REQUEST_API_BASE_URL = "http://localhost:8080/api/v1/requestmoney";
+  const { setStep, subscribtionData, setSubscribtionData } =
+    useContext(multiStepContext);
+
+  const PRODUCT_API_BASE_URL = "http://localhost:8080/api/v1/product";
 
   const [isOpen, setIsOpen] = useState(false);
 
-  const [request, setRequest] = useState({
-    requestedEmail: "",
-    payeeEmail: "",
-    amount: "",
+  const [product, setProduct] = useState({
+    name: "",
+    decs: "",
+    type: "",
+    imageUrl: "",
   });
-  const [responseRequest, setResponseRequest] = useState({
-    requestedEmail: "",
-    payeeEmail: "",
-    amount: "",
+  const [responseProduct, setResponseProduct] = useState({
+    name: "",
+    decs: "",
+    type: "",
+    imageUrl: "",
   });
-  const saveRequest = async (e) => {
+  const saveProduct = async (e) => {
     //e.preventDefault();
-    const response = await fetch(REQUEST_API_BASE_URL, {
+    const response = await fetch(PRODUCT_API_BASE_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(request),
+      body: JSON.stringify(product),
     });
     if (!response.ok) {
       throw new Error("Something went wrong");
     }
-    const _reqeuest = await response.json();
-    setResponseRequest(_reqeuest);
-    window.location.reload();
+    const _product = await response.json();
+    setResponseProduct(_product);
+    setStep(2);
   };
   const handleChange = (event) => {
     const value = event.target.value;
-    setRequest({ ...request, [event.target.name]: value });
+    setProduct({ ...product, [event.target.name]: value });
   };
 
   return (
@@ -69,52 +67,32 @@ export default function bills() {
             <div className="rounded-t mb-0 px-6 py-6">
               <div className="text-center mb-3">
                 <h6 className="text-blueGray-500 text-sm font-bold">
-                  Request Money
+                  Create a product
                 </h6>
               </div>
 
               <hr className="mt-6 border-b-1 border-blueGray-300" />
             </div>
             <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-              <form onSubmit={handleSubmit(saveRequest)}>
+              <form onSubmit={handleSubmit(saveProduct)}>
                 <div className="relative w-full mb-3">
                   <label
                     className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
-                    Your Email
+                    Product Name
                   </label>
                   <input
-                    {...register("requestedEmail")}
-                    type="email"
-                    name="requestedEmail"
+                    {...register("name")}
+                    type="text"
+                    name="name"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Enter your email"
+                    placeholder="Enter productsName"
+                    value={product.name}
                     onChange={(e) => handleChange(e)}
-                    value={request.requestedEmail}
                   />
                   <small role="alert" className="text-red-500 ">
-                    {errors.requestedEmail?.message}{" "}
-                  </small>{" "}
-                </div>
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Payee Email
-                  </label>
-                  <input
-                    {...register("payeeEmail")}
-                    type="email"
-                    name="payeeEmail"
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Enter the email you are requesting money from"
-                    onChange={(e) => handleChange(e)}
-                    value={request.payeeEmail}
-                  />
-                  <small role="alert" className="text-red-500 ">
-                    {errors.payeeEmail?.message}
+                    {errors.name?.message}
                   </small>
                 </div>
                 <div className="relative w-full mb-3">
@@ -122,26 +100,46 @@ export default function bills() {
                     className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                     htmlFor="grid-password"
                   >
-                    Amount
+                    Product Descrption
                   </label>
                   <input
-                    {...register("amount")}
-                    type="number"
-                    name="amount"
+                    type="text"
+                    name="desc"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    placeholder="Enter the product description   "
+                    value={product.desc}
                     onChange={(e) => handleChange(e)}
-                    placeholder="Enter the amount"
-                    value={request.amount}
                   />
-                  <small role="alert" className="text-red-500 ">
-                    {errors["amount"]?.message}
-                  </small>
+                </div>
+                <div className="relative w-full mb-3">
+                  <label
+                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                    htmlFor="grid-password"
+                  >
+                    Product Type
+                  </label>
+                  <input
+                    type="text"
+                    name="type"
+                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    placeholder="Enter the product type"
+                    value={product.type}
+                    onChange={(e) => handleChange(e)}
+                  />
+
                   <div className="text-center mt-6">
                     <input
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="submit"
-                      value="Request Money"
+                      value="Create Product"
                     />
+                    <a
+                      className=" text-blueGray-800 cursor-pointer mt-10"
+                      onClick={() => setStep(2)}
+                    >
+                      {" "}
+                      Skip{" "}
+                    </a>
                   </div>
                 </div>
               </form>
@@ -152,4 +150,4 @@ export default function bills() {
     </div>
   );
 }
-bills.layout = Auth;
+ProductForm.layout = Auth;

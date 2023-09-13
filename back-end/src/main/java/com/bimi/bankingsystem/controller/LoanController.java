@@ -4,7 +4,9 @@ import com.bimi.bankingsystem.model.Loan;
 import com.bimi.bankingsystem.service.LoanService;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
@@ -26,14 +28,21 @@ public class LoanController {
         return loanService.getAllLoans();
     }
 
-    @PutMapping("loan/{id}")
-    public Loan updateClient(@PathVariable Integer id,@RequestBody Loan loan){
-        return loanService.updateLoan(id,loan);
+    @GetMapping("/loan/{id}") 
+    public List<Loan> getLoanById(@PathVariable("id") Long id) {
+        Loan loan = null;
+        loan = loanService.getLoanById(id);
+        return loanService.getAllLoans();
     }
 
     @DeleteMapping("loan/{id}")
-    public boolean deleteLoan(@PathVariable Integer id){
+    public boolean deleteLoan(@PathVariable Long id){
         return loanService.deleteLoan(id);
+    }
+
+    @PutMapping("loan/{id}")
+    public Loan updateLoan(@PathVariable Long id, @RequestBody Loan loan){
+        return loanService.updateLoan(id,loan);
     }
 
 }

@@ -29,26 +29,26 @@ export default function LoanTable({ loan }) {
         setLoading(false);
       };
       fetchData();
-    }, [loans, responseLoan]);
+    }, [loan, responseLoan]);
 
-    const deleteLoan = (e, loan_id) => {
+    const deleteLoan = (e, id) => {
         let confirmed = confirm("Are you sure you wanna delete this loan?");
         if (!confirmed) return;
         e.preventDefault();
-        fetch(LOAN_API_BASE_URL + "/" + loan_id, {
+        fetch(LOAN_API_BASE_URL + "/" + id, {
           method: "DELETE",
         }).then((res) => {
           if (loans) {
             setLoans((prevElement) => {
-              return prevElement.filter((loan) => loan.loan_id !== loan_id);
+              return prevElement.filter((loan) => loan.id !== id);
             });
           }
         });
       };
 
-    const editLoan = (e, loan_id) => {
+    const editLoan = (e, id) => {
         e.preventDefault();
-        setLoanId(loan_id);
+        setLoanId(id);
       };
 
       return (
@@ -119,7 +119,7 @@ export default function LoanTable({ loan }) {
                     {loans?.map((loan) => (
                       <Loan
                         loan={loan}
-                        key={loan.loan_id}
+                        key={loan.id}
                         deleteLoan={deleteLoan}
                         editLoan={editLoan}
                       />

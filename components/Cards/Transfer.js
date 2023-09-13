@@ -15,9 +15,6 @@ const Transfer = ({ transfer, deleteTransfer}) => {
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
         {transfer.reciverAccountNumber}
       </td>
-      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
-        {transfer.description}
-      </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         <a
           onClick={(e, id) => deleteTransfer(e, transfer.id)}

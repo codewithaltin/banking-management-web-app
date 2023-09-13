@@ -23,6 +23,9 @@ const Employee = ({ employee, deleteEmployee, editEmployee }) => {
         {employee.jobTitle}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
+        {employee.endDate}
+      </td>
+      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         <a
           onClick={(e, id) => editEmployee(e, employee.id)}
           className="text-indigo-600 hover:text-indigo-800 cursor-pointer"

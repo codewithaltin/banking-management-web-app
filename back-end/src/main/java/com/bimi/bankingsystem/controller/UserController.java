@@ -1,8 +1,8 @@
 package com.bimi.bankingsystem.controller;
 
+
 import com.bimi.bankingsystem.model.User;
 import com.bimi.bankingsystem.service.UserService;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -45,8 +45,14 @@ public class UserController {
 
     @PutMapping("/user/{id}")
     public User updateUser(@PathVariable("id") Long id,
-                                           @RequestBody User user) {
+                           @RequestBody User user) {
         return userService.updateUser(id,user);
+    }
+
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESSOR')")
+    @PostMapping("{userId}/savingGoal/{savingGoalId}")
+    public void addSavingGoalToUser(@PathVariable Long userId, @PathVariable Long savingGoalId) {
+        userService.addSavingGoalToUser(userId, savingGoalId);
     }
 
 }

@@ -15,10 +15,10 @@ export default function PrePaidServices() {
     } = useForm({ });
     
   
-  const PREPAIDSERVICES_API_BASE_URL = "http://localhost:8080/api/v1/prePaidServices";
+  const PREPAIDSERVICES_API_BASE_URL = "http://localhost:8080/api/v1/prePaidPayment";
 
   const [isOpen, setIsOpen] = useState(false);
-  const [prePaidServices, setPrePaidServices] = useState({
+  const [prePaidService, setPrePaidServices] = useState({
     id: "",
     operator: "",
     product: "",
@@ -42,9 +42,9 @@ export default function PrePaidServices() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(prePaidServices),
+      body: JSON.stringify(prePaidService),
     });
-    if (!response.ok) {
+    if(!response.ok){
       throw new Error("Something went wrong");
     }
     const _prePaidServices = await response.json();
@@ -73,7 +73,7 @@ export default function PrePaidServices() {
 
   const handleChange = (event) => {
     const value = event.target.value;
-    setPrePaidServices({ ...prePaidServices, [event.target.name]: value });
+    setPrePaidServices({ ...prePaidService, [event.target.name]: value });
   };
 
   return (
@@ -104,12 +104,11 @@ export default function PrePaidServices() {
                     <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                       Operator
                     </label>
-                 
                     <select
-                   
+
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={handleChange}
-                      name="savingReason"
+                      name="operator"
                     >
                       <option></option>
                       {OperatorOption.map((option, index) => {
@@ -117,19 +116,14 @@ export default function PrePaidServices() {
                       })}
                     </select>
                   </div>
-
-                  
-                  
                   <div className="relative w-full mb-3">
                     <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                       Product
                     </label>
-                 
                     <select
-                   
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={handleChange}
-                      name="savingReason"
+                      name="product"
                     >
                       <option></option>
                       {ProductOption.map((option, index) => {
@@ -146,16 +140,13 @@ export default function PrePaidServices() {
                       Amount
                     </label>
                     <input
-                      {... register("goalName")}
+                      {... register("amount")}
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={(e) => handleChange(e)}
                     />
                     
                   </div>
-            
-                  
-                  
                   
                   <div className="text-center mt-6">
                     <input
