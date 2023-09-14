@@ -32,7 +32,7 @@ export default function UserTable({ user }) {
     fetchData();
   }, [user, responseUser]);
   let dialogValue = false;
-  e;
+
   const ConfirmDialogAlert = (e, id) => {
     if (dialogValue) return true;
     Swal.fire({

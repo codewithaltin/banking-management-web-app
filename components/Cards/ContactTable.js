@@ -5,7 +5,7 @@ import PropTypes from "prop-types";
 import Contact from "./Contact";
 
 export default function ContactTable({ contact }) {
-  const CONTACT_API_BASE_URL = "http://localhost:8080/api/v1/contact";
+  const CONTACT_API_BASE_URL = "http://localhost:8080/api/v1/auth/contact";
   const [contacts, setContacts] = useState(null);
   const [loading, setLoading] = useState(true);
   const [contactId, setContactId] = useState(null);

@@ -11,7 +11,7 @@ import EditSavingGoal from "./EditSavingGoal";
 export default function SavingTable({ savingGoal, color }) {
 
 
-  const SAVINGGOAL_API_BASE_URL = "http://localhost:8080/api/v1/savingGoal";
+  const SAVINGGOAL_API_BASE_URL = "http://localhost:8080/api/v1/auth/savingGoal";
   const [savingGoals, setSavingGoals] = useState(null);
   const [loading, setLoading] = useState(true);
   const [savingGoalId, setSavingGoalId] = useState(null);

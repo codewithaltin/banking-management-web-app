@@ -77,19 +77,7 @@ const PaymentDropdown = () => {
             "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-800"
           }
         ></span>
-        <Link
-          href="/paymentTypes/CollectorPayments"
-          className={
-            "text-sm py-2 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
-          }
-        >
-          Collector Payment
-        </Link>
-        <span
-          className={
-            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-800"
-          }
-        ></span>
+        
         <Link
           href="/paymentTypes/InstitutionPayments"
           className={
@@ -97,6 +85,19 @@ const PaymentDropdown = () => {
           }
         >
           Institution Payment
+        </Link>
+        <span
+          className={
+            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-800"
+          }
+        ></span>
+        <Link
+          href="/paymentTypes/CollectorPayments"
+          className={
+            "text-sm py-2 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
+          }
+        >
+          Collector Payment
         </Link>
         <span
           className={

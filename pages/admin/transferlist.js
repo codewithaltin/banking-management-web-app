@@ -1,7 +1,7 @@
 import React from "react";
 import TransferTable from "components/Cards/TransferTable.js";
 import Auth from "layouts/Auth";
-import Admin from "layouts/Admin";
+import User from "layouts/User";
 
 const transferlist = () => {
   return (
@@ -10,6 +10,6 @@ const transferlist = () => {
     </>
   );
 };
-transferlist.layout = Admin;
+transferlist.layout = User;
 
 export default transferlist;
