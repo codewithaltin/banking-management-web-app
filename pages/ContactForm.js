@@ -31,7 +31,7 @@ export default function Contact() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const CONTACT_API_BASE_URL = "http://localhost:8080/api/v1/contact";
+  const CONTACT_API_BASE_URL = "http://localhost:8080/api/v1/auth/contact";
 
   const [isOpen, setIsOpen] = useState(false);
   const [contact, setContacts] = useState({

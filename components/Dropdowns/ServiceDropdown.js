@@ -56,7 +56,7 @@ const ServiceDropdown = () => {
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
         }}
       >
-        services
+        fund services
       </a>
       <div
         ref={popoverDropdownRef}

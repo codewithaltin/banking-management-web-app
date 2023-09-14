@@ -56,7 +56,7 @@ const PaymentDropdown = () => {
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
         }}
       >
-        Pay
+        send payments
       </a>
       <div
         ref={popoverDropdownRef}

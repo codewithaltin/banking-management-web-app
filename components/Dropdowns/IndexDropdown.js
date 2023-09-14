@@ -56,7 +56,7 @@ const IndexDropdown = () => {
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
         }}
       >
-        other
+        Cash care
       </a>
       <div
         ref={popoverDropdownRef}
