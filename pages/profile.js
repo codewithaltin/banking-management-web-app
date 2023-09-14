@@ -7,7 +7,7 @@ import { useState, useEffect } from "react";
 export default function Profile() {
   const router = useRouter();
   const [profile, setProfile] = useState();
-  const email = router.query.email;
+  const email = localStorage.getItem("email");
   const USER_API_BASE_URL = `http://localhost:8080/api/v1/auth/user/${email}`;
 
   useEffect(() => {
@@ -32,12 +32,13 @@ export default function Profile() {
 
   function logout() {
     localStorage.removeItem("token");
+    localStorage.removeItem("email");
     router.push("/");
   }
 
   return (
     <>
-      <Navbar transparent email={email} />
+      <Navbar />
       <main className="profile-page">
         <section className="relative block h-500-px">
           <div
