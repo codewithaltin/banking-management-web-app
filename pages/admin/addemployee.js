@@ -19,13 +19,7 @@ export default function addemployee() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const departamentOptions = [
-    "Costumer Service",
-    "IT",
-    "Sales",
-    "Operations",
-    "Marketing",
-  ];
+  const departamentOptions = ["IT", "Sales", "Operations", "Marketing"];
   const jobTitleOptions = [
     "Banking Operations Manager",
     "Banking Customer Service Representative",

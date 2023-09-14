@@ -44,7 +44,7 @@ const EditUser = ({ userId, setResponseUser }) => {
     id: "",
     firstName: "",
     lastName: "",
-    emailId: "",
+    email: "",
     password: "",
     phoneNumber: "",
     role: "",

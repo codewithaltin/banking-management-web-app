@@ -14,7 +14,7 @@ import ServiceDropdown from "components/Dropdowns/ServiceDropdown";
 import PaymentDropdown from "components/Dropdowns/PaymentDropdown";
 
 
-export default function Navbar(props) {
+export default function Navbar(email) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
 
   return (
@@ -23,7 +23,7 @@ export default function Navbar(props) {
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <Link
-              href="/"
+              href={({ pathname: "/", query: { email: email } }, "/")}
               className="text-costum-dark text-xl font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
             >
               Futur

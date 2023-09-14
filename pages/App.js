@@ -5,14 +5,13 @@ import Footer from "components/Footers/Footer.js";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
-function App() {
+function App(email) {
   // useEffect(() => {
   //   Swal.fire("My sweet alert");
   // }, []);
-
   return (
     <div>
-      <IndexNavbarLight />
+      <IndexNavbarLight email={email} />
       <section className="header relative pt-16 items-center flex h-screen max-h-1200-px bg-cover-blur">
         <div className="container mx-auto ">
           <div className="w-full  px-4">
@@ -185,7 +184,7 @@ function App() {
               </a>
 
               <a
-                href="/bills"
+                href="/requestMoney"
                 target="_blank"
                 className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
               >
@@ -588,7 +587,13 @@ function App() {
                   <h5 className="text-xl font-semibold pb-4 text-center">
                     Profile Page
                   </h5>
-                  <Link href="/profile" legacyBehavior>
+                  <Link
+                    href={{
+                      pathname: "/profile",
+                      query: email,
+                    }}
+                    legacyBehavior
+                  >
                     <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
                       <img
                         alt="..."
