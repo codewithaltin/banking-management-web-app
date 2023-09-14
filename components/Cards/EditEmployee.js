@@ -1,8 +1,8 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { React, useState, useEffect, Fragment } from "react";
-
+import Swal from "sweetalert2";
 const EditEmployee = ({ employeeId, setResponseEmployee }) => {
-  const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/v1/employee";
+  const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/v1/auth/employee";
 
   const [isOpen, setIsOpen] = useState(false);
   const [employee, setEmployee] = useState({
@@ -70,6 +70,7 @@ const EditEmployee = ({ employeeId, setResponseEmployee }) => {
     const _employee = await response.json();
     setResponseEmployee(_employee);
     reset(e);
+    Swal.fire("Updated!", "Updated Succesfully!", "success");
   };
 
   return (
@@ -95,7 +96,7 @@ const EditEmployee = ({ employeeId, setResponseEmployee }) => {
                 </Dialog.Title>
                 <div className="flex max-w-md max-auto">
                   <div className="py-2">
-                    <div className="h-14 my-4">
+                    <div className="h-14 m-4">
                       <label className="block text-gray-600 text-sm font-normal">
                         First Name
                       </label>
@@ -107,7 +108,7 @@ const EditEmployee = ({ employeeId, setResponseEmployee }) => {
                         className="h-10 w-96 border mt-2 px-2 py-2"
                       ></input>
                     </div>
-                    <div className="h-14 my-4">
+                    <div className="h-14 m-4">
                       <label className="block text-gray-600 text-sm font-normal">
                         Last Name
                       </label>
@@ -119,7 +120,7 @@ const EditEmployee = ({ employeeId, setResponseEmployee }) => {
                         className="h-10 w-96 border mt-2 px-2 py-2"
                       ></input>
                     </div>
-                    <div className="h-14 my-4">
+                    <div className="h-14 m-4">
                       <label className="block text-gray-600 text-sm font-normal">
                         Email
                       </label>
@@ -131,7 +132,7 @@ const EditEmployee = ({ employeeId, setResponseEmployee }) => {
                         className="h-10 w-96 border mt-2 px-2 py-2"
                       ></input>
                     </div>
-                    <div className="h-14 my-4">
+                    <div className="h-14 my-4 mx-4">
                       <label className="block text-gray-600 text-sm font-normal">
                         Phone Number
                       </label>
@@ -143,7 +144,7 @@ const EditEmployee = ({ employeeId, setResponseEmployee }) => {
                         className="h-10 w-96 border mt-2 px-2 py-2"
                       ></input>
                     </div>
-                    <div className="h-14 my-4 space-x-4 pt-4">
+                    <div className="h-10  m-2 space-x-4 my-4 pt-4">
                       <button
                         onClick={updateEmployee}
                         className=" bg-emerald-400 hover:bg-emerald-600 rounded text-white font-semibold   py-2 px-6"

@@ -4,6 +4,7 @@ import PropTypes from "prop-types";
 // components
 import EditEmployee from "./EditEmployee";
 import Employee from "./Employee";
+import Swal from "sweetalert2";
 
 export default function EmployeeList({ employee, color }) {
   const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/v1/auth/employee";
@@ -32,9 +33,24 @@ export default function EmployeeList({ employee, color }) {
     fetchData();
   }, [employee, responseEmployee]);
 
+  const confirmDelete = (e, id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteEmployee(e, id);
+        Swal.fire("Deleted!", "Deleted Succesfully!", "success");
+      }
+    });
+  };
+
   const deleteEmployee = (e, id) => {
-    let confirmed = confirm("Are you sure you wanna delete this employee?");
-    if (!confirmed) return;
     e.preventDefault();
     fetch(EMPLOYEE_API_BASE_URL + "/" + id, {
       method: "DELETE",
@@ -172,7 +188,7 @@ export default function EmployeeList({ employee, color }) {
                   <Employee
                     employee={employee}
                     key={employee.id}
-                    deleteEmployee={deleteEmployee}
+                    confirmDelete={confirmDelete}
                     editEmployee={editEmployee}
                   />
                 ))}

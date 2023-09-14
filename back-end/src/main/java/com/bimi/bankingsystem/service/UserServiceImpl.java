@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> getUserById(Long id) {
-       return userRepository.findById(id);
+        return userRepository.findById(id);
     }
     @Override
     public Optional<User> getUserByEmail(String email) {
@@ -41,8 +41,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public boolean deleteUser(Long id) {
-       userRepository.deleteById(id);
-       return true;
+        userRepository.deleteById(id);
+        return true;
     }
 
     @Override

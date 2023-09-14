@@ -3,6 +3,7 @@ package com.bimi.bankingsystem.controller;
 import com.bimi.bankingsystem.exception.UnauthorizedException;
 import com.bimi.bankingsystem.config.JwtService;
 import com.bimi.bankingsystem.model.Employee;
+import com.bimi.bankingsystem.model.Transfer;
 import com.bimi.bankingsystem.service.EmployeeService;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import lombok.extern.slf4j.Slf4j;
@@ -16,7 +17,7 @@ import java.util.*;
 
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/v1/auth/")
+@RequestMapping("/api/v1/auth")
 public class EmployeeController {
 
     private EmployeeService employeeService;
@@ -27,7 +28,7 @@ public class EmployeeController {
         this.employeeService = employeeService;
     }
     @PostMapping("/employee")
-    public Employee createLoan(@RequestBody Employee e){
+    public Employee createEmployee(@RequestBody Employee e){
         return employeeService.addEmployee(e);
     }
 
@@ -39,6 +40,12 @@ public class EmployeeController {
 //        }
 
         return ResponseEntity.ok(employeeService.getAllEmployees());
+    }
+    @GetMapping("/employee/{id}")
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") Long id) {
+        Employee e = null;
+        e = employeeService.getEmployeeById(id);
+        return ResponseEntity.ok(e);
     }
 
     @DeleteMapping("/employee/{id}")
