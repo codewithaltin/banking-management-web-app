@@ -28,9 +28,9 @@ public class User implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(updatable = false)
     private long id;
-
+    @NonNull
     private String firstName;
-
+    @NonNull
     private String lastName;
     @NonNull
     private String email;

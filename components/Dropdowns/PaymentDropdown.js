@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { createPopper } from "@popperjs/core";
 
-const IndexDropdown = () => {
+const PaymentDropdown = () => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = useState(false);
   const btnDropdownRef = useRef();
@@ -56,7 +56,7 @@ const IndexDropdown = () => {
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
         }}
       >
-        other
+        Pay
       </a>
       <div
         ref={popoverDropdownRef}
@@ -70,7 +70,7 @@ const IndexDropdown = () => {
             "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-600"
           }
         >
-          My Services
+          Payments
         </span>
         <span
           className={
@@ -78,12 +78,12 @@ const IndexDropdown = () => {
           }
         ></span>
         <Link
-          href="/online-donation"
+          href="/paymentTypes/CollectorPayments"
           className={
             "text-sm py-2 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
           }
         >
-          Donate
+          Collector Payment
         </Link>
         <span
           className={
@@ -91,12 +91,12 @@ const IndexDropdown = () => {
           }
         ></span>
         <Link
-          href="/savingGoal"
+          href="/paymentTypes/InstitutionPayments"
           className={
             "text-sm py-2 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
           }
         >
-          Saving Goal
+          Institution Payment
         </Link>
         <span
           className={
@@ -104,25 +104,31 @@ const IndexDropdown = () => {
           }
         ></span>
         <Link
-          href="/beneficiary"
+          href="/paymentTypes/MobilePayments"
           className={
             "text-sm py-2 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
           }
         >
-          Beneficiary 
+          Mobile Payment 
         </Link>
         <span
           className={
             "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-800"
           }
         ></span>
-
+        <Link
+          href="/paymentTypes/PrePaidServices"
+          className={
+            "text-sm py-2 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
+          }
+        >
+          Pre Paid Payment
+        </Link>
        
-        
         <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
       </div>
     </>
   );
 };
 
-export default IndexDropdown;
+export default PaymentDropdown;

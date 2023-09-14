@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { createPopper } from "@popperjs/core";
 
-const IndexDropdown = () => {
+const ServiceDropdown = () => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = useState(false);
   const btnDropdownRef = useRef();
@@ -56,7 +56,7 @@ const IndexDropdown = () => {
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
         }}
       >
-        other
+        services
       </a>
       <div
         ref={popoverDropdownRef}
@@ -77,46 +77,54 @@ const IndexDropdown = () => {
             "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-800"
           }
         ></span>
-        <Link
-          href="/online-donation"
-          className={
-            "text-sm py-2 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
-          }
-        >
-          Donate
-        </Link>
-        <span
-          className={
-            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-800"
-          }
-        ></span>
-        <Link
-          href="/savingGoal"
-          className={
-            "text-sm py-2 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
-          }
-        >
-          Saving Goal
-        </Link>
-        <span
-          className={
-            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-800"
-          }
-        ></span>
-        <Link
-          href="/beneficiary"
-          className={
-            "text-sm py-2 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
-          }
-        >
-          Beneficiary 
-        </Link>
-        <span
-          className={
-            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-800"
-          }
-        ></span>
 
+        <Link
+          href="/transfer"
+          className={
+            "text-sm py-2 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
+          }
+        >
+          Transfer Money
+        </Link>
+        <span
+          className={
+            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-800"
+          }
+        ></span>
+        <Link
+          href="/requestMoney"
+          className={
+            "text-sm py-2 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
+          }
+        >
+          Request Money
+        </Link>
+        <span
+          className={
+            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-800"
+          }
+        ></span>
+        <Link
+          href="/loan-application"
+          className={
+            "text-sm py-2 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
+          }
+        >
+          Loan 
+        </Link>
+        <span
+          className={
+            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-800"
+          }
+        ></span>
+        <Link
+          href="/invoice_details"
+          className={
+            "text-sm py-2 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
+          }
+        >
+          Invoice
+        </Link>
        
         
         <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
@@ -125,4 +133,4 @@ const IndexDropdown = () => {
   );
 };
 
-export default IndexDropdown;
+export default ServiceDropdown;

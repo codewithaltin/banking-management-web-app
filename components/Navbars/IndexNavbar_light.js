@@ -5,6 +5,14 @@ import { useState, useEffect } from "react";
 // components
 
 import IndexDropdown from "components/Dropdowns/IndexDropdown.js";
+import NotificationDropdown from "components/Dropdowns/TableDropdown";
+import Contact from "pages/ContactForm";
+import ContactDropdown from "components/Dropdowns/ContactDropdown";
+import PagesDropdown from "components/Dropdowns/PagesDropdown";
+import UserDropdown from "components/Dropdowns/UserDropdown";
+import ServiceDropdown from "components/Dropdowns/ServiceDropdown";
+import PaymentDropdown from "components/Dropdowns/PaymentDropdown";
+
 
 export default function Navbar(props) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
@@ -46,6 +54,10 @@ export default function Navbar(props) {
                 </Link>{" "}
               </li> */}
 
+              <li>
+                <ServiceDropdown />
+              </li>
+              <li><PaymentDropdown/></li>
               <li>
                 <IndexDropdown />
               </li>

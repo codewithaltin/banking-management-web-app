@@ -15,7 +15,7 @@ export default function SavingGoal() {
     } = useForm({ });
     
   
-  const SAVINGGOAL_API_BASE_URL = "http://localhost:8080/api/v1/savingGoal";
+  const SAVINGGOAL_API_BASE_URL = "http://localhost:8080/api/v1/auth/savingGoal";
 
   const [isOpen, setIsOpen] = useState(false);
   const [savingGoal, setSavingGoals] = useState({
