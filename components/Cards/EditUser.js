@@ -31,7 +31,7 @@ const schema = yup
   })
   .required();
 const EditUser = ({ userId, setResponseUser }) => {
-  const USER_API_BASE_URL = "http://localhost:8080/api/v1/user";
+  const USER_API_BASE_URL = "http://localhost:8080/api/v1/auth/user";
   const {
     register,
     handleSubmit,
@@ -44,7 +44,7 @@ const EditUser = ({ userId, setResponseUser }) => {
     id: "",
     firstName: "",
     lastName: "",
-    emailId: "",
+    email: "",
     password: "",
     phoneNumber: "",
     role: "",

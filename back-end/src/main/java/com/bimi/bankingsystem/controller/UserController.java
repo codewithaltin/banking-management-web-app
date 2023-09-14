@@ -29,7 +29,7 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-//    @GetMapping("/user/{id}")
+    //    @GetMapping("/user/{id}")
 //    public Optional<User> getUserById(@PathVariable("id") Long id) {
 //        return userService.getUserById(id);
 //    }
@@ -49,10 +49,10 @@ public class UserController {
         return userService.updateUser(id,user);
     }
 
-//    //@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESSOR')")
-//    @PostMapping("{userId}/savingGoal/{savingGoalId}")
-//    public void addSavingGoalToUser(@PathVariable Long userId, @PathVariable Long savingGoalId) {
-//        userService.addSavingGoalToUser(userId, savingGoalId);
-//    }
+    //@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESSOR')")
+    /*@PostMapping("{userId}/savingGoal/{savingGoalId}")
+    public void addSavingGoalToUser(@PathVariable Long userId, @PathVariable Long savingGoalId) {
+        userService.addSavingGoalToUser(userId, savingGoalId);
+    }*/
 
 }

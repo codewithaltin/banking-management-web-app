@@ -56,10 +56,7 @@ export default function Login() {
       const json = await res.json();
       SuccessfulAlert();
       localStorage.setItem("token", json.token);
-      await router.push(
-        { pathname: "/profile", query: { email: email } },
-        "profile"
-      );
+      await router.push({ pathname: "/", query: { email: email } }, "/");
     } else {
       WrongCredentialsAlert();
     }
