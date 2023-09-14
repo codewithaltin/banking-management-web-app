@@ -59,7 +59,7 @@ export default function Transfer() {
         formState: { errors },
       } = useForm({ resolver: yupResolver(schema) });
 
-      const TRANSFER_API_BASE_URL = "http://localhost:8080/api/v1/transfer";
+      const TRANSFER_API_BASE_URL = "http://localhost:8080/api/v1/auth/transfer";
 
     
     const [transfer, setTransfers] = useState({

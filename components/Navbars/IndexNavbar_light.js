@@ -53,14 +53,24 @@ export default function Navbar(email) {
                   Individual
                 </Link>{" "}
               </li> */}
+                 <Link
+                  className="text-costum-dark text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                  href="/admin/dashboard"
+                 
+                >
+                  dashboard
+              
+                </Link>
 
-              <li>
-                <ServiceDropdown />
-              </li>
-              <li><PaymentDropdown/></li>
-              <li>
-                <IndexDropdown />
-              </li>
+               <li className="mr-4">
+                  <ServiceDropdown />
+                </li>
+                <li className="mr-4">
+                  <PaymentDropdown />
+                </li>
+                <li>
+                  <IndexDropdown />
+                </li>
               <li className="flex items-center"> </li>
               <li className="flex items-center"></li>
             </ul>

@@ -16,7 +16,7 @@ export default function MobilePayments() {
     } = useForm({ });
     
   
-  const MOBILEPAYMENTS_API_BASE_URL = "http://localhost:8080/api/v1/mobilePayment";
+  const MOBILEPAYMENTS_API_BASE_URL = "http://localhost:8080/api/v1/auth/mobilePayment";
 
   const [isOpen, setIsOpen] = useState(false);
   const [mobilePayments, setMobilePayments] = useState({
