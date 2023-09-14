@@ -56,7 +56,6 @@ export default function Navbar(email) {
                  <Link
                   className="text-costum-dark text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
                   href="/admin/dashboard"
-                 
                 >
                   dashboard
               
@@ -84,13 +83,26 @@ export default function Navbar(email) {
                   Sign In
                 </Link>
                 <Link
-                  href="/auth/login"
+                  href="/auth/register"
                   className="text-costum-dark  hover:text-blueGray-00 text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
                 >
-                  {/* Welcome {profile.firstName} */}
+                  register
                 </Link>
               </li>
             </ul>
+            
+            <ul>
+              <li>
+                <Link
+                 href="/ContactForm"
+                 className="text-costum-dark  hover:text-blueGray-00 text-x font-heavy leading-relaxed inline-block ml-auto py-4 whitespace-nowrap uppercase"
+                >
+                  Contact Us
+                </Link>
+              </li>
+            </ul>
+
+
           </div>
         </div>
       </nav>

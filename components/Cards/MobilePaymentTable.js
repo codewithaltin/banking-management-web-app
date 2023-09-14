@@ -10,7 +10,7 @@ import CardTable from "./CardTable";
 export default function MobilePaymentTable({ mobilePayment, color }) {
 
 
-  const MOBILEPAYMENT_API_BASE_URL = "http://localhost:8080/api/v1/mobilePayment";
+  const MOBILEPAYMENT_API_BASE_URL = "http://localhost:8080/api/v1/auth/mobilePayment";
 
   const [mobilePayments, setMobilePayment] = useState(null);
   const [loading, setLoading] = useState(true);

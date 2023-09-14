@@ -3,12 +3,14 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import Auth from "layouts/Auth.js";
+
 import Login from "pages/auth/login.js";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 const phoneReg =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+
+  import Auth from "layouts/Auth.js";
 
 const schema = yup.object().shape({}).required();
 export default function addemployee() {
@@ -120,7 +122,7 @@ export default function addemployee() {
                     transition-all duration-150"
                       placeholder="Last Name"
                       onChange={(e) => handleChange(e)}
-                      value={employee.firstName}
+                      value={employee.lastName}
                       required
                     />
                   </div>
@@ -288,3 +290,5 @@ export default function addemployee() {
     </>
   );
 }
+
+addemployee.layout = Auth;
