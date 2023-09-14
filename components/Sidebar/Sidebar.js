@@ -119,7 +119,7 @@ export default function Sidebar() {
                 >
                   <i
                     className={
-                      "fas fa-table mr-2 text-sm " +
+                      "fas fa-users mr-2 text-sm " +
                       (router.pathname.indexOf("/admin/userlist") !== -1
                         ? "opacity-75"
                         : "text-blueGray-300")
@@ -140,7 +140,7 @@ export default function Sidebar() {
                 >
                   <i
                     className={
-                      "fas fa-table mr-2 text-sm " +
+                      "fas fa-user-tie mr-2 text-sm " +
                       (router.pathname.indexOf("/admin/employeelist") !== -1
                         ? "opacity-75"
                         : "text-blueGray-300")
@@ -162,7 +162,7 @@ export default function Sidebar() {
                 >
                   <i
                     className={
-                      "fas fa-table mr-2 text-sm " +
+                      "fas fa-comments-dollar mr-2 text-sm " +
                       (router.pathname.indexOf("/admin/transferlist") !== -1
                         ? "opacity-75"
                         : "text-blueGray-300")
@@ -185,7 +185,7 @@ export default function Sidebar() {
                 >
                   <i
                     className={
-                      "fas fa-table mr-2 text-sm " +
+                      "fas fa-landmark mr-2 text-sm " +
                       (router.pathname.indexOf("/admin/loanlist") !== -1
                         ? "opacity-75"
                         : "text-blueGray-300")
@@ -200,7 +200,7 @@ export default function Sidebar() {
                   href="/auth/Institutionpaymentslist"
                   className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
                 >
-                  <i className="fas fa-newspaper text-blueGray-400 mr-2 text-sm"></i>{" "}
+                  <i className="fas fa-credit-card text-blueGray-400 mr-2 text-sm"></i>{" "}
                  Payments List
                 </Link>
               </li>
@@ -217,7 +217,7 @@ export default function Sidebar() {
                 >
                   <i
                     className={
-                      "fas fa-table mr-2 text-sm " +
+                      "fas fa-donate mr-2 text-sm " +
                       (router.pathname.indexOf("/admin/donationlist") !== -1
                         ? "opacity-75"
                         : "text-blueGray-300")
@@ -239,7 +239,7 @@ export default function Sidebar() {
                 >
                   <i
                     className={
-                      "fas fa-table mr-2 text-sm " +
+                      "far fa-address-card mr-2 text-sm " +
                       (router.pathname.indexOf("/admin/userlist") !== -1
                         ? "opacity-75"
                         : "text-blueGray-300")
@@ -261,7 +261,7 @@ export default function Sidebar() {
                 >
                   <i
                     className={
-                      "fas fa-table mr-2 text-sm " +
+                      "fas fa-dollar-sign mr-2 text-sm " +
                       (router.pathname.indexOf("/auth/savinglist") !== -1
                         ? "opacity-75"
                         : "text-blueGray-300")
