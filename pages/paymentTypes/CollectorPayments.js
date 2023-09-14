@@ -15,7 +15,7 @@ export default function CollectorPayments() {
     } = useForm({ });
     
   
-  const COLLECTORPAYMENTS_API_BASE_URL = "http://localhost:8080/api/v1/collectorPayment";
+  const COLLECTORPAYMENTS_API_BASE_URL = "http://localhost:8080/api/v1/auth/collectorPayment";
 
   const [isOpen, setIsOpen] = useState(false);
   const [collectorPayments, setCollectorPayments] = useState({
@@ -50,7 +50,7 @@ export default function CollectorPayments() {
       body: JSON.stringify(collectorPayments),
     });
     if (!response.ok) {
-      throw new Error("Something went wrong");
+      console.error("Something went wrong");
     }
     const _collectorPayments = await response.json();
     setResponseCollectorPayments(_collectorPayments);

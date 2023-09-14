@@ -10,7 +10,7 @@ import CardTable from "./CardTable";
 
 export default function InstitutionPaymentsTable({ institutionPayment, color }) {
 
-    const INSTITUTIONPAYMENTS_API_BASE_URL = "http://localhost:8080/api/v1/institutionPayments";
+    const INSTITUTIONPAYMENTS_API_BASE_URL = "http://localhost:8080/api/v1/auth/institutionPayments";
 
     const [institutionPayments, setInstitutionPayments] = useState(null);
     const [loading, setLoading] = useState(true);

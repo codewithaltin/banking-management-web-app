@@ -1,11 +1,20 @@
 import React from "react";
 import Link from "next/link";
-
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 // components
 
 import IndexDropdown from "components/Dropdowns/IndexDropdown.js";
+import NotificationDropdown from "components/Dropdowns/TableDropdown";
+import Contact from "pages/ContactForm";
+import ContactDropdown from "components/Dropdowns/ContactDropdown";
+import PagesDropdown from "components/Dropdowns/PagesDropdown";
+import UserDropdown from "components/Dropdowns/UserDropdown";
+import ServiceDropdown from "components/Dropdowns/ServiceDropdown";
+import PaymentDropdown from "components/Dropdowns/PaymentDropdown";
 
-export default function Navbar(props) {
+
+export default function Navbar(email) {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
 
   return (
@@ -14,7 +23,7 @@ export default function Navbar(props) {
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <Link
-              href="/"
+              href={({ pathname: "/", query: { email: email } }, "/")}
               className="text-costum-dark text-xl font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
             >
               Futur
@@ -35,27 +44,32 @@ export default function Navbar(props) {
             id="example-navbar-warning"
           >
             <ul className="flex flex-col lg:flex-row list-none align-center mr-auto">
-              <li className="flex items-center">
+              {/* <li className="flex items-center">
                 {" "}
                 <Link
-                  href="/auth/individual_register"
+                  href="/auth/register"
                   className="text-costum-dark  text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
                 >
                   Individual
                 </Link>{" "}
-              </li>
-              <li className="flex items-center">
-                {" "}
-                <Link
-                  href="/auth/business_register"
-                  className="text-costum-dark  text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+              </li> */}
+                 <Link
+                  className="text-costum-dark text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                  href="/admin/dashboard"
                 >
-                  Business
-                </Link>{" "}
-              </li>{" "}
-              <li>
-                <IndexDropdown />
-              </li>
+                  dashboard
+              
+                </Link>
+
+               <li className="mr-4">
+                  <ServiceDropdown />
+                </li>
+                <li className="mr-4">
+                  <PaymentDropdown />
+                </li>
+                <li>
+                  <IndexDropdown />
+                </li>
               <li className="flex items-center"> </li>
               <li className="flex items-center"></li>
             </ul>
@@ -67,9 +81,28 @@ export default function Navbar(props) {
                   className="text-costum-dark  hover:text-blueGray-00 text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
                 >
                   Sign In
-                </Link>{" "}
+                </Link>
+                <Link
+                  href="/auth/register"
+                  className="text-costum-dark  hover:text-blueGray-00 text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                >
+                  register
+                </Link>
               </li>
             </ul>
+            
+            <ul>
+              <li>
+                <Link
+                 href="/ContactForm"
+                 className="text-costum-dark  hover:text-blueGray-00 text-x font-heavy leading-relaxed inline-block ml-auto py-4 whitespace-nowrap uppercase"
+                >
+                  Contact Us
+                </Link>
+              </li>
+            </ul>
+
+
           </div>
         </div>
       </nav>

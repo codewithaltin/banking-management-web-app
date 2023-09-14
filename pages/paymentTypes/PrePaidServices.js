@@ -15,7 +15,7 @@ export default function PrePaidServices() {
     } = useForm({ });
     
   
-  const PREPAIDSERVICES_API_BASE_URL = "http://localhost:8080/api/v1/prePaidPayment";
+  const PREPAIDSERVICES_API_BASE_URL = "http://localhost:8080/api/v1/auth/prePaidPayment";
 
   const [isOpen, setIsOpen] = useState(false);
   const [prePaidService, setPrePaidServices] = useState({

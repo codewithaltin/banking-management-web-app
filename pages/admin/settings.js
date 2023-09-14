@@ -8,17 +8,19 @@ import CardProfile from "components/Cards/CardProfile.js";
 // layout for page
 
 import Admin from "layouts/Admin.js";
+import User from "layouts/User.js";
 
 export default function Settings() {
   return (
     <>
       <div className="flex flex-wrap justify-center ">
         <div className="w-full  lg:w-8/12 px-4">
-          <CardSettings />
+          {/* <CardSettings /> */}
+          <CardProfile />
         </div>
       </div>
     </>
   );
 }
 
-Settings.layout = Admin;
+Settings.layout = User;

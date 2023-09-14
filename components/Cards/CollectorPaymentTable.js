@@ -10,7 +10,7 @@ import CollectorPayments from "./CollectorPayments";
 
 export default function CollectorPaymentTable({ collectorPayment, color }) {
 
-  const COLLECTORPAYMENT_API_BASE_URL = "http://localhost:8080/api/v1/collectorPayment";
+  const COLLECTORPAYMENT_API_BASE_URL = "http://localhost:8080/api/v1/auth/collectorPayment";
 
   const [collectorPayments, setCollectorPayment] = useState(null);
   const [loading, setLoading] = useState(true);

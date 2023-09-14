@@ -11,7 +11,7 @@ import java.util.Map;
 
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1/auth/")
 public class SavingGoalController {
 
     private SavingGoalService savingGoalService;
@@ -22,6 +22,7 @@ public class SavingGoalController {
     @PostMapping("/savingGoal")
     public SavingGoal saveSavingGoals(@RequestBody SavingGoal savingGoal){
         return savingGoalService.addSavingGoal(savingGoal);
+
     }
 
     @GetMapping("/savingGoal")
@@ -35,13 +36,12 @@ public class SavingGoalController {
         savingGoal = savingGoalService.getSavingGoalsById(id);
         return ResponseEntity.ok(savingGoal);
     }
+
     @DeleteMapping("/savingGoal/{id}")
-    public ResponseEntity<Map<String,Boolean>> deleteSavingGoal(@PathVariable("id") Long id) {
-        boolean deleted = false;
-        Map<String,Boolean> response = new HashMap<>();
-        response.put("deleted", deleted);
-        return ResponseEntity.ok(response);
+    public boolean deleteSavingGoal(@PathVariable("id") Long id) {
+        return savingGoalService.deleteSavingGoal(id);
     }
+
 
     @PutMapping("/savingGoal/{id}")
     public ResponseEntity<SavingGoal> updateSavingGoal(@PathVariable("id") Long id,
@@ -49,4 +49,6 @@ public class SavingGoalController {
         savingGoal = savingGoalService.updateSavingGoals(id,savingGoal);
         return ResponseEntity.ok(savingGoal);
     }
+
+
 }

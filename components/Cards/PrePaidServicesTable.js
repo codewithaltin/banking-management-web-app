@@ -10,7 +10,7 @@ import CardTable from "./CardTable";
 export default function PrePaidServicesTable({ prePaidService, color }) {
 
 
-  const PREPAIDSERVICES_API_BASE_URL = "http://localhost:8080/api/v1/prePaidPayment";
+  const PREPAIDSERVICES_API_BASE_URL = "http://localhost:8080/api/v1/auth/prePaidPayment";
 
   const [prePaidServices, setPrePaidServives] = useState(null);
   const [loading, setLoading] = useState(true);

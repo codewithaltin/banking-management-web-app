@@ -1,25 +1,54 @@
-import React from "react";
+import React, { useRef, useState, useEffect } from "react";
 import Link from "next/link";
 import { createPopper } from "@popperjs/core";
 
 const IndexDropdown = () => {
   // dropdown props
-  const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
-  const btnDropdownRef = React.createRef();
-  const popoverDropdownRef = React.createRef();
+  const [dropdownPopoverShow, setDropdownPopoverShow] = useState(false);
+  const btnDropdownRef = useRef();
+  const popoverDropdownRef = useRef();
+
+  // Function to open the dropdown
   const openDropdownPopover = () => {
     createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
       placement: "bottom-start",
     });
     setDropdownPopoverShow(true);
   };
+
+  // Function to close the dropdown
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
   };
+
+  // Add a click event listener to the document body to close the dropdown
+  useEffect(() => {
+    const handleDocumentClick = (e) => {
+      if (
+        btnDropdownRef.current &&
+        !btnDropdownRef.current.contains(e.target) &&
+        popoverDropdownRef.current &&
+        !popoverDropdownRef.current.contains(e.target)
+      ) {
+        closeDropdownPopover();
+      }
+    };
+
+    if (dropdownPopoverShow) {
+      document.addEventListener("click", handleDocumentClick);
+    } else {
+      document.removeEventListener("click", handleDocumentClick);
+    }
+
+    return () => {
+      document.removeEventListener("click", handleDocumentClick);
+    };
+  }, [dropdownPopoverShow]);
+
   return (
     <>
       <a
-        className="text-costum-dark  text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+        className="text-costum-dark text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
         href="#pablo"
         ref={btnDropdownRef}
         onClick={(e) => {
@@ -27,7 +56,7 @@ const IndexDropdown = () => {
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
         }}
       >
-        Dashboard
+        Cash care
       </a>
       <div
         ref={popoverDropdownRef}
@@ -38,99 +67,59 @@ const IndexDropdown = () => {
       >
         <span
           className={
-            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-800"
+            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-600"
           }
         >
-          Admin Layout
+          Funds Center
         </span>
-        <Link
-          href="/admin/dashboard"
-          className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-          }
-        >
-          Dashboard
-        </Link>
-        <Link
-          href="/admin/settings"
-          className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-          }
-        >
-          Settings
-        </Link>
-        <Link
-          href="/admin/tables"
-          className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-          }
-        >
-          Tables
-        </Link>
-        <Link
-          href="/admin/maps"
-          className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-          }
-        >
-          Maps
-        </Link>
-        <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
         <span
           className={
             "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-800"
           }
-        >
-          Auth Layout
-        </span>
+        ></span>
         <Link
-          href="/auth/login"
+          href="/online-donation"
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            "text-sm py-2 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
           }
         >
-          Login
+          Donate
         </Link>
-        <Link
-          href="/auth/individual_register"
-          className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-          }
-        >
-          Individual Register
-        </Link>
-        <Link
-          href="/auth/business_register"
-          className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-          }
-        >
-          Business Register
-        </Link>
-        <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
         <span
           className={
             "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-800"
           }
-        >
-          No Layout
-        </span>
+        ></span>
         <Link
-          href="/landing"
+          href="/SavingGoal"
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            "text-sm py-2 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
           }
         >
-          Landing
+          Saving Goal
         </Link>
-        <Link
-          href="/profile"
+        <span
           className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
+            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-800"
+          }
+        ></span>
+        <Link
+          href="/beneficiary"
+          className={
+            "text-sm py-2 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
           }
         >
-          Profile
+          Beneficiary 
         </Link>
+        <span
+          className={
+            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-800"
+          }
+        ></span>
+
+       
+        
+        <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
       </div>
     </>
   );

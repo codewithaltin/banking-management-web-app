@@ -1,31 +1,52 @@
 package com.bimi.bankingsystem.controller;
 
+import com.bimi.bankingsystem.exception.UnauthorizedException;
+import com.bimi.bankingsystem.config.JwtService;
 import com.bimi.bankingsystem.model.Employee;
+import com.bimi.bankingsystem.model.Transfer;
 import com.bimi.bankingsystem.service.EmployeeService;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Role;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
 
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/v1")
+@RequestMapping("/api/v1/auth")
 public class EmployeeController {
 
-    private  EmployeeService employeeService;
+    private EmployeeService employeeService;
+    @Autowired
+    private JwtService jwtService;
 
     public EmployeeController(EmployeeService employeeService) {
         this.employeeService = employeeService;
     }
     @PostMapping("/employee")
-    public Employee createLoan(@RequestBody Employee e){
+    public Employee createEmployee(@RequestBody Employee e){
         return employeeService.addEmployee(e);
     }
 
     @GetMapping("/employee")
-    public List<Employee> getAllEmployees(){
-        return employeeService.getAllEmployees();
-    }
+    public ResponseEntity<List<Employee>> getAllEmployees(){
+//        //TODO here is where the authorization is happening
+//        if(!jwtService.getRoles("USER")){
+//            throw new UnauthorizedException("Unauthorized user");
+//        }
 
+        return ResponseEntity.ok(employeeService.getAllEmployees());
+    }
+    @GetMapping("/employee/{id}")
+    public ResponseEntity<Employee> getEmployeeById(@PathVariable("id") Long id) {
+        Employee e = null;
+        e = employeeService.getEmployeeById(id);
+        return ResponseEntity.ok(e);
+    }
 
     @DeleteMapping("/employee/{id}")
     public boolean deleteEmployee(@PathVariable Long id){

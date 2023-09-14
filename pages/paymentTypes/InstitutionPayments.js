@@ -15,7 +15,7 @@ export default function InstitutionPayments() {
     } = useForm({ });
     
   
-  const INSTITUTIONPAYMENTS_API_BASE_URL = "http://localhost:8080/api/v1/institutionPayments";
+  const INSTITUTIONPAYMENTS_API_BASE_URL = "http://localhost:8080/api/v1/auth/institutionPayments";
 
   const [isOpen, setIsOpen] = useState(false);
   const [institutionPayments, setInstitutionPayments] = useState({

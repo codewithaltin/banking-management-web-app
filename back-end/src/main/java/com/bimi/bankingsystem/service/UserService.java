@@ -12,8 +12,11 @@ public interface UserService {
 
     Optional<User> getUserById(Long id);
 
+    Optional<User> getUserByEmail(String email);
+
     boolean deleteUser(Long id);
 
     User updateUser(Long id, User user);
 
+//    void addSavingGoalToUser(Long userId, Long savingGoalId);
 }

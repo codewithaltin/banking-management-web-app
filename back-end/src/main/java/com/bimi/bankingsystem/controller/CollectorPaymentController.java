@@ -11,7 +11,7 @@ import java.util.Map;
 
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1/auth/")
 public class CollectorPaymentController {
 
     private CollectorPaymentService collectorPaymentService;
@@ -37,11 +37,8 @@ public class CollectorPaymentController {
         return ResponseEntity.ok(collectorPayment);
     }
     @DeleteMapping("/collectorPayment/{id}")
-    public ResponseEntity<Map<String,Boolean>> deleteCollectorPayment(@PathVariable("id") Long id) {
-        boolean deleted = false;
-        Map<String,Boolean> response = new HashMap<>();
-        response.put("deleted", deleted);
-        return ResponseEntity.ok(response);
+    public boolean deleteCollectorPayment(@PathVariable("id") Long id) {
+        return collectorPaymentService.deleteCollectorPayments(id);
     }
 
     @PutMapping("/collectorPayment/{id}")

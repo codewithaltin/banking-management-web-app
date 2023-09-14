@@ -3,12 +3,14 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import Auth from "layouts/Auth.js";
+
 import Login from "pages/auth/login.js";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from "react-router-dom";
 const phoneReg =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+
+  import Auth from "layouts/Auth.js";
 
 const schema = yup.object().shape({}).required();
 export default function addemployee() {
@@ -19,13 +21,7 @@ export default function addemployee() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const departamentOptions = [
-    "Costumer Service",
-    "IT",
-    "Sales",
-    "Operations",
-    "Marketing",
-  ];
+  const departamentOptions = ["IT", "Sales", "Operations", "Marketing"];
   const jobTitleOptions = [
     "Banking Operations Manager",
     "Banking Customer Service Representative",
@@ -37,7 +33,7 @@ export default function addemployee() {
     console.log("User Selected Value - ", event.target.value);
   };
 
-  const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/v1/employee";
+  const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/v1/auth/employee";
 
   const [isOpen, setIsOpen] = useState(false);
   const [employee, setEmployee] = useState({
@@ -49,7 +45,6 @@ export default function addemployee() {
     departament: "",
     jobTitle: "",
     startDate: "",
-
     endDate: "",
     salary: 0,
   });
@@ -127,7 +122,7 @@ export default function addemployee() {
                     transition-all duration-150"
                       placeholder="Last Name"
                       onChange={(e) => handleChange(e)}
-                      value={employee.firstName}
+                      value={employee.lastName}
                       required
                     />
                   </div>
@@ -295,3 +290,5 @@ export default function addemployee() {
     </>
   );
 }
+
+addemployee.layout = Auth;

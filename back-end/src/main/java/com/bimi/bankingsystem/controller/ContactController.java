@@ -12,7 +12,7 @@ import java.util.Map;
 
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1/auth/")
 public class ContactController {
 
     private final ContactService contactService;
@@ -38,11 +38,8 @@ public class ContactController {
         return ResponseEntity.ok(contact);
     }
     @DeleteMapping("/contact/{id}")
-    public ResponseEntity<Map<String,Boolean>> deleteContact(@PathVariable("id") Long id) {
-        boolean deleted = false;
-        Map<String,Boolean> response = new HashMap<>();
-        response.put("deleted", deleted);
-        return ResponseEntity.ok(response);
+    public boolean deleteContact(@PathVariable("id") Integer id){
+        return contactService.deleteContact(id);
     }
 
     @PutMapping("/contact/{id}")
@@ -51,7 +48,15 @@ public class ContactController {
         contact = contactService.updateContact(id,contact);
         return ResponseEntity.ok(contact);
     }
-
-
-
 }
+
+
+
+
+
+
+
+
+
+
+
