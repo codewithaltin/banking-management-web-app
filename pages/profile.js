@@ -1,40 +1,41 @@
 import React from "react";
-
 import Navbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+
 export default function Profile() {
   const router = useRouter();
   const [profile, setProfile] = useState();
-  const email = localStorage.getItem("email");
-  const USER_API_BASE_URL = `http://localhost:8080/api/v1/auth/user/${email}`;
 
+  const USER_API_BASE_URL = ``;
+  useEffect(() => {
+    // Perform localStorage action
+    const item = localStorage.getItem("key");
+  }, []);
   useEffect(() => {
     fetchProfile();
   }, []);
 
   async function fetchProfile() {
-    const res = await fetch(USER_API_BASE_URL, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    });
+    const res = await fetch(
+      "http://localhost:8080/api/v1/auth/userbyemail/" +
+        localStorage.getItem("email"),
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
     if (res.ok) {
       const json = await res.json();
       setProfile(json);
     } else {
-      // router.push("/");
+      router.push("/");
     }
   }
   if (profile == undefined) return;
-
-  function logout() {
-    localStorage.removeItem("token");
-    localStorage.removeItem("email");
-    router.push("/");
-  }
 
   return (
     <>

@@ -48,7 +48,7 @@ public class UserController {
                            @RequestBody User user) {
         return userService.updateUser(id,user);
     }
-
+    
 //    //@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESSOR')")
 //    @PostMapping("{userId}/savingGoal/{savingGoalId}")
 //    public void addSavingGoalToUser(@PathVariable Long userId, @PathVariable Long savingGoalId) {

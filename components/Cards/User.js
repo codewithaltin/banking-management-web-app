@@ -16,15 +16,29 @@ const User = ({ user, ConfirmDialogAlert, editUser }) => {
         {user.phoneNumber}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
-        {user.role}
+        {user.accountNumber}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
-        <a
-          onClick={(e, id) => editUser(e, user.id)}
-          className="text-indigo-600 hover:text-indigo-800 cursor-pointer"
-        >
-          Edit
-        </a>
+        <div class="m-5">
+          <button
+            onClick={(e, id) => editUser(e, user.id)}
+            class="inline-flex items-center px-4 py-2 bg-emerald-400 hover:bg-emerald-600 text-white text-sm font-medium rounded-md"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="#fff"
+              stroke-width="2"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="h-5 w-5 mr-2"
+            >
+              <polygon points="16 3 21 8 8 21 3 21 3 16 16 3"></polygon>
+            </svg>
+            Update{" "}
+          </button>
+        </div>
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         <button

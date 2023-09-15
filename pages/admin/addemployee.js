@@ -10,7 +10,7 @@ import { BrowserRouter } from "react-router-dom";
 const phoneReg =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
-  import Auth from "layouts/Auth.js";
+import Auth from "layouts/Auth.js";
 
 const schema = yup.object().shape({}).required();
 export default function addemployee() {
@@ -21,8 +21,15 @@ export default function addemployee() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const departamentOptions = ["IT", "Sales", "Operations", "Marketing"];
+  const departamentOptions = [
+    "Select",
+    "IT",
+    "Sales",
+    "Operations",
+    "Marketing",
+  ];
   const jobTitleOptions = [
+    "Select",
     "Banking Operations Manager",
     "Banking Customer Service Representative",
     "Banking Sales Representative",

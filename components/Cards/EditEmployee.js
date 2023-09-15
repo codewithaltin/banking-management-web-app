@@ -1,12 +1,47 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { React, useState, useEffect, Fragment } from "react";
 import Swal from "sweetalert2";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+
+import * as yup from "yup";
+import { dialog } from "@material-tailwind/react";
+
+// const phoneReg =
+//   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+// const schema = yup
+//   .object()
+//   .shape({
+//     firstName: yup
+//       .string()
+//       .required("First Name is required.")
+//       .min(2, "First name must be longer than 1 character")
+//       .max(50, "First name must be shorter than 30 characters."),
+//     lastName: yup
+//       .string()
+//       .required("Last Name is required.")
+//       .min(2, "Last name must be longer than 1 character")
+//       .max(50, "Last name must be shorter than 50 characters."),
+//     email: yup
+//       .string()
+//       .email("Please enter a valid e-mail")
+//       .required("Email is required."),
+//     phoneNumber: yup
+//       .string()
+//       .required("Phone number is required")
+//       .matches(phoneReg, "Phone Number is not valid."),
+//     departament: yup
+//       .string()
+//       .required("First Name is required.")
+//       .min(2, "First name must be longer than 1 character")
+//       .max(50, "First name must be shorter than 30 characters."),
+//   })
+//   .required();
+
 const EditEmployee = ({ employeeId, setResponseEmployee }) => {
   const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/v1/auth/employee";
-
-  const [isOpen, setIsOpen] = useState(false);
+  let [isOpen, setIsOpen] = useState(false);
   const [employee, setEmployee] = useState({
-    id: "",
     firstName: "",
     lastName: "",
     email: "",
@@ -15,7 +50,24 @@ const EditEmployee = ({ employeeId, setResponseEmployee }) => {
     jobTitle: "",
     salary: 0,
   });
+  // const {
+  //   register,
+  //   handleSubmit,
+  //   watch,
+  //   formState: { errors },
+  // } = useForm({ resolver: yupResolver(schema) });
 
+  const departamentOptions = ["IT", "Sales", "Operations", "Marketing"];
+  const jobTitleOptions = [
+    "Banking Operations Manager",
+    "Banking Customer Service Representative",
+    "Banking Sales Representative",
+    "Banking Marketing Manager",
+    "Banking IT Manager",
+  ];
+  const onOptionChangeHandler = (event) => {
+    console.log("User Selected Value - ", event.target.value);
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -27,7 +79,7 @@ const EditEmployee = ({ employeeId, setResponseEmployee }) => {
         });
         const _employee = await response.json();
         setEmployee(_employee);
-        setIsOpen(true);
+        openModal();
       } catch (error) {
         console.log(error);
       }
@@ -52,11 +104,10 @@ const EditEmployee = ({ employeeId, setResponseEmployee }) => {
 
   const reset = (e) => {
     e.preventDefault();
-    setIsOpen(false);
+    closeModal();
   };
 
   const updateEmployee = async (e) => {
-    e.preventDefault();
     const response = await fetch(EMPLOYEE_API_BASE_URL + "/" + employeeId, {
       method: "PUT",
       headers: {
@@ -65,29 +116,32 @@ const EditEmployee = ({ employeeId, setResponseEmployee }) => {
       body: JSON.stringify(employee),
     });
     if (!response.ok) {
-      throw new Error("Something went wrong");
+      Swal.fire({
+        icon: "error",
+        title: "Failed to update!",
+      });
     }
     const _employee = await response.json();
     setResponseEmployee(_employee);
-    reset(e);
     Swal.fire("Updated!", "Updated Succesfully!", "success");
+    reset(e);
   };
 
   return (
     <div className="min-h-screen absolute top-1/2 right-1/4">
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" m onClose={closeModal}>
-          <div className="px-4 text-center">
+          <div className="flex justify-center ">
             <Transition.Child
               as={Fragment}
-              enter="ease-out duration-300"
+              enter="ease-out duration-100"
               enterFrom="opacity-0 scale-95"
               enterTo="opacity-100 scale-100"
-              leave="ease-in duration-200"
+              leave="ease-in duration-100"
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block  p-5  max-w-md text-left absolute top-0 right-1/3 mt-36 transition-all transform bg-white shadow-xl rounded-md">
+              <div className="p-8 m-8 absolute top-0  transition-all transform bg-white shadow-xl rounded-lg">
                 <Dialog.Title
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
@@ -96,8 +150,8 @@ const EditEmployee = ({ employeeId, setResponseEmployee }) => {
                 </Dialog.Title>
                 <div className="flex max-w-md max-auto">
                   <div className="py-2">
-                    <div className="h-14 m-4">
-                      <label className="block text-gray-600 text-sm font-normal">
+                    <div className="h-14 mt-4">
+                      <label className="block text-gray-600 text-sm font-semibold">
                         First Name
                       </label>
                       <input
@@ -105,11 +159,14 @@ const EditEmployee = ({ employeeId, setResponseEmployee }) => {
                         name="firstName"
                         value={employee.firstName}
                         onChange={(e) => handleChange(e)}
-                        className="h-10 w-96 border mt-2 px-2 py-2"
+                        className="h-10  border mt-2 px-2 py-2 w-full"
                       ></input>
                     </div>
-                    <div className="h-14 m-4">
-                      <label className="block text-gray-600 text-sm font-normal">
+                    {/* <small role="alert" className="text-red-500">
+                      {errors.firstName?.message}
+                    </small> */}
+                    <div className="h-14 mt-4">
+                      <label className="block text-gray-600 text-sm font-semibold">
                         Last Name
                       </label>
                       <input
@@ -117,23 +174,29 @@ const EditEmployee = ({ employeeId, setResponseEmployee }) => {
                         name="lastName"
                         value={employee.lastName}
                         onChange={(e) => handleChange(e)}
-                        className="h-10 w-96 border mt-2 px-2 py-2"
+                        className="h-10 border mt-2 px-2 py-2 w-full"
                       ></input>
                     </div>
-                    <div className="h-14 m-4">
-                      <label className="block text-gray-600 text-sm font-normal">
+                    {/* <small role="alert" className="  text-red-500">
+                      {errors.lastName?.message}
+                    </small> */}
+                    <div className="h-14 mt-4">
+                      <label className="block text-gray-600 text-sm font-semibold">
                         Email
                       </label>
                       <input
                         type="text"
-                        name="emailId"
+                        name="email"
                         value={employee.email}
                         onChange={(e) => handleChange(e)}
-                        className="h-10 w-96 border mt-2 px-2 py-2"
+                        className="h-10 border mt-2 px-2 py-2 w-full"
                       ></input>
                     </div>
-                    <div className="h-14 my-4 mx-4">
-                      <label className="block text-gray-600 text-sm font-normal">
+                    {/* <small role="alert" className="  text-red-500 ">
+                      {errors.email?.message}
+                    </small> */}
+                    <div className="h-14 my-4">
+                      <label className="block text-gray-600 text-sm font-semibold">
                         Phone Number
                       </label>
                       <input
@@ -141,19 +204,51 @@ const EditEmployee = ({ employeeId, setResponseEmployee }) => {
                         name="phoneNumber"
                         value={employee.phoneNumber}
                         onChange={(e) => handleChange(e)}
-                        className="h-10 w-96 border mt-2 px-2 py-2"
+                        className="h-10  outline-none mt-2 p-2 w-full"
                       ></input>
                     </div>
-                    <div className="h-10  m-2 space-x-4 my-4 pt-4">
+                    <div className="h-14 my-4">
+                      <label className="block text-gray-600 text-sm font-semibold">
+                        Departament
+                      </label>
+                      <select
+                        type="text"
+                        name="departament"
+                        value={employee.departament}
+                        className="h-10  border mt-2 px-2 py-2 w-full"
+                        onChange={(e) => handleChange(e)}
+                      >
+                        {departamentOptions.map((option, index) => {
+                          return <option key={index}>{option}</option>;
+                        })}
+                      </select>
+                    </div>
+                    <div className="h-14 my-2">
+                      <label className="block text-gray-600 text-sm font-semibold">
+                        Job Title
+                      </label>
+                      <select
+                        type="text"
+                        name="jobTitle"
+                        value={employee.jobTitle}
+                        className="h-10  border mt-2 px-2 py-2 w-full"
+                        onChange={(e) => handleChange(e)}
+                      >
+                        {jobTitleOptions.map((option, index) => {
+                          return <option key={index}>{option}</option>;
+                        })}
+                      </select>
+                    </div>
+                    <div className="h-14 my-4 space-x-4 flex justify-center">
                       <button
                         onClick={updateEmployee}
-                        className=" bg-emerald-400 hover:bg-emerald-600 rounded text-white font-semibold   py-2 px-6"
+                        className=" bg-emerald-400 hover:bg-emerald-600 rounded text-white font-semibold w-full py-2  px-6"
                       >
                         Update
                       </button>
                       <button
                         onClick={reset}
-                        className="rounded text-white font-semibold bg-red-400 hover:bg-red-700 py-2 px-6"
+                        className="rounded text-white font-semibold bg-red-400 w-full hover:bg-red-700 py-2 px-6"
                       >
                         Close
                       </button>
