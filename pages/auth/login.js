@@ -35,13 +35,14 @@ export default function Login() {
       timer: 800,
     });
   };
-  const wrongCredentialsAlert = () => {
+  const WrongCredentialsAlert = () => {
     Swal.fire({
       icon: "error",
       title: "Log in failed",
       text: "Wrong credentials!",
     });
   };
+  const email = state.email;
   async function handleSubmit(event) {
     event.preventDefault();
     const res = await fetch(LOGIN_API_BASE_URL, {
@@ -55,10 +56,9 @@ export default function Login() {
       const json = await res.json();
       successfulAlert();
       localStorage.setItem("token", json.token);
-      localStorage.setItem("email", state.email);
-      await router.push("/");
+      await router.push({ pathname: "/", query: { email: email } }, "/");
     } else {
-      wrongCredentialsAlert();
+      WrongCredentialsAlert();
     }
   }
 
