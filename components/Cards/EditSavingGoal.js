@@ -76,17 +76,17 @@ const EditSavingGoal = ({ savingGoalId, setResponseSavingGoal }) => {
     <div className="min-h-screen absolute top-1/2 right-1/4">
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" m onClose={closeModal}>
-          <div className="px-4 text-center">
+          <div className="flex justify-center ">
             <Transition.Child
               as={Fragment}
-              enter="ease-out duration-300"
+              enter="ease-out duration-100"
               enterFrom="opacity-0 scale-95"
               enterTo="opacity-100 scale-100"
-              leave="ease-in duration-200"
+              leave="ease-in duration-100"
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
-              <div className="inline-block  p-5  max-w-md text-left absolute top-0 right-1/3 mt-36 transition-all transform bg-white shadow-xl rounded-md">
+              <div className="p-8 m-8 absolute top-0  transition-all transform bg-white shadow-xl rounded-lg">
                 <Dialog.Title
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
@@ -95,8 +95,8 @@ const EditSavingGoal = ({ savingGoalId, setResponseSavingGoal }) => {
                 </Dialog.Title>
                 <div className="flex max-w-md max-auto">
                   <div className="py-2">
-                    <div className="h-14 my-4">
-                      <label className="block text-gray-600 text-sm font-normal">
+                    <div className="h-14 mt-4">
+                      <label className="block text-gray-600 text-sm font-semibold">
                         Saving Reason
                       </label>
                       <input
@@ -104,23 +104,44 @@ const EditSavingGoal = ({ savingGoalId, setResponseSavingGoal }) => {
                         name="savingReason"
                         value={savingGoal.savingReason}
                         onChange={(e) => handleChange(e)}
-                        className="h-10 w-96 border mt-2 px-2 py-2"
+                        className="h-10  border mt-2 px-2 py-2 w-full"
                       ></input>
                     </div>
-                    <div className="h-14 my-4">
-                      <label className="block text-gray-600 text-sm font-normal">
+                    {/* <small role="alert" className="text-red-500">
+                      {errors.savingReason?.message}
+                    </small> */}
+                    <div className="h-14 mt-4">
+                      <label className="block text-gray-600 text-sm font-semibold">
                         Amount
                       </label>
                       <input
-                        type="number"
+                        type="text"
                         name="amount"
                         value={savingGoal.amount}
                         onChange={(e) => handleChange(e)}
-                        className="h-10 w-96 border mt-2 px-2 py-2"
+                        className="h-10 border mt-2 px-2 py-2 w-full"
                       ></input>
                     </div>
+                    {/* <small role="alert" className="  text-red-500">
+                      {errors.amount?.message}
+                    </small> */}
+                    <div className="h-14 mt-4">
+                      <label className="block text-gray-600 text-sm font-semibold">
+                        Date
+                      </label>
+                      <input
+                        type="text"
+                        name="date"
+                        value={savingGoal.date}
+                        onChange={(e) => handleChange(e)}
+                        className="h-10 border mt-2 px-2 py-2 w-full"
+                      ></input>
+                    </div>
+                    {/* <small role="alert" className="  text-red-500 ">
+                      {errors.date?.message}
+                    </small> */}
                     <div className="h-14 my-4">
-                      <label className="block text-gray-600 text-sm font-normal">
+                      <label className="block text-gray-600 text-sm font-semibold">
                         Goal Name
                       </label>
                       <input
@@ -128,31 +149,21 @@ const EditSavingGoal = ({ savingGoalId, setResponseSavingGoal }) => {
                         name="goalName"
                         value={savingGoal.goalName}
                         onChange={(e) => handleChange(e)}
-                        className="h-10 w-96 border mt-2 px-2 py-2"
+                        className="h-10  outline-none mt-2 p-2 w-full"
                       ></input>
                     </div>
-                    <div className="h-14 my-4">
-                      <label className="block text-gray-600 text-sm font-normal">
-                        Date
-                      </label>
-                      <input
-                        type="date"
-                        name="date"
-                        value={savingGoal.date}
-                        onChange={(e) => handleChange(e)}
-                        className="h-10 w-96 border mt-2 px-2 py-2"
-                      ></input>
-                    </div>
-                    <div className="h-14 my-4 space-x-4 pt-4">
+                  
+                    
+                    <div className="h-14 my-4 space-x-4 flex justify-center">
                       <button
                         onClick={updateSavingGoal}
-                        className=" bg-emerald-400 hover:bg-emerald-600 rounded text-white font-semibold   py-2 px-6"
+                        className=" bg-emerald-400 hover:bg-emerald-600 rounded text-white font-semibold w-full py-2  px-6"
                       >
                         Update
                       </button>
                       <button
                         onClick={reset}
-                        className="rounded text-white font-semibold bg-red-400 hover:bg-red-700 py-2 px-6"
+                        className="rounded text-white font-semibold bg-red-400 w-full hover:bg-red-700 py-2 px-6"
                       >
                         Close
                       </button>

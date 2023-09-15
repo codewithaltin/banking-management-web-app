@@ -39,7 +39,6 @@ export default function CollectorPayments() {
   //   navigate("/");
   // };
   
-
   const saveCollectorPayments = async (e) => {
     //e.preventDefault();
     const response = await fetch(COLLECTORPAYMENTS_API_BASE_URL, {
@@ -50,12 +49,12 @@ export default function CollectorPayments() {
       body: JSON.stringify(collectorPayments),
     });
     if (!response.ok) {
-      console.error("Something went wrong");
+     console.log("Something went wrong");
     }
     const _collectorPayments = await response.json();
     setResponseCollectorPayments(_collectorPayments);
     window.location.reload();
-  }; 
+  };
 
   
   const CollectorOption = [

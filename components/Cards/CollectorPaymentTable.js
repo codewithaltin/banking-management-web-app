@@ -142,41 +142,40 @@ export default function CollectorPaymentTable({ collectorPayment, color }) {
                 </th>
                 
                 <th
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                >
-                  Amount
-                </th>  
-
-
-                <th
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                >
-                    Actions
-                </th>
-                <th
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                ></th>
+                      className={
+                        "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                        (color === "light"
+                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                          : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                      }
+                    >
+                      Amount
+                    </th>
+                    <th
+                      className={
+                        "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                        (color === "light"
+                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                          : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                      }
+                    >
+                        Actions
+                    </th>
+                    <th
+                      className={
+                        "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                        (color === "light"
+                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                          : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                      }
+                    ></th>
               </tr>
             </thead>
             {!loading && (
               <tbody>
                 {collectorPayments?.map((collectorPayment) => (
                   <CollectorPayments
+                  ConfirmDialogAlert={ConfirmDialogAlert}  
                   collectorPayment={collectorPayment}
                     key={collectorPayment.id}
                     deleteCollectorPayment={deleteCollectorPayment}

@@ -21,7 +21,7 @@ public class CollectorPaymentController {
     }
 
     @PostMapping("/collectorPayment")
-    public CollectorPayment saveControllerPayment(@RequestBody CollectorPayment collectorPayment){
+    public CollectorPayment saveCollectorPayment(@RequestBody CollectorPayment collectorPayment){
         return collectorPaymentService.addCollectorPayment(collectorPayment);
     }
 
