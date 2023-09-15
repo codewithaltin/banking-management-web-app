@@ -13,10 +13,10 @@ import Auth from "layouts/Auth.js";
 import { async } from "rxjs";
 
 const LOGIN_API_BASE_URL = "http://localhost:8080/api/v1/auth/authenticate";
-const USER_API_BASE_URL = `http://localhost:8080/api/v1/auth/user/`;
 
 export default function Login() {
   const router = useRouter();
+
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -27,7 +27,7 @@ export default function Login() {
     copy[e.target.name] = e.target.value;
     setState(copy);
   }
-  const SuccessfulAlert = () => {
+  const successfulAlert = () => {
     Swal.fire({
       icon: "success",
       title: "Succesfully logged in!",
@@ -53,7 +53,7 @@ export default function Login() {
     });
     if (res.ok) {
       const json = await res.json();
-      SuccessfulAlert();
+      successfulAlert();
       localStorage.setItem("token", json.token);
       localStorage.setItem("email", state.email);
       await router.push("/");
@@ -62,24 +62,6 @@ export default function Login() {
     }
   }
 
-  useEffect(() => {
-    fetchProfile();
-  }, []);
-
-  async function fetchProfile() {
-    const res = await fetch(USER_API_BASE_URL, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    });
-    if (res.ok) {
-      const json = await res.json();
-      setProfile(json);
-    } else {
-      // router.push("/");
-    }
-  }
   return (
     <>
       <div className="container mx-auto px-4 h-full">
