@@ -1,8 +1,9 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { React, useState, useEffect, Fragment } from "react";
+import Swal from "sweetalert2";
 
 const EditSavingGoal = ({ savingGoalId, setResponseSavingGoal }) => {
-  const SAVINGGOAL_API_BASE_URL = "http://localhost:8080/api/v1/savingGoal";
+  const SAVINGGOAL_API_BASE_URL = "http://localhost:8080/api/v1/auth/savingGoal";
 
   const [isOpen, setIsOpen] = useState(false);
   const [savingGoal, setSavingGoal] = useState({
@@ -67,7 +68,9 @@ const EditSavingGoal = ({ savingGoalId, setResponseSavingGoal }) => {
     const _savingGoal = await response.json();
     setResponseSavingGoal(_savingGoal);
     reset(e);
+    Swal.fire("Updated!", "Updated Succesfully!", "success");
   };
+ 
 
   return (
     <div className="min-h-screen absolute top-1/2 right-1/4">
