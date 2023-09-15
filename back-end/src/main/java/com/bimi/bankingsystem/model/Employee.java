@@ -1,6 +1,6 @@
 package com.bimi.bankingsystem.model;
 
-import com.bimi.bankingsystem.Departaments;
+import com.bimi.bankingsystem.common.enums.Departaments;
 import jakarta.persistence.*;
 import lombok.*;
 

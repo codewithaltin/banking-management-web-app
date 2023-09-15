@@ -63,7 +63,6 @@ export default function UserTable({ user }) {
       }
     });
   };
-
   const editUser = (e, id) => {
     e.preventDefault();
     setUserId(id);
