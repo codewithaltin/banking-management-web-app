@@ -164,7 +164,7 @@ export default function LoanTable({ loan, color }) {
                 )}
               </table>
             </div>
-            <EditLoan loanId={loanId} setResponseUser={setResponseLoan} />
+            <EditLoan loanId={loanId} setResponseLoan={setResponseLoan} />
           </div>
         </>
       );
