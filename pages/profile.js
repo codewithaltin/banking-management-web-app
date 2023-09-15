@@ -39,7 +39,7 @@ export default function Profile() {
 
   return (
     <>
-      <Navbar />
+      <Navbar transparent email={email} />
       <main className="profile-page">
         <section className="relative block h-500-px">
           <div

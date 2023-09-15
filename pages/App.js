@@ -188,7 +188,16 @@ function App() {
                 Request Money{" "}
                 <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
               </a>
-            </div>
+     
+            <a
+                href="/auth/cards"
+                target="_blank"
+                className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
+              >
+                Apply for a Card{" "}
+                <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
+              </a>
+              </div>
 
             <div className="w-full md:w-5/12 px-4 mr-auto ml-auto mt-32">
               <div className="relative flex flex-col min-w-0 w-full mb-0 mt-48 md:mt-4">
@@ -363,32 +372,6 @@ function App() {
               Simplify your life and stay connected, insured, and powered up
               with us.
             </p>
-            {/* <div className="block pb-6">
-              <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white  last:mr-0 mr-2 mt-2">
-                Alerts
-              </span>
-              <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white  last:mr-0 mr-2 mt-2">
-                Dropdowns
-              </span>
-              <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white  last:mr-0 mr-2 mt-2">
-                Menus
-              </span>
-              <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white  last:mr-0 mr-2 mt-2">
-                Modals
-              </span>
-              <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white  last:mr-0 mr-2 mt-2">
-                Navbars
-              </span>
-              <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white  last:mr-0 mr-2 mt-2">
-                Popovers
-              </span>
-              <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white  last:mr-0 mr-2 mt-2">
-                Tabs
-              </span>
-              <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-white  last:mr-0 mr-2 mt-2">
-                Tooltips
-              </span>
-            </div> */}
             <a
               href="/payments"
               target="_blank"

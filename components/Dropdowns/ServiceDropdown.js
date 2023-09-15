@@ -105,12 +105,25 @@ const ServiceDropdown = () => {
           }
         ></span>
         <Link
+          href="/auth/cards"
+          className={
+            "text-sm py-2 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
+          }
+        >
+          Card Apply
+        </Link>
+        <span
+          className={
+            "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-800"
+          }
+        ></span>
+        <Link
           href="/loan-application"
           className={
             "text-sm py-2 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
           }
         >
-          Loan 
+          Loan Apply
         </Link>
         <span
           className={
