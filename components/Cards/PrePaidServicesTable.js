@@ -6,6 +6,7 @@ import PrePaidServices from "./PrePaidServices";
 import AddGoal from "./AddGoal";
 import TableDropdown from "components/Dropdowns/TableDropdown.js";
 import CardTable from "./CardTable";
+import Swal from "sweetalert2";
 
 export default function PrePaidServicesTable({ prePaidService, color }) {
 
@@ -37,10 +38,28 @@ useEffect(() => {
     };
     fetchData();
   }, [prePaidService, responsePrePaidServives]);
+  let dialogValue = false;
+
+  const ConfirmDialogAlert = (e, id) => {
+    if (dialogValue) return true;
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deletePrePaidServices(e, id);
+        Swal.fire("Deleted!", "Deleted Succesfully!", "success");
+      }
+    });
+    return dialogValue;
+  };
 
 const deletePrePaidServices = (e, id) => {
-    let confirmed = confirm("Are you sure you wanna delete this payment ?");
-    if (!confirmed) return;
     e.preventDefault();
     fetch(PREPAIDSERVICES_API_BASE_URL + "/" + id, {
       method: "DELETE",
@@ -144,6 +163,7 @@ const deletePrePaidServices = (e, id) => {
                 {prePaidServices?.map((prePaidService) => (
                   <PrePaidServices
                   prePaidService={prePaidService}
+                  ConfirmDialogAlert={ConfirmDialogAlert}
                     key={prePaidService.id}
                     deletePrePaidServices={deletePrePaidServices}
                   />

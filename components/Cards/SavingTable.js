@@ -7,6 +7,7 @@ import AddGoal from "./AddGoal";
 import TableDropdown from "components/Dropdowns/TableDropdown.js";
 import CardTable from "./CardTable";
 import EditSavingGoal from "./EditSavingGoal";
+import Swal from "sweetalert2";
 
 export default function SavingTable({ savingGoal, color }) {
 
@@ -47,9 +48,24 @@ export default function SavingTable({ savingGoal, color }) {
     fetchData();
   }, [savingGoal, responseSavingGoal]);
 
+  const ConfirmDialogAlert = (e, id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteEmployee(e, id);
+        Swal.fire("Deleted!", "Deleted Succesfully!", "success");
+      }
+    });
+  };
+
   const deleteSavingGoal = (e, id) => {
-    let confirmed = confirm("Are you sure you wanna delete this Saving Goal?");
-    if (!confirmed) return;
     e.preventDefault();
     fetch(SAVINGGOAL_API_BASE_URL + "/" + id, {
       method: "DELETE",
@@ -171,6 +187,7 @@ export default function SavingTable({ savingGoal, color }) {
                   <Savings
                     savingGoal={savingGoal}
                     key={savingGoal.id}
+                    ConfirmDialogAlert={ConfirmDialogAlert}
                     deleteSavingGoal={deleteSavingGoal}
                     editSavingGoal={editSavingGoal}
                   />
