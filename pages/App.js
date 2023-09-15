@@ -5,13 +5,10 @@ import Footer from "components/Footers/Footer.js";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 
-function App(email) {
-  // useEffect(() => {
-  //   Swal.fire("My sweet alert");
-  // }, []);
+function App() {
   return (
     <div>
-      <IndexNavbarLight email={email} />
+      <IndexNavbarLight />
       <section className="header relative pt-16 items-center flex h-screen max-h-1200-px bg-cover-blur">
         <div className="container mx-auto ">
           <div className="w-full  px-4">
@@ -587,13 +584,7 @@ function App(email) {
                   <h5 className="text-xl font-semibold pb-4 text-center">
                     Profile Page
                   </h5>
-                  <Link
-                    href={{
-                      pathname: "/profile",
-                      query: email,
-                    }}
-                    legacyBehavior
-                  >
+                  <Link href="/profile" legacyBehavior>
                     <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
                       <img
                         alt="..."

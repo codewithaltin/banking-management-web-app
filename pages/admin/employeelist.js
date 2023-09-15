@@ -1,10 +1,10 @@
 import React from "react";
 import EmployeeList from "components/Cards/EmployeeList.js";
-import Admin from "layouts/Admin.js";
+import User from "layouts/User.js";
 
 const employeeList = () => {
   return <EmployeeList />;
 };
-employeeList.layout = Admin;
+employeeList.layout = User;
 
 export default employeeList;

@@ -29,11 +29,11 @@ public class UserController {
         return userService.getAllUsers();
     }
 
-    //    @GetMapping("/user/{id}")
-//    public Optional<User> getUserById(@PathVariable("id") Long id) {
-//        return userService.getUserById(id);
-//    }
-    @GetMapping("/user/{email}")
+    @GetMapping("/user/{id}")
+    public Optional<User> getUserById(@PathVariable("id") Long id) {
+        return userService.getUserById(id);
+    }
+    @GetMapping("/userbyemail/{email}")
     public Optional<User> getUserByEmail(@PathVariable("email") String email) {
         return userService.getUserByEmail(email);
     }

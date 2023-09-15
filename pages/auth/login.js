@@ -27,7 +27,7 @@ export default function Login() {
     copy[e.target.name] = e.target.value;
     setState(copy);
   }
-  const SuccessfulAlert = () => {
+  const successfulAlert = () => {
     Swal.fire({
       icon: "success",
       title: "Succesfully logged in!",
@@ -54,7 +54,7 @@ export default function Login() {
     });
     if (res.ok) {
       const json = await res.json();
-      SuccessfulAlert();
+      successfulAlert();
       localStorage.setItem("token", json.token);
       await router.push({ pathname: "/", query: { email: email } }, "/");
     } else {
