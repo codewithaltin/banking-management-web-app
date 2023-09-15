@@ -75,72 +75,81 @@ export default function Footer() {
                     <li>
                       <a
                         className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="/auth/individual_register"
+                        href="/transfer"
                       >
-                        Individual Register
+                        Transfer Money
                       </a>
                     </li>
                     <li>
                       <a
                         className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="/auth/business_register"
+                        href="/requestMoney"
                       >
-                        Business Register
+                        Request Money
                       </a>
                     </li>
                     <li>
                       <a
                         className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="#"
+                        href="/auth/cards"
                       >
-                        About Us
+                        Card Apply
                       </a>
                     </li>
                     <li>
                       <a
                         className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="https://github.com/altinim/banking-managment"
+                        href="/loan-application"
                       >
-                        GitHub
+                        Loan Apply
+                      </a>
+                    </li>
+                    <li>
+                      <a
+                        className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
+                        href="/invoice_details"
+                      >
+                        Invoice
                       </a>
                     </li>
                   </ul>
+                  
                 </div>
                 <div className="w-full lg:w-4/12 px-4">
                   <span className="block uppercase text-blueGray-500 text-sm font-semibold mb-2">
-                    Other Resources
+                    Send Payments
                   </span>
                   <ul className="list-unstyled">
                     <li>
                       <a
                         className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="#"
+                        href="/paymentTypes/InstitutionPayments"
                       >
-                        Simplify your life
+                        Institution Payment
                       </a>
                     </li>
                     <li>
                       <a
                         className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="#"
+                        href="/paymentTypes/CollectorPayments"
                       >
-                        Financial Empowerment
+                        Collector Payment
                       </a>
                     </li>
                     <li>
                       <a
                         className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="#"
+                        href="/paymentTypes/MobilePayments"
                       >
-                        Elevate Your Giving
+                        Mobile Payment
                       </a>
                     </li>
                     <li>
                       <a
                         className="text-blueGray-600 hover:text-blueGray-800 font-semibold block pb-2 text-sm"
-                        href="#"
+                        href="/paymentTypes/PrePaidServices"
                       >
-                        Global Banking Services
+                        Pre Paid Payment
                       </a>
                     </li>
                   </ul>

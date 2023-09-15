@@ -63,13 +63,12 @@ function App() {
                     help you get the funds you need. Apply now and take the
                     first step toward achieving your financial goals.
                   </p>
+
                   <a
                     href="/loan-application"
-                    target="_blank"
-                    className="font-bold  text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
+                    className="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-600 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg"
                   >
-                    Get Loan{" "}
-                    <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
+                  GET LOAN
                   </a>
                 </blockquote>
               </div>
@@ -135,139 +134,6 @@ function App() {
                         goals.
                       </p>
                     </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="container mx-auto overflow-hidden pb-20">
-          <div className="flex flex-wrap items-center">
-            <div className="w-full md:w-4/12 px-12 md:px-4 ml-auto mr-auto mt-48">
-              <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
-                <img
-                  src="/img/invoice-logo.png"
-                  alt="..."
-                  className="fas fa-comments-dollar text-xl"
-                />
-              </div>
-              <h3 className="text-3xl mb-2 font-semibold leading-normal text-blueGray-900">
-                Your Financial Invoice
-              </h3>
-              <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-                We are pleased to provide you with an invoice for the banking
-                services that we provide to you. As a trusted financial
-                institution, we pride ourselves on offering a wide range of
-                services that cater to your individual banking needs and we are
-                committed to providing exceptional service to our clients.
-              </p>
-
-              <a
-                href="/invoice_details"
-                target="_blank"
-                className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
-              >
-                Settle your Invoice{" "}
-                <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
-              </a>
-              <a
-                href="/transfer"
-                target="_blank"
-                className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
-              >
-                Do a transfer{" "}
-                <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
-              </a>
-
-              <a
-                href="/requestMoney"
-                target="_blank"
-                className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
-              >
-                Request Money{" "}
-                <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
-              </a>
-     
-            <a
-                href="/auth/cards"
-                target="_blank"
-                className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
-              >
-                Apply for a Card{" "}
-                <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
-              </a>
-              </div>
-
-            <div className="w-full md:w-5/12 px-4 mr-auto ml-auto mt-32">
-              <div className="relative flex flex-col min-w-0 w-full mb-0 mt-48 md:mt-4">
-                <img
-                  alt="..."
-                  src="/img/f-banking.png"
-                  className="w-full align-middle rounded absolute shadow-lg max-w-100-px left-145-px -top-29-px z-3"
-                />
-                <img
-                  alt="..."
-                  src="/img/strong-finance1.jpg"
-                  className="w-full align-middle rounded-lg absolute shadow-lg max-w-210-px left-260-px -top-160-px"
-                />
-                <img
-                  alt="..."
-                  src="/img/invoice1.jpg"
-                  className="w-full align-middle rounded-lg absolute shadow-lg max-w-210-px left-40-px -top-225-px z-2"
-                />
-                <img
-                  alt="..."
-                  src="/img/simplify-finance.jpg"
-                  className="w-full align-middle rounded-lg absolute shadow-2xl max-w-210-px -left-50-px top-25-px"
-                />
-                <img
-                  alt="..."
-                  src="/img/invoice2.jpg"
-                  className="w-full align-middle rounded absolute shadow-xl max-w-210-px left-195-px top-95-px"
-                />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div className="container mx-auto overflow-hidden pb-20">
-          <div className="flex flex-wrap items-center">
-            <div className="w-full md:w-4/12 px-12 md:px-4 ml-auto mr-auto mt-48">
-              <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white"></div>
-              <h3 className="text-3xl mb-2 font-semibold leading-normal text-blueGray-900">
-                Empower Your Savings Journey with FuturBank
-              </h3>
-              <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-                Set your sights on your financial goals with FuturBank. Define
-                your targets, track your progress, and watch your savings grow.
-                Take control of your future today and make your dreams a
-                reality. Start saving with us now.
-              </p>
-
-              <a
-                href="/SavingGoal"
-                target="_blank"
-                className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
-              >
-                Set a saving goal{" "}
-                <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
-              </a>
-            </div>
-
-            <div className="w-full md:w-8/12 px-8 mr-px ml-px mt-32">
-              <div className="relative flex flex-col min-w-0 w-full mb-0 mt-48 md:mt-4">
-                <div className="relative flex flex-col min-w-0 w-full mb-0 mt-48 md:mt-4">
-                  <div className="w-full md:w-6/12 mr-auto px-4 pt-24 md:pt-0">
-                    <img
-                      alt="..."
-                      className="max-w-full rounded-lg shadow-xl"
-                      style={{
-                        transform:
-                          "scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg)",
-                      }}
-                      src="/img/savings-banking-investments-piggy-bank-credit.jpg"
-                    />
                   </div>
                 </div>
               </div>
@@ -359,7 +225,7 @@ function App() {
 
           <div className="w-full md:w-4/12 px-12 md:px-4 ml-auto mr-auto mt-48">
             <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
-              <i className="far fa-credit-card text-xl"></i>
+              <i className="fas fa-money-check-alt text-xl"></i>
             </div>
             <h3 className="text-3xl mb-2 font-semibold leading-normal text-blueGray-900">
               Payments
@@ -383,162 +249,129 @@ function App() {
           </div>
         </div>
 
-        <div className="container mx-auto overflow-hidden pb-20">
-          <div className="flex flex-wrap items-center">
-            <div className="w-full md:w-4/12 px-12 md:px-4 ml-auto mr-auto mt-48">
+        <section className="pb-20 bg-blueGray-200 -mt-30">
+        <div className="container mx-auto px-6">
+        <div className="flex flex-wrap items-center mt-32">
+            <div className="w-full md:w-5/12 px-4 mr-auto ml-auto">
               <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
-                <img
-                  src="/img/beneficiary-logo.jpg"
-                  alt="..."
-                  className="fas fa-comments-dollar text-xl"
-                />
+                <i className="fas fa-piggy-bank text-xl"></i>
               </div>
-              <h3 className="text-3xl mb-2 font-semibold leading-normal text-blueGray-900">
-                Do Your Beneficiary
+              <h3 className="text-3xl mb-2 font-semibold leading-normal">
+                Elevate Your Savings Game
               </h3>
               <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-                Are you looking to transfer funds to a friend or relative? With
-                the convenience of online banking facilities provided by our
-                bank, it's now easier than ever. Using our banking, you can
-                effortlessly transfer funds to individuals holding accounts
-                within your bank or even accounts held in other banks. To
-                initiate a transfer, simply add the bank account details of the
-                recipient, ensuring they can receive the funds securely.
+                Set your sights on your financial goals with FuturBank. Define
+                your targets, track your progress, and watch your savings grow.
               </p>
-
+              <p className="text-lg font-light leading-relaxed mt-0 mb-4 text-blueGray-600">
+                Take control of your future today and make your dreams a
+                reality. Start saving with us now.
+              </p>
               <a
-                href="/beneficiary"
+                href="/SavingGoal"
                 target="_blank"
                 className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
               >
-                Name your Beneficiary{" "}
+                Set a Saving Goal{" "}
                 <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
               </a>
             </div>
 
-            <div className="w-full md:w-5/12 px-4 mr-auto ml-auto mt-32">
-              <div className="relative flex flex-col min-w-0 w-full mb-0 mt-48 md:mt-4">
+            <div className="w-full md:w-4/12 px-4 mr-auto ml-auto">
+              <div className="relative flex flex-col min-w-0 break-words mt-20 bg-white w-full mb-6 shadow-lg rounded-lg bg-blueGray-600">
                 <img
                   alt="..."
-                  src="/img/1beneficiary.jpg"
-                  className="w-full align-middle rounded-lg absolute shadow-lg max-w-210-px left-260-px -top-160-px"
+                  src="/img/piggy-savings.jpg"
+                  className="w-full align-middle rounded-t-lg"
                 />
-                <img
-                  alt="..."
-                  src="/img/4beneficiary.jpg"
-                  className="mt-12 w-full align-middle rounded-lg absolute shadow-lg max-w-210-px left-40-px -top-225-px z-2"
-                />
-                <img
-                  alt="..."
-                  src="/img/3beneficiary.jpg"
-                  className="w-full align-middle rounded-lg absolute shadow-2xl max-w-210-px -left-50-px top-25-px"
-                />
-                <img
-                  alt="..."
-                  src="/img/2beneficiary.jpg"
-                  className="w-full align-middle rounded absolute shadow-xl max-w-210-px left-195-px top-95-px"
-                />
+                <blockquote className="relative p-8 mb-4">
+                  <svg
+                    preserveAspectRatio="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 583 95"
+                    className="absolute left-0 w-full block h-95-px -top-94-px"
+                  >
+                    <polygon
+                      points="-30,95 583,95 583,65"
+                      className="text-blueGray-600 fill-current"
+                    ></polygon>
+                  </svg>
+                  <h4 className="text-xl font-bold text-white">
+                    FuturBank is your best ally!
+                  </h4>
+                  <p className="text-md font-light mt-2 text-white">
+                    Your trusted financial partner, is dedicated to helping you reach your goals. 
+                    We aren't just a bank; FuturBank is your strongest supporter.
+                  </p>
+                </blockquote>
               </div>
             </div>
           </div>
+          </div>
+        </section>
+
+        <section className="relative py-20">
+        <div
+          className="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20 h-20"
+          style={{ transform: "translateZ(0)" }}
+        >
+          <svg
+            className="absolute bottom-0 overflow-hidden"
+            xmlns="http://www.w3.org/2000/svg"
+            preserveAspectRatio="none"
+            version="1.1"
+            viewBox="0 0 2560 100"
+            x="0"
+            y="0"
+          >
+            <polygon
+              className="text-white fill-current"
+              points="2560 0 2560 100 0 100"
+            ></polygon>
+          </svg>
         </div>
 
-        <div className="container mx-auto px-4 pb-32 pt-48">
+        <div className="container mx-auto px-4">
           <div className="items-center flex flex-wrap">
-            <div className="w-full md:w-5/12 ml-auto px-12 md:px-4">
-              <div className="md:pr-12">
-                <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
-                  <i className="fas fa-hand-holding-heart text-xl"></i>
-                </div>
-                <h3 className="text-3xl font-semibold text-blueGray-900">
-                  Elevate Your Giving
-                </h3>
-                <p className="mt-4 text-lg leading-relaxed text-blueGray-700">
-                  At “FuturBanking”, we believe in making a positive impact on
-                  the world. By using our online banking platform, you can
-                  easily donate to a variety of charitable organizations that
-                  we've partnered with. Join us in giving back to your community
-                  and make a difference today!
-                </p>
-
-                <a
-                  href="/online-donation"
-                  target="_blank"
-                  className="font-bold  text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
-                >
-                  Donate Online{" "}
-                  <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
-                </a>
-
-                <ul className="list-none mt-6">
-                  <li className="py-2">
-                    <div className="flex items-center">
-                      <div>
-                        <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-blueGray-50 mr-3">
-                          <i className="fas fa-donate"></i>
-                        </span>
-                      </div>
-                      <div>
-                        <h4 className="text-blueGray-600">
-                          Be a Part of Positive Change
-                        </h4>
-                      </div>
-                    </div>
-                  </li>
-                  <li className="py-2">
-                    <div className="flex items-center">
-                      <div>
-                        <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-blueGray-50 mr-3">
-                          <i className="fas fa-dove"></i>
-                        </span>
-                      </div>
-                      <div>
-                        <h4 className="text-blueGray-600">
-                          Spread Your Wings of Generosity
-                        </h4>
-                      </div>
-                    </div>
-                  </li>
-                  <li className="py-2">
-                    <div className="flex items-center">
-                      <div>
-                        <span className="text-xs font-semibold inline-block py-1 px-2 uppercase rounded-full text-blueGray-500 bg-blueGray-50 mr-3">
-                          <i className="fas fa-heart"></i>
-                        </span>
-                      </div>
-                      <div>
-                        <h4 className="text-blueGray-600">
-                          From Your Heart to Others
-                        </h4>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </div>
-            </div>
-
-            <div className="w-full md:w-6/12 mr-auto px-4 pt-24 md:pt-0">
+            <div className="w-full md:w-4/12 ml-auto mr-auto px-4">
               <img
                 alt="..."
-                className="max-w-full rounded-lg shadow-xl"
-                style={{
-                  transform:
-                    "scale(1) perspective(1040px) rotateY(-11deg) rotateX(2deg) rotate(2deg)",
-                }}
-                src="/img/charity.jpg"
+                className="max-w-full rounded-lg shadow-lg"
+                src="/img/atm.jpg"
               />
+            </div>
+            <div className="w-full md:w-5/12 ml-auto mr-auto px-4">
+              <div className="md:pr-12">
+                <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-blueGray-200">
+                  <i className="far fa-credit-card text-xl"></i>
+                </div>
+                <h3 className="text-3xl font-semibold">Apply for a Card</h3>
+                <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
+                    Discover the smart choice for obtaining your card right here. We're your top destination for card solutions that meet your needs.
+                    Unlock a world of possibilities. 
+                </p>
+                <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
+                    Ready to take advantage from the benefits of credit cards? Applying is simple, range of options to suit your needs.
+                </p>
+                <a
+                    href="/auth/cards"
+                    className="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-600 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg"
+                  >
+                  APPLY NOW
+                  </a>
+              </div>
             </div>
           </div>
         </div>
+      </section>     
+
+        
 
         <div className="justify-center text-center flex flex-wrap mt-24">
           <div className="w-full md:w-6/12 px-12 md:px-4">
-            <h2 className="font-semibold text-4xl">Explore Our Site</h2>
+            <h2 className="font-semibold text-4xl">Explore Our Services</h2>
             <p className="text-lg leading-relaxed mt-4 mb-4 text-blueGray-500">
-              We invite you to explore all that we have to offer. Click on one
-              of the three images below to access different sections of our
-              site. Thank you for choosing us as your destination for all
-              banking things. Happy exploring!
+              Experience easy, secure, and accessible online banking at your fingertips!
             </p>
           </div>
         </div>
@@ -550,14 +383,14 @@ function App() {
               <div className="flex flex-wrap">
                 <div className="w-full lg:w-4/12 px-4">
                   <h5 className="text-xl font-semibold pb-4 text-center">
-                    Login Page
+                    Settle your Invoice  
                   </h5>
-                  <Link href="/auth/individual_register" legacyBehavior>
+                  <Link href="/invoice_details" legacyBehavior>
                     <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
                       <img
                         alt="..."
                         className="align-middle border-none max-w-full h-auto rounded-lg"
-                        src="/img/login.jpg"
+                        src="/img/invoice-pc.png"
                       />
                     </div>
                   </Link>
@@ -565,14 +398,14 @@ function App() {
 
                 <div className="w-full lg:w-4/12 px-4">
                   <h5 className="text-xl font-semibold pb-4 text-center">
-                    Profile Page
+                    Request Money
                   </h5>
-                  <Link href="/profile" legacyBehavior>
+                  <Link href="/requestMoney" legacyBehavior>
                     <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
                       <img
                         alt="..."
                         className="align-middle border-none max-w-full h-auto rounded-lg"
-                        src="/img/profile.jpg"
+                        src="/img/tablet-request.png"
                       />
                     </div>
                   </Link>
@@ -580,18 +413,20 @@ function App() {
 
                 <div className="w-full lg:w-4/12 px-4">
                   <h5 className="text-xl font-semibold pb-4 text-center">
-                    Landing Page
+                    Execute a Transfer
                   </h5>
-                  <Link href="/landing" legacyBehavior>
+                  <Link href="/transfer" legacyBehavior>
                     <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
                       <img
                         alt="..."
                         className="align-middle border-none max-w-full h-auto rounded-lg"
-                        src="/img/landing.jpg"
+                        src="/img/transfer-phone-simple.png"
                       />
                     </div>
                   </Link>
                 </div>
+
+                
               </div>
             </div>
           </div>
@@ -602,95 +437,36 @@ function App() {
           <div className="flex flex-wrap justify-center">
             <div className="w-full md:w-5/12 px-12 md:px-4 ml-auto mr-auto md:mt-64">
               <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
-                <i className="fas fa-globe text-xl"></i>
+                <i className="fas fa-hand-holding-heart text-xl"></i>
               </div>
               <h3 className="text-3xl mb-2 font-semibold leading-normal text-white">
-                Global Banking Services
+                Raise Your Giving
               </h3>
               <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-300">
-                Our global banking services are designed to meet your financial
-                needs, no matter where you are in the world. Whether you are
-                traveling abroad or managing your finances from afar, we offer a
-                range of services to help you stay connected to your money.
+                  At “FuturBanking”, we believe in making a positive impact on
+                  the world. By using our online banking platform, you can
+                  easily donate to a variety of charitable organizations that
+                  we've partnered with. Join us in giving back to your community
+                  and make a difference today!
               </p>
               <p className="text-lg font-light leading-relaxed mt-0 mb-4 text-blueGray-300">
-                So, whether you're exploring new horizons or simply looking to
-                expand your financial reach, our global banking services are
-                here to help you achieve your goals.
+              Your generosity fuels our mission and allows us to continue our important work. Together, 
+              we can make a meaningful difference in the lives of those in need.
               </p>
               <a
-                href="./auth/cards.js"
+                href="/online-donation"
                 className="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg"
               >
-                Register Now
+                Donate Online
               </a>
             </div>
 
             <div className="w-full md:w-4/12 px-4 mr-auto ml-auto mt-32 relative">
-              <i className="fas fa-globe text-blueGray-700 absolute text-55 -top-150-px -right-100 left-auto opacity-80"></i>
+              <i className="fas fa-dove fa-flip-horizontal text-blueGray-700 absolute text-55 -top-150-px -right-200 left-auto opacity-80"></i>
             </div>
           </div>
         </div>
       </section>
-      {/* <section className="pb-16 bg-blueGray-200 relative pt-32">
-      <div
-        className="-mt-20 top-0 bottom-auto left-0 right-0 w-full absolute h-20"
-        style={{ transform: "translateZ(0)" }}
-      >
-        <svg
-          className="absolute bottom-0 overflow-hidden"
-          xmlns="http://www.w3.org/2000/svg"
-          preserveAspectRatio="none"
-          version="1.1"
-          viewBox="0 0 2560 100"
-          x="0"
-          y="0"
-        >
-          <polygon
-            className="text-blueGray-200 fill-current"
-            points="2560 0 2560 100 0 100"
-          ></polygon>
-        </svg>
-      </div>
-
-      <div className="container mx-auto">
-        <div className="flex flex-wrap justify-center bg-white shadow-xl rounded-lg -mt-64 py-16 px-12 relative z-10">
-          <div className="w-full text-center lg:w-8/12">
-            <p className="text-4xl text-center">
-              <span role="img" aria-label="love">
-                😍
-              </span>
-            </p>
-            <h3 className="font-semibold text-3xl">
-              Do you love this Starter Kit?
-            </h3>
-            <p className="text-blueGray-500 text-lg leading-relaxed mt-4 mb-4">
-              Cause if you do, it can be yours now. Hit the buttons below to
-              navigate to get the Free version for your next project. Build a
-              new web app or give an old project a new look!
-            </p>
-            <div className="sm:block flex flex-col mt-10">
-              <a
-                href="https://www.creative-tim.com/learning-lab/tailwind/nextjs/overview/notus?ref=nnjs-index"
-                target="_blank"
-                className="get-started text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-2 bg-blueGray-400 active:bg-blueGray-500 uppercase text-sm shadow hover:shadow-lg ease-linear transition-all duration-150"
-              >
-                Get started
-              </a>
-              <a
-                href="https://github.com/creativetimofficial/notus-nextjs?ref=nnjs-index"
-                target="_blank"
-                className="github-star sm:ml-1 text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg"
-              >
-                <i className="fab fa-github text-lg mr-1"></i>
-                <span>Help With a Star</span>
-              </a>
-            </div>
-            <div className="text-center mt-16"></div>
-          </div>
-        </div>
-      </div>
-    </section> */}
       <Footer /> ;
     </div>
   );
