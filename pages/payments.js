@@ -9,12 +9,11 @@ import { getSession } from "next-auth/react";
 import LightAuth from "layouts/LightAuth.js";
 
 
+
 export default function payments() {
     return (
       <>
-
-
-        <section className="mt-48 md:mt-40 pb-40 relative ">
+         <section className="mt-48 md:mt-40 pb-40 relative ">
         <div
           className="-mt-20 top-0 bottom-auto left-0 right-0 w-full absolute h-20"
           style={{ transform: "translateZ(0)" }}
@@ -142,9 +141,11 @@ export default function payments() {
             </div>
           </div>
         </div>
-        </section>
+        </section> 
    
     </>
   );
 }
+
+
 payments.layout = LightAuth;
