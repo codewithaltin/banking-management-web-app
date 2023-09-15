@@ -5,7 +5,7 @@ import EditLoan from "./EditLoan";
 import Loan from "./Loan";
 
 export default function LoanTable({ loan }) {
-    const LOAN_API_BASE_URL = "http://localhost:8080/api/v1/loan";
+    const LOAN_API_BASE_URL = "http://localhost:8080/api/v1/auth/loan";
     const [loans, setLoans] = useState(null);
     const [loading, setLoading] = useState(true);
     const [loanId, setLoanId] = useState(null);
@@ -128,7 +128,7 @@ export default function LoanTable({ loan }) {
                 )}
               </table>
             </div>
-            <EditLoan loanId={loanId} setResponseLoan={setResponseLoan} />
+            <EditLoan loanId={loanId} setResponseUser={setResponseLoan} />
           </div>
         </>
       );

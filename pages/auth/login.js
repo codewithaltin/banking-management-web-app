@@ -13,10 +13,10 @@ import Auth from "layouts/Auth.js";
 import { async } from "rxjs";
 
 const LOGIN_API_BASE_URL = "http://localhost:8080/api/v1/auth/authenticate";
-const USER_API_BASE_URL = `http://localhost:8080/api/v1/auth/user/`;
 
 export default function Login() {
   const router = useRouter();
+
   const [state, setState] = useState({
     email: "",
     password: "",
@@ -35,13 +35,14 @@ export default function Login() {
       timer: 800,
     });
   };
-  const wrongCredentialsAlert = () => {
+  const WrongCredentialsAlert = () => {
     Swal.fire({
       icon: "error",
       title: "Log in failed",
       text: "Wrong credentials!",
     });
   };
+  const email = state.email;
   async function handleSubmit(event) {
     event.preventDefault();
     const res = await fetch(LOGIN_API_BASE_URL, {
@@ -55,31 +56,12 @@ export default function Login() {
       const json = await res.json();
       SuccessfulAlert();
       localStorage.setItem("token", json.token);
-      localStorage.setItem("email", state.email);
-      await router.push("/");
+      await router.push({ pathname: "/", query: { email: email } }, "/");
     } else {
-      wrongCredentialsAlert();
+      WrongCredentialsAlert();
     }
   }
 
-  useEffect(() => {
-    fetchProfile();
-  }, []);
-
-  async function fetchProfile() {
-    const res = await fetch(USER_API_BASE_URL, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    });
-    if (res.ok) {
-      const json = await res.json();
-      setProfile(json);
-    } else {
-      // router.push("/");
-    }
-  }
   return (
     <>
       <div className="container mx-auto px-4 h-full">
