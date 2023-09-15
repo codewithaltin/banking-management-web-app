@@ -7,6 +7,7 @@ import AddGoal from "./AddGoal";
 import TableDropdown from "components/Dropdowns/TableDropdown.js";
 import CardTable from "./CardTable";
 import CollectorPayments from "./CollectorPayments";
+import Swal from "sweetalert2";
 
 export default function CollectorPaymentTable({ collectorPayment, color }) {
 
@@ -45,10 +46,29 @@ export default function CollectorPaymentTable({ collectorPayment, color }) {
     fetchData();
   }, [collectorPayment, responseCollectorPayment]);
 
+  let dialogValue = false;
+
+  const ConfirmDialogAlert = (e, id) => {
+    if (dialogValue) return true;
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteCollectorPayment(e, id);
+        Swal.fire("Deleted!", "Deleted Succesfully!", "success");
+      }
+    });
+    return dialogValue;
+  };
+
 
   const deleteCollectorPayment = (e, id) => {
-    let confirmed = confirm("Are you sure you wanna delete this payment ?");
-    if (!confirmed) return;
     e.preventDefault();
     fetch(COLLECTORPAYMENT_API_BASE_URL + "/" + id, {
       method: "DELETE",

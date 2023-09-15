@@ -1,6 +1,6 @@
 import React from "react";
 import ContactTable from "components/Cards/ContactTable.js";
-import Admin from "layouts/Admin.js";
+import User from "layouts/User";
 
 const contactlist = () => {
   return (
@@ -9,6 +9,6 @@ const contactlist = () => {
     </>
   );
 };
-contactlist.layout = Admin;
+contactlist.layout = User;
 
 export default contactlist;

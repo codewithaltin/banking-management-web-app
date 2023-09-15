@@ -6,6 +6,7 @@ import MobilePayments from "./MobilePayments";
 import AddGoal from "./AddGoal";
 import TableDropdown from "components/Dropdowns/TableDropdown.js";
 import CardTable from "./CardTable";
+import Swal from "sweetalert2";
 
 export default function MobilePaymentTable({ mobilePayment, color }) {
 
@@ -44,10 +45,28 @@ export default function MobilePaymentTable({ mobilePayment, color }) {
     };
     fetchData();
   }, [mobilePayment, responseMobilePayment]);
+  let dialogValue = false;
+
+  const ConfirmDialogAlert = (e, id) => {
+    if (dialogValue) return true;
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteMobilePayment(e, id);
+        Swal.fire("Deleted!", "Deleted Succesfully!", "success");
+      }
+    });
+    return dialogValue;
+  };
 
   const deleteMobilePayment = (e, id) => {
-    let confirmed = confirm("Are you sure you wanna delete this payment ?");
-    if (!confirmed) return;
     e.preventDefault();
     fetch(MOBILEPAYMENT_API_BASE_URL + "/" + id, {
       method: "DELETE",
@@ -155,6 +174,7 @@ export default function MobilePaymentTable({ mobilePayment, color }) {
                 {mobilePayments?.map((mobilePayment) => (
                   <MobilePayments
                   mobilePayment={mobilePayment}
+                  ConfirmDialogAlert={ConfirmDialogAlert}
                     key={mobilePayment.id}
                     deleteMobilePayment={deleteMobilePayment}
                   />

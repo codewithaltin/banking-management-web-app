@@ -3,8 +3,9 @@ import PropTypes from "prop-types";
 
 // components
 import Contact from "./Contact";
+import Swal from "sweetalert2";
 
-export default function ContactTable({ contact }) {
+export default function ContactTable({ contact, color }) {
   const CONTACT_API_BASE_URL = "http://localhost:8080/api/v1/auth/contact";
   const [contacts, setContacts] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -30,10 +31,28 @@ export default function ContactTable({ contact }) {
     };
     fetchData();
   }, [contact, responseContact]);
+  let dialogValue = false;
+
+  const ConfirmDialogAlert = (e, id) => {
+    if (dialogValue) return true;
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteContact(e, id);
+        Swal.fire("Deleted!", "Deleted Succesfully!", "success");
+      }
+    });
+    return dialogValue;
+  };
 
   const deleteContact = (e, id) => {
-    let confirmed = confirm("Are you sure you wanna delete this contact form?");
-    if (!confirmed) return;
     e.preventDefault();
     fetch(CONTACT_API_BASE_URL + "/" + id, {
       method: "DELETE",
@@ -48,10 +67,10 @@ export default function ContactTable({ contact }) {
 
   return (
     <>
-      <div className=" w-28 h-28 mt-16">.</div>
       <div
         className={
-          "relative flex flex-col min-w-0 break-words w-full mb-6 mt-16 shadow-lg rounded "
+          "relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded " +
+          (color === "light" ? "bg-white" : "bg-blueGray-700 text-white")
         }
       >
         <div className="rounded-t mb-0 px-4 py-3  border-0">
@@ -66,9 +85,12 @@ export default function ContactTable({ contact }) {
           <table className="items-center w-full bg-transparent border-collapse">
             <thead>
               <tr>
-                <th
+              <th
                   className={
-                    "px-6 align-middle bg-blueGray-200 border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
+                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                    (color === "light"
+                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 >
                   Full Name
@@ -76,14 +98,20 @@ export default function ContactTable({ contact }) {
                 
                 <th
                   className={
-                    "px-6 align-middle border border-solid bg-blueGray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
+                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                    (color === "light"
+                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 >
                   Email
                 </th>
                 <th
                   className={
-                    "px-6 align-middle border border-solid bg-blueGray-200 py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
+                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                    (color === "light"
+                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 >
                   Text
@@ -92,7 +120,10 @@ export default function ContactTable({ contact }) {
                 <th
                   colSpan={2}
                   className={
-                    " col-span-2 px-6  align-middle border min-w-full bg-blueGray-200 border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left "
+                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                    (color === "light"
+                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 >
                   Actions
@@ -105,6 +136,7 @@ export default function ContactTable({ contact }) {
                   <Contact
                   contact={contact}
                     key={contact.id}
+                    ConfirmDialogAlert={ConfirmDialogAlert}
                     deleteContact={deleteContact}
                   />
                 ))}
