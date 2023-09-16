@@ -5,7 +5,7 @@ import EditDonation from "./EditDonation";
 import Donation from "./Donation";
 
 export default function DonationTable({ donation, color }) {
-    const DONATION_API_BASE_URL = "http://localhost:8080/api/v1/donation";
+    const DONATION_API_BASE_URL = "http://localhost:8080/api/v1/auth/donation";
     const [donations, setDonations] = useState(null);
     const [loading, setLoading] = useState(true);
     const [donationId, setDonationId] = useState(null);

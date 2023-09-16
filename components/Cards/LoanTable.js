@@ -3,9 +3,9 @@ import PropTypes from "prop-types";
 
 import EditLoan from "./EditLoan";
 import Loan from "./Loan";
-
+import Swal from "sweetalert2";
 export default function LoanTable({ loan, color }) {
-    const LOAN_API_BASE_URL = "http://localhost:8080/api/v1/loan";
+    const LOAN_API_BASE_URL = "http://localhost:8080/api/v1/auth/loan";
     const [loans, setLoans] = useState(null);
     const [loading, setLoading] = useState(true);
     const [loanId, setLoanId] = useState(null);
@@ -31,9 +31,24 @@ export default function LoanTable({ loan, color }) {
       fetchData();
     }, [loan, responseLoan]);
 
+    const confirmDelete = (e, id) => {
+      Swal.fire({
+        title: "Are you sure?",
+        text: "You won't be able to revert this!",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Yes, delete it!",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          deleteLoan(e, id);
+          Swal.fire("Deleted!", "Deleted Succesfully!", "success");
+        }
+      });
+    };
+
     const deleteLoan = (e, id) => {
-        let confirmed = confirm("Are you sure you wanna delete this loan?");
-        if (!confirmed) return;
         e.preventDefault();
         fetch(LOAN_API_BASE_URL + "/" + id, {
           method: "DELETE",
@@ -101,7 +116,7 @@ export default function LoanTable({ loan, color }) {
                 >
                         PhoneNumber
                     </th>
-                    <th
+                  <th
                   className={
                     "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
                     (color === "light"
@@ -148,23 +163,24 @@ export default function LoanTable({ loan, color }) {
                 >
                   Actions
                 </th>
-                  </tr>
-                </thead>
-                {!loading && (
-                  <tbody>
-                    {loans?.map((loan) => (
-                      <Loan
-                        loan={loan}
-                        key={loan.id}
-                        deleteLoan={deleteLoan}
-                        editLoan={editLoan}
-                      />
-                    ))}
-                  </tbody>
-                )}
-              </table>
-            </div>
-            <EditLoan loanId={loanId} setResponseUser={setResponseLoan} />
+              </tr>
+            </thead>
+            {!loading && (
+              <tbody>
+                {loans?.map((loan) => (
+                  <Loan
+                    loan={loan}
+                    key={loan.id}
+                    deleteLoan={deleteLoan}
+                    confirmDelete={confirmDelete}
+                    editLoan={editLoan}
+                  />
+                ))}
+              </tbody>
+            )}
+          </table>
+        </div>
+            <EditLoan loanId={loanId} setResponseLoan={setResponseLoan} />
           </div>
         </>
       );

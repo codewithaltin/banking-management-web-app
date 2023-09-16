@@ -1,8 +1,9 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { React, useState, useEffect, Fragment } from "react";
+import Swal from "sweetalert2";
 
 const EditLoan = ({ loanId, setResponseLoan }) => {
-  const LOAN_API_BASE_URL = "http://localhost:8080/api/v1/loan";
+  const LOAN_API_BASE_URL = "http://localhost:8080/api/v1/auth/loan";
 
   const [isOpen, setIsOpen] = useState(false);
   const [loan, setLoan] = useState({
@@ -27,7 +28,7 @@ const EditLoan = ({ loanId, setResponseLoan }) => {
         });
         const _loan = await response.json();
         setLoan(_loan);
-        setIsOpen(true);
+        openModal();
       } catch (error) {
         console.log(error);
       }
