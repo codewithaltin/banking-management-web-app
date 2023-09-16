@@ -63,12 +63,32 @@ public class UserServiceImpl implements UserService {
 
     }
 
-//    @Override
-//    public void addSavingGoalToUser(Long userId, Long savingGoalId) {
-//        SavingGoal savingGoal = savingGoalService.getSavingGoalsById(savingGoalId);
-//        Optional<User> user = getUserById(userId);
-//
-////        user.addSavingGoals(savingGoal);
-//        saveUser(user);
-//    }
+
+
+
+/*
+
+    @Override
+    public void addSavingGoalToUser(Long userId, Long savingGoalId) {
+        SavingGoal savingGoal = savingGoalService.getSavingGoalsById(savingGoalId);
+        Optional<User> userOptional = getUserById(userId);
+
+        if (userOptional.isPresent()) {
+            User user = userOptional.get();
+            user.addSavingGoals(savingGoal);
+            userRepository.save(user); // Save the updated User entity
+        } else {
+            //throw new NotFoundException("User with ID " + userId + " not found");
+        }
+    }
+
+    @Override
+    public SavingGoal createSavingGoalUser(Optional<User> user, SavingGoal savingGoal) {
+        savingGoal.setUser(user); // Set the user for the saving goal
+        return savingGoalService.addSavingGoal(savingGoal);
+    }
+*/
+
+
+
 }

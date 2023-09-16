@@ -1,8 +1,10 @@
 package com.bimi.bankingsystem.controller;
 
 
+import com.bimi.bankingsystem.model.SavingGoal;
 import com.bimi.bankingsystem.model.User;
 import com.bimi.bankingsystem.service.UserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.*;
@@ -54,9 +56,25 @@ public class UserController {
     }
 
 //    //@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESSOR')")
-//    @PostMapping("{userId}/savingGoal/{savingGoalId}")
-//    public void addSavingGoalToUser(@PathVariable Long userId, @PathVariable Long savingGoalId) {
-//        userService.addSavingGoalToUser(userId, savingGoalId);
-//    }
+   /* @PostMapping("{userId}/savingGoal/{savingGoalId}")
+    public void addSavingGoalToUser(@PathVariable Long userId, @PathVariable Long savingGoalId) {
+        userService.addSavingGoalToUser(userId, savingGoalId);
+    }
 
+    @PostMapping("/{userId}/savingGoal")
+    public ResponseEntity<?> createSavingGoalForUser(
+            @PathVariable Long userId,
+            @RequestBody SavingGoal savingGoal
+    ) {
+        Optional<User> user = userService.getUserById(userId);
+        if (user == null) {
+            return ResponseEntity.notFound().build();
+        }
+
+        SavingGoal createdSavingGoal = userService.createSavingGoalUser(user, savingGoal);
+        return ResponseEntity.ok(createdSavingGoal);
+    }*/
 }
+
+
+

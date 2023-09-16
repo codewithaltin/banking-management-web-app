@@ -69,7 +69,7 @@ const Loan = ({loan, confirmDelete, editLoan}) => {
         </button>
       </td>
     </tr>
-    );
+  );
 };
 
 export default Loan;

@@ -114,60 +114,12 @@ export default function Sidebar() {
               </div>
             </form>
 
-            {/* Divider */}
-            <hr className="my-4 md:min-w-full" />
-            {/* Heading */}
-            <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              Profiles & Personnel
-            </h6>
-            {/* Navigation */}
 
             <ul className="md:flex-col md:min-w-full flex flex-col list-none">
-              <li className="items-center">
-                <Link
-                  href="/admin/userlist"
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (router.pathname.indexOf("/admin/userlist") !== -1
-                      ? "text-lightBlue-500 hover:text-lightBlue-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                >
-                  <i
-                    className={
-                      "fas fa-users mr-2 text-sm " +
-                      (router.pathname.indexOf("/admin/userlist") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
-                    }
-                  ></i>{" "}
-                  User List
-                </Link>
-              </li>
-              <li className="items-center">
-                <Link
-                  href="/admin/employeelist"
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (router.pathname.indexOf("/admin/employeelist") !== -1
-                      ? "text-lightBlue-500 hover:text-lightBlue-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                >
-                  <i
-                    className={
-                      "fas fa-user-tie mr-2 text-sm " +
-                      (router.pathname.indexOf("/admin/employeelist") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
-                    }
-                  ></i>{" "}
-                  Employee List
-                </Link>
-              </li>
+              
 
               {/* Divider */}
-            <hr className="my-4 md:min-w-full" />
+            <hr className="my-2 md:min-w-full" />
             {/* Heading */}
             <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
               Data Summary
@@ -196,6 +148,7 @@ export default function Sidebar() {
                 </Link>
               </li>
 
+              <hr className="my-2 md:min-w-full" />
 
               <li className="items-center">
                 <Link
@@ -219,6 +172,8 @@ export default function Sidebar() {
                 </Link>
               </li>
 
+              <hr className="my-2 md:min-w-full" />
+
               <li className="items-center">
                 <Link
                   href="/auth/Institutionpaymentslist"
@@ -233,6 +188,7 @@ export default function Sidebar() {
                  Payments List
                 </Link>
               </li>
+              <hr className="my-2 md:min-w-full" />
 
               <li className="items-center">
                 <Link
@@ -256,27 +212,7 @@ export default function Sidebar() {
                 </Link>
               </li>
 
-              <li className="items-center">
-                <Link
-                  href="/admin/contactlist"
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (router.pathname.indexOf("/admin/contactlist") !== -1
-                      ? "text-lightBlue-500 hover:text-lightBlue-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                >
-                  <i
-                    className={
-                      "far fa-address-card mr-2 text-sm " +
-                      (router.pathname.indexOf("/admin/userlist") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
-                    }
-                  ></i>{" "}
-                  Contact Forms List
-                </Link>
-              </li>
+              <hr className="my-2 md:min-w-full" />
 
               <li className="items-center">
                 <Link
@@ -300,7 +236,7 @@ export default function Sidebar() {
                 </Link>
               </li>
 
-              
+              <hr className="my-2 md:min-w-full" />
           
               <li className="items-center">
                 <Link
@@ -324,6 +260,9 @@ export default function Sidebar() {
                 </Link>
               </li>
             </ul>
+
+            
+
             {/* Divider */}
             <hr className="my-4 md:min-w-full" />
             {/* Heading */}

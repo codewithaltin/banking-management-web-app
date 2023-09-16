@@ -59,13 +59,16 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private Role role;
 
+
     public User(){
     }
 
-    public void addSavingGoals(SavingGoal savingGoal) {
+   /* public void addSavingGoals(SavingGoal savingGoal) {
         savingGoals.add(savingGoal);
         savingGoal.setUser(this);
     }
+    */
+
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
@@ -92,6 +95,10 @@ public class User implements UserDetails {
     public boolean isAccountNonLocked() {
         return true;
     }
+
+
+
+
 
     @Override
     public boolean isCredentialsNonExpired() {

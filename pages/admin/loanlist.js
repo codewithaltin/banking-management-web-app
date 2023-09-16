@@ -5,7 +5,7 @@ import User from "layouts/User.js";
 const loanlist = () => {
   return (
     <>
-        <LoanTable />;
+        <LoanTable />
     </>
   );
 };

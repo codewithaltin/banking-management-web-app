@@ -71,19 +71,20 @@ const EditLoan = ({ loanId, setResponseLoan }) => {
     const _loan = await response.json();
     setResponseLoan(_loan);
     reset(e);
+    Swal.fire("Updated!", "Updated Succesfully!", "success");
   };
 
   return (
     <div className="min-h-screen absolute top-1/2 right-1/4">
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" m onClose={closeModal}>
-          <div className="px-4 text-center">
+          <div className="flex justify-center ">
             <Transition.Child
               as={Fragment}
-              enter="ease-out duration-300"
+              enter="ease-out duration-100"
               enterFrom="opacity-0 scale-95"
               enterTo="opacity-100 scale-100"
-              leave="ease-in duration-200"
+              leave="ease-in duration-100"
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >

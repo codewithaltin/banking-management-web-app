@@ -6,7 +6,7 @@ import User from "layouts/User";
 const transferlist = () => {
   return (
     <>
-      <TransferTable />;
+      <TransferTable />
     </>
   );
 };
