@@ -1,11 +1,9 @@
 package com.bimi.bankingsystem.model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -43,8 +41,17 @@ public class SavingGoal {
     private User user;
 
 
+    public void setUser(Optional<User> user){
+        this.user = user.orElse(null);
+    }
+
+
     public SavingGoal() {
 
+    }
+
+    public void assignSavingGoal(Optional<User> user){
+        this.user = user.orElse(null);
     }
 
     public SavingGoal(long id, String savingReason, int amount, String date, String goalName, String goalDescription) {

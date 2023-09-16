@@ -3,14 +3,15 @@ import React from "react";
 // components
 
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
-import Sidebar from "components/Sidebar/Sidebar.js";
+import UserSideBar from "components/Sidebar/UserSideBar.js";
 import HeaderStats from "components/Headers/HeaderStats.js";
 import FooterAdmin from "components/Footers/FooterAdmin.js";
+import Sidebar from "components/Sidebar/UserSideBar.js";
 
 export default function Admin({ children }) {
   return (
     <>
-      <Sidebar />
+      <UserSideBar />
       <div className="relative md:ml-64 bg-blueGray-100">
         <AdminNavbar />
         {/* Header */}

@@ -5,7 +5,7 @@ import User from "layouts/User";
 const contactlist = () => {
   return (
     <>
-      <ContactTable />;
+      <ContactTable />
     </>
   );
 };

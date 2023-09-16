@@ -5,7 +5,7 @@ import User from "layouts/User.js";
 const userlist = () => {
   return (
     <>
-      <UserTable />;
+      <UserTable />
     </>
   );
 };

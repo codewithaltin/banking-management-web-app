@@ -1,6 +1,8 @@
 package com.bimi.bankingsystem.controller;
 
 import com.bimi.bankingsystem.model.SavingGoal;
+import com.bimi.bankingsystem.model.User;
+import com.bimi.bankingsystem.service.UserServiceImpl;
 import com.bimi.bankingsystem.service.SavingGoalService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -8,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
@@ -15,6 +18,7 @@ import java.util.Map;
 public class SavingGoalController {
 
     private SavingGoalService savingGoalService;
+    private UserServiceImpl userService;
 
     public SavingGoalController(SavingGoalService savingGoalService) {
         this.savingGoalService = savingGoalService;
@@ -49,6 +53,18 @@ public class SavingGoalController {
         savingGoal = savingGoalService.updateSavingGoals(id,savingGoal);
         return ResponseEntity.ok(savingGoal);
     }
+
+    @PutMapping("{savingGoalId}/savingGoal/{userId}")
+    public SavingGoal assignSavingGoalToUser(
+            @PathVariable Long savingGoalId, @PathVariable Long userId
+    ){
+        SavingGoal savingGoal = savingGoalService.getSavingGoalsById(savingGoalId);
+        Optional<User> user = userService.getUserById(userId);
+        savingGoal.assignSavingGoal(user);
+        return savingGoalService.addSavingGoal(savingGoal);
+    }
+
+
 
 
 }

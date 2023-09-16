@@ -3,7 +3,7 @@ import EmployeeList from "components/Cards/EmployeeList.js";
 import User from "layouts/User.js";
 
 const employeeList = () => {
-  return <EmployeeList />;
+  return <EmployeeList />
 };
 employeeList.layout = User;
 
