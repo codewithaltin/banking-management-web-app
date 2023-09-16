@@ -1,7 +1,12 @@
 package com.bimi.bankingsystem.controller;
 
 import com.bimi.bankingsystem.model.SavingGoal;
+import com.bimi.bankingsystem.model.User;
+import com.bimi.bankingsystem.repository.SavingGoalRepository;
+import com.bimi.bankingsystem.repository.UserRepository;
 import com.bimi.bankingsystem.service.SavingGoalService;
+import com.bimi.bankingsystem.service.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +19,15 @@ import java.util.Map;
 @RequestMapping("/api/v1/auth/")
 public class SavingGoalController {
 
+    @Autowired
     private SavingGoalService savingGoalService;
+
+    @Autowired
+    private UserServiceImpl userService;
+
+    @Autowired
+    private SavingGoalRepository savingGoalRepository;
+
 
     public SavingGoalController(SavingGoalService savingGoalService) {
         this.savingGoalService = savingGoalService;
@@ -50,5 +63,31 @@ public class SavingGoalController {
         return ResponseEntity.ok(savingGoal);
     }
 
+//    @PutMapping("/{savingGoalId}/user/{userId}")
+//    SavingGoal assignTeacherToSubject(
+//            @PathVariable Long savingGoalId,
+//            @PathVariable Long userId
+//    ) {
+//        SavingGoal savingGoal = savingGoalRepository.findById(savingGoalId).get();
+//        User user = userRepository.findById(userId).get();
+//        savingGoal.assignUser(user);
+////        return savingGoalRepository.save(savingGoal);
+//    }
+
+    @PostMapping("/savingGoal/{userId}")
+    public SavingGoal saveSavingGoalByUserId(@PathVariable Long userId, @RequestBody SavingGoal savingGoal){
+        User user = userService.getUserById(userId).get();
+        savingGoal.assignUser(user);
+        return savingGoalService.addSavingGoal(savingGoal);
+    }
+
+    @GetMapping("/savingGoalByUser/{userId}")
+    public SavingGoal getSavingGoalByUserId(@RequestBody SavingGoal savingGoal, @PathVariable Long userId){
+        User user = userService.getUserById().get();
+        savingGoal = savingGoalService.getSavingGoalByUserId(id);
+
+        return ResponseEntity.ok(savingGoal);
+
+    }
 
 }

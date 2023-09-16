@@ -39,7 +39,6 @@ export default function Login() {
       text: "Wrong credentials!",
     });
   };
-  const email = state.email;
   async function handleSubmit(event) {
     event.preventDefault();
     const res = await fetch(LOGIN_API_BASE_URL, {

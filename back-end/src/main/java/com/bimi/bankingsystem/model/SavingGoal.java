@@ -10,6 +10,7 @@ import java.util.Set;
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
 @Table(name = "saving_goal")
 public class SavingGoal {
     @Id
@@ -38,21 +39,19 @@ public class SavingGoal {
     @Column
     private String goalDescription;
 
+    public  SavingGoal(){
+
+    }
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_id", referencedColumnName = "id")
     private User user;
 
-
-    public SavingGoal() {
-
+    public User getUser() {
+        return user;
+    }
+    public void assignUser(User user){
+        this.user = user;
     }
 
-    public SavingGoal(long id, String savingReason, int amount, String date, String goalName, String goalDescription) {
-        this.id = id;
-        this.savingReason = savingReason;
-        this.amount = amount;
-        this.date = date;
-        this.goalName = goalName;
-        this.goalDescription = goalDescription;
-    }
 }

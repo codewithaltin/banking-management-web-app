@@ -18,7 +18,6 @@ export default function Navbar() {
   function logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
-
     router.push("/auth/login");
   }
   return (
@@ -47,7 +46,10 @@ export default function Navbar() {
               <UserDropdown />
             </li>
             <li>
-              <button className="text-blueGray-100 p-5 hover:text-blueGray-200 text-xs font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase">
+              <button
+                onClick={logout}
+                className="text-blueGray-100 p-5 hover:text-blueGray-200 text-xs font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+              >
                 Sign Out{" "}
               </button>
             </li>

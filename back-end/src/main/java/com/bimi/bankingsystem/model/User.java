@@ -47,6 +47,10 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private City city;
 
+    public Set<SavingGoal> getSavingGoals() {
+        return savingGoals;
+    }
+
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private Set<SavingGoal> savingGoals;
