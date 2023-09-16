@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import Navbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
-
+import TokenCheck from "components/TokenCheck";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -104,6 +104,8 @@ export default function Loan() {
 
   return (
     <>
+      <TokenCheck />
+
       <Navbar transparent />
       <main>
         <div className="relative pt-16 pb-32 flex content-center items-center justify-center min-h-screen-75">
