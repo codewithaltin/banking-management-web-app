@@ -1,12 +1,11 @@
 package com.bimi.bankingsystem.model;
 
+import com.bimi.bankingsystem.common.enums.City;
 import com.bimi.bankingsystem.common.enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.HashSet;
 import java.util.Set;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -18,9 +17,9 @@ import java.util.List;
 @Entity
 @Data
 @Builder
-@AllArgsConstructor
 @Getter
 @Setter
+@AllArgsConstructor
 @Table ( name="user")
 
 public class User implements UserDetails {
@@ -29,11 +28,13 @@ public class User implements UserDetails {
     @Column(updatable = false)
     private long id;
 
+    @NonNull
     private String firstName;
 
     private String lastName;
     @NonNull
     private String email;
+
     private long accountNumber;
     @NonNull
     private String phoneNumber;
@@ -41,6 +42,10 @@ public class User implements UserDetails {
     private String password;
 
     private double balance;
+
+    @NonNull
+    @Enumerated(EnumType.STRING)
+    private City city;
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
@@ -62,6 +67,7 @@ public class User implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return List.of(new SimpleGrantedAuthority(role.name()));
     }
+
 
     @Override
     public String getPassword() {
@@ -92,4 +98,5 @@ public class User implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
 }

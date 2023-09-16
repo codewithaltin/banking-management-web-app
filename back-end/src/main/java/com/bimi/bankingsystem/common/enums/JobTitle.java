@@ -1,2 +1,9 @@
-package com.bimi.bankingsystem.common.enums;public class JobTitle {
+package com.bimi.bankingsystem.common.enums;
+
+public enum JobTitle {
+    BankingOperationsManager,
+    BankingCustomerServiceRepresentative,
+    BankingSalesRepresentative,
+    BankingMarketingManager,
+    BankingITManager,
 }

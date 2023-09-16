@@ -210,6 +210,7 @@ export default function EmployeeList({ employee, color }) {
         <EditEmployee
           employeeId={employeeId}
           setResponseEmployee={setResponseEmployee}
+          setIsOpen={true}
         />
       </div>
     </>
