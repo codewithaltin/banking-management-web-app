@@ -1,9 +1,9 @@
 package com.bimi.bankingsystem.service;
+import com.bimi.bankingsystem.common.enums.City;
 import com.bimi.bankingsystem.model.SavingGoal;
 import com.bimi.bankingsystem.model.User;
 import com.bimi.bankingsystem.repository.UserRepository;
 import org.springframework.stereotype.Service;
-
 
 import java.util.List;
 import java.util.Optional;
@@ -37,6 +37,9 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<User> getUserByEmail(String email) {
         return userRepository.findByEmail(email);
+    }
+    public String[] getCities(){
+        return City.getNames(City.class);
     }
 
     @Override

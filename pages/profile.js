@@ -39,7 +39,7 @@ export default function Profile() {
 
   return (
     <>
-      <Navbar transparent email={email} />
+      <Navbar />
       <main className="profile-page">
         <section className="relative block h-500-px">
           <div
@@ -99,7 +99,7 @@ export default function Profile() {
                     </div>
                   </div>
                   <div className="w-full lg:w-4/12 px-4 lg:order-1">
-                    <div className="flex justify-center py-4 lg:pt-4 pt-8">
+                    {/* <div className="flex justify-center py-4 lg:pt-4 pt-8">
                       <div className="mr-4 p-3 text-center">
                         <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
                           22
@@ -124,7 +124,7 @@ export default function Profile() {
                           Comments
                         </span>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 <div className="text-center mt-12">
@@ -136,11 +136,7 @@ export default function Profile() {
                   <div className="flex flex-wrap justify-center">
                     <div className="w-full lg:w-9/12 px-4">
                       <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                        An artist of considerable range, Jenna the name taken by
-                        Melbourne-raised, Brooklyn-based Nick Murphy writes,
-                        performs and records all of his own music, giving it a
-                        warm, intimate feel with a solid groove structure. An
-                        artist of considerable range.
+                        Account Numb
                       </p>
                     </div>
                   </div>

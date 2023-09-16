@@ -31,6 +31,10 @@ public class UserController {
         return userService.getAllUsers();
     }
 
+    @GetMapping("/cities")
+    public String[] getAllCities() {
+        return userService.getCities();
+    }
     @GetMapping("/user/{id}")
     public Optional<User> getUserById(@PathVariable("id") Long id) {
         return userService.getUserById(id);
@@ -50,7 +54,7 @@ public class UserController {
                            @RequestBody User user) {
         return userService.updateUser(id,user);
     }
-    
+
 //    //@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESSOR')")
    /* @PostMapping("{userId}/savingGoal/{savingGoalId}")
     public void addSavingGoalToUser(@PathVariable Long userId, @PathVariable Long savingGoalId) {

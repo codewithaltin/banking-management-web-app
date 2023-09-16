@@ -19,6 +19,9 @@ const User = ({ user, ConfirmDialogAlert, editUser }) => {
         {user.accountNumber}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
+        {user.city}
+      </td>
+      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         <div class="m-5">
           <button
             onClick={(e, id) => editUser(e, user.id)}
