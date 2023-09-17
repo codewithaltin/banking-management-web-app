@@ -38,110 +38,8 @@ function App() {
           className="-mt-20 top-0 bottom-auto left-0 right-0 w-full absolute h-20"
           style={{ transform: "translateZ(0)" }}
         ></div>
-        {/* <div className="container mx-auto">
-          <div className="flex flex-wrap items-center">
-            <div className="w-10/12 md:w-6/12 lg:w-4/12 px-12 md:px-4 mr-auto ml-auto -mt-32">
-              <div className="relative flex flex-col min-w-0 break-words bg-white 33w-full mb-6 shadow-lg rounded-lg">
-                <img
-                  alt="..."
-                  src="https://images.unsplash.com/photo-1537724326059-2ea20251b9c8?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1176&q=80"
-                  className="w-full align-middle rounded-t-lg"
-                />
-                <blockquote className="relative p-8 mb-4">
-                  <svg
-                    preserveAspectRatio="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 583 95"
-                    className="absolute left-0 w-full block h-95-px -top-94-px"
-                  ></svg>
-                  <h4 className="text-xl font-bold text-blueGray-900">
-                    Get Individual/ Business Loan
-                  </h4>
-                  <p className="text-md font-light mt-2 text-blueGray-900 mb-4">
-                    Whether you're an individual looking to make a big purchase
-                    or a business owner in need of funding, our loan options can
-                    help you get the funds you need. Apply now and take the
-                    first step toward achieving your financial goals.
-                  </p>
 
-                  <a
-                    href="/loan-application"
-                    className="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-600 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg"
-                  >
-                  GET LOAN
-                  </a>
-                </blockquote>
-              </div>
-            </div>
-
-            <div className="w-full md:w-6/12 px-4">
-              <div className="flex flex-wrap">
-                <div className="w-full md:w-6/12 px-4">
-                  <div className="relative flex flex-col mt-4">
-                    <div className="px-4 py-5 flex-auto">
-                      <div className="text-blueGray-700 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white">
-                        <i className="fas fa-balance-scale"></i>
-                      </div>
-                      <h6 className="text-xl mb-1 font-semibold  text-blueGray-900">
-                        Control Balance
-                      </h6>
-                      <p className="mb-4 text-blueGray-600">
-                        Track your finances and stay in control with the
-                        balance.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="relative flex flex-col min-w-0">
-                    <div className="px-4 py-5 flex-auto">
-                      <div className="text-blueGray-700 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white">
-                        <i className="fas fa-calculator"></i>
-                      </div>
-                      <h6 className="text-xl mb-1 font-semibold text-blueGray-900">
-                        Crunch the Numbers
-                      </h6>
-                      <p className="mb-4 text-blueGray-600">
-                        Use our financial calculator to make sense of your
-                        finances.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-                <div className="w-full md:w-6/12 px-4">
-                  <div className="relative flex flex-col min-w-0 mt-4">
-                    <div className="px-4 py-5 flex-auto">
-                      <div className="text-blueGray-700 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white">
-                        <i className="fas fa-wallet"></i>
-                      </div>
-                      <h6 className="text-xl mb-1 font-semibold text-blueGray-900">
-                        Digital Wallet
-                      </h6>
-                      <p className="mb-4 text-blueGray-600">
-                        Carry your bank in your pocket with our secure digital
-                        wallet.
-                      </p>
-                    </div>
-                  </div>
-                  <div className="relative flex flex-col min-w-0">
-                    <div className="px-4 py-5 flex-auto">
-                      <div className="text-blueGray-700 p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-white ">
-                        <i className="fas fa-landmark"></i>
-                      </div>
-                      <h6 className="text-xl mb-1 font-semibold  text-blueGray-900">
-                        "Landmark Banking"
-                      </h6>
-                      <p className="mb-4 text-blueGray-600">
-                        We are the reliable partner in achieving your financial
-                        goals.
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> */}
-
-        <div className="justify-center text-center flex flex-wrap">
+        <div className="justify-center text-center flex flex-wrap mt-24">
           <div className="w-full md:w-6/12 px-12 md:px-4">
             <h2 className="font-semibold text-4xl">Explore Our Services</h2>
             <p className="text-lg leading-relaxed mt-4 mb-4 text-blueGray-500">
@@ -373,40 +271,103 @@ function App() {
               <img
                 alt="..."
                 className="max-w-full rounded-lg shadow-lg"
-                src="/img/atm.jpg"
+                src="/img/loan-apply.jpg"
               />
             </div>
             <div className="w-full md:w-5/12 ml-auto mr-auto px-4">
               <div className="md:pr-12">
                 <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-blueGray-200">
-                  <i className="fas fa-money-check-alt text-xl"></i>
+                  <i className="fas fa-file-invoice-dollar text-xl"></i>
                 </div>
-                <h3 className="text-3xl font-semibold">Payments</h3>
+                <h3 className="text-3xl font-semibold">Request a Loan</h3>
                 <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-                          You can perform utility payments such as Electricity, Insurance,
-                          Pre-paid Service and Mobile Top-Up.
+                    Whether you're an individual looking to make a big purchase
+                    or a business owner in need of funding, our loan options can
+                    help you get the funds you need.
                 </p>
                 <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-                          Simplify your life and stay connected, insured, and powered up
-                          with us.
+                    Apply now and take the first step toward achieving your financial goals.
                 </p>
-                <a
-                    href="/payments"
-                    className="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-600 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg"
-                  >
-                    Pay effortlessly{""}
+                  <a href="/loan-application"
+                    className="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-600 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg">
+                    Get Loan{""}
                   </a>
               </div>
             </div>
           </div>
-        </div>
-      </section>     
+        </div> 
 
-        
-
-        
       </section>
-      
+      <div className="justify-center text-center flex flex-wrap mt-24">
+          <div className="w-full md:w-6/12 px-12 md:px-4">
+            <h2 className="font-semibold text-4xl">Process Payments</h2>
+          </div>
+        </div>
+      </section>
+      <section className="block relative z-1 bg-blueGray-600">
+        <div className="container mx-auto">
+          <div className="justify-center flex flex-wrap">
+            <div className="w-full lg:w-12/12 px-4  -mt-24">
+              <div className="flex flex-wrap">
+                <div className="w-full md:w-4/12 px-4 text-center">
+                  <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg border border-gray-300">
+                  <div className="px-4 py-5 flex-auto">
+                  <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-400">
+                    <i className="fas fa-building"></i>
+                  </div>
+                  <h6 className="text-xl font-semibold">Collector Payments</h6>
+                  <p className="mt-2 mb-4 text-blueGray-500">
+                      Ministry, Municipality, Education, Organizations
+                  </p>
+                  <a href="/paymentTypes/CollectorPayments"
+                    className="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg">
+                    Pay Now{""}
+                  </a>
+                  </div>
+                </div>
+                </div>
+
+                <div className="w-full md:w-4/12 px-4 text-center">
+                  <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg border border-gray-300">
+                  <div className="px-4 py-5 flex-auto">
+                  <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-emerald-400">
+                    <i className="fas fa-globe"></i>
+                  </div>
+                  <h6 className="text-xl font-semibold">Pre-Paid Services</h6>
+                  <p className="mt-2 mb-4 text-blueGray-500">
+                      Pay monthly bills like: TV & Internet easily
+                  </p>
+                  <a href="/paymentTypes/PrePaidServices"
+                    className="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg">
+                    Pay Now{""}
+                  </a>
+                  </div>
+                </div>
+                </div>
+                
+
+                <div className="w-full md:w-4/12 px-4 text-center">
+                  <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg border border-gray-300">
+                  <div className="px-4 py-5 flex-auto">
+                  <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-lightBlue-400">
+                    <i className="fas fa-phone"></i>
+                  </div>
+                  <h6 className="text-xl font-semibold">Mobile Top-Up</h6>
+                  <p className="mt-2 mb-4 text-blueGray-500">
+                  All mobile operators in one place: Ipko & Vala
+                  </p>
+                  <a href="/paymentTypes/MobilePayments"
+                    className="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg">
+                    Pay Now{""}
+                  </a>
+                  </div>
+                </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
       <section className="py-20 bg-blueGray-600 overflow-hidden">
         <div className="container mx-auto pb-64">
           <div className="flex flex-wrap justify-center">
