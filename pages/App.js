@@ -38,7 +38,7 @@ function App() {
           className="-mt-20 top-0 bottom-auto left-0 right-0 w-full absolute h-20"
           style={{ transform: "translateZ(0)" }}
         ></div>
-        <div className="container mx-auto">
+        {/* <div className="container mx-auto">
           <div className="flex flex-wrap items-center">
             <div className="w-10/12 md:w-6/12 lg:w-4/12 px-12 md:px-4 mr-auto ml-auto -mt-32">
               <div className="relative flex flex-col min-w-0 break-words bg-white 33w-full mb-6 shadow-lg rounded-lg">
@@ -139,124 +139,82 @@ function App() {
               </div>
             </div>
           </div>
-        </div>
+        </div> */}
 
-        <div className="flex flex-wrap items-center pt-32">
-          <div className="w-full md:w-6/12 px-4 mr-auto ml-auto mt-32">
-            <div className="justify-center flex flex-wrap relative">
-              <div className="my-4 w-full lg:w-6/12 px-4">
-                <a href="#" target="_blank">
-                  <div className="bg-red-600 shadow-lg rounded-lg text-center p-8">
-                    <img
-                      alt="..."
-                      className="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                      src="/img/retirement.png"
-                    />
-                    <p className="text-lg text-white mt-4 font-semibold">
-                      Retirement Planning
-                    </p>
-                  </div>
-                </a>
-                <a href="#" target="_blank">
-                  <div className="bg-lightBlue-500 shadow-lg rounded-lg text-center p-8 mt-8">
-                    <img
-                      alt="..."
-                      className="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                      src="/img/property.png"
-                    />
-                    <p className="text-lg text-white mt-4 font-semibold">
-                      Mortgage
-                    </p>
-                  </div>
-                </a>
-                <a href="#" target="_blank">
-                  <div className="bg-blueGray-900 shadow-lg rounded-lg text-center p-8 mt-8">
-                    <img
-                      alt="..."
-                      className="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                      src="/img/piggy-b.png"
-                    />
-                    <p className="text-lg text-white mt-4 font-semibold">
-                      Saving Accounts
-                    </p>
-                  </div>
-                </a>
-              </div>
-              <div className="my-4 w-full lg:w-6/12 px-4 lg:mt-16">
-                <a href="#" target="_blank">
-                  <div className="bg-yellow-500 shadow-lg rounded-lg text-center p-8">
-                    <img
-                      alt="..."
-                      className="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                      src="/img/money.png"
-                    />
-                    <p className="text-lg text-white mt-4 font-semibold">
-                      Grow Wealth
-                    </p>
-                  </div>
-                </a>
-                <a href="#" target="_blank">
-                  <div className="bg-red-700 shadow-lg rounded-lg text-center p-8 mt-8">
-                    <img
-                      alt="..."
-                      className="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                      src="/img/risk-m.png"
-                    />
-                    <p className="text-lg text-white mt-4 font-semibold">
-                      Risk Management
-                    </p>
-                  </div>
-                </a>
-                <a href="#" target="_blank">
-                  <div className="bg-emerald-500 shadow-lg rounded-lg text-center p-8 mt-8">
-                    <img
-                      alt="..."
-                      className="shadow-md rounded-full max-w-full w-16 mx-auto p-2 bg-white"
-                      src="/img/euro.png"
-                    />
-                    <p className="text-lg text-white mt-4 font-semibold">
-                      Smart Money Moves
-                    </p>
-                  </div>
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div className="w-full md:w-4/12 px-12 md:px-4 ml-auto mr-auto mt-48">
-            <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
-              <i className="fas fa-money-check-alt text-xl"></i>
-            </div>
-            <h3 className="text-3xl mb-2 font-semibold leading-normal text-blueGray-900">
-              Payments
-            </h3>
-            <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-800">
-              You can perform utility payments such as Electricity, Insurance,
-              Pre-paid Service and Mobile Top-Up.
+        <div className="justify-center text-center flex flex-wrap">
+          <div className="w-full md:w-6/12 px-12 md:px-4">
+            <h2 className="font-semibold text-4xl">Explore Our Services</h2>
+            <p className="text-lg leading-relaxed mt-4 mb-4 text-blueGray-500">
+              Experience easy, secure, and accessible online banking at your fingertips!
             </p>
-            <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-800">
-              Simplify your life and stay connected, insured, and powered up
-              with us.
-            </p>
-            <a
-              href="/payments"
-              target="_blank"
-              className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
-            >
-              Pay effortlessly{" "}
-              <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
-            </a>
           </div>
         </div>
 
         <div className="flex flex-wrap items-center pt-32">
-          <div className="w-full md:w-6/12 px-4 mr-auto ml-auto mt-32">
+        <div className="container mx-auto">
+          <div className="justify-center flex flex-wrap">
+            <div className="w-full lg:w-12/12 px-4  -mt-24">
+              <div className="flex flex-wrap">
+                <div className="w-full lg:w-4/12 px-4">
+                  <h5 className="text-xl font-semibold pb-4 text-center">
+                    Settle your Invoice  
+                  </h5>
+                  <Link href="/invoice_details" legacyBehavior>
+                    <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
+                      <img
+                        alt="..."
+                        className="align-middle border-none max-w-full h-auto rounded-lg"
+                        src="/img/invoice-pc.png"
+                      />
+                    </div>
+                  </Link>
+                </div>
+
+                <div className="w-full lg:w-4/12 px-4">
+                  <h5 className="text-xl font-semibold pb-4 text-center">
+                    Request Money
+                  </h5>
+                  <Link href="/requestMoney" legacyBehavior>
+                    <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
+                      <img
+                        alt="..."
+                        className="align-middle border-none max-w-full h-auto rounded-lg"
+                        src="/img/tablet-request.png"
+                      />
+                    </div>
+                  </Link>
+                </div>
+
+                <div className="w-full lg:w-4/12 px-4">
+                  <h5 className="text-xl font-semibold pb-4 text-center">
+                    Execute a Transfer
+                  </h5>
+                  <Link href="/transfer" legacyBehavior>
+                    <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
+                      <img
+                        alt="..."
+                        className="align-middle border-none max-w-full h-auto rounded-lg"
+                        src="/img/transfer-phone-simple.png"
+                      />
+                    </div>
+                  </Link>
+                </div>
+
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+        <div className="flex flex-wrap items-center pt-32">
+          <div className="w-full md:w-6/12 px-4 mr-auto ml-auto">
             <div className="justify-center flex flex-wrap relative">
               <div className="my-4 w-full lg:w-6/12 px-4">
                 <a href="#" target="_blank">
                   <div className="flex flex-wrap justify-center">
                   <div className="w-8/16 sm:w-4/12 px-4">
-                    <img src="/img/cards/aexpres.png" alt="..." className="shadow rounded max-w-full h-auto align-middle border-none" />
+                    <img src="/img/cards/aexpres1.png" alt="..." className="shadow rounded max-w-full h-auto align-middle border-none" />
                   </div>
                   </div>
                 </a>
@@ -264,7 +222,7 @@ function App() {
                 <a href="#" target="_blank">
                   <div className="flex flex-wrap justify-center rounded-full">
                   <div className="w-8/16 mt-8 sm:w-4/12 px-4 ">
-                    <img src="/img/cards/diners.png" alt="..." className="shadow rounded max-w-full h-auto align-middle border-none" />
+                    <img src="/img/cards/diners1.png" alt="..." className="shadow rounded max-w-full h-auto align-middle border-none" />
                   </div>
                   </div>
                 </a>
@@ -272,7 +230,7 @@ function App() {
                 <a href="#" target="_blank">
                   <div className="flex flex-wrap justify-center rounded-full">
                   <div className="w-8/16 mt-8 sm:w-4/12 px-4 ">
-                    <img src="/img/cards/elo.png" alt="..." className="shadow rounded max-w-full h-auto align-middle border-none" />
+                    <img src="/img/cards/elo1.png" alt="..." className="shadow rounded max-w-full h-auto align-middle border-none" />
                   </div>
                   </div>
                 </a>  
@@ -282,21 +240,21 @@ function App() {
                 <a href="#" target="_blank">
                   <div className="flex flex-wrap justify-center rounded-full">
                   <div className="w-8/16 mt-8 sm:w-4/12 px-4 ">
-                    <img src="/img/cards/visa.png" alt="..." className="shadow rounded max-w-full h-auto align-middle border-none" />
+                    <img src="/img/cards/visa1.png" alt="..." className="shadow rounded max-w-full h-auto align-middle border-none" />
                   </div>
                   </div>
                 </a>  
                 <a href="#" target="_blank">
                   <div className="flex flex-wrap justify-center rounded-full">
                   <div className="w-8/16 mt-8 sm:w-4/12 px-4 ">
-                    <img src="/img/cards/hiper.png" alt="..." className="shadow rounded max-w-full h-auto align-middle border-none" />
+                    <img src="/img/cards/hiper1.png" alt="..." className="shadow rounded max-w-full h-auto align-middle border-none" />
                   </div>
                   </div>
                 </a>  
                 <a href="#" target="_blank">
                   <div className="flex flex-wrap justify-center rounded-full">
                   <div className="w-8/16 mt-8 sm:w-4/12 px-4 ">
-                    <img src="/img/cards/unionpay.png" alt="..." className="shadow rounded max-w-full h-auto align-middle border-none" />
+                    <img src="/img/cards/unionpay1.png" alt="..." className="shadow rounded max-w-full h-auto align-middle border-none" />
                   </div>
                   </div>
                 </a>
@@ -304,30 +262,27 @@ function App() {
             </div>
           </div>
 
-          <div className="w-full md:w-4/12 px-12 md:px-4 ml-auto mr-auto mt-48">
-            <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
-              <i className="fas fa-money-check-alt text-xl"></i>
-            </div>
-            <h3 className="text-3xl mb-2 font-semibold leading-normal text-blueGray-900">
-              Payments
-            </h3>
-            <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-800">
-              You can perform utility payments such as Electricity, Insurance,
-              Pre-paid Service and Mobile Top-Up.
-            </p>
-            <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-800">
-              Simplify your life and stay connected, insured, and powered up
-              with us.
-            </p>
-            <a
-              href="/payments"
-              target="_blank"
-              className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
-            >
-              Pay effortlessly{" "}
-              <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
-            </a>
-          </div>
+          <div className="w-full md:w-5/12 mt-20 ml-auto mr-auto px-4">
+              <div className="md:pr-12">
+                <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-blueGray-200">
+                  <i className="far fa-credit-card text-xl"></i>
+                </div>
+                <h3 className="text-3xl font-semibold">Apply for a Card</h3>
+                <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
+                    Discover the smart choice for obtaining your card right here. We're your top destination for card solutions that meet your needs.
+                    Unlock a world of possibilities. 
+                </p>
+                <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
+                    Ready to take advantage from the benefits of credit cards? Applying is simple, range of options to suit your needs.
+                </p>
+                <a
+                    href="/auth/cards"
+                    className="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-600 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg"
+                  >
+                  APPLY NOW
+                  </a>
+              </div>
+            </div>          
         </div>
 
         <section className="pb-20 bg-blueGray-200 -mt-30">
@@ -424,21 +379,22 @@ function App() {
             <div className="w-full md:w-5/12 ml-auto mr-auto px-4">
               <div className="md:pr-12">
                 <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-blueGray-200">
-                  <i className="far fa-credit-card text-xl"></i>
+                  <i className="fas fa-money-check-alt text-xl"></i>
                 </div>
-                <h3 className="text-3xl font-semibold">Apply for a Card</h3>
+                <h3 className="text-3xl font-semibold">Payments</h3>
                 <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-                    Discover the smart choice for obtaining your card right here. We're your top destination for card solutions that meet your needs.
-                    Unlock a world of possibilities. 
+                          You can perform utility payments such as Electricity, Insurance,
+                          Pre-paid Service and Mobile Top-Up.
                 </p>
                 <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-                    Ready to take advantage from the benefits of credit cards? Applying is simple, range of options to suit your needs.
+                          Simplify your life and stay connected, insured, and powered up
+                          with us.
                 </p>
                 <a
-                    href="/auth/cards"
+                    href="/payments"
                     className="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-600 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg"
                   >
-                  APPLY NOW
+                    Pay effortlessly{""}
                   </a>
               </div>
             </div>
@@ -448,71 +404,9 @@ function App() {
 
         
 
-        <div className="justify-center text-center flex flex-wrap mt-24">
-          <div className="w-full md:w-6/12 px-12 md:px-4">
-            <h2 className="font-semibold text-4xl">Explore Our Services</h2>
-            <p className="text-lg leading-relaxed mt-4 mb-4 text-blueGray-500">
-              Experience easy, secure, and accessible online banking at your fingertips!
-            </p>
-          </div>
-        </div>
+        
       </section>
-      <section className="block relative z-1 bg-blueGray-600">
-        <div className="container mx-auto">
-          <div className="justify-center flex flex-wrap">
-            <div className="w-full lg:w-12/12 px-4  -mt-24">
-              <div className="flex flex-wrap">
-                <div className="w-full lg:w-4/12 px-4">
-                  <h5 className="text-xl font-semibold pb-4 text-center">
-                    Settle your Invoice  
-                  </h5>
-                  <Link href="/invoice_details" legacyBehavior>
-                    <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
-                      <img
-                        alt="..."
-                        className="align-middle border-none max-w-full h-auto rounded-lg"
-                        src="/img/invoice-pc.png"
-                      />
-                    </div>
-                  </Link>
-                </div>
-
-                <div className="w-full lg:w-4/12 px-4">
-                  <h5 className="text-xl font-semibold pb-4 text-center">
-                    Request Money
-                  </h5>
-                  <Link href="/requestMoney" legacyBehavior>
-                    <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
-                      <img
-                        alt="..."
-                        className="align-middle border-none max-w-full h-auto rounded-lg"
-                        src="/img/tablet-request.png"
-                      />
-                    </div>
-                  </Link>
-                </div>
-
-                <div className="w-full lg:w-4/12 px-4">
-                  <h5 className="text-xl font-semibold pb-4 text-center">
-                    Execute a Transfer
-                  </h5>
-                  <Link href="/transfer" legacyBehavior>
-                    <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
-                      <img
-                        alt="..."
-                        className="align-middle border-none max-w-full h-auto rounded-lg"
-                        src="/img/transfer-phone-simple.png"
-                      />
-                    </div>
-                  </Link>
-                </div>
-
-                
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      
       <section className="py-20 bg-blueGray-600 overflow-hidden">
         <div className="container mx-auto pb-64">
           <div className="flex flex-wrap justify-center">
