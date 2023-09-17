@@ -249,6 +249,87 @@ function App() {
           </div>
         </div>
 
+        <div className="flex flex-wrap items-center pt-32">
+          <div className="w-full md:w-6/12 px-4 mr-auto ml-auto mt-32">
+            <div className="justify-center flex flex-wrap relative">
+              <div className="my-4 w-full lg:w-6/12 px-4">
+                <a href="#" target="_blank">
+                  <div className="flex flex-wrap justify-center">
+                  <div className="w-8/16 sm:w-4/12 px-4">
+                    <img src="/img/cards/aexpres.png" alt="..." className="shadow rounded max-w-full h-auto align-middle border-none" />
+                  </div>
+                  </div>
+                </a>
+
+                <a href="#" target="_blank">
+                  <div className="flex flex-wrap justify-center rounded-full">
+                  <div className="w-8/16 mt-8 sm:w-4/12 px-4 ">
+                    <img src="/img/cards/diners.png" alt="..." className="shadow rounded max-w-full h-auto align-middle border-none" />
+                  </div>
+                  </div>
+                </a>
+
+                <a href="#" target="_blank">
+                  <div className="flex flex-wrap justify-center rounded-full">
+                  <div className="w-8/16 mt-8 sm:w-4/12 px-4 ">
+                    <img src="/img/cards/elo.png" alt="..." className="shadow rounded max-w-full h-auto align-middle border-none" />
+                  </div>
+                  </div>
+                </a>  
+              </div>
+              <div className="my-4 w-full lg:w-6/12 px-4 lg:mt-16">
+
+                <a href="#" target="_blank">
+                  <div className="flex flex-wrap justify-center rounded-full">
+                  <div className="w-8/16 mt-8 sm:w-4/12 px-4 ">
+                    <img src="/img/cards/visa.png" alt="..." className="shadow rounded max-w-full h-auto align-middle border-none" />
+                  </div>
+                  </div>
+                </a>  
+                <a href="#" target="_blank">
+                  <div className="flex flex-wrap justify-center rounded-full">
+                  <div className="w-8/16 mt-8 sm:w-4/12 px-4 ">
+                    <img src="/img/cards/hiper.png" alt="..." className="shadow rounded max-w-full h-auto align-middle border-none" />
+                  </div>
+                  </div>
+                </a>  
+                <a href="#" target="_blank">
+                  <div className="flex flex-wrap justify-center rounded-full">
+                  <div className="w-8/16 mt-8 sm:w-4/12 px-4 ">
+                    <img src="/img/cards/unionpay.png" alt="..." className="shadow rounded max-w-full h-auto align-middle border-none" />
+                  </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <div className="w-full md:w-4/12 px-12 md:px-4 ml-auto mr-auto mt-48">
+            <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-white">
+              <i className="fas fa-money-check-alt text-xl"></i>
+            </div>
+            <h3 className="text-3xl mb-2 font-semibold leading-normal text-blueGray-900">
+              Payments
+            </h3>
+            <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-800">
+              You can perform utility payments such as Electricity, Insurance,
+              Pre-paid Service and Mobile Top-Up.
+            </p>
+            <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-800">
+              Simplify your life and stay connected, insured, and powered up
+              with us.
+            </p>
+            <a
+              href="/payments"
+              target="_blank"
+              className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
+            >
+              Pay effortlessly{" "}
+              <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
+            </a>
+          </div>
+        </div>
+
         <section className="pb-20 bg-blueGray-200 -mt-30">
         <div className="container mx-auto px-6">
         <div className="flex flex-wrap items-center mt-32">
