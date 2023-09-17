@@ -1,8 +1,5 @@
 import React from "react";
 import Link from "next/link";
-
-// components
-
 import IndexDropdown from "components/Dropdowns/IndexDropdown.js";
 
 export default function Navbar() {

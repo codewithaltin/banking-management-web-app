@@ -1,11 +1,14 @@
 import React from "react";
 import Link from "next/link";
-import IndexNavbarLight from "components/Navbars/IndexNavbar_light.js";
+import AdminHomeNavbar from "components/Navbars/AdminHomeNavbar";
+import UserNavbar from "components/Navbars/UserNavbar";
+import GuestNavbar from "components/Navbars/GuestNavbar";
+import IndexNavbar from "components/Navbars/IndexNavbar_light"
 import Footer from "components/Footers/Footer.js";
 function App() {
   return (
     <div>
-      <IndexNavbarLight />
+      <IndexNavbar />
       <section className="header relative pt-16 items-center flex h-screen max-h-1200-px bg-cover-blur">
         <div className="container mx-auto ">
           <div className="w-full  px-4">

@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "react-credit-cards";
+import TokenCheck from "components/TokenCheck";
 import "react-credit-cards/es/styles-compiled.css";
 
 import {
@@ -80,6 +81,7 @@ export default class cards extends React.Component {
       this.state;
 
     return (
+      <TokenCheck>
       <div>
         <Card
           number={cardNumber}
@@ -147,6 +149,7 @@ export default class cards extends React.Component {
           </div>
         </form>
       </div>
+      </TokenCheck>
     );
   }
 }

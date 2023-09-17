@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import TokenCheck from "components/TokenCheck";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
@@ -75,6 +76,7 @@ export default function SavingGoal() {
   };
 
   return (
+    <TokenCheck>
     <>
       <div className="relative pt-16 pb-32 flex content-center items-center justify-center min-h-screen-75">
         <div
@@ -249,6 +251,7 @@ export default function SavingGoal() {
         </div>
       </div>
     </>
+    </TokenCheck>
   );
 }
 

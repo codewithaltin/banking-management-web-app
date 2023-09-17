@@ -18,7 +18,6 @@ export default function Navbar() {
   function logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
-    router.push("/auth/login");
   }
   return (
     <>
