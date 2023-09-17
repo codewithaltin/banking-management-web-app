@@ -8,11 +8,6 @@ export default function Profile() {
   const router = useRouter();
   const [profile, setProfile] = useState();
 
-  const USER_API_BASE_URL = ``;
-  useEffect(() => {
-    // Perform localStorage action
-    const item = localStorage.getItem("key");
-  }, []);
   useEffect(() => {
     fetchProfile();
   }, []);
@@ -35,7 +30,6 @@ export default function Profile() {
       router.push("/");
     }
   }
-  if (profile == undefined) return;
 
   return (
     <>

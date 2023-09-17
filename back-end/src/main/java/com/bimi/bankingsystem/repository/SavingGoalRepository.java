@@ -7,5 +7,4 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface SavingGoalRepository extends JpaRepository<SavingGoal, Long> {
-    public SavingGoal findByUser();
 }

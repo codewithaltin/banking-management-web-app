@@ -91,7 +91,7 @@ const EditUser = ({ userId, setResponseUser }) => {
 
   const updateUser = async (e) => {
     e.preventDefault();
-    const response = await fetch(USER_API_BASE_URL + "/" + userId, {
+    const response = await fetch(USER_API_BASE_URL + userId, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",

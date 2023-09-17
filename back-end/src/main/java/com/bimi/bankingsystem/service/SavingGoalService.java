@@ -38,7 +38,7 @@ public class SavingGoalService {
 
     public SavingGoal getSavingGoalByUserId(Long id) {
         try {
-            return savingGoalRepository.findByUser(id).orElseThrow(() -> new NotFoundException("SavingGoal with id " + id + " not found"));
+            return savingGoalRepository.findById(id).orElseThrow(() -> new NotFoundException("SavingGoal with id " + id + " not found"));
         } catch (NotFoundException ex) {
             System.out.println("SavingGoal could not be found, id: " + id);
             throw ex;

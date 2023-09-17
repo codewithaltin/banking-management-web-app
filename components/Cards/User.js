@@ -1,6 +1,6 @@
 import React from "react";
 
-const User = ({ user, ConfirmDialogAlert, editUser }) => {
+const User = ({ user, confirmDelete, editUser }) => {
   return (
     <tr key={user.id}>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
@@ -45,7 +45,7 @@ const User = ({ user, ConfirmDialogAlert, editUser }) => {
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         <button
-          onClick={(e, id) => ConfirmDialogAlert(e, user.id)}
+          onClick={(e, id) => confirmDelete(e, user.id)}
           class="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-md"
         >
           <svg

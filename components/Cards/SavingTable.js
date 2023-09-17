@@ -10,9 +10,15 @@ import EditSavingGoal from "./EditSavingGoal";
 import Swal from "sweetalert2";
 
 export default function SavingTable({ savingGoal, color }) {
-
-
-  const SAVINGGOAL_API_BASE_URL = "http://localhost:8080/api/v1/auth/savingGoal";
+  let SAVINGGOAL_API_BASE_URL;
+  useEffect(() => {
+    if (localStorage.getItem("role") == "USER") {
+      SAVINGGOAL_API_BASE_URL =
+        "http://localhost:8080/api/v1/auth/savingGoal/user/" +
+        localStorage.getItem("id");
+    } else
+      SAVINGGOAL_API_BASE_URL = "http://localhost:8080/api/v1/auth/savingGoal";
+  });
   const [savingGoals, setSavingGoals] = useState(null);
   const [loading, setLoading] = useState(true);
   const [savingGoalId, setSavingGoalId] = useState(null);
@@ -26,7 +32,6 @@ export default function SavingTable({ savingGoal, color }) {
   const handleCloseDialog = () => {
     setDialogOpen(false);
   };
-
 
   useEffect(() => {
     const fetchData = async () => {
@@ -83,8 +88,6 @@ export default function SavingTable({ savingGoal, color }) {
     setSavingGoalId(id);
   };
 
-  
-
   return (
     <>
       <div
@@ -100,23 +103,24 @@ export default function SavingTable({ savingGoal, color }) {
                 className={
                   "font-semibold text-lg " +
                   (color === "light" ? "text-blueGray-700" : "text-white")
-                }>
+                }
+              >
                 Saving Goals
               </h3>
               <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-              <a  
-                className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                href="/SavingGoal"
-              >
-                Add Goal
-              </a>
-              
-              {isDialogOpen && <AddGoal isDialogOpen={handleOpenDialog} />}
+                <a
+                  className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                  href="/SavingGoal"
+                >
+                  Add Goal
+                </a>
+
+                {isDialogOpen && <AddGoal isDialogOpen={handleOpenDialog} />}
+              </div>
             </div>
-            </div>
-            </div>
+          </div>
         </div>
-            <div className="block w-full overflow-x-auto">
+        <div className="block w-full overflow-x-auto">
           {/* Projects table */}
           <table className="items-center w-full bg-transparent border-collapse">
             <thead>
@@ -169,7 +173,7 @@ export default function SavingTable({ savingGoal, color }) {
                       : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 >
-                    Actions
+                  Actions
                 </th>
                 <th
                   className={
@@ -196,7 +200,10 @@ export default function SavingTable({ savingGoal, color }) {
             )}
           </table>
         </div>
-        <EditSavingGoal savingGoalId={savingGoalId} setResponseSavingGoal={setResponseSavingGoal} />
+        <EditSavingGoal
+          savingGoalId={savingGoalId}
+          setResponseSavingGoal={setResponseSavingGoal}
+        />
       </div>
     </>
   );

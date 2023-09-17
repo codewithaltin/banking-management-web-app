@@ -47,14 +47,17 @@ public class User implements UserDetails {
     @Enumerated(EnumType.STRING)
     private City city;
 
-    public Set<SavingGoal> getSavingGoals() {
-        return savingGoals;
-    }
-
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
-    private Set<SavingGoal> savingGoals;
+    private List<SavingGoal> savingGoals;
 
+
+    public List<SavingGoal> getSavingGoals() {
+        return savingGoals;
+    }
+    public void addSavingGoal(SavingGoal savingGoal){
+        savingGoals.add(savingGoal);
+    }
 
     @Enumerated(EnumType.STRING)
     private Role role;
@@ -62,12 +65,6 @@ public class User implements UserDetails {
 
     public User(){
     }
-
-   /* public void addSavingGoals(SavingGoal savingGoal) {
-        savingGoals.add(savingGoal);
-        savingGoal.setUser(this);
-    }
-    */
 
 
     @Override

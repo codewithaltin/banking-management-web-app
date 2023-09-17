@@ -75,20 +75,18 @@ public class SavingGoalController {
 ////        return savingGoalRepository.save(savingGoal);
 //    }
 
-    @PostMapping("/savingGoal/{userId}")
+    @PostMapping("/savingGoal/user/{userId}")
     public SavingGoal saveSavingGoalByUserId(@PathVariable Long userId, @RequestBody SavingGoal savingGoal){
         User user = userService.getUserById(userId).get();
+        user.addSavingGoal(savingGoal);
         savingGoal.assignUser(user);
         return savingGoalService.addSavingGoal(savingGoal);
     }
 
-    @GetMapping("/savingGoalByUser/{userId}")
-    public SavingGoal getSavingGoalByUserId(@RequestBody SavingGoal savingGoal, @PathVariable Long userId){
-        User user = userService.getUserById().get();
-        savingGoal = savingGoalService.getSavingGoalByUserId(id);
-
-        return ResponseEntity.ok(savingGoal);
-
+    @GetMapping("/savingGoal/user/{userId}")
+    public List<SavingGoal> getSavingGoalsByUserId(@PathVariable Long userId){
+         User user = userService.getUserById(userId).get();
+         return user.getSavingGoals();
     }
 
 }
