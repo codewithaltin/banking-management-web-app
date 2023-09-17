@@ -1,34 +1,48 @@
 import React from "react";
 import Chart from "chart.js";
+import { useState, useEffect } from "react";
 
 export default function CardLineChart() {
+  const [profile, setProfile] = useState(false);
+
+  useEffect(() => {
+    const item = localStorage.getItem("key");
+  }, []);
+  useEffect(() => {
+    fetchProfile();
+  }, []);
+
+  async function fetchProfile() {
+    const res = await fetch(
+      "http://localhost:8080/api/v1/auth/userbyemail/" +
+        localStorage.getItem("email"),
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+    if (res.ok) {
+      const json = await res.json();
+      setProfile(json);
+    } else {
+      throw new Error("Something went wrong.");
+    }
+  }
+
   React.useEffect(() => {
     var config = {
       type: "line",
       data: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-        ],
+        labels: ["June", "July", "August", "September"],
         datasets: [
           {
             label: new Date().getFullYear(),
             backgroundColor: "#4c51bf",
             borderColor: "#4c51bf",
-            data: [0, 0, 0, 0, 0, 0, 0],
+            data: [profile.balance, 20, 30],
             fill: false,
-          },
-          {
-            label: new Date().getFullYear() - 1,
-            fill: false,
-            backgroundColor: "#fff",
-            borderColor: "#fff",
-            data: [40, 68, 86, 74, 56, 60, 87],
           },
         ],
       },
@@ -37,7 +51,7 @@ export default function CardLineChart() {
         responsive: true,
         title: {
           display: false,
-          text: "Sales Charts",
+          text: "Balance",
           fontColor: "white",
         },
         legend: {

@@ -3,12 +3,24 @@ import Link from "next/link";
 import AdminHomeNavbar from "components/Navbars/AdminHomeNavbar";
 import UserNavbar from "components/Navbars/UserNavbar";
 import GuestNavbar from "components/Navbars/GuestNavbar";
-import IndexNavbar from "components/Navbars/IndexNavbar_light"
+import IndexNavbar from "components/Navbars/IndexNavbar_light";
 import Footer from "components/Footers/Footer.js";
+import { useEffect, useState } from "react";
 function App() {
+  const [token, setToken] = useState(null);
+
+  useEffect(() => {
+    // Check if localStorage is available (client-side) before using it.
+    if (typeof window !== "undefined") {
+      const t = localStorage.getItem("token");
+      // Now you can use the token as needed.
+      setToken(t);
+    }
+  }, []);
+
   return (
     <div>
-      <IndexNavbar />
+      {token ? <UserNavbar /> : <GuestNavbar />}
       <section className="header relative pt-16 items-center flex h-screen max-h-1200-px bg-cover-blur">
         <div className="container mx-auto ">
           <div className="w-full  px-4">
@@ -42,65 +54,64 @@ function App() {
           <div className="w-full md:w-6/12 px-12 md:px-4">
             <h2 className="font-semibold text-4xl">Explore Our Services</h2>
             <p className="text-lg leading-relaxed mt-4 mb-4 text-blueGray-500">
-              Experience easy, secure, and accessible online banking at your fingertips!
+              Experience easy, secure, and accessible online banking at your
+              fingertips!
             </p>
           </div>
         </div>
         <div className="flex flex-wrap items-center pt-32">
-        <div className="container mx-auto">
-          <div className="justify-center flex flex-wrap">
-            <div className="w-full lg:w-12/12 px-4  -mt-24">
-              <div className="flex flex-wrap">
-                <div className="w-full lg:w-4/12 px-4">
-                  <h5 className="text-xl font-semibold pb-4 text-center">
-                    Settle your Invoice  
-                  </h5>
-                  <Link href="/invoice_details" legacyBehavior>
-                    <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
-                      <img
-                        alt="..."
-                        className="align-middle border-none max-w-full h-auto rounded-lg"
-                        src="/img/invoice-pc.png"
-                      />
-                    </div>
-                  </Link>
-                </div>
+          <div className="container mx-auto">
+            <div className="justify-center flex flex-wrap">
+              <div className="w-full lg:w-12/12 px-4  -mt-24">
+                <div className="flex flex-wrap">
+                  <div className="w-full lg:w-4/12 px-4">
+                    <h5 className="text-xl font-semibold pb-4 text-center">
+                      Settle your Invoice
+                    </h5>
+                    <Link href="/invoice_details" legacyBehavior>
+                      <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
+                        <img
+                          alt="..."
+                          className="align-middle border-none max-w-full h-auto rounded-lg"
+                          src="/img/invoice-pc.png"
+                        />
+                      </div>
+                    </Link>
+                  </div>
 
-                <div className="w-full lg:w-4/12 px-4">
-                  <h5 className="text-xl font-semibold pb-4 text-center">
-                    Request Money
-                  </h5>
-                  <Link href="/requestMoney" legacyBehavior>
-                    <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
-                      <img
-                        alt="..."
-                        className="align-middle border-none max-w-full h-auto rounded-lg"
-                        src="/img/tablet-request.png"
-                      />
-                    </div>
-                  </Link>
-                </div>
+                  <div className="w-full lg:w-4/12 px-4">
+                    <h5 className="text-xl font-semibold pb-4 text-center">
+                      Request Money
+                    </h5>
+                    <Link href="/requestMoney" legacyBehavior>
+                      <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
+                        <img
+                          alt="..."
+                          className="align-middle border-none max-w-full h-auto rounded-lg"
+                          src="/img/tablet-request.png"
+                        />
+                      </div>
+                    </Link>
+                  </div>
 
-                <div className="w-full lg:w-4/12 px-4">
-                  <h5 className="text-xl font-semibold pb-4 text-center">
-                    Execute a Transfer
-                  </h5>
-                  <Link href="/transfer" legacyBehavior>
-                    <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
-                      <img
-                        alt="..."
-                        className="align-middle border-none max-w-full h-auto rounded-lg"
-                        src="/img/transfer-phone-simple.png"
-                      />
-                    </div>
-                  </Link>
+                  <div className="w-full lg:w-4/12 px-4">
+                    <h5 className="text-xl font-semibold pb-4 text-center">
+                      Execute a Transfer
+                    </h5>
+                    <Link href="/transfer" legacyBehavior>
+                      <div className="hover:-mt-4 relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-lg rounded-lg ease-linear transition-all duration-150">
+                        <img
+                          alt="..."
+                          className="align-middle border-none max-w-full h-auto rounded-lg"
+                          src="/img/transfer-phone-simple.png"
+                        />
+                      </div>
+                    </Link>
+                  </div>
                 </div>
-
-                
               </div>
             </div>
           </div>
-        </div>
         </div>
 
         <div className="flex flex-wrap items-center pt-32">
@@ -109,49 +120,72 @@ function App() {
               <div className="my-4 w-full lg:w-6/12 px-4">
                 <a href="#" target="_blank">
                   <div className="flex flex-wrap justify-center">
-                  <div className="w-8/16 sm:w-4/12 px-4">
-                    <img src="/img/cards/aexpres1.png" alt="..." className="shadow rounded max-w-full h-auto align-middle border-none" />
-                  </div>
-                  </div>
-                </a>
-
-                <a href="#" target="_blank">
-                  <div className="flex flex-wrap justify-center rounded-full">
-                  <div className="w-8/16 mt-8 sm:w-4/12 px-4 ">
-                    <img src="/img/cards/diners1.png" alt="..." className="shadow rounded max-w-full h-auto align-middle border-none" />
-                  </div>
+                    <div className="w-8/16 sm:w-4/12 px-4">
+                      <img
+                        src="/img/cards/aexpres1.png"
+                        alt="..."
+                        className="shadow rounded max-w-full h-auto align-middle border-none"
+                      />
+                    </div>
                   </div>
                 </a>
 
                 <a href="#" target="_blank">
                   <div className="flex flex-wrap justify-center rounded-full">
-                  <div className="w-8/16 mt-8 sm:w-4/12 px-4 ">
-                    <img src="/img/cards/elo1.png" alt="..." className="shadow rounded max-w-full h-auto align-middle border-none" />
+                    <div className="w-8/16 mt-8 sm:w-4/12 px-4 ">
+                      <img
+                        src="/img/cards/diners1.png"
+                        alt="..."
+                        className="shadow rounded max-w-full h-auto align-middle border-none"
+                      />
+                    </div>
                   </div>
+                </a>
+
+                <a href="#" target="_blank">
+                  <div className="flex flex-wrap justify-center rounded-full">
+                    <div className="w-8/16 mt-8 sm:w-4/12 px-4 ">
+                      <img
+                        src="/img/cards/elo1.png"
+                        alt="..."
+                        className="shadow rounded max-w-full h-auto align-middle border-none"
+                      />
+                    </div>
                   </div>
-                </a>  
+                </a>
               </div>
               <div className="my-4 w-full lg:w-6/12 px-4 lg:mt-16">
-
                 <a href="#" target="_blank">
                   <div className="flex flex-wrap justify-center rounded-full">
-                  <div className="w-8/16 mt-8 sm:w-4/12 px-4 ">
-                    <img src="/img/cards/visa1.png" alt="..." className="shadow rounded max-w-full h-auto align-middle border-none" />
+                    <div className="w-8/16 mt-8 sm:w-4/12 px-4 ">
+                      <img
+                        src="/img/cards/visa1.png"
+                        alt="..."
+                        className="shadow rounded max-w-full h-auto align-middle border-none"
+                      />
+                    </div>
                   </div>
-                  </div>
-                </a>  
+                </a>
                 <a href="#" target="_blank">
                   <div className="flex flex-wrap justify-center rounded-full">
-                  <div className="w-8/16 mt-8 sm:w-4/12 px-4 ">
-                    <img src="/img/cards/hiper1.png" alt="..." className="shadow rounded max-w-full h-auto align-middle border-none" />
+                    <div className="w-8/16 mt-8 sm:w-4/12 px-4 ">
+                      <img
+                        src="/img/cards/hiper1.png"
+                        alt="..."
+                        className="shadow rounded max-w-full h-auto align-middle border-none"
+                      />
+                    </div>
                   </div>
-                  </div>
-                </a>  
+                </a>
                 <a href="#" target="_blank">
                   <div className="flex flex-wrap justify-center rounded-full">
-                  <div className="w-8/16 mt-8 sm:w-4/12 px-4 ">
-                    <img src="/img/cards/unionpay1.png" alt="..." className="shadow rounded max-w-full h-auto align-middle border-none" />
-                  </div>
+                    <div className="w-8/16 mt-8 sm:w-4/12 px-4 ">
+                      <img
+                        src="/img/cards/unionpay1.png"
+                        alt="..."
+                        className="shadow rounded max-w-full h-auto align-middle border-none"
+                      />
+                    </div>
                   </div>
                 </a>
               </div>
@@ -159,26 +193,28 @@ function App() {
           </div>
 
           <div className="w-full md:w-5/12 mt-20 ml-auto mr-auto px-4">
-              <div className="md:pr-12">
-                <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-blueGray-200">
-                  <i className="far fa-credit-card text-xl"></i>
-                </div>
-                <h3 className="text-3xl font-semibold">Apply for a Card</h3>
-                <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-                    Discover the smart choice for obtaining your card right here. We're your top destination for card solutions that meet your needs.
-                    Unlock a world of possibilities. 
-                </p>
-                <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-                    Ready to take advantage from the benefits of credit cards? Applying is simple, range of options to suit your needs.
-                </p>
-                <a
-                    href="/auth/cards"
-                    className="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-600 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg"
-                  >
-                  APPLY NOW
-                  </a>
+            <div className="md:pr-12">
+              <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-blueGray-200">
+                <i className="far fa-credit-card text-xl"></i>
               </div>
-            </div>          
+              <h3 className="text-3xl font-semibold">Apply for a Card</h3>
+              <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
+                Discover the smart choice for obtaining your card right here.
+                We're your top destination for card solutions that meet your
+                needs. Unlock a world of possibilities.
+              </p>
+              <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
+                Ready to take advantage from the benefits of credit cards?
+                Applying is simple, range of options to suit your needs.
+              </p>
+              <a
+                href="/auth/cards"
+                className="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-600 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg"
+              >
+                APPLY NOW
+              </a>
+            </div>
+          </div>
         </div>
 
         <section className="pb-20 bg-blueGray-200 -mt-30">
@@ -264,41 +300,42 @@ function App() {
               ></polygon>
             </svg>
           </div>
-        <div className="container mx-auto px-4">
-          <div className="items-center flex flex-wrap">
-            <div className="w-full md:w-4/12 ml-auto mr-auto px-4">
-              <img
-                alt="..."
-                className="max-w-full rounded-lg shadow-lg"
-                src="/img/loan-apply.jpg"
-              />
-            </div>
-            <div className="w-full md:w-5/12 ml-auto mr-auto px-4">
-              <div className="md:pr-12">
-                <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-blueGray-200">
-                  <i className="fas fa-file-invoice-dollar text-xl"></i>
-                </div>
-                <h3 className="text-3xl font-semibold">Request a Loan</h3>
-                <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
+          <div className="container mx-auto px-4">
+            <div className="items-center flex flex-wrap">
+              <div className="w-full md:w-4/12 ml-auto mr-auto px-4">
+                <img
+                  alt="..."
+                  className="max-w-full rounded-lg shadow-lg"
+                  src="/img/loan-apply.jpg"
+                />
+              </div>
+              <div className="w-full md:w-5/12 ml-auto mr-auto px-4">
+                <div className="md:pr-12">
+                  <div className="text-blueGray-500 p-3 text-center inline-flex items-center justify-center w-16 h-16 mb-6 shadow-lg rounded-full bg-blueGray-200">
+                    <i className="fas fa-file-invoice-dollar text-xl"></i>
+                  </div>
+                  <h3 className="text-3xl font-semibold">Request a Loan</h3>
+                  <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
                     Whether you're an individual looking to make a big purchase
                     or a business owner in need of funding, our loan options can
                     help you get the funds you need.
-                </p>
-                <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
-                    Apply now and take the first step toward achieving your financial goals.
-                </p>
-                  <a href="/loan-application"
-                    className="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-600 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg">
+                  </p>
+                  <p className="text-lg font-light leading-relaxed mt-4 mb-4 text-blueGray-600">
+                    Apply now and take the first step toward achieving your
+                    financial goals.
+                  </p>
+                  <a
+                    href="/loan-application"
+                    className="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-600 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg"
+                  >
                     Get Loan{""}
                   </a>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-
-      </section>
-      <div className="justify-center text-center flex flex-wrap mt-24">
+        </section>
+        <div className="justify-center text-center flex flex-wrap mt-24">
           <div className="w-full md:w-6/12 px-12 md:px-4">
             <h2 className="font-semibold text-4xl">Process Payments</h2>
           </div>
@@ -311,55 +348,65 @@ function App() {
               <div className="flex flex-wrap">
                 <div className="w-full md:w-4/12 px-4 text-center">
                   <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg border border-gray-300">
-                  <div className="px-4 py-5 flex-auto">
-                  <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-400">
-                    <i className="fas fa-building"></i>
+                    <div className="px-4 py-5 flex-auto">
+                      <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-red-400">
+                        <i className="fas fa-building"></i>
+                      </div>
+                      <h6 className="text-xl font-semibold">
+                        Collector Payments
+                      </h6>
+                      <p className="mt-2 mb-4 text-blueGray-500">
+                        Ministry, Municipality, Education, Organizations
+                      </p>
+                      <a
+                        href="/paymentTypes/CollectorPayments"
+                        className="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg"
+                      >
+                        Pay Now{""}
+                      </a>
+                    </div>
                   </div>
-                  <h6 className="text-xl font-semibold">Collector Payments</h6>
-                  <p className="mt-2 mb-4 text-blueGray-500">
-                      Ministry, Municipality, Education, Organizations
-                  </p>
-                  <a href="/paymentTypes/CollectorPayments"
-                    className="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg">
-                    Pay Now{""}
-                  </a>
-                  </div>
-                </div>
                 </div>
 
                 <div className="w-full md:w-4/12 px-4 text-center">
                   <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg border border-gray-300">
-                  <div className="px-4 py-5 flex-auto">
-                  <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-emerald-400">
-                    <i className="fas fa-globe"></i>
+                    <div className="px-4 py-5 flex-auto">
+                      <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-emerald-400">
+                        <i className="fas fa-globe"></i>
+                      </div>
+                      <h6 className="text-xl font-semibold">
+                        Pre-Paid Services
+                      </h6>
+                      <p className="mt-2 mb-4 text-blueGray-500">
+                        Pay monthly bills like: TV & Internet easily
+                      </p>
+                      <a
+                        href="/paymentTypes/PrePaidServices"
+                        className="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg"
+                      >
+                        Pay Now{""}
+                      </a>
+                    </div>
                   </div>
-                  <h6 className="text-xl font-semibold">Pre-Paid Services</h6>
-                  <p className="mt-2 mb-4 text-blueGray-500">
-                      Pay monthly bills like: TV & Internet easily
-                  </p>
-                  <a href="/paymentTypes/PrePaidServices"
-                    className="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg">
-                    Pay Now{""}
-                  </a>
-                  </div>
-                </div>
                 </div>
                 <div className="w-full md:w-4/12 px-4 text-center">
                   <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-8 shadow-lg rounded-lg border border-gray-300">
-                  <div className="px-4 py-5 flex-auto">
-                  <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-lightBlue-400">
-                    <i className="fas fa-phone"></i>
+                    <div className="px-4 py-5 flex-auto">
+                      <div className="text-white p-3 text-center inline-flex items-center justify-center w-12 h-12 mb-5 shadow-lg rounded-full bg-lightBlue-400">
+                        <i className="fas fa-phone"></i>
+                      </div>
+                      <h6 className="text-xl font-semibold">Mobile Top-Up</h6>
+                      <p className="mt-2 mb-4 text-blueGray-500">
+                        All mobile operators in one place: Ipko & Vala
+                      </p>
+                      <a
+                        href="/paymentTypes/MobilePayments"
+                        className="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg"
+                      >
+                        Pay Now{""}
+                      </a>
+                    </div>
                   </div>
-                  <h6 className="text-xl font-semibold">Mobile Top-Up</h6>
-                  <p className="mt-2 mb-4 text-blueGray-500">
-                  All mobile operators in one place: Ipko & Vala
-                  </p>
-                  <a href="/paymentTypes/MobilePayments"
-                    className="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-700 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg">
-                    Pay Now{""}
-                  </a>
-                  </div>
-                </div>
                 </div>
               </div>
             </div>

@@ -20,8 +20,6 @@ export default function Settings() {
       <div className="flex flex-wrap justify-center ">
         <div className="w-full  lg:w-8/12 px-4">
           {editProfile ? <CardSettings /> : <CardProfile />}
-
-          <button onClick={changeProfileEdit}>Edit</button>
         </div>
       </div>
     </>
