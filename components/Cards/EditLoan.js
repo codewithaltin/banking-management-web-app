@@ -4,16 +4,14 @@ import Swal from "sweetalert2";
 
 const EditLoan = ({ loanId, setResponseLoan }) => {
   const LOAN_API_BASE_URL = "http://localhost:8080/api/v1/auth/loan";
-
-  const [isOpen, setIsOpen] = useState(false);
+  let [isOpen, setIsOpen] = useState(false);
   const [loan, setLoan] = useState({
-    id: "",
     fullName: "",
     email: "",
-    phoneNumber: "",
+    phoneNumber: 0,
     address: "",
-    loanAmount: "",
-    monthlyIncome: "",
+    loanAmount: 0,
+    monthlyIncome: 0,
     purpouse: "",
   });
 
@@ -28,6 +26,7 @@ const EditLoan = ({ loanId, setResponseLoan }) => {
         });
         const _loan = await response.json();
         setLoan(_loan);
+        console.log(loan);
         openModal();
       } catch (error) {
         console.log(error);
@@ -53,11 +52,10 @@ const EditLoan = ({ loanId, setResponseLoan }) => {
 
   const reset = (e) => {
     e.preventDefault();
-    setIsOpen(false);
+    closeModal();
   };
 
   const updateLoan = async (e) => {
-    e.preventDefault();
     const response = await fetch(LOAN_API_BASE_URL + "/" + loanId, {
       method: "PUT",
       headers: {
@@ -66,12 +64,16 @@ const EditLoan = ({ loanId, setResponseLoan }) => {
       body: JSON.stringify(loan),
     });
     if (!response.ok) {
-      throw new Error("Something went wrong");
+      Swal.fire({
+        icon: "error",
+        title: "Failed to update!",
+      });
     }
     const _loan = await response.json();
     setResponseLoan(_loan);
-    reset(e);
+    console.log(loan);
     Swal.fire("Updated!", "Updated Succesfully!", "success");
+    reset(e);
   };
 
   return (
@@ -104,7 +106,7 @@ const EditLoan = ({ loanId, setResponseLoan }) => {
                       <input
                         type="text"
                         name="fullName"
-                        value={loan.fullName}
+                        defaultValue={loan.fullName}
                         onChange={(e) => handleChange(e)}
                         className="h-10 w-96 border mt-2 px-2 py-2"
                       ></input>
@@ -181,7 +183,6 @@ const EditLoan = ({ loanId, setResponseLoan }) => {
                         className="h-10 w-96 border mt-2 px-2 py-2"
                       ></input>
                     </div>
-
 
                     <div className="h-14 my-4 space-x-4 pt-4">
                       <button

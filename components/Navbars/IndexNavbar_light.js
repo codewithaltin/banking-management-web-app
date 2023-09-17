@@ -12,20 +12,22 @@ import PagesDropdown from "components/Dropdowns/PagesDropdown";
 import UserDropdown from "components/Dropdowns/UserDropdown";
 import ServiceDropdown from "components/Dropdowns/ServiceDropdown";
 import PaymentDropdown from "components/Dropdowns/PaymentDropdown";
-
-
-export default function Navbar(email) {
+import TokenCheck from "components/TokenCheck";
+export default function Navbar() {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
 
   return (
     <>
+      {/* <TokenCheck /> */}
       <nav className="top-0 fixed z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg">
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <Link
-              href={({ pathname: "/", query: { email: email } }, "/")}
-              className="text-costum-dark text-xl font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+              href=""
+              className="text-costum-dark text-xl font-heavy leading-relaxed
+              inline-block mr-4 py-2 whitespace-nowrap uppercase"
             >
+              {" "}
               Futur
             </Link>
             <button
@@ -53,23 +55,22 @@ export default function Navbar(email) {
                   Individual
                 </Link>{" "}
               </li> */}
-                 <Link
-                  className="text-costum-dark text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
-                  href="/admin/dashboard"
-                >
-                  dashboard
-              
-                </Link>
+              <Link
+                className="text-costum-dark text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                href="/admin/dashboard"
+              >
+                dashboard
+              </Link>
 
-               <li className="mr-4">
-                  <ServiceDropdown />
-                </li>
-                <li className="mr-4">
-                  <PaymentDropdown />
-                </li>
-                <li>
-                  <IndexDropdown />
-                </li>
+              <li className="mr-4">
+                <ServiceDropdown />
+              </li>
+              <li className="mr-4">
+                <PaymentDropdown />
+              </li>
+              <li>
+                <IndexDropdown />
+              </li>
               <li className="flex items-center"> </li>
               <li className="flex items-center"></li>
             </ul>
@@ -90,19 +91,17 @@ export default function Navbar(email) {
                 </Link>
               </li>
             </ul>
-            
+
             <ul>
               <li>
                 <Link
-                 href="/ContactForm"
-                 className="text-costum-dark  hover:text-blueGray-00 text-x font-heavy leading-relaxed inline-block ml-auto py-4 whitespace-nowrap uppercase"
+                  href="/ContactForm"
+                  className="text-costum-dark  hover:text-blueGray-00 text-x font-heavy leading-relaxed inline-block ml-auto py-4 whitespace-nowrap uppercase"
                 >
                   Contact Us
                 </Link>
               </li>
             </ul>
-
-
           </div>
         </div>
       </nav>

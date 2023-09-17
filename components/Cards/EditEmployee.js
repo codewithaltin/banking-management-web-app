@@ -1,11 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { React, useState, useEffect, Fragment } from "react";
 import Swal from "sweetalert2";
-import { yupResolver } from "@hookform/resolvers/yup";
-import { useForm } from "react-hook-form";
-
-import * as yup from "yup";
-import { dialog } from "@material-tailwind/react";
 
 // const phoneReg =
 //   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
@@ -79,6 +74,7 @@ const EditEmployee = ({ employeeId, setResponseEmployee }) => {
         });
         const _employee = await response.json();
         setEmployee(_employee);
+        console.log(employee);
         openModal();
       } catch (error) {
         console.log(error);
@@ -123,6 +119,7 @@ const EditEmployee = ({ employeeId, setResponseEmployee }) => {
     }
     const _employee = await response.json();
     setResponseEmployee(_employee);
+    console.log(employee);
     Swal.fire("Updated!", "Updated Succesfully!", "success");
     reset(e);
   };
