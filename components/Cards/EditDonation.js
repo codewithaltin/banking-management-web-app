@@ -2,7 +2,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { React, useState, useEffect, Fragment } from "react";
 
 const EditDonation = ({ donationId, setResponseDonation }) => {
-  const DONATION_API_BASE_URL = "http://localhost:8080/api/v1/donation";
+  const DONATION_API_BASE_URL = "http://localhost:8080/api/v1/auth/donation";
 
   const [isOpen, setIsOpen] = useState(false);
   const [donation, setDonation] = useState({

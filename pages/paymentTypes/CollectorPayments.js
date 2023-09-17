@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import TokenCheck from "components/TokenCheck";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
@@ -39,7 +40,6 @@ export default function CollectorPayments() {
   //   navigate("/");
   // };
   
-
   const saveCollectorPayments = async (e) => {
     //e.preventDefault();
     const response = await fetch(COLLECTORPAYMENTS_API_BASE_URL, {
@@ -50,12 +50,12 @@ export default function CollectorPayments() {
       body: JSON.stringify(collectorPayments),
     });
     if (!response.ok) {
-      console.error("Something went wrong");
+     console.log("Something went wrong");
     }
     const _collectorPayments = await response.json();
     setResponseCollectorPayments(_collectorPayments);
     window.location.reload();
-  }; 
+  };
 
   
   const CollectorOption = [
@@ -79,6 +79,7 @@ export default function CollectorPayments() {
   };
 
   return (
+    <TokenCheck>
     <>
       <div className="container mx-auto px-4 h-full">
         <div className="flex content-center items-center justify-center h-full">
@@ -199,6 +200,7 @@ export default function CollectorPayments() {
         </div>
       </div>
     </>
+    </TokenCheck>
   );
 }
 

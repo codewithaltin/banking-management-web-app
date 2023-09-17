@@ -1,20 +1,34 @@
 package com.bimi.bankingsystem.controller;
 
 import com.bimi.bankingsystem.model.SavingGoal;
+import com.bimi.bankingsystem.model.User;
+import com.bimi.bankingsystem.repository.SavingGoalRepository;
+import com.bimi.bankingsystem.repository.UserRepository;
 import com.bimi.bankingsystem.service.SavingGoalService;
+import com.bimi.bankingsystem.service.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
 @RequestMapping("/api/v1/auth/")
 public class SavingGoalController {
 
+    @Autowired
     private SavingGoalService savingGoalService;
+
+    @Autowired
+    private UserServiceImpl userService;
+
+    @Autowired
+    private SavingGoalRepository savingGoalRepository;
+
 
     public SavingGoalController(SavingGoalService savingGoalService) {
         this.savingGoalService = savingGoalService;
@@ -50,5 +64,29 @@ public class SavingGoalController {
         return ResponseEntity.ok(savingGoal);
     }
 
+//    @PutMapping("/{savingGoalId}/user/{userId}")
+//    SavingGoal assignTeacherToSubject(
+//            @PathVariable Long savingGoalId,
+//            @PathVariable Long userId
+//    ) {
+//        SavingGoal savingGoal = savingGoalRepository.findById(savingGoalId).get();
+//        User user = userRepository.findById(userId).get();
+//        savingGoal.assignUser(user);
+////        return savingGoalRepository.save(savingGoal);
+//    }
+
+    @PostMapping("/savingGoal/user/{userId}")
+    public SavingGoal saveSavingGoalByUserId(@PathVariable Long userId, @RequestBody SavingGoal savingGoal){
+        User user = userService.getUserById(userId).get();
+        user.addSavingGoal(savingGoal);
+        savingGoal.assignUser(user);
+        return savingGoalService.addSavingGoal(savingGoal);
+    }
+
+    @GetMapping("/savingGoal/user/{userId}")
+    public List<SavingGoal> getSavingGoalsByUserId(@PathVariable Long userId){
+         User user = userService.getUserById(userId).get();
+         return user.getSavingGoals();
+    }
 
 }

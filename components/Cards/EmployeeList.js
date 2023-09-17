@@ -181,7 +181,7 @@ export default function EmployeeList({ employee, color }) {
                   }
                 ></th>
                 <th
-                colSpan={2}
+                  colSpan={2}
                   className={
                     "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
                     (color === "light"
@@ -191,7 +191,6 @@ export default function EmployeeList({ employee, color }) {
                 >
                   Actions
                 </th>
-                
               </tr>
             </thead>
             {!loading && (
@@ -211,6 +210,7 @@ export default function EmployeeList({ employee, color }) {
         <EditEmployee
           employeeId={employeeId}
           setResponseEmployee={setResponseEmployee}
+          setIsOpen={true}
         />
       </div>
     </>

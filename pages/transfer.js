@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import TokenCheck from "components/TokenCheck";
 import * as yup from "yup";
 
 // components
@@ -131,6 +132,7 @@ export default function Transfer() {
       };
 
   return (
+    <TokenCheck>
     <>
       <div className="flex flex-wrap justify-center ">
         <div className="w-full  lg:w-8/12 px-4">
@@ -347,6 +349,7 @@ export default function Transfer() {
         </div>
       </div>
     </>
+    </TokenCheck>
   );
 }
 

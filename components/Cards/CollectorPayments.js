@@ -7,10 +7,10 @@ const CollectorPayments = ({ collectorPayment, ConfirmDialogAlert, deleteCollect
         {collectorPayment.collector}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
-        {collectorPayment.company}
+        {collectorPayment.serialNo}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
-        {collectorPayment.referenceNumber}
+        {collectorPayment.uniref}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
         {collectorPayment.amount}

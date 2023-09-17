@@ -120,8 +120,6 @@ public class TransferService {
         userRepository.save(receiver);
     }
 
-
-
     public Transfer updateTransfer(Integer id, Transfer transfer) {
         Transfer transferEntity =
                 transferRepository.findById(id).get();

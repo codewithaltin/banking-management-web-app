@@ -1,5 +1,6 @@
 import React from "react";
 import Navbar from "components/Navbars/IndexNavbar.js";
+import TokenCheck from "components/TokenCheck";
 import Footer from "components/Footers/Footer.js";
 
 import { useForm } from "react-hook-form";
@@ -280,6 +281,7 @@ function Beneficiary() {
     };
 
     return (
+        <TokenCheck>
         <>
             <Navbar transparent />
             <main>
@@ -618,5 +620,6 @@ function Beneficiary() {
             </main>
             <Footer />
         </>
+        </TokenCheck>
     );
 }

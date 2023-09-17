@@ -1,43 +1,39 @@
 import React from "react";
-
 import Navbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+
 export default function Profile() {
   const router = useRouter();
   const [profile, setProfile] = useState();
-  const email = router.query.email;
-  const USER_API_BASE_URL = `http://localhost:8080/api/v1/auth/user/${email}`;
 
   useEffect(() => {
     fetchProfile();
   }, []);
 
   async function fetchProfile() {
-    const res = await fetch(USER_API_BASE_URL, {
-      headers: {
-        "Content-Type": "application/json",
-        Authorization: "Bearer " + localStorage.getItem("token"),
-      },
-    });
+    const res = await fetch(
+      "http://localhost:8080/api/v1/auth/userbyemail/" +
+        localStorage.getItem("email"),
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
     if (res.ok) {
       const json = await res.json();
       setProfile(json);
     } else {
-      // router.push("/");
+      router.push("/");
     }
-  }
-  if (profile == undefined) return;
-
-  function logout() {
-    localStorage.removeItem("token");
-    router.push("/");
   }
 
   return (
     <>
-      <Navbar transparent email={email} />
+      <Navbar />
       <main className="profile-page">
         <section className="relative block h-500-px">
           <div
@@ -97,7 +93,7 @@ export default function Profile() {
                     </div>
                   </div>
                   <div className="w-full lg:w-4/12 px-4 lg:order-1">
-                    <div className="flex justify-center py-4 lg:pt-4 pt-8">
+                    {/* <div className="flex justify-center py-4 lg:pt-4 pt-8">
                       <div className="mr-4 p-3 text-center">
                         <span className="text-xl font-bold block uppercase tracking-wide text-blueGray-600">
                           22
@@ -122,7 +118,7 @@ export default function Profile() {
                           Comments
                         </span>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
                 <div className="text-center mt-12">
@@ -134,11 +130,7 @@ export default function Profile() {
                   <div className="flex flex-wrap justify-center">
                     <div className="w-full lg:w-9/12 px-4">
                       <p className="mb-4 text-lg leading-relaxed text-blueGray-700">
-                        An artist of considerable range, Jenna the name taken by
-                        Melbourne-raised, Brooklyn-based Nick Murphy writes,
-                        performs and records all of his own music, giving it a
-                        warm, intimate feel with a solid groove structure. An
-                        artist of considerable range.
+                        Account Numb
                       </p>
                     </div>
                   </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import TokenCheck from "components/TokenCheck";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
@@ -74,6 +75,7 @@ export default function InstitutionPayments() {
   };
 
   return (
+    <TokenCheck>
     <>
       <div className="container mx-auto px-4 h-full">
         <div className="flex content-center items-center justify-center h-full">
@@ -181,6 +183,7 @@ export default function InstitutionPayments() {
         </div>
       </div>
     </>
+    </TokenCheck>
   );
 }
 

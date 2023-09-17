@@ -1,16 +1,13 @@
 import React from "react";
 import Link from "next/link";
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useState } from "react";
 import { useRouter } from "next/router";
 // layout for page
-import { useSession, signIn, signOut } from "next-auth/react";
 import Swal from "sweetalert2";
 
 import Auth from "layouts/Auth.js";
-import { async } from "rxjs";
 
 const LOGIN_API_BASE_URL = "http://localhost:8080/api/v1/auth/authenticate";
 
@@ -42,7 +39,6 @@ export default function Login() {
       text: "Wrong credentials!",
     });
   };
-  const email = state.email;
   async function handleSubmit(event) {
     event.preventDefault();
     const res = await fetch(LOGIN_API_BASE_URL, {
@@ -56,7 +52,8 @@ export default function Login() {
       const json = await res.json();
       successfulAlert();
       localStorage.setItem("token", json.token);
-      await router.push({ pathname: "/", query: { email: email } }, "/");
+      localStorage.setItem("email", state.email);
+      router.push("/");
     } else {
       WrongCredentialsAlert();
     }
@@ -65,7 +62,6 @@ export default function Login() {
   return (
     <>
       <div className="container mx-auto px-4 h-full">
-        {" "}
         <div className="flex content-center items-center justify-center h-full">
           <div className="w-full lg:w-4/12 px-4">
             <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">

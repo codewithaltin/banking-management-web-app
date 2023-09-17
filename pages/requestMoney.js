@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import TokenCheck from "components/TokenCheck";
 import * as yup from "yup";
 
 
@@ -64,6 +65,7 @@ export default function requestMoney() {
   };
 
   return (
+    <TokenCheck>
     <div className="container mx-auto px-4 h-full">
       <div className="flex content-center items-center justify-center h-full">
         <div className="w-full lg:w-6/12 px-4">
@@ -152,6 +154,7 @@ export default function requestMoney() {
         </div>
       </div>
     </div>
+    </TokenCheck>
   );
 }
 requestMoney.layout = Auth;

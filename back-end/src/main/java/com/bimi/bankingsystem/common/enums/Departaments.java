@@ -7,11 +7,4 @@ public enum Departaments {
     Operations,
     Marketing;
 
-    public enum JobTitle {
-        BankingOperationsManager,
-        BankingCustomerServiceRepresentative,
-        BankingSalesRepresentative,
-        BankingMarketingManager,
-        BankingITManager,
-    }
 }

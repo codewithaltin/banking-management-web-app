@@ -1,21 +1,22 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
+import TokenCheck from "components/TokenCheck";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
 import Auth from "layouts/Auth.js";
+import { Route } from "react-router-dom";
 
 export default function SavingGoal() {
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({});
 
-    const {
-      register,
-      handleSubmit,
-      watch,
-      formState: { errors },
-    } = useForm({ });
-    
-  
-  const SAVINGGOAL_API_BASE_URL = "http://localhost:8080/api/v1/auth/savingGoal";
+  const SAVINGGOAL_API_BASE_URL =
+    "http://localhost:8080/api/v1/auth/savingGoal";
 
   const [isOpen, setIsOpen] = useState(false);
   const [savingGoal, setSavingGoals] = useState({
@@ -39,8 +40,7 @@ export default function SavingGoal() {
   //   navigate("/");
   // };ss
 
-
-  const saveSavingGoals = async(e) => {
+  const saveSavingGoals = async (e) => {
     //e.preventDefault();
     const response = await fetch(SAVINGGOAL_API_BASE_URL, {
       method: "POST",
@@ -57,7 +57,6 @@ export default function SavingGoal() {
     window.location.reload();
   };
 
-
   const SavingOptions = [
     "Vacation",
     "Car",
@@ -66,7 +65,7 @@ export default function SavingGoal() {
     "Holidays",
     "Other",
   ];
-  
+
   const onOptionChangeHandler = (event) => {
     console.log("User Selected Value - ", event.target.value);
   };
@@ -77,13 +76,13 @@ export default function SavingGoal() {
   };
 
   return (
+    <TokenCheck>
     <>
-    <div className="relative pt-16 pb-32 flex content-center items-center justify-center min-h-screen-75">
+      <div className="relative pt-16 pb-32 flex content-center items-center justify-center min-h-screen-75">
         <div
           className="absolute top-0 w-full h-full bg-center bg-cover"
           style={{
-            backgroundImage:
-              "url('/img/R.jpg')",
+            backgroundImage: "url('/img/R.jpg')",
           }}
         >
           <span
@@ -96,9 +95,8 @@ export default function SavingGoal() {
             <div className="w-full lg:w-6/12 px-4 ml-auto mr-auto text-center">
               <div className="pr-12">
                 <h1 className="text-white font-semibold text-5xl">
-                    Set your saving goal here!
+                  Set your saving goal here!
                 </h1>
-                
               </div>
             </div>
           </div>
@@ -109,7 +107,6 @@ export default function SavingGoal() {
         >
           <svg
             className="absolute bottom-0 overflow-hidden"
-            
             preserveAspectRatio="none"
             version="1.1"
             viewBox="0 0 2560 100"
@@ -123,7 +120,7 @@ export default function SavingGoal() {
           </svg>
         </div>
       </div>
-    <section className="pb-20 relative block bg-blueGray-800">
+      <section className="pb-20 relative block bg-blueGray-800">
         <div
           className="bottom-auto top-0 left-0 right-0 w-full absolute pointer-events-none overflow-hidden -mt-20 h-20"
           style={{ transform: "translateZ(0)" }}
@@ -142,8 +139,7 @@ export default function SavingGoal() {
               points="2560 0 2560 100 0 100"
             ></polygon>
           </svg>
-        </div> 
-      
+        </div>
       </section>
       <div className="container mx-auto px-4 h-full">
         <div className="flex content-center items-center justify-center h-full">
@@ -155,20 +151,18 @@ export default function SavingGoal() {
                     Set a goal
                   </h6>
                 </div>
-                  
+
                 <hr className="mt-6 border-b-1 border-blueGray-300" />
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                
                 <form onSubmit={handleSubmit(saveSavingGoals)}>
                   {" "}
                   <div className="relative w-full mb-3">
                     <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                       What are you saving for?
                     </label>
-                 
+
                     <select
-                   
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={handleChange}
                       name="savingReason"
@@ -180,39 +174,37 @@ export default function SavingGoal() {
                     </select>
                   </div>
                   <div className="flex flex-wrap">
-              <div className="w-full lg:w-6/12 px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Amount
-                  </label>
-                  <input
-                    {... register("amount")}
-                    type="text"
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    onChange={(e) => handleChange(e)}
-                  />
-                  
-                </div>
-              </div>
-              <div className="mb-4 ">
-                  <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
-                    Date 
-                  </label>
-                    <input
-                    {... register("date")}
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    id="dueDate"
-                    name="dueDate"
-                    type="date"
-                    {... register("date")}
-                    onChange={(e) => handleChange(e)}
-                  />
-                 
-              </div>
-            </div>
+                    <div className="w-full lg:w-6/12 px-4">
+                      <div className="relative w-full mb-3">
+                        <label
+                          className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                          htmlFor="grid-password"
+                        >
+                          Amount
+                        </label>
+                        <input
+                          {...register("amount")}
+                          type="text"
+                          className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                          onChange={(e) => handleChange(e)}
+                        />
+                      </div>
+                    </div>
+                    <div className="mb-4 ">
+                      <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
+                        Date
+                      </label>
+                      <input
+                        {...register("date")}
+                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        id="dueDate"
+                        name="dueDate"
+                        type="date"
+                        {...register("date")}
+                        onChange={(e) => handleChange(e)}
+                      />
+                    </div>
+                  </div>
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -221,36 +213,32 @@ export default function SavingGoal() {
                       Goal name
                     </label>
                     <input
-                      {... register("goalName")}
+                      {...register("goalName")}
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s VacayGoal"
                       onChange={(e) => handleChange(e)}
                     />
-                    
                   </div>
-                  
                   <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="text"
-                  >
-                    Description
-                  </label>
-                  <textarea
-                  {... register("goalDescription")}
-                    id="text"
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="Write a short description about your saving goal"
-                    rows="5"
-                    cols="40"
-                    onChange={(e) => handleChange(e)}
-                  />
-                </div>
-                  
+                    <label
+                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="text"
+                    >
+                      Description
+                    </label>
+                    <textarea
+                      {...register("goalDescription")}
+                      id="text"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="Write a short description about your saving goal"
+                      rows="5"
+                      cols="40"
+                      onChange={(e) => handleChange(e)}
+                    />
+                  </div>
                   <div className="text-center mt-6">
                     <input
-                    
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="submit"
                       value="Submit"
@@ -263,6 +251,7 @@ export default function SavingGoal() {
         </div>
       </div>
     </>
+    </TokenCheck>
   );
 }
 

@@ -4,9 +4,16 @@ import Link from "next/link";
 import IndexDropdown from "components/Dropdowns/IndexDropdown.js";
 import ServiceDropdown from "components/Dropdowns/ServiceDropdown";
 import PaymentDropdown from "components/Dropdowns/PaymentDropdown";
+import { useRouter } from "next/router";
 export default function Navbar() {
+    const router = useRouter();
   const [navbarOpen, setNavbarOpen] = React.useState(false);
 
+  function logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+    router.push("/auth/login");
+  }
   return (
     <>
       <nav className="top-0 fixed z-50 w-full flex flex-wrap items-center justify-between px-2 py-3 navbar-expand-lg">
@@ -36,35 +43,25 @@ export default function Navbar() {
             id="example-navbar-warning"
           >
             <ul className="flex flex-col lg:flex-row list-none align-center mr-auto">
-              <li className="mr-4">
-                <ServiceDropdown />
-              </li>
-              <li className="mr-4">
-                <PaymentDropdown />
-              </li>
-              <li>
-                <IndexDropdown />
-              </li>
               <li className="mr-4"></li>
               <Link
                 className="text-costum-dark text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
-                href="/ContactForm"
+                href="/admin/dashboard"
               >
-                Contact Us
+                Admin Dashboard
               </Link>
             </ul>
 
             <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
-              <li className="flex items-center">
-                {" "}
-                <Link
-                  href="/admin/settings"
-                  className="text-costum-dark  hover:text-blueGray-00 text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
-                >
-                  Account Overview
-                </Link>
-                <i className="fas fa-user-cog"></i>
-              </li>
+            <li>
+              <button
+                onClick={logout}
+                className="text-costum-dark text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+              >
+                Sign Out{" "}
+              </button>
+              <i className="fas fa-power-off"></i>
+            </li>
             </ul>
           </div>
         </div>

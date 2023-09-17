@@ -1,11 +1,8 @@
 import React from "react";
 import Link from "next/link";
-
-// components
-
 import IndexDropdown from "components/Dropdowns/IndexDropdown.js";
 
-export default function Navbar(email) {
+export default function Navbar() {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
   return (
     <>
@@ -13,10 +10,7 @@ export default function Navbar(email) {
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <Link
-              href={{
-                pathname: "/",
-                query: email,
-              }}
+              href="/"
               className="text-blueGray-100 text-xl font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
             >
               Futur
