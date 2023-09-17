@@ -1,9 +1,6 @@
 import React from "react";
 import Link from "next/link";
 
-import IndexDropdown from "components/Dropdowns/IndexDropdown.js";
-import ServiceDropdown from "components/Dropdowns/ServiceDropdown";
-import PaymentDropdown from "components/Dropdowns/PaymentDropdown";
 export default function Navbar() {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
 
@@ -15,7 +12,7 @@ export default function Navbar() {
             <Link
               href=""
               className="text-costum-dark text-xl font-heavy leading-relaxed
-              inline-block mr-4 py-2 whitespace-nowrap uppercase "
+              inline-block mr-4 py-2 whitespace-nowrap uppercase"
             >
               {" "}
               Futur
@@ -35,35 +32,21 @@ export default function Navbar() {
             }
             id="example-navbar-warning"
           >
-            <ul className="flex flex-col lg:flex-row list-none align-center mr-auto">
-              <li className="mr-4">
-                <ServiceDropdown />
-              </li>
-              <li className="mr-4">
-                <PaymentDropdown />
-              </li>
-              <li>
-                <IndexDropdown />
-              </li>
-              <li className="mr-4"></li>
-              <Link
-                className="text-costum-dark text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
-                href="/ContactForm"
-              >
-                Contact Us
-              </Link>
-            </ul>
-
             <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
               <li className="flex items-center">
                 {" "}
                 <Link
-                  href="/admin/settings"
+                  href="/auth/login"
                   className="text-costum-dark  hover:text-blueGray-00 text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
                 >
-                  Account Overview
+                  Sign In
                 </Link>
-                <i className="fas fa-user-cog"></i>
+                <Link
+                  href="/auth/register"
+                  className="text-costum-dark  hover:text-blueGray-00 text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
+                >
+                  Register
+                </Link>
               </li>
             </ul>
           </div>

@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import TokenCheck from "components/TokenCheck";
 import Navbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 
@@ -127,7 +128,8 @@ export default function Donate() {
       setDonations({ ...donation, [event.target.name]: value });
     };
 
-    return( 
+    return(
+    <TokenCheck>
     <>
       <Navbar transparent />
       <main>
@@ -381,5 +383,7 @@ export default function Donate() {
 
       </main>
     <Footer />
-  </>);
+  </>
+  </TokenCheck>
+  );
 }
