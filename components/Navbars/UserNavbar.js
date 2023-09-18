@@ -46,9 +46,6 @@ export default function Navbar() {
               <li>
                 <IndexDropdown />
               </li>
-              <li>
-                <UserDropdown />
-              </li>
               <li className="mr-4"></li>
               <Link
                 className="text-costum-dark text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"

@@ -64,17 +64,17 @@ public class SavingGoalController {
         return ResponseEntity.ok(savingGoal);
     }
 
-    @PostMapping("/savingGoal/user/{userId}")
-    public SavingGoal saveSavingGoalByUserId(@PathVariable Long userId, @RequestBody SavingGoal savingGoal){
-        User user = userService.getUserById(userId).get();
+    @PostMapping("/savingGoal/user/{email}")
+    public SavingGoal saveSavingGoalByUserId(@PathVariable String email, @RequestBody SavingGoal savingGoal){
+        User user = userService.getUserByEmail(email).get();
         user.addSavingGoal(savingGoal);
         savingGoal.assignUser(user);
         return savingGoalService.addSavingGoal(savingGoal);
     }
 
-    @GetMapping("/savingGoal/user/{userId}")
-    public List<SavingGoal> getSavingGoalsByUserId(@PathVariable Long userId){
-         User user = userService.getUserById(userId).get();
+    @GetMapping("/savingGoal/user/{email}")
+    public List<SavingGoal> getSavingGoalsByUserId(@PathVariable String email){
+         User user = userService.getUserByEmail(email).get();
          return user.getSavingGoals();
     }
 

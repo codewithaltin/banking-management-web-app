@@ -68,7 +68,6 @@ export default function Register() {
 
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState({
-    id: "",
     firstName: "",
     accountNumber: "",
     lastName: "",
@@ -76,9 +75,9 @@ export default function Register() {
     phoneNumber: "",
     password: "",
     city: "",
+    role: "USER",
   });
   const [responseUser, setResponseUser] = useState({
-    id: "",
     firstName: "",
     accountNumber: "",
     lastName: "",

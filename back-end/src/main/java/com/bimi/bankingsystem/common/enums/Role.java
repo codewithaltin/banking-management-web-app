@@ -1,6 +1,26 @@
 package com.bimi.bankingsystem.common.enums;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+
+import java.util.EnumSet;
+
+@AllArgsConstructor
+@Getter
 public enum Role {
-    USER,
-    ADMIN
+    USER("USER"),
+    ADMIN("ADMIN");
+
+    private String value;
+
+    public static Role fromString(String value){
+        if(value == null)
+            return null;
+
+        return EnumSet.allOf(Role.class)
+                .stream()
+                .filter(role -> role.getValue().equals(value))
+                .findFirst()
+                .orElseThrow(() -> new IllegalStateException("Something went wrong, unsupported type!"));
+    }
 }
