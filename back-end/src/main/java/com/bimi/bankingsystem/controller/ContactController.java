@@ -1,14 +1,15 @@
 package com.bimi.bankingsystem.controller;
 
-import com.bimi.bankingsystem.entity.ContactEntity;
+import com.bimi.bankingsystem.model.Transfer;
+import com.bimi.bankingsystem.model.User;
 import com.bimi.bankingsystem.service.ContactService;
+import com.bimi.bankingsystem.service.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.bimi.bankingsystem.model.Contact;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
@@ -17,8 +18,12 @@ public class ContactController {
 
     private final ContactService contactService;
 
-    public ContactController(ContactService contactService) {
+    @Autowired
+    private UserServiceImpl userService;
+
+    public ContactController(ContactService contactService, UserServiceImpl userService) {
         this.contactService = contactService;
+        this.userService = userService;
     }
 
     @PostMapping("/contact")
@@ -27,7 +32,7 @@ public class ContactController {
     }
 
     @GetMapping("/contact")
-    public List<ContactEntity> getAllContact() {
+    public List<Contact> getAllContact() {
         return contactService.getAllContact();
     }
 
@@ -48,6 +53,23 @@ public class ContactController {
         contact = contactService.updateContact(id,contact);
         return ResponseEntity.ok(contact);
     }
+
+    @PostMapping("/contact/user/{userId}")
+    public Contact saveContactFormByUserId(@PathVariable Long userId, @RequestBody Contact contact){
+        User user = userService.getUserById(userId).get();
+        user.addContact(contact);
+        contact.assignUserToContact(user);
+        return contactService.saveContact(contact);
+    }
+
+    @GetMapping("/contact/user/{userId}")
+    public List<Contact> getContactFormByUserId(@PathVariable Long userId){
+        User user = userService.getUserById(userId).get();
+        return user.getContacts();
+    }
+
+
+
 }
 
 

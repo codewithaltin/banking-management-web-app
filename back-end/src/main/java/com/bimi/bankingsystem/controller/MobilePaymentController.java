@@ -1,13 +1,13 @@
 package com.bimi.bankingsystem.controller;
 
 import com.bimi.bankingsystem.model.MobilePayment;
+import com.bimi.bankingsystem.model.User;
 import com.bimi.bankingsystem.service.MobilePaymentService;
+import com.bimi.bankingsystem.service.UserServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
@@ -16,8 +16,10 @@ public class MobilePaymentController {
 
     private MobilePaymentService mobilePaymentService;
 
-    public MobilePaymentController(MobilePaymentService mobilePaymentService) {
+    private UserServiceImpl userService;
+    public MobilePaymentController(MobilePaymentService mobilePaymentService, UserServiceImpl userService) {
         this.mobilePaymentService = mobilePaymentService;
+        this.userService = userService;
     }
 
     @PostMapping("/mobilePayment")
@@ -47,4 +49,21 @@ public class MobilePaymentController {
         mobilePayment = mobilePaymentService.updateMobilePayments(id,mobilePayment);
         return ResponseEntity.ok(mobilePayment);
     }
+
+
+    @PostMapping("/mobilePayment/user/{userId}")
+    public MobilePayment saveInstitutionPaymentByUserId(@PathVariable Long userId, @RequestBody MobilePayment mobilePayment){
+        User user = userService.getUserById(userId).get();
+        user.addMobilePayment(mobilePayment);
+        mobilePayment.assignUserToMobilePayment(user);
+        return mobilePaymentService.addMobilePayment(mobilePayment);
+    }
+
+    @GetMapping("/mobilePayment/user/{userId}")
+    public List<MobilePayment> getMobilePaymentByUserId(@PathVariable Long userId){
+        User user = userService.getUserById(userId).get();
+        return user.getMobilePayments();
+    }
+
+
 }

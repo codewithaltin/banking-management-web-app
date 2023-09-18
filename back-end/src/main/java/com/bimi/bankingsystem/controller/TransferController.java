@@ -1,14 +1,15 @@
 package com.bimi.bankingsystem.controller;
 
-import com.bimi.bankingsystem.entity.TransferEntity;
+import com.bimi.bankingsystem.model.SavingGoal;
 import com.bimi.bankingsystem.model.Transfer;
+import com.bimi.bankingsystem.model.User;
 import com.bimi.bankingsystem.service.TransferService;
+import com.bimi.bankingsystem.service.UserServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
@@ -17,7 +18,13 @@ public class TransferController {
 
     private TransferService transferService;
 
-    public TransferController(TransferService transferService){this.transferService = transferService;}
+    @Autowired
+    private UserServiceImpl userService;
+
+    public TransferController(TransferService transferService, UserServiceImpl userService){
+        this.transferService = transferService;
+        this.userService = userService;
+    }
 
     //@PostMapping("/transfer")
     public Transfer saveTransfer(@RequestBody Transfer transfer){
@@ -60,6 +67,20 @@ public class TransferController {
                                                    @RequestBody Transfer transfer) {
         transfer = transferService.updateTransfer(id,transfer);
         return ResponseEntity.ok(transfer);
+    }
+
+    @PostMapping("/transfer/user/{userId}")
+    public Transfer saveTransferByUserId(@PathVariable Long userId, @RequestBody Transfer transfer){
+        User user = userService.getUserById(userId).get();
+        user.addTransfer(transfer);
+        transfer.assignUserToTransfer(user);
+        return transferService.saveTransfer(transfer);
+    }
+
+    @GetMapping("/transfer/user/{userId}")
+    public List<Transfer> getSavingGoalsByUserId(@PathVariable Long userId){
+        User user = userService.getUserById(userId).get();
+        return user.getTransfers();
     }
 
 }

@@ -43,5 +43,16 @@ public class MobilePayment {
         this.phoneNumber = phoneNumber;
         this.amount = amount;
     }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id", referencedColumnName = "id")
+    private User user;
+    public User getUser() {
+        return user;
+    }
+    public void assignUserToMobilePayment(User user){
+        this.user = user;
+    }
+
 }
 

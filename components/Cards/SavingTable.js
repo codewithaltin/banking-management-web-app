@@ -75,7 +75,7 @@ export default function SavingTable({ savingGoal, color }) {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteEmployee(e, id);
+        deleteSavingGoal(e, id);
         Swal.fire("Deleted!", "Deleted Succesfully!", "success");
       }
     });

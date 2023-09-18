@@ -1,5 +1,6 @@
 package com.bimi.bankingsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 
 @Entity
@@ -40,6 +41,19 @@ public class Transfer {
         this.postCode = postCode;
         this.description = description;
     }
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id", referencedColumnName = "id")
+    private User user;
+    public User getUser() {
+        return user;
+    }
+    public void assignUserToTransfer(User user){
+        this.user = user;
+    }
+
+
     public Transfer() {
     }
     public long getId() {

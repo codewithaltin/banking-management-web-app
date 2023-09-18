@@ -1,40 +1,17 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Chart from "chart.js";
-import { useState, useEffect } from "react";
 
 export default function CardLineChart() {
-  const [profile, setProfile] = useState(false);
+  const chartRef = useRef(null);
+  const [profile, setProfile] = useState(null);
 
-  useEffect(() => {
-    const item = localStorage.getItem("key");
-  }, []);
   useEffect(() => {
     fetchProfile();
   }, []);
 
-  async function fetchProfile() {
-    const res = await fetch(
-      "http://localhost:8080/api/v1/auth/userbyemail/" +
-        localStorage.getItem("email"),
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      }
-    );
-    if (res.ok) {
-      const json = await res.json();
-      setProfile(json);
-    } else {
-      throw new Error("Something went wrong.");
-    }
-  }
-
-  React.useEffect(() => {
-    var config = {
-      type: "line",
-      data: {
+  useEffect(() => {
+    if (chartRef.current && profile) {
+      const chartData = {
         labels: ["June", "July", "August", "September"],
         datasets: [
           {
@@ -45,8 +22,9 @@ export default function CardLineChart() {
             fill: false,
           },
         ],
-      },
-      options: {
+      };
+
+      const chartOptions = {
         maintainAspectRatio: false,
         responsive: true,
         title: {
@@ -115,11 +93,41 @@ export default function CardLineChart() {
             },
           ],
         },
-      },
-    };
-    var ctx = document.getElementById("line-chart").getContext("2d");
-    window.myLine = new Chart(ctx, config);
-  }, []);
+      };
+
+      const ctx = chartRef.current.getContext("2d");
+      new Chart(ctx, {
+        type: "line",
+        data: chartData,
+        options: chartOptions,
+      });
+    }
+  }, [profile]);
+
+  async function fetchProfile() {
+    try {
+      const res = await fetch(
+        `http://localhost:8080/api/v1/auth/userbyemail/${localStorage.getItem(
+          "email"
+        )}`,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
+      );
+      if (res.ok) {
+        const json = await res.json();
+        setProfile(json);
+      } else {
+        throw new Error("Something went wrong.");
+      }
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+    }
+  }
+
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-blueGray-700">
@@ -129,14 +137,16 @@ export default function CardLineChart() {
               <h6 className="uppercase text-blueGray-100 mb-1 text-xs font-semibold">
                 Overview
               </h6>
-              <h2 className="text-white text-xl font-semibold">Sales value</h2>
+              <h2 className="text-white text-xl font-semibold">
+                Balance over months
+              </h2>
             </div>
           </div>
         </div>
         <div className="p-4 flex-auto">
           {/* Chart */}
           <div className="relative h-350-px">
-            <canvas id="line-chart"></canvas>
+            <canvas id="line-chart" ref={chartRef}></canvas>
           </div>
         </div>
       </div>
