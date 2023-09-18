@@ -75,6 +75,14 @@ export default function CardProfile() {
             <h3 className="text-xl font-semibold leading-normal text-blueGray-700 mb-2">
               {profile.firstName + " " + profile.lastName}
             </h3>
+            <div className="mb-2 text-blueGray-600">
+              <i className="fas fa-credit-card mr-2 text-lg text-blueGray-400"></i>
+              {profile.accountNumber}
+            </div>
+            <div className="mb-2 text-blueGray-600">
+              <i className="fas fa-dollar-sign mr-2 text-lg text-blueGray-400"></i>
+              {profile.balance}
+            </div>
             <div className="text-sm leading-normal mt-0 mb-2 text-blueGray-400 font-bold uppercase">
               <i className="fas fa-map-marker-alt mr-2 text-lg text-blueGray-400"></i>{" "}
               {profile.city}
@@ -87,10 +95,7 @@ export default function CardProfile() {
               <i className="fas fa-phone mr-2 text-lg text-blueGray-400"></i>
               {profile.phoneNumber}
             </div>
-            <div className="mb-2 text-blueGray-600">
-              <i className="fas fa-credit-card mr-2 text-lg text-blueGray-400"></i>
-              {profile.accountNumber}
-            </div>
+            
           </div>
         </div>
       </div>
