@@ -5,6 +5,8 @@ import lombok.*;
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table (name = "donation")
 public class Donation {
     @Setter(AccessLevel.PROTECTED)
@@ -19,27 +21,15 @@ public class Donation {
     @NonNull
     private String email;
     @NonNull
-    private Integer phoneNumber;
+    private String phoneNumber;
     @NonNull
     private String address;
     @NonNull
     private double donationAmount;
     @NonNull
-    private int cardInformation;
+    private String cardInformation;
     @NonNull
     private String comment;
 
-    public Donation() {
-    }
 
-    public Donation(@NonNull long id, @NonNull String fullName, @NonNull String email, @NonNull Integer phoneNumber, @NonNull String address, @NonNull double donationAmount, @NonNull int cardInformation, @NonNull String comment) {
-        this.id = id;
-        this.fullName = fullName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.donationAmount = donationAmount;
-        this.cardInformation = cardInformation;
-        this.comment = comment;
-    }
 }
