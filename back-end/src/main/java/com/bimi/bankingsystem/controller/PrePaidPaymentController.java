@@ -1,13 +1,13 @@
 package com.bimi.bankingsystem.controller;
 
 import com.bimi.bankingsystem.model.PrePaidPayment;
+import com.bimi.bankingsystem.model.User;
 import com.bimi.bankingsystem.service.PrePaidPaymentService;
+import com.bimi.bankingsystem.service.UserServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
@@ -16,8 +16,11 @@ public class PrePaidPaymentController {
 
     private PrePaidPaymentService prePaidPaymentService;
 
-    public PrePaidPaymentController(PrePaidPaymentService prePaidPaymentService) {
+    private UserServiceImpl userService;
+
+    public PrePaidPaymentController(PrePaidPaymentService prePaidPaymentService, UserServiceImpl userService) {
         this.prePaidPaymentService = prePaidPaymentService;
+        this.userService = userService;
     }
 
     @PostMapping("/prePaidPayment")
@@ -47,4 +50,20 @@ public class PrePaidPaymentController {
         prePaidPayment = prePaidPaymentService.updatePrePaidPayments(id,prePaidPayment);
         return ResponseEntity.ok(prePaidPayment);
     }
+
+    @PostMapping("/prePaidPayment/user/{userId}")
+    public PrePaidPayment savePrePaidPaymentByUserId(@PathVariable Long userId, @RequestBody PrePaidPayment prePaidPayment){
+        User user = userService.getUserById(userId).get();
+        user.addPrePaidPayment(prePaidPayment);
+        prePaidPayment.assignUserToPrePaidPayment(user);
+        return prePaidPaymentService.addPrePaidPayment(prePaidPayment);
+    }
+
+    @GetMapping("/prePaidPayment/user/{userId}")
+    public List<PrePaidPayment> getMobilePaymentByUserId(@PathVariable Long userId){
+        User user = userService.getUserById(userId).get();
+        return user.getPrePaidPayments();
+    }
+
+
 }

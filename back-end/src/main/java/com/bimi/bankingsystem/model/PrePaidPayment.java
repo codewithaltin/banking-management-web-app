@@ -40,5 +40,17 @@ public class PrePaidPayment {
         this.product = product;
         this.amount = amount;
     }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id", referencedColumnName = "id")
+    private User user;
+    public User getUser() {
+        return user;
+    }
+    public void assignUserToPrePaidPayment(User user){
+        this.user = user;
+    }
+
+
 }
 
