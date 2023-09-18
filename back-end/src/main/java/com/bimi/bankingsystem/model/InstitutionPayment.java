@@ -42,6 +42,17 @@ public class InstitutionPayment {
         this.referenceNumber = referenceNumber;
         this.amount = amount;
     }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id", referencedColumnName = "id")
+    private User user;
+    public User getUser() {
+        return user;
+    }
+    public void assignUserToInstitutionPayment(User user){
+        this.user = user;
+    }
+
 }
 
 

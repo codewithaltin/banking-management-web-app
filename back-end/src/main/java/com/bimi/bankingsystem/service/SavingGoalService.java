@@ -36,15 +36,6 @@ public class SavingGoalService {
         }
     }
 
-    public SavingGoal getSavingGoalByUserId(Long id) {
-        try {
-            return savingGoalRepository.findById(id).orElseThrow(() -> new NotFoundException("SavingGoal with id " + id + " not found"));
-        } catch (NotFoundException ex) {
-            System.out.println("SavingGoal could not be found, id: " + id);
-            throw ex;
-        }
-    }
-
     public boolean deleteSavingGoal(Long id) {
         SavingGoal savingGoal =  savingGoalRepository.findById(id).get();
         savingGoalRepository.delete(savingGoal);

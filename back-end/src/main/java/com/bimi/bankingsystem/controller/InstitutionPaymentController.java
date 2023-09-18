@@ -1,13 +1,13 @@
 package com.bimi.bankingsystem.controller;
 
 import com.bimi.bankingsystem.model.InstitutionPayment;
+import com.bimi.bankingsystem.model.User;
 import com.bimi.bankingsystem.service.InstitutionPaymentService;
+import com.bimi.bankingsystem.service.UserServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
@@ -16,8 +16,11 @@ public class InstitutionPaymentController {
 
     private InstitutionPaymentService institutionPaymentService;
 
-    public InstitutionPaymentController(InstitutionPaymentService institutionPaymentService) {
+    private UserServiceImpl userService;
+
+    public InstitutionPaymentController(InstitutionPaymentService institutionPaymentService, UserServiceImpl userService) {
         this.institutionPaymentService = institutionPaymentService;
+        this.userService = userService;
     }
     @PostMapping("/institutionPayments")
     public InstitutionPayment saveInstitutionPayments(@RequestBody InstitutionPayment institutionPayment){
@@ -46,4 +49,22 @@ public class InstitutionPaymentController {
         institutionPayments = institutionPaymentService.updateInstitutionPayments(id,institutionPayments);
         return ResponseEntity.ok(institutionPayments);
     }
+
+
+    @PostMapping("/institutionPayments/user/{userId}")
+    public InstitutionPayment saveInstitutionPaymentByUserId(@PathVariable Long userId, @RequestBody InstitutionPayment institutionPayment){
+        User user = userService.getUserById(userId).get();
+        user.addInstitutionPayment(institutionPayment);
+        institutionPayment.assignUserToInstitutionPayment(user);
+        return institutionPaymentService.addInstitutionPayment(institutionPayment);
+    }
+
+    @GetMapping("/institutionPayments/user/{userId}")
+    public List<InstitutionPayment> getInstitutionPaymentByUserId(@PathVariable Long userId){
+        User user = userService.getUserById(userId).get();
+        return user.getInstitutionPayments();
+    }
+
+
+
 }
