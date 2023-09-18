@@ -11,6 +11,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import javax.imageio.plugins.jpeg.JPEGImageReadParam;
 import java.util.Collection;
 import java.util.List;
 
@@ -50,14 +51,76 @@ public class User implements UserDetails {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
     private List<SavingGoal> savingGoals;
-
-
     public List<SavingGoal> getSavingGoals() {
         return savingGoals;
     }
     public void addSavingGoal(SavingGoal savingGoal){
         savingGoals.add(savingGoal);
     }
+
+
+
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Transfer> transfers;
+    public List<Transfer> getTransfers() {
+        return transfers;
+    }
+    public void addTransfer(Transfer transfer){
+        transfers.add(transfer);
+    }
+
+
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Contact> contacts;
+    public List<Contact> getContacts() {
+        return contacts;
+    }
+    public void addContact(Contact contact){
+        contacts.add(contact);
+    }
+
+
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<InstitutionPayment> institutionPayments;
+    public List<InstitutionPayment> getInstitutionPayments() {
+        return institutionPayments;
+    }
+    public void addInstitutionPayment(InstitutionPayment institutionPayment){
+        institutionPayments.add(institutionPayment);
+    }
+
+
+
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<MobilePayment> mobilePayments;
+    public List<MobilePayment> getMobilePayments() {
+        return mobilePayments;
+    }
+    public void addMobilePayment(MobilePayment mobilePayment){
+        mobilePayments.add(mobilePayment);
+    }
+
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<PrePaidPayment> prePaidPayments;
+    public List<PrePaidPayment> getPrePaidPayments() {
+        return prePaidPayments;
+    }
+    public void addPrePaidPayment(PrePaidPayment prePaidPayment){
+        prePaidPayments.add(prePaidPayment);
+    }
+
+
+
 
     @Enumerated(EnumType.STRING)
     private Role role;
