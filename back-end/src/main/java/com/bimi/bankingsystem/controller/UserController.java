@@ -55,25 +55,6 @@ public class UserController {
         return userService.updateUser(id,user);
     }
 
-//    //@PreAuthorize("hasAnyRole('ROLE_ADMIN','ROLE_PROFESSOR')")
-   /* @PostMapping("{userId}/savingGoal/{savingGoalId}")
-    public void addSavingGoalToUser(@PathVariable Long userId, @PathVariable Long savingGoalId) {
-        userService.addSavingGoalToUser(userId, savingGoalId);
-    }
-
-    @PostMapping("/{userId}/savingGoal")
-    public ResponseEntity<?> createSavingGoalForUser(
-            @PathVariable Long userId,
-            @RequestBody SavingGoal savingGoal
-    ) {
-        Optional<User> user = userService.getUserById(userId);
-        if (user == null) {
-            return ResponseEntity.notFound().build();
-        }
-
-        SavingGoal createdSavingGoal = userService.createSavingGoalUser(user, savingGoal);
-        return ResponseEntity.ok(createdSavingGoal);
-    }*/
 }
 
 
