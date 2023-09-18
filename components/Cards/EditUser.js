@@ -2,7 +2,7 @@ import { Dialog, Transition } from "@headlessui/react";
 import { React, useState, useEffect, Fragment } from "react";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { useForm } from "react-hook-form";
-
+import Swal from "sweetalert2";
 import * as yup from "yup";
 
 const phoneReg =
@@ -41,12 +41,14 @@ const EditUser = ({ userId, setResponseUser }) => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState({
-    id: "",
     firstName: "",
     lastName: "",
     email: "",
-    password: "",
+    accountNumber: "",
     phoneNumber: "",
+    password: "",
+    balance: 0,
+    city: "",
     role: "",
   });
 
@@ -101,8 +103,7 @@ const EditUser = ({ userId, setResponseUser }) => {
     if (!response.ok) {
       throw new Error("Something went wrong");
     }
-    const _user = await response.json();
-    setResponseUser(_user);
+    esponseUser(_user);
     reset(e);
     Swal.fire("Updated!", "Updated Succesfully!", "success");
   };

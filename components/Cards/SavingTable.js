@@ -8,52 +8,61 @@ import TableDropdown from "components/Dropdowns/TableDropdown.js";
 import CardTable from "./CardTable";
 import EditSavingGoal from "./EditSavingGoal";
 import Swal from "sweetalert2";
+import jwt_decode from "jwt-decode";
+import { useRouter } from "next/router";
 
 export default function SavingTable({ savingGoal, color }) {
   let SAVINGGOAL_API_BASE_URL;
-
-  useEffect(() => {
-    if (localStorage.getItem("role") == "USER") {
-      SAVINGGOAL_API_BASE_URL =
-        "http://localhost:8080/api/v1/auth/savingGoal/user/" +
-        localStorage.getItem("id");
-    } else
-      SAVINGGOAL_API_BASE_URL = "http://localhost:8080/api/v1/auth/savingGoal";
-  });
-
   const [savingGoals, setSavingGoals] = useState(null);
   const [loading, setLoading] = useState(true);
   const [savingGoalId, setSavingGoalId] = useState(null);
   const [responseSavingGoal, setResponseSavingGoal] = useState(null);
   const [isDialogOpen, setDialogOpen] = useState(false);
-
-  const handleOpenDialog = () => {
-    setDialogOpen(true);
-  };
-
-  const handleCloseDialog = () => {
-    setDialogOpen(false);
-  };
+  const [decoded, setDecoded] = useState(null);
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch(SAVINGGOAL_API_BASE_URL, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const savingGoals = await response.json();
-        setSavingGoals(savingGoals);
-      } catch (error) {
-        console.log(error);
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      chooseEndPoint();
+      fetchData();
+    }
+  }, [decoded]);
+
+  function chooseEndPoint() {
+    let res = decoded.authorities === "ROLE_USER";
+    if (res) {
+      SAVINGGOAL_API_BASE_URL =
+        "http://localhost:8080/api/v1/auth/savingGoal/user/" + decoded.sub;
+    } else {
+      SAVINGGOAL_API_BASE_URL = "http://localhost:8080/api/v1/auth/savingGoal";
+    }
+  }
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(SAVINGGOAL_API_BASE_URL, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const savingGoalsData = await response.json();
+        setSavingGoals(savingGoalsData);
+      } else {
+        throw new Error("Failed to fetch data");
       }
+    } catch (error) {
+      console.error(error);
+    } finally {
       setLoading(false);
-    };
-    fetchData();
-  }, [savingGoal, responseSavingGoal]);
+    }
+  };
 
   const ConfirmDialogAlert = (e, id) => {
     Swal.fire({

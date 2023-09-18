@@ -49,7 +49,7 @@ public class User implements UserDetails {
     private City city;
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
     private List<SavingGoal> savingGoals;
     public List<SavingGoal> getSavingGoals() {
         return savingGoals;
