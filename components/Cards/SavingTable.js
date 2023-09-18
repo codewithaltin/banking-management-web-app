@@ -11,6 +11,7 @@ import Swal from "sweetalert2";
 
 export default function SavingTable({ savingGoal, color }) {
   let SAVINGGOAL_API_BASE_URL;
+
   useEffect(() => {
     if (localStorage.getItem("role") == "USER") {
       SAVINGGOAL_API_BASE_URL =
@@ -19,6 +20,7 @@ export default function SavingTable({ savingGoal, color }) {
     } else
       SAVINGGOAL_API_BASE_URL = "http://localhost:8080/api/v1/auth/savingGoal";
   });
+
   const [savingGoals, setSavingGoals] = useState(null);
   const [loading, setLoading] = useState(true);
   const [savingGoalId, setSavingGoalId] = useState(null);

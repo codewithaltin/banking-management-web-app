@@ -4,6 +4,7 @@ import Link from "next/link";
 import IndexDropdown from "components/Dropdowns/IndexDropdown.js";
 import ServiceDropdown from "components/Dropdowns/ServiceDropdown";
 import PaymentDropdown from "components/Dropdowns/PaymentDropdown";
+import UserDropdown from "components/Dropdowns/UserDropdown";
 export default function Navbar() {
   const [navbarOpen, setNavbarOpen] = React.useState(false);
 
@@ -44,6 +45,9 @@ export default function Navbar() {
               </li>
               <li>
                 <IndexDropdown />
+              </li>
+              <li>
+                <UserDropdown />
               </li>
               <li className="mr-4"></li>
               <Link

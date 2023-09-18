@@ -36,6 +36,7 @@ public class SavingGoalService {
         }
     }
 
+
     public boolean deleteSavingGoal(Long id) {
         SavingGoal savingGoal =  savingGoalRepository.findById(id).get();
         savingGoalRepository.delete(savingGoal);
