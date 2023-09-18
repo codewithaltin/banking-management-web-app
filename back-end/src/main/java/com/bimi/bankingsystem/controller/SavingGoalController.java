@@ -2,18 +2,13 @@ package com.bimi.bankingsystem.controller;
 
 import com.bimi.bankingsystem.model.SavingGoal;
 import com.bimi.bankingsystem.model.User;
-import com.bimi.bankingsystem.repository.SavingGoalRepository;
-import com.bimi.bankingsystem.repository.UserRepository;
 import com.bimi.bankingsystem.service.SavingGoalService;
 import com.bimi.bankingsystem.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Optional;
 
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
@@ -25,9 +20,6 @@ public class SavingGoalController {
 
     @Autowired
     private UserServiceImpl userService;
-
-    @Autowired
-    private SavingGoalRepository savingGoalRepository;
 
 
     public SavingGoalController(SavingGoalService savingGoalService) {
@@ -63,17 +55,6 @@ public class SavingGoalController {
         savingGoal = savingGoalService.updateSavingGoals(id,savingGoal);
         return ResponseEntity.ok(savingGoal);
     }
-
-//    @PutMapping("/{savingGoalId}/user/{userId}")
-//    SavingGoal assignTeacherToSubject(
-//            @PathVariable Long savingGoalId,
-//            @PathVariable Long userId
-//    ) {
-//        SavingGoal savingGoal = savingGoalRepository.findById(savingGoalId).get();
-//        User user = userRepository.findById(userId).get();
-//        savingGoal.assignUser(user);
-////        return savingGoalRepository.save(savingGoal);
-//    }
 
     @PostMapping("/savingGoal/user/{userId}")
     public SavingGoal saveSavingGoalByUserId(@PathVariable Long userId, @RequestBody SavingGoal savingGoal){

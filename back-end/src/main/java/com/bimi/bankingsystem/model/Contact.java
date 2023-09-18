@@ -1,10 +1,17 @@
 package com.bimi.bankingsystem.model;
 
+import com.bimi.bankingsystem.model.User;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Table;
 
 import jakarta.persistence.*;
-
+@Entity
+@Table(name = "contact")
 public class Contact {
-
+    @Id
+    @SequenceGenerator(name =   "contact_sequence", sequenceName = "contact_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "contact_sequence")
+    @Column(updatable = false)
     private long id;
     private String fullName;
     private String email;
@@ -17,6 +24,15 @@ public class Contact {
         this.email = email;
         this.text = text;
     }
+
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id",referencedColumnName = "id")
+    private User user;
+    public User getUser(){return user;}
+    public void assignUserToContact(User user){this.user = user;}
+
+
 
     public long getId() {
         return id;
@@ -57,3 +73,5 @@ public class Contact {
 
 
 }
+
+
