@@ -55,6 +55,7 @@ public class User implements UserDetails {
     public List<SavingGoal> getSavingGoals() {
         return savingGoals;
     }
+    
     public void addSavingGoal(SavingGoal savingGoal){
         savingGoals.add(savingGoal);
     }

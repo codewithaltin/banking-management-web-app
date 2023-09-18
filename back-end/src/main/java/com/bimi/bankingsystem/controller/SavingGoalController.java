@@ -64,17 +64,6 @@ public class SavingGoalController {
         return ResponseEntity.ok(savingGoal);
     }
 
-//    @PutMapping("/{savingGoalId}/user/{userId}")
-//    SavingGoal assignTeacherToSubject(
-//            @PathVariable Long savingGoalId,
-//            @PathVariable Long userId
-//    ) {
-//        SavingGoal savingGoal = savingGoalRepository.findById(savingGoalId).get();
-//        User user = userRepository.findById(userId).get();
-//        savingGoal.assignUser(user);
-////        return savingGoalRepository.save(savingGoal);
-//    }
-
     @PostMapping("/savingGoal/user/{userId}")
     public SavingGoal saveSavingGoalByUserId(@PathVariable Long userId, @RequestBody SavingGoal savingGoal){
         User user = userService.getUserById(userId).get();
