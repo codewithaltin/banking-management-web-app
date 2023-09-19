@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import TokenCheck from "components/TokenCheck";
 import * as yup from "yup";
+import jwt_decode from "jwt-decode";
+import { useEffect } from "react";
 
 // components
 
@@ -50,6 +52,8 @@ const schema = yup
   })
   .required();
 
+  
+
 
 export default function Transfer() {
 
@@ -59,8 +63,13 @@ export default function Transfer() {
         watch,
         formState: { errors },
       } = useForm({ resolver: yupResolver(schema) });
+      const [decoded, setDecoded] = useState(null);
 
-      const TRANSFER_API_BASE_URL = "http://localhost:8080/api/v1/auth/transfer";
+      useEffect(() => {
+        const token = localStorage.getItem("token");
+        const decodedToken = jwt_decode(token);
+        setDecoded(decodedToken);
+      }, []);
 
     
     const [transfer, setTransfers] = useState({
@@ -86,9 +95,11 @@ export default function Transfer() {
     text: "",
   });
 
+  
+
   const executeTransferMethod = async () => {
     try {
-      const response = await fetch(TRANSFER_API_BASE_URL, {
+      const response = await fetch("http://localhost:8080/api/v1/auth/transfer/user/" + decoded.sub, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

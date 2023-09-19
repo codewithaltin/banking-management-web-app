@@ -3,38 +3,63 @@ import PropTypes from "prop-types";
 
 // components
 import Transfer from "./Transfer";
+import jwt_decode from "jwt-decode";
 import Swal from "sweetalert2";
 
 export default function TransferTable({ transfer,color }) {
-  const TRANSFER_API_BASE_URL = "http://localhost:8080/api/v1/auth/transfer";
+  let TRANSFER_API_BASE_URL;
   const [transfers, setTransfers] = useState(null);
   const [loading, setLoading] = useState(true);
   const [transferId, setTransferId] = useState(null);
   const [responseTransfer, setResponseTransfer] = useState(null);
+  const [decoded, setDecoded] = useState(null);
   const [search, setSearch] = useState("");
+
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch(TRANSFER_API_BASE_URL, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const transfers = await response.json();
-        setTransfers(transfers);
-      } catch (error) {
-        console.log(error);
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      chooseEndPoint();
+      fetchData();
+    }
+  }, [decoded]);
+
+  function chooseEndPoint() {
+    let res = decoded.authorities === "ROLE_USER";
+    if (res) {
+      TRANSFER_API_BASE_URL =
+        "http://localhost:8080/api/v1/auth/transfer/user/" + decoded.sub;
+    } else {
+      TRANSFER_API_BASE_URL = "http://localhost:8080/api/v1/auth/transfer";
+    }
+  }
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(TRANSFER_API_BASE_URL, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const transferData = await response.json();
+        setTransfers(transferData);
+      } else {
+        throw new Error("Failed to fetch data");
       }
+    } catch (error) {
+      console.error(error);
+    } finally {
       setLoading(false);
-    };
-    fetchData();
-  }, [transfer, responseTransfer]);
-  let dialogValue = false;
+    }
+  };
 
   const ConfirmDialogAlert = (e, id) => {
-    if (dialogValue) return true;
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -49,7 +74,6 @@ export default function TransferTable({ transfer,color }) {
         Swal.fire("Deleted!", "Deleted Succesfully!", "success");
       }
     });
-    return dialogValue;
   };
 
 

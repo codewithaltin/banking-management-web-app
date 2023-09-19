@@ -69,17 +69,18 @@ public class TransferController {
         return ResponseEntity.ok(transfer);
     }
 
-    @PostMapping("/transfer/user/{userId}")
-    public Transfer saveTransferByUserId(@PathVariable Long userId, @RequestBody Transfer transfer){
-        User user = userService.getUserById(userId).get();
+    @PostMapping("/transfer/user/{email}")
+    public Transfer saveTransferByUserId(@PathVariable String email, @RequestBody Transfer transfer){
+        User user = userService.getUserByEmail(email).get();
         user.addTransfer(transfer);
+        transferService.transferAmount(transfer);
         transfer.assignUserToTransfer(user);
         return transferService.saveTransfer(transfer);
     }
 
-    @GetMapping("/transfer/user/{userId}")
-    public List<Transfer> getSavingGoalsByUserId(@PathVariable Long userId){
-        User user = userService.getUserById(userId).get();
+    @GetMapping("/transfer/user/{email}")
+    public List<Transfer> getTransferByUserId(@PathVariable String email){
+        User user = userService.getUserByEmail(email).get();
         return user.getTransfers();
     }
 
