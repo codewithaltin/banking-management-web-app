@@ -1,6 +1,6 @@
 import React from "react";
 import ContactTable from "components/Cards/ContactTable.js";
-import User from "layouts/User";
+import User from "layouts/Admin";
 
 const contactlist = () => {
   return (

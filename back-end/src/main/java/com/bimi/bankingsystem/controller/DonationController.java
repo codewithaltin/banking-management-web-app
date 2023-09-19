@@ -1,12 +1,14 @@
 package com.bimi.bankingsystem.controller;
 
 import com.bimi.bankingsystem.model.Donation;
+import com.bimi.bankingsystem.model.MobilePayment;
+import com.bimi.bankingsystem.model.SavingGoal;
 import com.bimi.bankingsystem.service.DonationService;
+import com.bimi.bankingsystem.model.User;
+import com.bimi.bankingsystem.service.UserServiceImpl;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 
 @CrossOrigin(value = "http://localhost:3000")
@@ -15,8 +17,11 @@ import java.util.Map;
 public class DonationController {
     private DonationService donationService;
 
-    public DonationController(DonationService donationService) {
+    private UserServiceImpl userService;
+
+    public DonationController(DonationService donationService, UserServiceImpl userService) {
         this.donationService = donationService;
+        this.userService = userService;
     }
 
     @PostMapping("/donation")
@@ -39,6 +44,14 @@ public class DonationController {
     @PutMapping("/donation/{id}")
     public Donation updateDonation(@PathVariable ("id") Long id,@RequestBody Donation donation) {
         return donationService.updateDonation(id, donation);
+    }
+
+    @PostMapping("/donation/user/{email}")
+    public Donation saveDonateByUserId(@PathVariable String email, @RequestBody Donation donation){
+        User user = userService.getUserByEmail(email).get();
+        user.createDonation(donation);
+        donation.assignUserToDonation(user);
+        return donationService.createDonation(donation);
     }
 
     @DeleteMapping("donation/{id}")

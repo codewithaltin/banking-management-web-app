@@ -55,18 +55,7 @@ export default function Navbar() {
               </Link>
             </ul>
 
-            <ul className="flex flex-col lg:flex-row list-none lg:ml-auto">
-              <li className="flex items-center">
-                {" "}
-                <Link
-                  href="/admin/settings"
-                  className="text-costum-dark  hover:text-blueGray-00 text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"
-                >
-                  Account Overview
-                </Link>
-                <i className="fas fa-user-cog"></i>
-              </li>
-            </ul>
+            <UserDropdown />
           </div>
         </div>
       </nav>

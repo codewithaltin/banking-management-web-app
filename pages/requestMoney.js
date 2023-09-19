@@ -4,7 +4,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import TokenCheck from "components/TokenCheck";
 import * as yup from "yup";
 import Swal from "sweetalert2";
-import User from "layouts/User.js";
+import User from "layouts/Admin.js";
 import jwt_decode from "jwt-decode";
 import { useEffect } from "react";
 import { useRouter } from "next/router";

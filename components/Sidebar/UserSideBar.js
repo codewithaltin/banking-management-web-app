@@ -27,43 +27,51 @@ export default function Sidebar() {
           > 
             MAIN PAGE
           </Link> */}
-                <Link
-                  href="/"
-                  className={
-                    "text-xs uppercase py-3 font-bold block "
-                  }
-                >
-                  <i
-                    className={
-                      "fas fa-home mr-2 text-sm " +
-                      (router.pathname.indexOf("/") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
-                    }
-                  ></i>{" "}
-                  MAIN PAGE
-                </Link>
+          <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
+            Homepage
+          </h6>
+          <Link href="/" className={"text-xs uppercase py-3 font-bold block "}>
+            <i
+              className={
+                "fas fa-home mr-2 text-sm " +
+                (router.pathname.indexOf("/") !== -1
+                  ? "opacity-75"
+                  : "text-blueGray-300")
+              }
+            ></i>{" "}
+            MAIN PAGE
+          </Link>
+          <hr className="my-2 md:min-w-full" />
 
-  
-                <Link
-                  href="/admin/dashboard"
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (router.pathname.indexOf("/admin/dashboard") !== -1
-                      ? "text-lightBlue-500 hover:text-lightBlue-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                >
-                  <i
-                    className={
-                      "fas fa-tv mr-2 text-sm " +
-                      (router.pathname.indexOf("/admin/dashboard") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
-                    }
-                  ></i>{" "}
-                  DASHBOARD
-                </Link>
+          <Link
+            href="/auth/dashboard"
+            className={
+              "text-xs uppercase py-3 font-bold block " +
+              (router.pathname.indexOf("/admin/dashboard") !== -1
+                ? "text-lightBlue-500 hover:text-lightBlue-600"
+                : "text-blueGray-700 hover:text-blueGray-500")
+            }
+          >
+            {" "}
+            <i
+              className={
+                "fas fa-comment-dollar	 mr-2 text-sm " +
+                (router.pathname.indexOf("/admin/dashboard") !== -1
+                  ? "opacity-75"
+                  : "text-blueGray-300")
+              }
+            ></i>{" "}
+            cash flow
+          </Link>
+          <hr className="my-2 md:min-w-full" />
+
+          <Link
+            href="/auth/profile"
+            className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+          >
+            <i className="fas fa-user-circle text-blueGray-400 mr-2 text-sm"></i>{" "}
+            Profile Page
+          </Link>
 
           {/* User */}
           <ul className="md:hidden items-center flex flex-wrap list-none">
@@ -114,18 +122,15 @@ export default function Sidebar() {
               </div>
             </form>
 
-
             <ul className="md:flex-col md:min-w-full flex flex-col list-none">
-              
-
               {/* Divider */}
-            <hr className="my-2 md:min-w-full" />
-            {/* Heading */}
-            <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              Data Summary
-            </h6>
-            {/* Navigation */}
-              
+              <hr className="my-2 md:min-w-full" />
+              {/* Heading */}
+              <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
+                Data Summary
+              </h6>
+              {/* Navigation */}
+
               <li className="items-center">
                 <Link
                   href="/admin/transferlist"
@@ -179,13 +184,15 @@ export default function Sidebar() {
                   href="/auth/Institutionpaymentslist"
                   className={
                     "text-xs uppercase py-3 font-bold block " +
-                    (router.pathname.indexOf("/auth/Institutionpaymentslist") !== -1
+                    (router.pathname.indexOf(
+                      "/auth/Institutionpaymentslist"
+                    ) !== -1
                       ? "text-lightBlue-500 hover:text-lightBlue-600"
                       : "text-blueGray-700 hover:text-blueGray-500")
                   }
                 >
                   <i className="fas fa-credit-card text-blueGray-400 mr-2 text-sm"></i>{" "}
-                 Payments List
+                  Payments List
                 </Link>
               </li>
               <hr className="my-2 md:min-w-full" />
@@ -237,51 +244,14 @@ export default function Sidebar() {
               </li>
 
               <hr className="my-2 md:min-w-full" />
-          
-              <li className="items-center">
-                <Link
-                  href="/admin/settings"
-                  className={
-                    "text-xs uppercase py-3 font-bold block " +
-                    (router.pathname.indexOf("/admin/settings") !== -1
-                      ? "text-lightBlue-500 hover:text-lightBlue-600"
-                      : "text-blueGray-700 hover:text-blueGray-500")
-                  }
-                >
-                  <i
-                    className={
-                      "fas fa-tools mr-2 text-sm " +
-                      (router.pathname.indexOf("/admin/settings") !== -1
-                        ? "opacity-75"
-                        : "text-blueGray-300")
-                    }
-                  ></i>{" "}
-                  Settings
-                </Link>
-              </li>
             </ul>
-
-            
 
             {/* Divider */}
-            <hr className="my-4 md:min-w-full" />
             {/* Heading */}
-            <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
-              USER SECTION
-            </h6>
+
             {/* Navigation */}
 
-            <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
-              <li className="items-center">
-                <Link
-                  href="/profile"
-                  className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                >
-                  <i className="fas fa-user-circle text-blueGray-400 mr-2 text-sm"></i>{" "}
-                  Profile Page
-                </Link>
-              </li>
-            </ul>
+            <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4"></ul>
           </div>
         </div>
       </nav>

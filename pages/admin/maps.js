@@ -6,7 +6,7 @@ import MapExample from "components/Maps/MapExample.js";
 
 // layout for page
 
-import Admin from "layouts/Admin.js";
+import Admin from "layouts/User.js";
 
 export default function Maps() {
   return (

@@ -3,12 +3,14 @@ import Link from "next/link";
 import TokenCheck from "components/TokenCheck";
 import Navbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
+import Auth from "layouts/Auth.js";
+import jwt_decode from "jwt-decode";
+import { useEffect } from "react";
 
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import Auth from "layouts/Auth.js";
 const phoneReg = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
 
@@ -57,8 +59,16 @@ export default function Donate() {
       watch,
       formState: { errors },
     } = useForm({ resolver: yupResolver(schema) });
+    const [decoded, setDecoded] = useState(null);
+    const [user, setUser] = useState(false);
 
-    const DONATION_API_BASE_URL = "http://localhost:8080/api/v1/auth/donation";
+    useEffect(() => {
+      const token = localStorage.getItem("token");
+      const decodedToken = jwt_decode(token);
+      setDecoded(decodedToken);
+    }, []);
+
+    //const DONATION_API_BASE_URL = "http://localhost:8080/api/v1/auth/donation";
 
     const [isOpen, setIsOpen] = useState(false);
     const [donation, setDonations] = useState({
@@ -101,7 +111,8 @@ export default function Donate() {
 
     const saveDonation = async (e) => {
       try {
-        const response = await fetch(DONATION_API_BASE_URL, {
+        const response = await fetch(
+          "http://localhost:8080/api/v1/auth/donation/user/"+ decoded.sub, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",

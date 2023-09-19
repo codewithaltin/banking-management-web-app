@@ -3,13 +3,10 @@ import PropTypes from "prop-types";
 
 // components
 import Savings from "./Savings";
-import AddGoal from "./AddGoal";
-import TableDropdown from "components/Dropdowns/TableDropdown.js";
-import CardTable from "./CardTable";
+
 import EditSavingGoal from "./EditSavingGoal";
 import Swal from "sweetalert2";
 import jwt_decode from "jwt-decode";
-import { useRouter } from "next/router";
 
 export default function SavingTable({ savingGoal, color }) {
   let SAVINGGOAL_API_BASE_URL;
@@ -113,7 +110,7 @@ export default function SavingTable({ savingGoal, color }) {
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
               <div className="flex items-center">
                 <form>
-                <div class="relative">
+                  <div class="relative">
                     <div class="absolute inset-b-0 left-0 flex items-center pl-3 pointer-events-none">
                       <i className="fa fa-search text-blue-50 mt-3"></i>
                     </div>
@@ -211,20 +208,20 @@ export default function SavingTable({ savingGoal, color }) {
             {!loading && (
               <tbody>
                 {savingGoals
-                ?.filter((item) => {
-                  return search.toLowerCase() === ""
-                    ? item
-                    : item.goalName.toLowerCase().includes(search);
-                })
-                .map((savingGoal) => (
-                  <Savings
-                    savingGoal={savingGoal}
-                    key={savingGoal.id}
-                    ConfirmDialogAlert={ConfirmDialogAlert}
-                    deleteSavingGoal={deleteSavingGoal}
-                    editSavingGoal={editSavingGoal}
-                  />
-                ))}
+                  ?.filter((item) => {
+                    return search.toLowerCase() === ""
+                      ? item
+                      : item.goalName.toLowerCase().includes(search);
+                  })
+                  .map((savingGoal) => (
+                    <Savings
+                      savingGoal={savingGoal}
+                      key={savingGoal.id}
+                      ConfirmDialogAlert={ConfirmDialogAlert}
+                      deleteSavingGoal={deleteSavingGoal}
+                      editSavingGoal={editSavingGoal}
+                    />
+                  ))}
               </tbody>
             )}
           </table>

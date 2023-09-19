@@ -1,6 +1,6 @@
 import React from "react";
 import RequestMoney from "components/Cards/RequestMoney";
-import User from "layouts/User";
+import User from "layouts/Admin";
 import RequestMoneyTable from "components/Cards/RequestMoneyTable";
 
 const requestedMoney = () => {

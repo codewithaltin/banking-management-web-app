@@ -1,9 +1,9 @@
 import React from "react";
 import EmployeeList from "components/Cards/EmployeeList.js";
-import User from "layouts/User.js";
+import User from "layouts/Admin.js";
 
 const employeeList = () => {
-  return <EmployeeList />
+  return <EmployeeList />;
 };
 employeeList.layout = User;
 

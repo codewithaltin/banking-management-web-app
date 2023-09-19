@@ -6,8 +6,8 @@ import CardProfile from "components/Cards/CardProfile.js";
 
 // layout for page
 
-import Admin from "layouts/Admin.js";
 import User from "layouts/User.js";
+import Admin from "layouts/Admin.js";
 
 export default function Settings() {
   const [editProfile, setEditProfile] = useState(false);

@@ -1,11 +1,11 @@
-import React from 'react'
+import React from "react";
 import LoanTable from "components/Cards/LoanTable.js";
 import User from "layouts/User.js";
 
 const loanlist = () => {
   return (
     <>
-        <LoanTable />
+      <LoanTable />
     </>
   );
 };

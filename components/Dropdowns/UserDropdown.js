@@ -1,6 +1,8 @@
 import React from "react";
 import { createPopper } from "@popperjs/core";
-
+import Link from "next/link";
+import { useRouter } from "next/router";
+import Swal from "sweetalert2";
 const UserDropdown = () => {
   // dropdown props
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
@@ -8,17 +10,34 @@ const UserDropdown = () => {
   const popoverDropdownRef = React.createRef();
   const openDropdownPopover = () => {
     createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
-      placement: "bottom-start",
+      placement: "auto",
     });
     setDropdownPopoverShow(true);
   };
   const closeDropdownPopover = () => {
     setDropdownPopoverShow(false);
   };
+
+  const router = useRouter();
+
+  const successfulAlert = () => {
+    Swal.fire({
+      icon: "success",
+      title: "Succesfully logged out!",
+      showConfirmButton: false,
+      timer: 800,
+    });
+    logout();
+    router.push("/auth/login");
+  };
+  function logout() {
+    localStorage.removeItem("token");
+    localStorage.removeItem("email");
+  }
+
   return (
     <>
       <a
-        className="text-blueGray-500 block"
         href="#pablo"
         ref={btnDropdownRef}
         onClick={(e) => {
@@ -26,15 +45,11 @@ const UserDropdown = () => {
           dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover();
         }}
       >
-        <div className="items-center absolute flex">
-          <span className="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full">
-            <img
-              alt="..."
-              className="w-full absolute rounded-full align-middle border-none shadow-lg"
-              src="/img/blank-profile-picture.webp"
-            />
-          </span>
-        </div>
+        {" "}
+        <i className="fas fa-user-circle text-2xl text-s pr-4"></i>
+        {/* <a className="text-darkBlue-600 text-xs font-heavy leading-relaxed inline-block whitespace-nowrap uppercase">
+          Account
+        </a> */}
       </a>
       <div
         ref={popoverDropdownRef}
@@ -50,35 +65,22 @@ const UserDropdown = () => {
           }
           onClick={(e) => e.preventDefault()}
         >
-          Action
+          {" "}
+          <i className=" text-s fas fa-user-cog pr-4	"></i>
+          <Link href="/auth/profile">View Profile</Link>
         </a>
-        <a
-          href="#pablo"
-          className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-          }
-          onClick={(e) => e.preventDefault()}
-        >
-          Another action
-        </a>
-        <a
-          href="#pablo"
-          className={
-            "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
-          }
-          onClick={(e) => e.preventDefault()}
-        >
-          Something else here
-        </a>
+
         <div className="h-0 my-2 border border-solid border-blueGray-100" />
         <a
-          href="#pablo"
           className={
             "text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
           }
           onClick={(e) => e.preventDefault()}
         >
-          Seprated link
+          <button onClick={successfulAlert}>
+            <i className="fas fa-power-off text-s pr-4"></i>
+            <a>Log Out</a>
+          </button>
         </a>
       </div>
     </>

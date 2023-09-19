@@ -43,7 +43,7 @@ export default function SavingGoal() {
   // const navigate = useNavigate();
   // const navigateHome = () => {
   //   navigate("/");
-  // };ss
+  // };
 
   const saveSavingGoals = async (e) => {
     //e.preventDefault();

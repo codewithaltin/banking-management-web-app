@@ -8,7 +8,7 @@ import jwt_decode from "jwt-decode";
 export default function CardProfile() {
   const [profile, setProfile] = useState({});
   const [decoded, setDecoded] = useState(null);
-
+  const router = useRouter();
   useEffect(() => {
     const token = localStorage.getItem("token");
     const decodedToken = jwt_decode(token);
@@ -42,6 +42,7 @@ export default function CardProfile() {
       console.error("An error occurred while fetching profile:", error);
     }
   }
+
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">

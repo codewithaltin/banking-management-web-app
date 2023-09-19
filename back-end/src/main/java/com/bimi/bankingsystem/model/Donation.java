@@ -31,5 +31,15 @@ public class Donation {
     @NonNull
     private String comment;
 
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id", referencedColumnName = "id")
+    private User user;
+    public User getUser() {
+        return user;
+    }
+    public void assignUserToDonation(User user){
+        this.user = user;
+    }
+
 
 }

@@ -98,6 +98,7 @@ const EditUser = ({ userId, setResponseUser }) => {
       lastName: user.lastName,
       email: user.email,
       accountNumber: user.accountNumber,
+      password: user.password,
       phoneNumber: user.phoneNumber,
       balance: user.balance,
       city: user.city,

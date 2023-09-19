@@ -1,6 +1,6 @@
 import React from "react";
 import UserTable from "components/Cards/UserTable.js";
-import User from "layouts/User.js";
+import Admin from "layouts/Admin.js";
 
 const userlist = () => {
   return (
@@ -9,6 +9,6 @@ const userlist = () => {
     </>
   );
 };
-userlist.layout = User;
+userlist.layout = Admin;
 
 export default userlist;
