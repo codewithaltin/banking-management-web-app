@@ -4,35 +4,60 @@ import PropTypes from "prop-types";
 // components
 import Contact from "./Contact";
 import Swal from "sweetalert2";
+import jwt_decode from "jwt-decode";
 
 export default function ContactTable({ contact, color }) {
-  const CONTACT_API_BASE_URL = "http://localhost:8080/api/v1/auth/contact";
+  let CONTACT_API_BASE_URL;
   const [contacts, setContacts] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [search, setSearch] = useState("");
   const [contactId, setContactId] = useState(null);
   const [responseContact, setResponseContact] = useState(null);
+  const [decoded, setDecoded] = useState(null);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch(CONTACT_API_BASE_URL, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const contacts = await response.json();
-        setContacts(contacts);
-      } catch (error) {
-        console.log(error);
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      chooseEndPoint();
+      fetchData();
+    }
+  }, [decoded]);
+
+  function chooseEndPoint() {
+    let res = decoded.authorities === "ROLE_USER";
+    if (res) {
+      CONTACT_API_BASE_URL =
+        "http://localhost:8080/api/v1/auth/contact/user/" + decoded.sub;
+    } else {
+      CONTACT_API_BASE_URL = "http://localhost:8080/api/v1/auth/contact";
+    }
+  }
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(CONTACT_API_BASE_URL, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const contactData = await response.json();
+        setContacts(contactData);
+      } else {
+        throw new Error("Failed to fetch data");
       }
+    } catch (error) {
+      console.error(error);
+    } finally {
       setLoading(false);
-    };
-    fetchData();
-  }, [contact, responseContact]);
-  let dialogValue = false;
+    }
+  };
 
   const ConfirmDialogAlert = (e, id) => {
     if (dialogValue) return true;
