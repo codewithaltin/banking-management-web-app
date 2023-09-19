@@ -1,13 +1,14 @@
 package com.bimi.bankingsystem.controller;
 
 import com.bimi.bankingsystem.model.CollectorPayment;
+import com.bimi.bankingsystem.model.InstitutionPayment;
+import com.bimi.bankingsystem.model.User;
 import com.bimi.bankingsystem.service.CollectorPaymentService;
+import com.bimi.bankingsystem.service.UserServiceImpl;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
@@ -15,9 +16,11 @@ import java.util.Map;
 public class CollectorPaymentController {
 
     private CollectorPaymentService collectorPaymentService;
+    private UserServiceImpl userService;
 
-    public CollectorPaymentController(CollectorPaymentService collectorPaymentService) {
+    public CollectorPaymentController(CollectorPaymentService collectorPaymentService, UserServiceImpl userService) {
         this.collectorPaymentService = collectorPaymentService;
+        this.userService = userService;
     }
 
     @PostMapping("/collectorPayment")
@@ -47,4 +50,21 @@ public class CollectorPaymentController {
         collectorPayment = collectorPaymentService.updateCollectorPayments(id,collectorPayment);
         return ResponseEntity.ok(collectorPayment);
     }
+
+    @PostMapping("/collectorPayment/user/{email}")
+    public CollectorPayment saveCollectorPaymentByUserId(@PathVariable String email, @RequestBody CollectorPayment collectorPayment){
+        User user = userService.getUserByEmail(email).get();
+        user.addCollectorPayment(collectorPayment);
+        collectorPayment.assignUserToCollectorPayment(user);
+        return collectorPaymentService.addCollectorPayment(collectorPayment);
+    }
+
+    @GetMapping("/collectorPayment/user/{email}")
+    public List<CollectorPayment> getCollectorPaymentByUserId(@PathVariable String email){
+        User user = userService.getUserByEmail(email).get();
+        return user.getCollectorPayments();
+    }
+
+
+
 }

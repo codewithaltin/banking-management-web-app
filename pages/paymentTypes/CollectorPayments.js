@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import TokenCheck from "components/TokenCheck";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import jwt_decode from "jwt-decode";
 
 import Auth from "layouts/Auth.js";
 
@@ -14,6 +15,13 @@ export default function CollectorPayments() {
       watch,
       formState: { errors },
     } = useForm({ });
+    const [decoded, setDecoded] = useState(null);
+  
+    useEffect(() => {
+      const token = localStorage.getItem("token");
+      const decodedToken = jwt_decode(token);
+      setDecoded(decodedToken);
+    }, []);
     
   
   const COLLECTORPAYMENTS_API_BASE_URL = "http://localhost:8080/api/v1/auth/collectorPayment";
@@ -42,15 +50,17 @@ export default function CollectorPayments() {
   
   const saveCollectorPayments = async (e) => {
     //e.preventDefault();
-    const response = await fetch(COLLECTORPAYMENTS_API_BASE_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    const response = await fetch(
+      "http://localhost:8080/api/v1/auth/collectorPayment/user/" + decoded.sub,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
       body: JSON.stringify(collectorPayments),
     });
     if (!response.ok) {
-     console.log("Something went wrong");
+      throw new Error("Something went wrong");
     }
     const _collectorPayments = await response.json();
     setResponseCollectorPayments(_collectorPayments);

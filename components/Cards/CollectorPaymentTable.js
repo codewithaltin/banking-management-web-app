@@ -8,48 +8,66 @@ import TableDropdown from "components/Dropdowns/TableDropdown.js";
 import CardTable from "./CardTable";
 import CollectorPayments from "./CollectorPayments";
 import Swal from "sweetalert2";
+import jwt_decode from "jwt-decode";
 
 export default function CollectorPaymentTable({ collectorPayment, color }) {
 
-  const COLLECTORPAYMENT_API_BASE_URL = "http://localhost:8080/api/v1/auth/collectorPayment";
+  let COLLECTORPAYMENT_API_BASE_URL;
 
   const [collectorPayments, setCollectorPayment] = useState(null);
   const [loading, setLoading] = useState(true);
   const [collectorPaymentId, setCollectorPaymentId] = useState(null);
   const [responseCollectorPayment, setResponseCollectorPayment] = useState(null);
   const [search, setSearch] = useState("");
-  const handleOpenDialog = () => {
-    setDialogOpen(true);
-  };
+  const [decoded, setDecoded] = useState(null);
 
-  const handleCloseDialog = () => {
-    setDialogOpen(false);
-  };
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch(COLLECTORPAYMENT_API_BASE_URL, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const collectorPayments = await response.json();
-        setCollectorPayment(collectorPayments);
-      } catch (error) {
-        console.log(error);
-      }
-      setLoading(false);
-    };
-    fetchData();
-  }, [collectorPayment, responseCollectorPayment]);
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
 
-  let dialogValue = false;
+  useEffect(() => {
+    if (decoded) {
+      chooseEndPoint();
+      fetchData();
+    }
+  }, [decoded]);
+
+  function chooseEndPoint() {
+    let res = decoded.authorities === "ROLE_USER";
+    if (res) {
+      COLLECTORPAYMENT_API_BASE_URL =
+        "http://localhost:8080/api/v1/auth/collectorPayment/user/" + decoded.sub;
+    } else {
+      COLLECTORPAYMENT_API_BASE_URL = "http://localhost:8080/api/v1/auth/collectorPayment";
+    }
+  }
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(COLLECTORPAYMENT_API_BASE_URL, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const collectorData = await response.json();
+        setCollectorPayment(collectorData);
+      } else {
+        throw new Error("Failed to fetch data");
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
 
   const ConfirmDialogAlert = (e, id) => {
-    if (dialogValue) return true;
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -64,7 +82,6 @@ export default function CollectorPaymentTable({ collectorPayment, color }) {
         Swal.fire("Deleted!", "Deleted Succesfully!", "success");
       }
     });
-    return dialogValue;
   };
 
 

@@ -47,5 +47,19 @@ public class CollectorPayment {
         this.amount = amount;
         this.description = description;
     }
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id", referencedColumnName = "id")
+    private User user;
+    public User getUser() {
+        return user;
+    }
+    public void assignUserToCollectorPayment(User user){
+        this.user = user;
+    }
+
 }
+
+
+
 
