@@ -1,12 +1,13 @@
 package com.bimi.bankingsystem.controller;
 
+import com.bimi.bankingsystem.model.Donation;
 import com.bimi.bankingsystem.model.Loan;
 import com.bimi.bankingsystem.service.LoanService;
 import org.springframework.web.bind.annotation.*;
+import com.bimi.bankingsystem.model.User;
+import com.bimi.bankingsystem.service.UserServiceImpl;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
@@ -14,8 +15,11 @@ import java.util.Map;
 public class LoanController {
     private LoanService loanService;
 
-    public LoanController(LoanService loanService) {
+    private UserServiceImpl userService;
+
+    public LoanController(LoanService loanService, UserServiceImpl userService) {
         this.loanService=loanService;
+        this.userService = userService;
     }
 
     @PostMapping("/loan")
@@ -33,6 +37,14 @@ public class LoanController {
         Loan loan = null;
         loan = loanService.getLoanById(id);
         return loanService.getAllLoans();
+    }
+
+    @PostMapping("/loan/user/{email}")
+    public Loan saveLoanByUserId(@PathVariable String email, @RequestBody Loan loan){
+        User user = userService.getUserByEmail(email).get();
+        user.createLoan(loan);
+        loan.assignUserToLoan(user);
+        return loanService.createLoan(loan);
     }
 
     @DeleteMapping("loan/{id}")

@@ -118,7 +118,7 @@ function App() {
           <div className="w-full md:w-6/12 px-4 mr-auto ml-auto">
             <div className="justify-center flex flex-wrap relative">
               <div className="my-4 w-full lg:w-6/12 px-4">
-                <a href="#" target="_blank">
+                <a href="/auth/cards">
                   <div className="flex flex-wrap justify-center">
                     <div className="w-8/16 sm:w-4/12 px-4">
                       <img
@@ -130,7 +130,7 @@ function App() {
                   </div>
                 </a>
 
-                <a href="#" target="_blank">
+                <a href="/auth/cards">
                   <div className="flex flex-wrap justify-center rounded-full">
                     <div className="w-8/16 mt-8 sm:w-4/12 px-4 ">
                       <img
@@ -142,7 +142,7 @@ function App() {
                   </div>
                 </a>
 
-                <a href="#" target="_blank">
+                <a href="/auth/cards">
                   <div className="flex flex-wrap justify-center rounded-full">
                     <div className="w-8/16 mt-8 sm:w-4/12 px-4 ">
                       <img
@@ -155,7 +155,7 @@ function App() {
                 </a>
               </div>
               <div className="my-4 w-full lg:w-6/12 px-4 lg:mt-16">
-                <a href="#" target="_blank">
+              <a href="/auth/cards">
                   <div className="flex flex-wrap justify-center rounded-full">
                     <div className="w-8/16 mt-8 sm:w-4/12 px-4 ">
                       <img
@@ -166,7 +166,7 @@ function App() {
                     </div>
                   </div>
                 </a>
-                <a href="#" target="_blank">
+                <a href="/auth/cards">
                   <div className="flex flex-wrap justify-center rounded-full">
                     <div className="w-8/16 mt-8 sm:w-4/12 px-4 ">
                       <img
@@ -177,7 +177,7 @@ function App() {
                     </div>
                   </div>
                 </a>
-                <a href="#" target="_blank">
+                <a href="/auth/cards">
                   <div className="flex flex-wrap justify-center rounded-full">
                     <div className="w-8/16 mt-8 sm:w-4/12 px-4 ">
                       <img
