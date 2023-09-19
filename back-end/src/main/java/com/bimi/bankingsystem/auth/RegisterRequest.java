@@ -2,6 +2,7 @@ package com.bimi.bankingsystem.auth;
 
 
 import com.bimi.bankingsystem.common.enums.City;
+import com.bimi.bankingsystem.common.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -20,5 +21,6 @@ public class RegisterRequest {
     private String email;
     private String phoneNumber;
     private String password;
+    private Role role;
 
 }

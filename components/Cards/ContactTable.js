@@ -9,6 +9,7 @@ export default function ContactTable({ contact, color }) {
   const CONTACT_API_BASE_URL = "http://localhost:8080/api/v1/auth/contact";
   const [contacts, setContacts] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [search, setSearch] = useState("");
   const [contactId, setContactId] = useState(null);
   const [responseContact, setResponseContact] = useState(null);
 
@@ -73,10 +74,38 @@ export default function ContactTable({ contact, color }) {
           (color === "light" ? "bg-white" : "bg-blueGray-700 text-white")
         }
       >
-        <div className="rounded-t mb-0 px-4 py-3  border-0">
+        <div className="rounded-t mb-0 px-4 py-3 border-0">
           <div className="flex flex-wrap items-center">
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-              <h3 className={"font-semibold text-lg "}>Contact Forms</h3>
+              <div className="flex items-center">
+                <form>
+                <div class="relative">
+                    <div class="absolute inset-b-0 left-0 flex items-center pl-3 pointer-events-none">
+                      <i className="fa fa-search text-blue-50 mt-3"></i>
+                    </div>
+                    <input
+                      type="search"
+                      id="default-search"
+                      class="block w-full p-2 pl-10 text-sm text-blue-50 border border-gray-300 rounded-lg bg-blueGray-600 "
+                      placeholder="Search contact by e-mail"
+                      onChange={(e) => setSearch(e.target.value)}
+                      required
+                    ></input>
+                    <button
+                      type="submit"
+                      class="text-white absolute right-2.5 bottom-2.5 bg-blue-50 "
+                    ></button>
+                  </div>
+                </form>
+                <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
+                  <a
+                    className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    href="/ContactForm"
+                  >
+                    Add Contact Form
+                  </a>
+                </div>{" "}
+              </div>
             </div>
           </div>
         </div>
@@ -132,7 +161,13 @@ export default function ContactTable({ contact, color }) {
             </thead>
             {!loading && (
               <tbody>
-                {contacts?.map((contact) => (
+                {contacts
+                ?.filter((item) => {
+                  return search.toLowerCase() === ""
+                    ? item
+                    : item.email.toLowerCase().includes(search);
+                })
+                .map((contact) => (
                   <Contact
                   contact={contact}
                     key={contact.id}

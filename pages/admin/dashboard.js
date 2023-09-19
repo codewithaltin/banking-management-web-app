@@ -35,8 +35,6 @@ export default function Dashboard() {
     if (res.ok) {
       const json = await res.json();
       setProfile(json);
-      localStorage.setItem("id", json.id);
-      localStorage.setItem("role", json.role);
     } else {
       router.push("/");
     }

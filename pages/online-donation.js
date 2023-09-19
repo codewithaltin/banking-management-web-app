@@ -39,13 +39,12 @@ const schema = yup
       .min(10, "Donation amount must be greater than €10")
       .max(25000, "Donation amount must be lower than €25000"),
     cardInformation: yup
-      .number()
+      .string()
       .required("Card Info is required"),
-      //.min(16, "Card Info must be at least 16 characters"),
     comment: yup
       .string()
       .required("Comment is required")
-      .min(20, "Purpose must be at least 20 characters"),
+      .min(10, "Purpose must be at least 20 characters"),
     
   })
   .required();

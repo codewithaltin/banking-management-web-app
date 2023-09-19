@@ -44,7 +44,7 @@ const schema = yup
     purpose: yup
       .string()
       .required("Loan purpose is required")
-      .min(20, "Purpose must be at least 20 characters"),
+      .min(10, "Purpose must be at least 20 characters"),
   })
   .required();
 
