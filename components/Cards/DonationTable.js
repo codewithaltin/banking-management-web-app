@@ -9,7 +9,7 @@ export default function DonationTable({ donation, color }) {
     const [loading, setLoading] = useState(true);
     const [donationId, setDonationId] = useState(null);
     const [responseDonation, setResponseDonation] = useState(null);
-
+    const [search, setSearch] = useState("");
     useEffect(() => {
       const fetchData = async () => {
         setLoading(true);
@@ -68,13 +68,42 @@ export default function DonationTable({ donation, color }) {
           (color === "light" ? "bg-white" : "bg-blueGray-700 text-white")
         }
       >
-            <div className="rounded-t mb-0 px-4 py-3  border-0">
-              <div className="flex flex-wrap items-center">
-                <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-                  <h3 className={"font-semibold text-lg "}>Donations</h3>
-                </div>
+        <div className="rounded-t mb-0 px-4 py-3 border-0">
+          <div className="flex flex-wrap items-center">
+            <div className="relative w-full px-4 max-w-full flex-grow flex-1">
+              <div className="flex items-center">
+                <form>
+                <div class="relative">
+                    <div class="absolute inset-b-0 left-0 flex items-center pl-3 pointer-events-none">
+                      <i className="fa fa-search text-blue-50 mt-3"></i>
+                    </div>
+                    <input
+                      type="search"
+                      id="default-search"
+                      class="block w-full p-2 pl-10 text-sm text-blue-50 border border-gray-300 rounded-lg bg-blueGray-600 "
+                      placeholder="Search Donation by e-mail..."
+                      onChange={(e) => setSearch(e.target.value)}
+                      required
+                    ></input>
+                    <button
+                      type="submit"
+                      class="text-white absolute right-2.5 bottom-2.5 bg-blue-50 "
+                    ></button>
+                  </div>
+                </form>
+                <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
+                  <a
+                    className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    href="/online-donation"
+                  >
+                    Add Donation
+                  </a>
+                </div>{" "}
               </div>
             </div>
+          </div>
+        </div>
+
             <div className=" w-full overflow-x-auto flex justify-center  ">
               {/* Projects table */}
               <table className="items-center w-full bg-transparent border-collapse">
@@ -161,7 +190,13 @@ export default function DonationTable({ donation, color }) {
                 </thead>
                 {!loading && (
                   <tbody>
-                    {donations?.map((donation) => (
+                    {donations
+                    ?.filter((item) => {
+                      return search.toLowerCase() === ""
+                        ? item
+                        : item.email.toLowerCase().includes(search);
+                    })
+                    .map((donation) => (
                       <Donation
                         donation={donation}
                         key={donation.id}
