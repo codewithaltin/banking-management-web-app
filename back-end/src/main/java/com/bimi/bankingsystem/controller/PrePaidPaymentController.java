@@ -51,19 +51,17 @@ public class PrePaidPaymentController {
         return ResponseEntity.ok(prePaidPayment);
     }
 
-    @PostMapping("/prePaidPayment/user/{userId}")
-    public PrePaidPayment savePrePaidPaymentByUserId(@PathVariable Long userId, @RequestBody PrePaidPayment prePaidPayment){
-        User user = userService.getUserById(userId).get();
+    @PostMapping("/prePaidPayment/user/{email}")
+    public PrePaidPayment savePrePaidPaymentByUserId(@PathVariable String email, @RequestBody PrePaidPayment prePaidPayment){
+        User user = userService.getUserByEmail(email).get();
         user.addPrePaidPayment(prePaidPayment);
         prePaidPayment.assignUserToPrePaidPayment(user);
         return prePaidPaymentService.addPrePaidPayment(prePaidPayment);
     }
 
-    @GetMapping("/prePaidPayment/user/{userId}")
-    public List<PrePaidPayment> getMobilePaymentByUserId(@PathVariable Long userId){
-        User user = userService.getUserById(userId).get();
+    @GetMapping("/prePaidPayment/user/{email}")
+    public List<PrePaidPayment> getMobilePaymentByUserId(@PathVariable String email){
+        User user = userService.getUserByEmail(email).get();
         return user.getPrePaidPayments();
     }
-
-
 }

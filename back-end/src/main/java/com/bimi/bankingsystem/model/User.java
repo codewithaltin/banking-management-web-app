@@ -132,6 +132,18 @@ public class User implements UserDetails {
         prePaidPayments.add(prePaidPayment);
     }
 
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<CollectorPayment> collectorPayments;
+    public List<CollectorPayment> getCollectorPayments() {
+        return collectorPayments;
+    }
+    public void addCollectorPayment(CollectorPayment collectorPayment){
+        collectorPayments.add(collectorPayment);
+    }
+
+
+
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
