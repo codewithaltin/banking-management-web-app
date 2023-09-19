@@ -51,17 +51,17 @@ public class MobilePaymentController {
     }
 
 
-    @PostMapping("/mobilePayment/user/{userId}")
-    public MobilePayment saveInstitutionPaymentByUserId(@PathVariable Long userId, @RequestBody MobilePayment mobilePayment){
-        User user = userService.getUserById(userId).get();
+    @PostMapping("/mobilePayment/user/{email}")
+    public MobilePayment saveInstitutionPaymentByUserId(@PathVariable String email, @RequestBody MobilePayment mobilePayment){
+        User user = userService.getUserByEmail(email).get();
         user.addMobilePayment(mobilePayment);
         mobilePayment.assignUserToMobilePayment(user);
         return mobilePaymentService.addMobilePayment(mobilePayment);
     }
 
-    @GetMapping("/mobilePayment/user/{userId}")
-    public List<MobilePayment> getMobilePaymentByUserId(@PathVariable Long userId){
-        User user = userService.getUserById(userId).get();
+    @GetMapping("/mobilePayment/user/{email}")
+    public List<MobilePayment> getMobilePaymentByUserId(@PathVariable String email){
+        User user = userService.getUserByEmail(email).get();
         return user.getMobilePayments();
     }
 

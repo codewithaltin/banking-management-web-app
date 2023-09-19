@@ -1,11 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import { useForm } from "react-hook-form";
 import TokenCheck from "components/TokenCheck";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import jwt_decode from "jwt-decode";
 
 import Auth from "layouts/Auth.js";
 import { number } from "joi";
+import LazyResult from "postcss/lib/lazy-result";
 
 export default function MobilePayments() {
 
@@ -15,9 +17,16 @@ export default function MobilePayments() {
       watch,
       formState: { errors },
     } = useForm({ });
+    const [decoded, setDecoded] = useState(null);
+  
+    useEffect(() => {
+      const token = localStorage.getItem("token");
+      const decodedToken = jwt_decode(token);
+      setDecoded(decodedToken);
+    }, []);
     
   
-  const MOBILEPAYMENTS_API_BASE_URL = "http://localhost:8080/api/v1/auth/mobilePayment";
+  let MOBILEPAYMENTS_API_BASE_URL;
 
   const [isOpen, setIsOpen] = useState(false);
   const [mobilePayments, setMobilePayments] = useState({
@@ -41,11 +50,13 @@ export default function MobilePayments() {
 
   const saveMobilePayments = async (e) => {
     //e.preventDefault();
-    const response = await fetch(MOBILEPAYMENTS_API_BASE_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    const response = await fetch(
+      "http://localhost:8080/api/v1/auth/mobilePayment/user/" + decoded.sub,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
       body: JSON.stringify(mobilePayments),
     });
     if (!response.ok) {
