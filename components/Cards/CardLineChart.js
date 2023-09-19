@@ -6,19 +6,15 @@ import { decode } from "next-auth/jwt";
 export default function CardLineChart() {
   const chartRef = useRef(null);
   const [profile, setProfile] = useState(null);
+  const [balance, setBalance] = useState(null);
   const [decoded, setDecoded] = useState(null);
-  let balance = 0;
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const decodedToken = jwt_decode(token);
     setDecoded(decodedToken);
   }, []);
 
-  useEffect(() => {
-    if (decoded) {
-      fetchProfile();
-    }
-  }, [decoded]);
   async function fetchProfile() {
     try {
       const res = await fetch(
@@ -31,8 +27,8 @@ export default function CardLineChart() {
       );
       if (res.ok) {
         const json = await res.json();
-        balance = json.balance;
         setProfile(json);
+        setBalance(json.balance);
       } else {
         throw new Error("Something went wrong.");
       }
@@ -40,6 +36,13 @@ export default function CardLineChart() {
       console.error("Error fetching profile:", error);
     }
   }
+
+  useEffect(() => {
+    if (decoded) {
+      fetchProfile();
+    }
+  }, [decoded]);
+
   useEffect(() => {
     if (chartRef.current && profile) {
       const chartData = {
@@ -142,9 +145,9 @@ export default function CardLineChart() {
           <div className="flex flex-wrap items-center">
             <div className="relative w-full max-w-full flex-grow flex-1">
               <h6 className="uppercase text-blueGray-100 mb-1 text-xs font-semibold">
-                BALANCE
+                balance
               </h6>
-              <h2 className="text-white text-xl font-semibold">
+              <h2 className="text-white text-2xl font-semibold">
                 {balance + " EUR"}
               </h2>
             </div>

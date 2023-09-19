@@ -44,7 +44,7 @@ export default function Sidebar() {
           <hr className="my-2 md:min-w-full" />
 
           <Link
-            href="/admin/dashboard"
+            href="/auth/dashboard"
             className={
               "text-xs uppercase py-3 font-bold block " +
               (router.pathname.indexOf("/admin/dashboard") !== -1
@@ -61,7 +61,7 @@ export default function Sidebar() {
                   : "text-blueGray-300")
               }
             ></i>{" "}
-            ACCOUNT OVERVIEW
+            cash flow
           </Link>
           <hr className="my-2 md:min-w-full" />
 
