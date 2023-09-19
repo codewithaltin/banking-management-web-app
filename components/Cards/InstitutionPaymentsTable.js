@@ -7,11 +7,12 @@ import InstitutionPayments from "./InstitutionPayments";
 import TableDropdown from "components/Dropdowns/TableDropdown.js";
 import CardTable from "./CardTable";
 import Swal from "sweetalert2";
+import jwt_decode from "jwt-decode";
 
 
 export default function InstitutionPaymentsTable({ institutionPayment, color }) {
 
-    const INSTITUTIONPAYMENTS_API_BASE_URL = "http://localhost:8080/api/v1/auth/institutionPayments";
+    let INSTITUTIONPAYMENTS_API_BASE_URL;
 
     const [institutionPayments, setInstitutionPayments] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -19,34 +20,52 @@ export default function InstitutionPaymentsTable({ institutionPayment, color }) 
     const [responseInstitutionPayments, setResponseInstitutionPayments] = useState(null);
     const [isDialogOpen, setDialogOpen] = useState(false);
     const [search, setSearch] = useState("");
-    const handleOpenDialog = () => {
-        setDialogOpen(true);
-      };
-    
-      const handleCloseDialog = () => {
-        setDialogOpen(false);
-      };
+    const [decoded, setDecoded] = useState(null);
 
-      useEffect(() => {
-        const fetchData = async () => {
-          setLoading(true);
-          try {
-            const response = await fetch(INSTITUTIONPAYMENTS_API_BASE_URL, {
-              method: "GET",
-              headers: {
-                "Content-Type": "application/json",
-              },
-            });
-            const institutionPayments = await response.json();
-            setInstitutionPayments(institutionPayments);
-          } catch (error) {
-            console.log(error);
-          }
-          setLoading(false);
-        };
-        fetchData();
-      }, [institutionPayment, responseInstitutionPayments]);
-      let dialogValue = false;
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      chooseEndPoint();
+      fetchData();
+    }
+  }, [decoded]);
+
+  function chooseEndPoint() {
+    let res = decoded.authorities === "ROLE_USER";
+    if (res) {
+      INSTITUTIONPAYMENTS_API_BASE_URL =
+        "http://localhost:8080/api/v1/auth/institutionPayments/user/" + decoded.sub;
+    } else {
+      INSTITUTIONPAYMENTS_API_BASE_URL = "http://localhost:8080/api/v1/auth/institutionPayments";
+    }
+  }
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(INSTITUTIONPAYMENTS_API_BASE_URL, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const institutionPaymentData = await response.json();
+        setInstitutionPayments(institutionPaymentData);
+      } else {
+        throw new Error("Failed to fetch data");
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
 
   const ConfirmDialogAlert = (e, id) => {
     if (dialogValue) return true;
