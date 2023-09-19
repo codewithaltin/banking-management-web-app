@@ -88,7 +88,7 @@ export default function TransferTable({ transfer,color }) {
                       type="search"
                       id="default-search"
                       class="block w-full p-2 pl-10 text-sm text-blue-50 border border-gray-300 rounded-lg bg-blueGray-600 "
-                      placeholder="Search transfer by e-mail..."
+                      placeholder="Search transfer by account number..."
                       onChange={(e) => setSearch(e.target.value)}
                       required
                     ></input>

@@ -133,9 +133,17 @@ public class User implements UserDetails {
     }
 
 
-    public void removeSavingGoal(SavingGoal s){
-        savingGoals.remove(s);
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Donation> donations;
+    public List<Donation> getDonations() {
+        return donations;
     }
+    public void createDonation(Donation donation){
+        donations.add(donation);
+    }
+
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
