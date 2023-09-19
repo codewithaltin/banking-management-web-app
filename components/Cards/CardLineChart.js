@@ -12,13 +12,13 @@ export default function CardLineChart() {
   useEffect(() => {
     if (chartRef.current && profile) {
       const chartData = {
-        labels: ["June", "July", "August", "September"],
+        labels: ["September", "October", "November", "Decemeber"],
         datasets: [
           {
             label: new Date().getFullYear(),
             backgroundColor: "#4c51bf",
             borderColor: "#4c51bf",
-            data: [profile.balance, 20, 30],
+            data: [0, profile.balance],
             fill: false,
           },
         ],

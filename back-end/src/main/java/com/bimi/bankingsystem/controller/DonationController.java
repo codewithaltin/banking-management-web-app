@@ -8,9 +8,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+
 @CrossOrigin(value = "http://localhost:3000")
 @RestController
-@RequestMapping("api/v1")
+@RequestMapping("api/v1/auth")
 public class DonationController {
     private DonationService donationService;
 
