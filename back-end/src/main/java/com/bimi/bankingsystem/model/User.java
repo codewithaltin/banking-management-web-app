@@ -156,6 +156,17 @@ public class User implements UserDetails {
     }
 
 
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Loan> loans;
+    public List<Loan> getLoans() {
+        return loans;
+    }
+    public void createLoan(Loan loan){
+        loans.add(loan);
+    }
+
+
     @Enumerated(EnumType.STRING)
     private Role role;
 

@@ -5,6 +5,8 @@ import lombok.*;
 @Getter
 @Setter
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
 @Table (name = "loan")
 public class Loan {
     @Setter(AccessLevel.PROTECTED)
@@ -28,17 +30,14 @@ public class Loan {
     @NonNull
     private String purpouse;
 
-    public Loan() {
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name="user_id", referencedColumnName = "id")
+    private User user;
+    public User getUser() {
+        return user;
     }
 
-    public Loan(@NonNull long id, @NonNull String fullName, @NonNull String email, @NonNull Integer phoneNumber, @NonNull String address, @NonNull double loanAmount, @NonNull double monthlyIncome, @NonNull String purpouse) {
-        this.id = id;
-        this.fullName = fullName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.address = address;
-        this.loanAmount = loanAmount;
-        this.monthlyIncome = monthlyIncome;
-        this.purpouse = purpouse;
+    public void assignUserToLoan(User user){
+        this.user = user;
     }
 }

@@ -3,6 +3,8 @@ import Link from "next/link";
 import Navbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import TokenCheck from "components/TokenCheck";
+import jwt_decode from "jwt-decode";
+import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -55,8 +57,16 @@ export default function Loan() {
     watch,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+  const [decoded, setDecoded] = useState(null);
+  const [user, setUser] = useState(false);
 
-  const LOAN_API_BASE_URL = "http://localhost:8080/api/v1/auth/loan";
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  //const LOAN_API_BASE_URL = "http://localhost:8080/api/v1/auth/loan";
 
   const [isOpen, setIsOpen] = useState(false);
   const [loan, setLoans] = useState({
@@ -82,7 +92,8 @@ export default function Loan() {
 
   const saveLoan = async (e) => {
     //e.preventDefault();
-    const response = await fetch(LOAN_API_BASE_URL, {
+    const response = await fetch(
+      "http://localhost:8080/api/v1/auth/loan/user/"+ decoded.sub, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
