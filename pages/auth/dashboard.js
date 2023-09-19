@@ -11,7 +11,7 @@ import CardSocialTraffic from "components/Cards/CardSocialTraffic.js";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
-import Admin from "layouts/Admin.js";
+import Admin from "layouts/User.js";
 
 export default function Dashboard() {
   const router = useRouter();

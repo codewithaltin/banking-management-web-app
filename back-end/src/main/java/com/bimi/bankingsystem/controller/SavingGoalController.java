@@ -44,7 +44,8 @@ public class SavingGoalController {
     }
 
     @DeleteMapping("/savingGoal/{id}")
-    public boolean deleteSavingGoal(@PathVariable("id") Long id) {
+    public boolean deleteSavingGoal(@PathVariable("id") Long id)
+    {
         return savingGoalService.deleteSavingGoal(id);
     }
 

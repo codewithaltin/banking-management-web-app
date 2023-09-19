@@ -133,8 +133,9 @@ public class User implements UserDetails {
     }
 
 
-
-
+    public void removeSavingGoal(SavingGoal s){
+        savingGoals.remove(s);
+    }
     @Enumerated(EnumType.STRING)
     private Role role;
 

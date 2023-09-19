@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-
+import { useRouter } from "next/router";
 // components
 import EditUser from "./EditUser";
 import User from "./User";
+import jwt_decode from "jwt-decode";
 import Swal from "sweetalert2";
 export default function UserTable({ user, color }) {
   const USER_API_BASE_URL = "http://localhost:8080/api/v1/auth/user";
@@ -12,6 +13,24 @@ export default function UserTable({ user, color }) {
   const [userId, setUserId] = useState(null);
   const [responseUser, setResponseUser] = useState(null);
   const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [decoded, setDecoded] = useState(null);
+  const router = useRouter();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      if (decoded.authorities === "ROLE_USER") {
+        router.push("/");
+      }
+    }
+  }, [decoded]);
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -68,6 +87,27 @@ export default function UserTable({ user, color }) {
     setUserId(id);
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:8080/api/v1/auth/cities",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const arrOfCities = await response.json();
+        setCities(arrOfCities); // Update the cities array using the useState hook
+      } catch (error) {
+        throw new Error("Oops, fetching went wrong!");
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <>
       <div
@@ -81,22 +121,31 @@ export default function UserTable({ user, color }) {
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
               <div className="flex items-center">
                 <form>
-                  <div class="relative">
+                  <div class="relative flex">
                     <div class="absolute inset-b-0 left-0 flex items-center pl-3 pointer-events-none">
                       <i className="fa fa-search text-blue-50 mt-3"></i>
                     </div>
                     <input
                       type="search"
                       id="default-search"
-                      class="block w-full p-2 pl-10 text-sm text-blue-50 border border-gray-300 rounded-lg bg-blueGray-600 "
+                      class="block w-full p-2 pl-10 text-sm text-blue-50 border border-gray-300 rounded-lg bg-blueGray-600 mr-4"
                       placeholder="Search user by e-mail..."
                       onChange={(e) => setSearch(e.target.value)}
                       required
                     ></input>
-                    <button
-                      type="submit"
-                      class="text-white absolute right-2.5 bottom-2.5 bg-blue-50 "
-                    ></button>
+                    <select
+                      className="eblock w-full p-2  text-sm text-blue-50 border border-gray-300 rounded-lg bg-blueGray-600 mr-4"
+                      value={filter}
+                      onChange={(e) => setFilter(e.target.value)}
+                      name="city"
+                    >
+                      <option>All Cities</option>
+                      {cities.map((city, index) => (
+                        <option key={index} value={city}>
+                          {city}
+                        </option>
+                      ))}
+                    </select>{" "}
                   </div>
                 </form>
                 <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
@@ -197,6 +246,11 @@ export default function UserTable({ user, color }) {
                     return search.toLowerCase() === ""
                       ? item
                       : item.email.toLowerCase().includes(search);
+                  })
+                  .filter((item) => {
+                    return filter === "All Cities"
+                      ? item
+                      : item.city.includes(filter);
                   })
                   .map((user) => (
                     <User

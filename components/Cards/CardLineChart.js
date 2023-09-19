@@ -7,18 +7,23 @@ export default function CardLineChart() {
   const chartRef = useRef(null);
   const [profile, setProfile] = useState(null);
   const [decoded, setDecoded] = useState(null);
-
+  let balance = 0;
   useEffect(() => {
     const token = localStorage.getItem("token");
     const decodedToken = jwt_decode(token);
     setDecoded(decodedToken);
   }, []);
 
+  useEffect(() => {
+    if (decoded) {
+      fetchProfile();
+    }
+  }, [decoded]);
   async function fetchProfile() {
     try {
       const res = await fetch(
-        "http://localhost:8080/api/v1/auth/savingGoal/user/" + decoded.sub,
-      {
+        "http://localhost:8080/api/v1/auth/userbyemail/" + decoded.sub,
+        {
           headers: {
             "Content-Type": "application/json",
           },
@@ -26,6 +31,7 @@ export default function CardLineChart() {
       );
       if (res.ok) {
         const json = await res.json();
+        balance = json.balance;
         setProfile(json);
       } else {
         throw new Error("Something went wrong.");
@@ -34,23 +40,16 @@ export default function CardLineChart() {
       console.error("Error fetching profile:", error);
     }
   }
-
-  useEffect(() => {
-    if (decoded) {
-      fetchProfile();
-    }
-  }, [decoded]);
-
   useEffect(() => {
     if (chartRef.current && profile) {
       const chartData = {
-        labels: ["September", "October", "November", "December"],
+        labels: ["September", "Sep/Oct", "October", "November", "December"],
         datasets: [
           {
             label: new Date().getFullYear(),
             backgroundColor: "#4c51bf",
             borderColor: "#4c51bf",
-            data: [0, profile.balance],
+            data: [0, profile.balance * 0.1, profile.balance],
             fill: false,
           },
         ],
@@ -136,8 +135,6 @@ export default function CardLineChart() {
     }
   }, [profile]);
 
-  
-
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-blueGray-700">
@@ -145,10 +142,10 @@ export default function CardLineChart() {
           <div className="flex flex-wrap items-center">
             <div className="relative w-full max-w-full flex-grow flex-1">
               <h6 className="uppercase text-blueGray-100 mb-1 text-xs font-semibold">
-                Overview
+                BALANCE
               </h6>
               <h2 className="text-white text-xl font-semibold">
-                Balance over months
+                {balance + " EUR"}
               </h2>
             </div>
           </div>

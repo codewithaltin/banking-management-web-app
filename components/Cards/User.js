@@ -16,7 +16,7 @@ const User = ({ user, confirmDelete, editUser }) => {
         {user.phoneNumber}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
-        {user.accountNumber}
+        {"XXXX-XXXX-" + (user.accountNumber % 10000)}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         {user.city}
