@@ -1,18 +1,50 @@
 import React, { useState, useEffect, useRef } from "react";
 import Chart from "chart.js";
+import jwt_decode from "jwt-decode";
+import { decode } from "next-auth/jwt";
 
 export default function CardLineChart() {
   const chartRef = useRef(null);
   const [profile, setProfile] = useState(null);
+  const [decoded, setDecoded] = useState(null);
 
   useEffect(() => {
-    fetchProfile();
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
   }, []);
+
+  async function fetchProfile() {
+    try {
+      const res = await fetch(
+        "http://localhost:8080/api/v1/auth/savingGoal/user/" + decoded.sub,
+      {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (res.ok) {
+        const json = await res.json();
+        setProfile(json);
+      } else {
+        throw new Error("Something went wrong.");
+      }
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+    }
+  }
+
+  useEffect(() => {
+    if (decoded) {
+      fetchProfile();
+    }
+  }, [decoded]);
 
   useEffect(() => {
     if (chartRef.current && profile) {
       const chartData = {
-        labels: ["September", "October", "November", "Decemeber"],
+        labels: ["September", "October", "November", "December"],
         datasets: [
           {
             label: new Date().getFullYear(),
@@ -104,29 +136,7 @@ export default function CardLineChart() {
     }
   }, [profile]);
 
-  async function fetchProfile() {
-    try {
-      const res = await fetch(
-        `http://localhost:8080/api/v1/auth/userbyemail/${localStorage.getItem(
-          "email"
-        )}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
-        }
-      );
-      if (res.ok) {
-        const json = await res.json();
-        setProfile(json);
-      } else {
-        throw new Error("Something went wrong.");
-      }
-    } catch (error) {
-      console.error("Error fetching profile:", error);
-    }
-  }
+  
 
   return (
     <>
