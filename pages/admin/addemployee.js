@@ -21,24 +21,14 @@ export default function addemployee() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const departamentOptions = [
-    "Select",
-    "IT",
-    "Sales",
-    "Operations",
-    "Marketing",
-  ];
+  const departamentOptions = ["IT", "Sales", "Operations", "Marketing"];
   const jobTitleOptions = [
-    "Select",
     "Banking Operations Manager",
     "Banking Customer Service Representative",
     "Banking Sales Representative",
     "Banking Marketing Manager",
     "Banking IT Manager",
   ];
-  const onOptionChangeHandler = (event) => {
-    console.log("User Selected Value - ", event.target.value);
-  };
 
   const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/v1/auth/employee";
 

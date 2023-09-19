@@ -3,7 +3,8 @@ import { React, useState, useEffect, Fragment } from "react";
 import Swal from "sweetalert2";
 
 const EditSavingGoal = ({ savingGoalId, setResponseSavingGoal }) => {
-  const SAVINGGOAL_API_BASE_URL = "http://localhost:8080/api/v1/auth/savingGoal";
+  const SAVINGGOAL_API_BASE_URL =
+    "http://localhost:8080/api/v1/auth/savingGoal";
 
   const [isOpen, setIsOpen] = useState(false);
   const [savingGoal, setSavingGoal] = useState({
@@ -17,12 +18,15 @@ const EditSavingGoal = ({ savingGoalId, setResponseSavingGoal }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(SAVINGGOAL_API_BASE_URL + "/" + savingGoalId, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
+        const response = await fetch(
+          SAVINGGOAL_API_BASE_URL + "/" + savingGoalId,
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
         const _user = await response.json();
         setSavingGoal(_user);
         setIsOpen(true);
@@ -70,7 +74,6 @@ const EditSavingGoal = ({ savingGoalId, setResponseSavingGoal }) => {
     reset(e);
     Swal.fire("Updated!", "Updated Succesfully!", "success");
   };
- 
 
   return (
     <div className="min-h-screen absolute top-1/2 right-1/4">
@@ -152,8 +155,7 @@ const EditSavingGoal = ({ savingGoalId, setResponseSavingGoal }) => {
                         className="h-10  outline-none mt-2 p-2 w-full"
                       ></input>
                     </div>
-                  
-                    
+
                     <div className="h-14 my-4 space-x-4 flex justify-center">
                       <button
                         onClick={updateSavingGoal}

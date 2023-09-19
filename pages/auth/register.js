@@ -77,29 +77,37 @@ export default function Register() {
     city: "",
     role: "USER",
   });
-  const [responseUser, setResponseUser] = useState({
-    firstName: "",
-    accountNumber: "",
-    lastName: "",
-    email: "",
-    phoneNumber: "",
-    password: "",
-    city: "",
-  });
-  // const navigate = useNavigate();
-  // const navigateHome = () => {
-  //   navigate("/");
-  // };
 
   const successfulAlert = () => {
     Swal.fire({
       icon: "success",
-      title: "Succesfully logged in!",
+      title: "Succesfully registered!",
       showConfirmButton: false,
       timer: 800,
     });
   };
+  const saveUser = async (e) => {
+    //e.preventDefault();
+    const response = await fetch(USER_API_BASE_URL, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(user),
+    });
+    if (!response.ok) {
+      throw new Error("Something went wrong");
+    }
+    const _user = await response.json();
+    setUser(_user);
+    successfulAlert();
+    await router.push("login");
+  };
 
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setUser({ ...user, [event.target.name]: value });
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -122,28 +130,6 @@ export default function Register() {
     fetchData();
   }, []);
 
-  const saveUser = async (e) => {
-    //e.preventDefault();
-    const response = await fetch(USER_API_BASE_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    });
-    if (!response.ok) {
-      throw new Error("Something went wrong");
-    }
-    const _user = await response.json();
-    setResponseUser(_user);
-    successfulAlert();
-    await router.push("login");
-  };
-
-  const handleChange = (event) => {
-    const value = event.target.value;
-    setUser({ ...user, [event.target.name]: value });
-  };
   return (
     <>
       {/* <Routes>

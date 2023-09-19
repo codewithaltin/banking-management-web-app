@@ -93,17 +93,27 @@ const EditUser = ({ userId, setResponseUser }) => {
 
   const updateUser = async (e) => {
     e.preventDefault();
+    const updatedUserData = {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      accountNumber: user.accountNumber,
+      phoneNumber: user.phoneNumber,
+      balance: user.balance,
+      city: user.city,
+    };
     const response = await fetch(USER_API_BASE_URL + userId, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(user),
+      body: JSON.stringify(updatedUserData),
     });
     if (!response.ok) {
       throw new Error("Something went wrong");
     }
-    esponseUser(_user);
+    const _user = await response.json();
+    setResponseUser(_user);
     reset(e);
     Swal.fire("Updated!", "Updated Succesfully!", "success");
   };

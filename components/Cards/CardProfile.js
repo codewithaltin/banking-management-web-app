@@ -3,37 +3,45 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 import { useEffect } from "react";
 // components
+import jwt_decode from "jwt-decode";
 
 export default function CardProfile() {
-  const router = useRouter();
-  const [profile, setProfile] = useState(false);
+  const [profile, setProfile] = useState({});
+  const [decoded, setDecoded] = useState(null);
 
   useEffect(() => {
-    const item = localStorage.getItem("key");
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
   }, []);
+
   useEffect(() => {
-    fetchProfile();
-  }, []);
+    if (decoded) {
+      fetchProfile();
+    } else console.log("decoding failed.");
+  }, [decoded]);
 
   async function fetchProfile() {
-    const res = await fetch(
-      "http://localhost:8080/api/v1/auth/userbyemail/" +
-        localStorage.getItem("email"),
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
+    try {
+      const res = await fetch(
+        "http://localhost:8080/api/v1/auth/userbyemail/" + decoded.sub,
+        {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
+        }
+      );
+      if (res.ok) {
+        const json = await res.json();
+        setProfile(json);
+      } else {
+        console.error("Failed to fetch profile data");
       }
-    );
-    if (res.ok) {
-      const json = await res.json();
-      setProfile(json);
-    } else {
-      router.push("/");
+    } catch (error) {
+      console.error("An error occurred while fetching profile:", error);
     }
   }
-
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words bg-white w-full mb-6 shadow-xl rounded-lg mt-16">
@@ -95,7 +103,6 @@ export default function CardProfile() {
               <i className="fas fa-phone mr-2 text-lg text-blueGray-400"></i>
               {profile.phoneNumber}
             </div>
-            
           </div>
         </div>
       </div>

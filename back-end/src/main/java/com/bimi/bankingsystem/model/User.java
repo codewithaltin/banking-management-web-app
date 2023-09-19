@@ -2,11 +2,14 @@ package com.bimi.bankingsystem.model;
 
 import com.bimi.bankingsystem.common.enums.City;
 import com.bimi.bankingsystem.common.enums.Role;
+import com.bimi.bankingsystem.service.RequestMoneyService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Set;
+
+import org.apache.coyote.Request;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -51,16 +54,25 @@ public class User implements UserDetails {
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
     private List<SavingGoal> savingGoals;
+
     public List<SavingGoal> getSavingGoals() {
         return savingGoals;
     }
-    
     public void addSavingGoal(SavingGoal savingGoal){
         savingGoals.add(savingGoal);
     }
 
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<RequestMoney> requestedMoney;
 
+    public List<RequestMoney> getRequestedMoney() {
+        return requestedMoney;
+    }
 
+    public void addRequestMoney(RequestMoney r){
+        requestedMoney.add(r);
+    }
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")

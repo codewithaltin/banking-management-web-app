@@ -6,30 +6,6 @@ import { useState, useEffect } from "react";
 
 export default function Profile() {
   const router = useRouter();
-  const [profile, setProfile] = useState();
-
-  useEffect(() => {
-    fetchProfile();
-  }, []);
-
-  async function fetchProfile() {
-    const res = await fetch(
-      "http://localhost:8080/api/v1/auth/userbyemail/" +
-        localStorage.getItem("email"),
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: "Bearer " + localStorage.getItem("token"),
-        },
-      }
-    );
-    if (res.ok) {
-      const json = await res.json();
-      setProfile(json);
-    } else {
-      router.push("/");
-    }
-  }
 
   return (
     <>

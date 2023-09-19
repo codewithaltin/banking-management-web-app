@@ -1,7 +1,10 @@
 package com.bimi.bankingsystem.service;
 
+import com.bimi.bankingsystem.exception.NotFoundException;
 import com.bimi.bankingsystem.model.RequestMoney;
+import com.bimi.bankingsystem.model.SavingGoal;
 import com.bimi.bankingsystem.repository.RequestMoneyRepository;
+import org.apache.coyote.Request;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -30,6 +33,8 @@ public class RequestMoneyService {
         rmr.deleteById(id);
         return true;
     }
+
+
     public RequestMoney updateRequest(Long id, RequestMoney e){
         RequestMoney rm =
                 rmr.findById(id).get();
