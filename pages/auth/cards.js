@@ -62,7 +62,7 @@ export default class cards extends React.Component {
         return acc;
       }, {});
 
-    const response = fetch(CARDS_API_BASE_URL, {
+    const response = fetch("http://localhost8080/api/v1/auth/cards", {
       method: "POST",
       headers: headers,
       body: JSON.stringify(formData),
@@ -82,73 +82,73 @@ export default class cards extends React.Component {
 
     return (
       <TokenCheck>
-      <div>
-        <Card
-          number={cardNumber}
-          name={name}
-          expiry={valid}
-          cvc={cvc}
-          focused={focused}
-          callback={this.handleCallback}
-        />
-        <form
-          ref={(c) => (this.form = c)}
-          onSubmit={this.handleSubmit}
-          className="relative py-6  flex flex-col items-center"
-        >
-          <div className="p-2 w-1/2">
-            <input
-              type="tel"
-              name="cardNumber"
-              className="w-full rounded-lg"
-              placeholder="Card Number"
-              pattern="[\d| ]{16,22}"
-              required
-              onChange={this.handleInputChange}
-              onFocus={this.handleInputFocus}
-            />
-          </div>
-          <div className="p-2 w-1/2">
-            <input
-              type="text"
-              name="name"
-              className="w-full rounded-lg"
-              placeholder="Name"
-              required
-              onChange={this.handleInputChange}
-              onFocus={this.handleInputFocus}
-            />
-          </div>
-          <div className="p-2 w-1/2">
-            <input
-              type="tel"
-              name="valid"
-              className="w-full rounded-lg"
-              placeholder="Valid Thru"
-              pattern="\d\d/\d\d"
-              required
-              onChange={this.handleInputChange}
-              onFocus={this.handleInputFocus}
-            />
-          </div>
-          <div className="p-2 w-1/2">
-            <input
-              type="tel"
-              name="cvc"
-              className="w-full rounded-lg"
-              placeholder="CVC"
-              pattern="\d{3,4}"
-              required
-              onChange={this.handleInputChange}
-              onFocus={this.handleInputFocus}
-            />
-          </div>
-          <input type="hidden" name="issuer" value={issuer} />
-          <div className="p-2 w-1/2 flex justify-center">
-            <button className="bg-white px-4 py-2 rounded-lg">Submit</button>
-          </div>
-        </form>
-      </div>
+        <div>
+          <Card
+            number={cardNumber}
+            name={name}
+            expiry={valid}
+            cvc={cvc}
+            focused={focused}
+            callback={this.handleCallback}
+          />
+          <form
+            ref={(c) => (this.form = c)}
+            onSubmit={this.handleSubmit}
+            className="relative py-6  flex flex-col items-center"
+          >
+            <div className="p-2 w-1/2">
+              <input
+                type="tel"
+                name="cardNumber"
+                className="w-full rounded-lg"
+                placeholder="Card Number"
+                pattern="[\d| ]{16,22}"
+                required
+                onChange={this.handleInputChange}
+                onFocus={this.handleInputFocus}
+              />
+            </div>
+            <div className="p-2 w-1/2">
+              <input
+                type="text"
+                name="name"
+                className="w-full rounded-lg"
+                placeholder="Name"
+                required
+                onChange={this.handleInputChange}
+                onFocus={this.handleInputFocus}
+              />
+            </div>
+            <div className="p-2 w-1/2">
+              <input
+                type="tel"
+                name="valid"
+                className="w-full rounded-lg"
+                placeholder="Valid Thru"
+                pattern="\d\d/\d\d"
+                required
+                onChange={this.handleInputChange}
+                onFocus={this.handleInputFocus}
+              />
+            </div>
+            <div className="p-2 w-1/2">
+              <input
+                type="tel"
+                name="cvc"
+                className="w-full rounded-lg"
+                placeholder="CVC"
+                pattern="\d{3,4}"
+                required
+                onChange={this.handleInputChange}
+                onFocus={this.handleInputFocus}
+              />
+            </div>
+            <input type="hidden" name="issuer" value={issuer} />
+            <div className="p-2 w-1/2 flex justify-center">
+              <button className="bg-white px-4 py-2 rounded-lg">Submit</button>
+            </div>
+          </form>
+        </div>
       </TokenCheck>
     );
   }

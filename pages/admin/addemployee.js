@@ -2,11 +2,7 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { Routes, Route, useNavigate } from "react-router-dom";
-
-import Login from "pages/auth/login.js";
-import ReactDOM from "react-dom";
-import { BrowserRouter } from "react-router-dom";
+import Swal from "sweetalert2";
 const phoneReg =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
@@ -57,6 +53,14 @@ export default function addemployee() {
     endDate: "",
     salary: 0,
   });
+  const successfulAlert = () => {
+    Swal.fire({
+      icon: "success",
+      title: "Succesfully registered!",
+      showConfirmButton: false,
+      timer: 800,
+    });
+  };
   const saveEmployee = async (e) => {
     const response = await fetch(EMPLOYEE_API_BASE_URL, {
       method: "POST",
@@ -68,9 +72,9 @@ export default function addemployee() {
     if (!response.ok) {
       throw new Error("Something went wrong");
     }
+    successfulAlert();
     const _employee = await response.json();
     setResponseEmployee(_employee);
-    window.location.reload();
     alert("Registered Succesfully!");
   };
   const handleChange = (event) => {
@@ -191,6 +195,7 @@ export default function addemployee() {
                       onChange={(e) => handleChange(e)}
                       name="departament"
                     >
+                      <option value="">Select Departament</option>
                       {departamentOptions.map((option, index) => {
                         return <option key={index}>{option}</option>;
                       })}

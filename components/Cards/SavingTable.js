@@ -27,6 +27,8 @@ export default function SavingTable({ savingGoal, color }) {
 
   useEffect(() => {
     if (decoded) {
+      chooseEndPoint();
+      fetchData();
       setIsAuditor(checkAuditor());
     }
   }, [decoded]);
@@ -36,8 +38,7 @@ export default function SavingTable({ savingGoal, color }) {
   }
 
   function chooseEndPoint() {
-    let res = decoded.authorities === "ROLE_USER";
-    if (res) {
+    if (decoded.authorities === "ROLE_USER") {
       SAVINGGOAL_API_BASE_URL =
         "http://localhost:8080/api/v1/auth/savingGoal/user/" + decoded.sub;
     } else {
@@ -190,16 +191,16 @@ export default function SavingTable({ savingGoal, color }) {
                   Goal Name
                 </th>
                 {!isAuditor && (
-                <th
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                >
-                  Actions
-                </th>
+                  <th
+                    className={
+                      "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                      (color === "light"
+                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                    }
+                  >
+                    Actions
+                  </th>
                 )}
                 <th
                   className={
@@ -209,7 +210,6 @@ export default function SavingTable({ savingGoal, color }) {
                       : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 ></th>
-                
               </tr>
             </thead>
             {!loading && (
