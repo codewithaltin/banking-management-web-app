@@ -21,6 +21,8 @@ export default function RequestMoneyTable({ requestMoney, color }) {
 
   useEffect(() => {
     if (decoded) {
+      //chooseEndPoint();
+      //fetchData();
       setIsAuditor(checkAuditor());
     }
   }, [decoded]);

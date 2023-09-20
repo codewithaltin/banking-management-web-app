@@ -24,6 +24,8 @@ export default function ContactTable({ contact, color }) {
 
   useEffect(() => {
     if (decoded) {
+      chooseEndPoint();
+      fetchData();
       setIsAuditor(checkAuditor());
     }
   }, [decoded]);

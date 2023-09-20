@@ -30,6 +30,8 @@ export default function CollectorPaymentTable({ collectorPayment, color }) {
 
   useEffect(() => {
     if (decoded) {
+      chooseEndPoint();
+      fetchData();
       setIsAuditor(checkAuditor());
     }
   }, [decoded]);

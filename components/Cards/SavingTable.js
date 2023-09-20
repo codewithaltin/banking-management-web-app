@@ -26,7 +26,9 @@ export default function SavingTable({ savingGoal, color }) {
   }, []);
 
   useEffect(() => {
-    if (decoded) {
+    if (decoded) {  
+      chooseEndPoint();
+      fetchData();
       setIsAuditor(checkAuditor());
     }
   }, [decoded]);

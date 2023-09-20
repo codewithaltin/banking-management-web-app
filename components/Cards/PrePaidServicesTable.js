@@ -30,6 +30,8 @@ export default function PrePaidServicesTable({ prePaidService, color }) {
 
   useEffect(() => {
     if (decoded) {
+      chooseEndPoint();
+      fetchData();
       setIsAuditor(checkAuditor());
     }
   }, [decoded]);
