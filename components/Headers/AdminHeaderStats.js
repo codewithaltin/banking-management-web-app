@@ -69,7 +69,6 @@ export default function AdminHeaderStats() {
       });
   }, []);
 
-
   return (
     <>
       {/* Header */}
@@ -81,7 +80,7 @@ export default function AdminHeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="Acitve Users"
-                  statTitle={userCount !== null ? userCount : "Loading..."}               
+                  statTitle={userCount !== null ? userCount : "Loading..."}
                   statArrow="up"
                   statPercent="3.48"
                   statPercentColor="text-emerald-500"
@@ -93,7 +92,9 @@ export default function AdminHeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="Employees"
-                  statTitle={employeeCount !== null ? employeeCount : "Loading..."} 
+                  statTitle={
+                    employeeCount !== null ? employeeCount : "Loading..."
+                  }
                   statArrow="down"
                   statPercent="3.48"
                   statPercentColor="text-red-500"
@@ -105,7 +106,7 @@ export default function AdminHeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="Loans Taken"
-                  statTitle={loanCount !== null ? loanCount : "Loading..."} 
+                  statTitle={loanCount !== null ? loanCount : "Loading..."}
                   statArrow="up"
                   statPercent="12"
                   statPercentColor="text-emerald-500"
@@ -117,7 +118,9 @@ export default function AdminHeaderStats() {
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
                   statSubtitle="Donations Made"
-                  statTitle={donationCount !== null ? donationCount : "Loading..."} 
+                  statTitle={
+                    donationCount !== null ? donationCount : "Loading..."
+                  }
                   statArrow="down"
                   statPercent="1.10"
                   statPercentColor="text-orange-500"

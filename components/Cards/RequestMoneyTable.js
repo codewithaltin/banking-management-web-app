@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-
+import jwt_decode from "jwt-decode";
 import RequestMoney from "./RequestMoney";
 import Swal from "sweetalert2";
 export default function RequestMoneyTable({ requestMoney, color }) {
@@ -10,6 +10,24 @@ export default function RequestMoneyTable({ requestMoney, color }) {
   const [loading, setLoading] = useState(true);
   const [requestedMoneyId, setRequestedMoneyId] = useState(null);
   const [responseRequestedMoney, setResponseRequestedMoney] = useState(null);
+  const [decoded, setDecoded] = useState(null);
+  const [isAuditor, setIsAuditor] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      setIsAuditor(checkAuditor());
+    }
+  }, [decoded]);
+
+  function checkAuditor() {
+    return decoded.authorities === "ROLE_AUDITOR";
+  }
 
   useEffect(() => {
     const fetchData = async () => {
@@ -50,7 +68,7 @@ export default function RequestMoneyTable({ requestMoney, color }) {
 
   const deleteRequestedMoney = (e, id) => {
     e.preventDefault();
-    fetch(LOAN_API_BASE_URL + "/" + id, {
+    fetch("http://localhost:8080/api/v1/auth/requestmoney/" + id, {
       method: "DELETE",
     }).then((res) => {
       if (requestedMoney) {
@@ -108,7 +126,7 @@ export default function RequestMoneyTable({ requestMoney, color }) {
                 >
                   Amount
                 </th>
-
+                {!isAuditor && (
                 <th
                   colSpan={2}
                   className={
@@ -120,6 +138,7 @@ export default function RequestMoneyTable({ requestMoney, color }) {
                 >
                   Actions
                 </th>
+                )}
               </tr>
             </thead>
             {!loading && (

@@ -7,8 +7,7 @@ import CardProfile from "components/Cards/CardProfile.js";
 // layout for page
 
 import User from "layouts/User.js";
-import Admin from "layouts/Admin.js";
-import UserDropdown from "components/Dropdowns/UserDropdown";
+
 export default function Settings() {
   const [editProfile, setEditProfile] = useState(false);
   function changeProfileEdit() {

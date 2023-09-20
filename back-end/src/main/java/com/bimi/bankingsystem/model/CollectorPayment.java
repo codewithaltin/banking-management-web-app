@@ -48,7 +48,7 @@ public class CollectorPayment {
         this.description = description;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name="user_id", referencedColumnName = "id")
     private User user;
     public User getUser() {

@@ -68,7 +68,8 @@ public class User implements UserDetails {
     }
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE},orphanRemoval = true,mappedBy="user",fetch = FetchType.LAZY)
+
     private List<RequestMoney> requestedMoney;
 
     public List<RequestMoney> getRequestedMoney() {
@@ -80,7 +81,8 @@ public class User implements UserDetails {
     }
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE},orphanRemoval = true,mappedBy="user",fetch = FetchType.LAZY)
+
     private List<Transfer> transfers;
     public List<Transfer> getTransfers() {
         return transfers;
@@ -92,7 +94,7 @@ public class User implements UserDetails {
 
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE},orphanRemoval = true,mappedBy="user",fetch = FetchType.LAZY)
     private List<Contact> contacts;
     public List<Contact> getContacts() {
         return contacts;
@@ -104,7 +106,7 @@ public class User implements UserDetails {
 
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE},orphanRemoval = true,mappedBy="user",fetch = FetchType.LAZY)
     private List<InstitutionPayment> institutionPayments;
     public List<InstitutionPayment> getInstitutionPayments() {
         return institutionPayments;
@@ -117,7 +119,7 @@ public class User implements UserDetails {
 
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE},orphanRemoval = true,mappedBy="user",fetch = FetchType.LAZY)
     private List<MobilePayment> mobilePayments;
     public List<MobilePayment> getMobilePayments() {
         return mobilePayments;
@@ -128,7 +130,7 @@ public class User implements UserDetails {
 
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE},orphanRemoval = true,mappedBy="user",fetch = FetchType.LAZY)
     private List<PrePaidPayment> prePaidPayments;
     public List<PrePaidPayment> getPrePaidPayments() {
         return prePaidPayments;
@@ -138,7 +140,8 @@ public class User implements UserDetails {
     }
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE},orphanRemoval = true,mappedBy="user",fetch = FetchType.LAZY)
+
     private List<CollectorPayment> collectorPayments;
     public List<CollectorPayment> getCollectorPayments() {
         return collectorPayments;
@@ -151,7 +154,8 @@ public class User implements UserDetails {
 
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE},orphanRemoval = true,mappedBy="user",fetch = FetchType.LAZY)
+
     private List<Donation> donations;
     public List<Donation> getDonations() {
         return donations;
@@ -162,7 +166,8 @@ public class User implements UserDetails {
 
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE},orphanRemoval = true,mappedBy="user",fetch = FetchType.LAZY)
+
     private List<Loan> loans;
     public List<Loan> getLoans() {
         return loans;

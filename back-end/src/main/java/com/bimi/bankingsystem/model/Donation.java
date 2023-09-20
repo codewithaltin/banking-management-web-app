@@ -6,7 +6,7 @@ import lombok.*;
 @Setter
 @Entity
 @AllArgsConstructor
-@NoArgsConstructor
+
 @Table (name = "donation")
 public class Donation {
     @Setter(AccessLevel.PROTECTED)
@@ -31,9 +31,14 @@ public class Donation {
     @NonNull
     private String comment;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name="user_id", referencedColumnName = "id")
     private User user;
+
+    public Donation() {
+
+    }
+
     public User getUser() {
         return user;
     }

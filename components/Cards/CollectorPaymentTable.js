@@ -20,7 +20,7 @@ export default function CollectorPaymentTable({ collectorPayment, color }) {
   const [responseCollectorPayment, setResponseCollectorPayment] = useState(null);
   const [search, setSearch] = useState("");
   const [decoded, setDecoded] = useState(null);
-
+  const [isAuditor, setIsAuditor] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -30,10 +30,13 @@ export default function CollectorPaymentTable({ collectorPayment, color }) {
 
   useEffect(() => {
     if (decoded) {
-      chooseEndPoint();
-      fetchData();
+      setIsAuditor(checkAuditor());
     }
   }, [decoded]);
+
+  function checkAuditor() {
+    return decoded.authorities === "ROLE_AUDITOR";
+  }
 
   function chooseEndPoint() {
     let res = decoded.authorities === "ROLE_USER";
@@ -87,7 +90,7 @@ export default function CollectorPaymentTable({ collectorPayment, color }) {
 
   const deleteCollectorPayment = (e, id) => {
     e.preventDefault();
-    fetch(COLLECTORPAYMENT_API_BASE_URL + "/" + id, {
+    fetch("http://localhost:8080/api/v1/auth/collectorPayment/" + id, {
       method: "DELETE",
     }).then((res) => {
       if (collectorPayment) {
@@ -189,6 +192,7 @@ export default function CollectorPaymentTable({ collectorPayment, color }) {
                     >
                       Amount
                     </th>
+                    {!isAuditor && (
                     <th
                       className={
                         "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
@@ -199,6 +203,7 @@ export default function CollectorPaymentTable({ collectorPayment, color }) {
                     >
                         Actions
                     </th>
+                    )}
                     <th
                       className={
                         "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +

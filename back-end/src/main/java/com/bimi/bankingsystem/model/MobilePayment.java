@@ -44,7 +44,7 @@ public class MobilePayment {
         this.amount = amount;
     }
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name="user_id", referencedColumnName = "id")
     private User user;
     public User getUser() {

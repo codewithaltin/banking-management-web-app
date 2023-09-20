@@ -14,6 +14,7 @@ export default function LoanTable({ loan, color }) {
   const [responseLoan, setResponseLoan] = useState(null);
   const [search, setSearch] = useState("");
   const [decoded, setDecoded] = useState(null);
+  const [isAuditor, setIsAuditor] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -23,10 +24,13 @@ export default function LoanTable({ loan, color }) {
 
   useEffect(() => {
     if (decoded) {
-      chooseEndPoint();
-      fetchData();
+      setIsAuditor(checkAuditor());
     }
   }, [decoded]);
+
+  function checkAuditor() {
+    return decoded.authorities === "ROLE_AUDITOR";
+  }
 
   function chooseEndPoint() {
     let res = decoded.authorities === "ROLE_USER";
@@ -78,7 +82,7 @@ export default function LoanTable({ loan, color }) {
 
   const deleteLoan = (e, id) => {
     e.preventDefault();
-    fetch(LOAN_API_BASE_URL + "/" + id, {
+    fetch("http://localhost:8080/api/v1/auth/loan/" + id, {
       method: "DELETE",
     }).then((res) => {
       if (loans) {
@@ -183,6 +187,7 @@ export default function LoanTable({ loan, color }) {
                   {" "}
                   Monthly Income
                 </th>
+                {!isAuditor && (
                 <th
                   colSpan={2}
                   className={
@@ -194,6 +199,7 @@ export default function LoanTable({ loan, color }) {
                 >
                   Actions
                 </th>
+                )}
               </tr>
             </thead>
             {!loading && (

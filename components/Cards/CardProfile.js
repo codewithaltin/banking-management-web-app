@@ -2,13 +2,14 @@ import React from "react";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useEffect } from "react";
+import EditUser from "./EditUser";
 // components
 import jwt_decode from "jwt-decode";
 
 export default function CardProfile() {
   const [profile, setProfile] = useState({});
   const [decoded, setDecoded] = useState(null);
-  const router = useRouter();
+  const [isEditDialogOpen, setIsEditDialogOpen] = useState(false);
   useEffect(() => {
     const token = localStorage.getItem("token");
     const decodedToken = jwt_decode(token);
@@ -42,6 +43,10 @@ export default function CardProfile() {
       console.error("An error occurred while fetching profile:", error);
     }
   }
+
+  const handleEditProfileClick = () => {
+    setIsEditDialogOpen(true);
+  };
 
   return (
     <>
@@ -105,8 +110,23 @@ export default function CardProfile() {
               {profile.phoneNumber}
             </div>
           </div>
+          <button
+            className="mb-2 bg-blue-500 hover:bg-blue-700 text-blueGray-500 font-bold py-2 px-4 rounded mt-4"
+            onClick={handleEditProfileClick}
+          >
+            Edit Profile
+          </button>
+          {isEditDialogOpen && (
+        <EditUser
+          userId={profile.id}
+          setResponseUser={(updatedUser) => {
+            setProfile(updatedUser);
+          }}
+          closeModal={() => setIsEditDialogOpen(false)}
+        />
+      )}
         </div>
-      </div>
+      </div>  
     </>
   );
 }

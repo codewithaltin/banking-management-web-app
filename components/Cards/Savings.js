@@ -1,6 +1,29 @@
 import React from "react";
 
+import jwt_decode from "jwt-decode";
+import { useState } from "react";
+import { useEffect } from "react";
+
+
 const Savings = ({ savingGoal, ConfirmDialogAlert, editSavingGoal}) => {
+  const [decoded, setDecoded] = useState(null);
+  const [isAuditor, setIsAuditor] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      setIsAuditor(checkAuditor());
+    }
+  }, [decoded]);
+
+  function checkAuditor() {
+    return decoded.authorities === "ROLE_AUDITOR";
+  }
   return (
     <tr key={savingGoal.id}>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
@@ -15,6 +38,7 @@ const Savings = ({ savingGoal, ConfirmDialogAlert, editSavingGoal}) => {
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
         {savingGoal.goalName}
       </td>
+      {!isAuditor && (
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         <div class="m-5">
           <button
@@ -37,6 +61,8 @@ const Savings = ({ savingGoal, ConfirmDialogAlert, editSavingGoal}) => {
           </button>
         </div>
       </td>
+      )}
+      {!isAuditor && (
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         <button
           onClick={(e, id) => ConfirmDialogAlert(e, savingGoal.id)}
@@ -59,6 +85,7 @@ const Savings = ({ savingGoal, ConfirmDialogAlert, editSavingGoal}) => {
           Delete
         </button>
       </td>
+      )}
     </tr>
   );
 };

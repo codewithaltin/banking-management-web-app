@@ -20,6 +20,23 @@ export default function PrePaidServicesTable({ prePaidService, color }) {
   const [responsePrePaidServives, setResponsePrePaidServives] = useState(null);
   const [search, setSearch] = useState("");
   const [decoded, setDecoded] = useState(null);
+  const [isAuditor, setIsAuditor] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      setIsAuditor(checkAuditor());
+    }
+  }, [decoded]);
+
+  function checkAuditor() {
+    return decoded.authorities === "ROLE_AUDITOR";
+  }
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -67,7 +84,6 @@ export default function PrePaidServicesTable({ prePaidService, color }) {
   let dialogValue = false;
 
   const ConfirmDialogAlert = (e, id) => {
-    if (dialogValue) return true;
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -82,12 +98,11 @@ export default function PrePaidServicesTable({ prePaidService, color }) {
         Swal.fire("Deleted!", "Deleted Succesfully!", "success");
       }
     });
-    return dialogValue;
   };
 
 const deletePrePaidServices = (e, id) => {
     e.preventDefault();
-    fetch(PREPAIDSERVICES_API_BASE_URL + "/" + id, {
+    fetch("http://localhost:8080/api/v1/auth/prePaidPayment/" + id, {
       method: "DELETE",
     }).then((res) => {
       if (prePaidServices) {
@@ -184,7 +199,7 @@ const deletePrePaidServices = (e, id) => {
                 >
                   Amount
                 </th>
-                
+                {!isAuditor && (
                 <th
                   className={
                     "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
@@ -195,6 +210,7 @@ const deletePrePaidServices = (e, id) => {
                 >
                     Actions
                 </th>
+                )}
                 <th
                   className={
                     "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +

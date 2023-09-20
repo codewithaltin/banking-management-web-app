@@ -17,6 +17,7 @@ export default function SavingTable({ savingGoal, color }) {
   const [isDialogOpen, setDialogOpen] = useState(false);
   const [decoded, setDecoded] = useState(null);
   const [search, setSearch] = useState("");
+  const [isAuditor, setIsAuditor] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -26,10 +27,13 @@ export default function SavingTable({ savingGoal, color }) {
 
   useEffect(() => {
     if (decoded) {
-      chooseEndPoint();
-      fetchData();
+      setIsAuditor(checkAuditor());
     }
   }, [decoded]);
+
+  function checkAuditor() {
+    return decoded.authorities === "ROLE_AUDITOR";
+  }
 
   function chooseEndPoint() {
     let res = decoded.authorities === "ROLE_USER";
@@ -185,6 +189,7 @@ export default function SavingTable({ savingGoal, color }) {
                 >
                   Goal Name
                 </th>
+                {!isAuditor && (
                 <th
                   className={
                     "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
@@ -195,6 +200,7 @@ export default function SavingTable({ savingGoal, color }) {
                 >
                   Actions
                 </th>
+                )}
                 <th
                   className={
                     "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
@@ -203,6 +209,7 @@ export default function SavingTable({ savingGoal, color }) {
                       : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 ></th>
+                
               </tr>
             </thead>
             {!loading && (
