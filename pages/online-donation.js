@@ -48,7 +48,7 @@ const schema = yup
     comment: yup
       .string()
       .required("Comment is required")
-      .min(10, "Purpose must be at least 20 characters"),
+      .min(10, "Purpouse must be at least 10 characters"),
     
   })
   .required();
@@ -94,7 +94,7 @@ export default function Donate() {
       comment: "",
     });
 
-    const saveDonation = async (e) => {
+    const executeDonationMethod = async (e) => {
       try {
         const response = await fetch(
           "http://localhost:8080/api/v1/auth/donation/user/"+ decoded.sub, {
@@ -217,7 +217,7 @@ export default function Donate() {
                   </p>
 
 
-                  <form onSubmit={handleSubmit(saveDonation)}>
+                  <form onSubmit={handleSubmit(executeDonationMethod)}>
                   {" "}
                   <div className="relative w-full mb-3 mt-8">
                     <label

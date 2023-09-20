@@ -1,34 +1,61 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import Donation from "./Donation";
+import jwt_decode from "jwt-decode";
 import Swal from "sweetalert2";
 
 export default function DonationTable({ donation, color }) {
-    const DONATION_API_BASE_URL = "http://localhost:8080/api/v1/auth/donation";
+    let DONATION_API_BASE_URL;
     const [donations, setDonations] = useState(null);
     const [loading, setLoading] = useState(true);
     const [donationId, setDonationId] = useState(null);
     const [responseDonation, setResponseDonation] = useState(null);
     const [search, setSearch] = useState("");
+    const [decoded, setDecoded] = useState(null);
+    
     useEffect(() => {
-      const fetchData = async () => {
-        setLoading(true);
-        try {
-          const response = await fetch(DONATION_API_BASE_URL, {
-            method: "GET",
-            headers: {
-              "Content-Type": "application/json",
-            },
-          });
-          const donations = await response.json();
-          setDonations(donations);
-        } catch (error) {
-          console.log(error);
+      const token = localStorage.getItem("token");
+      const decodedToken = jwt_decode(token);
+      setDecoded(decodedToken);
+    }, []);
+  
+    useEffect(() => {
+      if (decoded) {
+        chooseEndPoint();
+        fetchData();
+      }
+    }, [decoded]);
+
+    function chooseEndPoint() {
+      let res = decoded.authorities === "ROLE_USER";
+      if (res) {
+        DONATION_API_BASE_URL =
+          "http://localhost:8080/api/v1/auth/donation/user/" + decoded.sub;
+      } else {
+        DONATION_API_BASE_URL = "http://localhost:8080/api/v1/auth/loan";
+      }
+    }
+    const fetchData = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch(DONATION_API_BASE_URL, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.ok) {
+          const donationData = await response.json();
+          setDonations(donationData);
+        } else {
+          throw new Error("Failed to fetch data");
         }
+      } catch (error) {
+        console.error(error);
+      } finally {
         setLoading(false);
-      };
-      fetchData();
-    }, [donation, responseDonation]);
+      }
+    };
 
     const confirmDelete = (e, id) => {
       Swal.fire({
