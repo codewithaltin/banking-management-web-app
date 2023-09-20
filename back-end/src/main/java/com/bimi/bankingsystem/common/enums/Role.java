@@ -9,7 +9,8 @@ import java.util.EnumSet;
 @Getter
 public enum Role {
     USER("USER"),
-    ADMIN("ADMIN");
+    ADMIN("ADMIN"),
+    AUDITOR("AUDITOR");
 
     private String value;
 
