@@ -43,7 +43,7 @@ const schema = yup
       .typeError("Input must be a number")
       .required("Monthly incomes are required")
       .min(500, "Monthly incomes must be greater than €500"),
-    purpose: yup
+      purpouse: yup
       .string()
       .required("Loan purpose is required")
       .min(10, "Purpose must be at least 20 characters"),
@@ -354,14 +354,14 @@ export default function Loan() {
                           <textarea
                             rows="4"
                             cols="80"
-                            {...register("purpose")}
+                            {...register("purpouse")}
                             className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                             placeholder="Type a message..."
                             value={loan.purpouse}
                             onChange={(e) => handleChange(e)}
                           />
                           <small role="alert" className="text-red-500 ">
-                            {errors.purpose?.message}
+                            {errors.purpouse?.message}
                           </small>
                         </div>
                         <div className="text-center mt-6">
