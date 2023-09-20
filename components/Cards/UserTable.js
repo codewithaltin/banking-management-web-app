@@ -50,6 +50,7 @@ export default function UserTable({ user, color }) {
     };
     fetchData();
   }, [user, responseUser]);
+
   let dialogValue = false;
 
   const confirmDelete = (e, id) => {
@@ -265,7 +266,7 @@ export default function UserTable({ user, color }) {
           </table>
         </div>
         <EditUser
-          userId={userId}
+          userId={profile.id}
           setResponseUser={setResponseUser}
           setIsOpen={true}
         />

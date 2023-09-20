@@ -54,6 +54,12 @@ public class DonationController {
         return donationService.createDonation(donation);
     }
 
+    @GetMapping("/donation/user/{email}")
+    public List<Donation> getDonationByUserId(@PathVariable String email){
+        User user = userService.getUserByEmail(email).get();
+        return user.getDonations();
+    }
+
     @DeleteMapping("donation/{id}")
     public boolean deleteDonation(@PathVariable Long id){
         return donationService.deleteDonation(id);

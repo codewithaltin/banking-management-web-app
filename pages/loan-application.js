@@ -45,8 +45,8 @@ const schema = yup
       .min(500, "Monthly incomes must be greater than €500"),
       purpouse: yup
       .string()
-      .required("Loan purpose is required")
-      .min(10, "Purpose must be at least 20 characters"),
+      .required("Loan purpouse is required")
+      .min(10, "Purpouse must be at least 20 characters"),
   })
   .required();
 
@@ -349,7 +349,7 @@ export default function Loan() {
                             className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                             htmlFor="message"
                           >
-                            Purpose of loan
+                            Purpouse of loan
                           </label>
                           <textarea
                             rows="4"

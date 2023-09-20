@@ -1,11 +1,8 @@
 import React from "react";
-// components
 import CardLineChart from "components/Cards/CardLineChart.js";
-// layout for page
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-
-import User from "layouts/User.js";
+import Admin from "layouts/Admin.js";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -37,12 +34,10 @@ export default function Dashboard() {
   return (
     <>
       <div className="flex flex-wrap">
-        <div className="w-full xl:w-full mb-12 xl:mb-0 px-4">
-          <CardLineChart />
-        </div>
+        <div className="w-full xl:w-full mb-12 xl:mb-0 px-4"></div>
       </div>
     </>
   );
 }
 
-Dashboard.layout = User;
+Dashboard.layout = Admin;

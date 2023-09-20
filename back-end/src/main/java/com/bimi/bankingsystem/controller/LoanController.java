@@ -2,6 +2,7 @@ package com.bimi.bankingsystem.controller;
 
 import com.bimi.bankingsystem.model.Donation;
 import com.bimi.bankingsystem.model.Loan;
+import com.bimi.bankingsystem.model.SavingGoal;
 import com.bimi.bankingsystem.service.LoanService;
 import org.springframework.web.bind.annotation.*;
 import com.bimi.bankingsystem.model.User;
@@ -37,6 +38,12 @@ public class LoanController {
         Loan loan = null;
         loan = loanService.getLoanById(id);
         return loanService.getAllLoans();
+    }
+
+    @GetMapping("/loan/user/{email}")
+    public List<Loan> getLoanByUserId(@PathVariable String email){
+        User user = userService.getUserByEmail(email).get();
+        return user.getLoans();
     }
 
     @PostMapping("/loan/user/{email}")
