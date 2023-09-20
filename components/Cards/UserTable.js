@@ -29,7 +29,7 @@ export default function UserTable({ user, color }) {
     if (decoded) {
       if (decoded.authorities === "ROLE_USER") {
         router.push("/");
-      } else if (decoded.authorities === "ROLE_ADMIN") {
+      } else if (decoded.authorities === "ROLE_AUDITOR") {
         setIsAuditor(checkAuditor());
       }
     }

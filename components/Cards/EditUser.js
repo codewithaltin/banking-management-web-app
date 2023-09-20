@@ -126,6 +126,7 @@ const EditUser = ({ userId, setResponseUser }) => {
       balance: user.balance,
       city: user.city,
     };
+    console.log(user.city);
     const response = await fetch(USER_API_BASE_URL + userId, {
       method: "PUT",
       headers: {
@@ -141,7 +142,27 @@ const EditUser = ({ userId, setResponseUser }) => {
     reset(e);
     Swal.fire("Updated!", "Updated Succesfully!", "success");
   };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:8080/api/v1/auth/cities",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const arrOfCities = await response.json();
+        setCities(arrOfCities); // Update the cities array using the useState hook
+      } catch (error) {
+        throw new Error("Oops, fetching went wrong!");
+      }
+    };
 
+    fetchData();
+  }, []);
   return (
     <div className="min-h-screen absolute top-1/2 right-1/4">
       <Transition appear show={isOpen} as={Fragment}>
@@ -174,7 +195,7 @@ const EditUser = ({ userId, setResponseUser }) => {
                         name="firstName"
                         value={user.firstName}
                         onChange={(e) => handleChange(e)}
-                        className="h-10  border mt-2 px-2 py-2 w-full"
+                        className="h-10  border mt-2 p-4 w-full rounded-md"
                       ></input>
                     </div>
                     {/* <small role="alert" className="text-red-500">
@@ -189,29 +210,28 @@ const EditUser = ({ userId, setResponseUser }) => {
                         name="lastName"
                         value={user.lastName}
                         onChange={(e) => handleChange(e)}
-                        className="h-10 border mt-2 px-2 py-2 w-full"
+                        className="h-10 border mt-2 px-2 p-4 w-full rounded-md"
                       ></input>
                     </div>
                     {/* <small role="alert" className="  text-red-500">
                       {errors.lastName?.message}
                     </small> */}
                     <div className="h-14 mt-4">
-                    <label className="block text-gray-600 text-sm font-semibold">
+                      <label className="block text-gray-600 text-sm font-semibold">
                         City
                       </label>
-                    <select
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      type="text"
-                      name="city"
-                      value={user.city}
-                      onChange={(e) => handleChange(e)}
-                    >
-                      {cities.map((city, index) => (
-                        <option key={index} value={city}>
-                          {city}
-                        </option>
-                      ))}
-                    </select>
+                      <select
+                        className=" px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow border rounder-md focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        name="city"
+                        value={user.city}
+                        onChange={(e) => handleChange(e)}
+                      >
+                        {cities.map((city, index) => (
+                          <option key={index} value={city}>
+                            {city}
+                          </option>
+                        ))}
+                      </select>
                     </div>
                     <div className="h-14 mt-4">
                       <label className="block text-gray-600 text-sm font-semibold">
@@ -222,14 +242,14 @@ const EditUser = ({ userId, setResponseUser }) => {
                         name="email"
                         value={user.email}
                         onChange={(e) => handleChange(e)}
-                        className="h-10 border mt-2 px-2 py-2 w-full"
+                        className="h-10 border mt-2 p-4 w-full rounded-md"
                       ></input>
                     </div>
                     {/* <small role="alert" className="  text-red-500 ">
                       {errors.email?.message}
                     </small> */}
                     <div className="h-14 my-4">
-                      <label className="block text-gray-600 text-sm font-semibold">
+                      <label className="block text-gray-600 text-sm font-semibold rounded-md">
                         Phone Number
                       </label>
                       <input
@@ -237,7 +257,7 @@ const EditUser = ({ userId, setResponseUser }) => {
                         name="phoneNumber"
                         value={user.phoneNumber}
                         onChange={(e) => handleChange(e)}
-                        className="h-10  outline-none mt-2 p-2 w-full"
+                        className="h-10  outline-none mt-2 p-4 w-full"
                       ></input>
                     </div>
 

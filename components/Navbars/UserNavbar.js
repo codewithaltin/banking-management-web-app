@@ -14,7 +14,7 @@ export default function Navbar() {
         <div className="container px-4 mx-auto flex flex-wrap items-center justify-between">
           <div className="w-full relative flex justify-between lg:w-auto lg:static lg:block lg:justify-start">
             <Link
-              href=""
+              href="/"
               className="text-costum-dark text-xl font-heavy leading-relaxed
               inline-block mr-4 py-2 whitespace-nowrap uppercase "
             >

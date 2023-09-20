@@ -2,7 +2,9 @@ import React from "react";
 import { getSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import Swal from "sweetalert2";
+
 export default function Navbar() {
+  const router = useRouter();
   const successfulAlert = () => {
     Swal.fire({
       icon: "success",
@@ -16,6 +18,7 @@ export default function Navbar() {
   function logout() {
     localStorage.removeItem("token");
     localStorage.removeItem("email");
+    router.push("auth/login");
   }
   return (
     <>
@@ -25,7 +28,10 @@ export default function Navbar() {
           <form className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-3"></form>
           {/* User */}
 
-          <a onClick={logout} className="">
+          <a
+            className="text-white text-s font-bold leading-relaxed inline-block mr-4 py-2 whitespace-nowrap capitalize cursor-pointer "
+            onClick={logout}
+          >
             Log Out
           </a>
         </div>

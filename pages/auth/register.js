@@ -53,9 +53,6 @@ const schema = yup
   .required();
 export default function Register() {
   const router = useRouter();
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [password, setPassword] = useState("");
   const [cities, setCities] = useState([]);
   const {
     register,
