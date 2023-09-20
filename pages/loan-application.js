@@ -43,10 +43,10 @@ const schema = yup
       .typeError("Input must be a number")
       .required("Monthly incomes are required")
       .min(500, "Monthly incomes must be greater than €500"),
-    purpose: yup
+      purpouse: yup
       .string()
-      .required("Loan purpose is required")
-      .min(10, "Purpose must be at least 20 characters"),
+      .required("Loan purpouse is required")
+      .min(10, "Purpouse must be at least 20 characters"),
   })
   .required();
 
@@ -58,7 +58,6 @@ export default function Loan() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
   const [decoded, setDecoded] = useState(null);
-  const [user, setUser] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -66,7 +65,7 @@ export default function Loan() {
     setDecoded(decodedToken);
   }, []);
 
-  //const LOAN_API_BASE_URL = "http://localhost:8080/api/v1/auth/loan";
+  let LOAN_API_BASE_URL;
 
   const [isOpen, setIsOpen] = useState(false);
   const [loan, setLoans] = useState({
@@ -90,10 +89,32 @@ export default function Loan() {
     purpouse: "",
   });
 
+  const executeLoanMethod = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/api/v1/auth/loan/user/" + decoded.sub, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(loan), 
+      });
+  
+      if (!response.ok) {
+        // Handle any errors if needed
+        console.error('Transfer failed');
+      } else {
+        console.log('Transfer executed successfully!');
+        location.reload();
+      }
+    } catch (error) {
+ 
+      console.error('An error occurred:', error);
+    }
+  };
+
   const saveLoan = async (e) => {
     //e.preventDefault();
-    const response = await fetch(
-      "http://localhost:8080/api/v1/auth/loan/user/"+ decoded.sub, {
+    const response = await fetch(LOAN_API_BASE_URL, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -207,7 +228,7 @@ export default function Loan() {
                         Complete this form and we will review your details.
                       </p>
 
-                      <form onSubmit={handleSubmit(saveLoan)}>
+                      <form onSubmit={handleSubmit(executeLoanMethod)}>
                         {" "}
                         <div className="relative w-full mb-3 mt-8">
                           <label
@@ -328,19 +349,19 @@ export default function Loan() {
                             className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                             htmlFor="message"
                           >
-                            Purpose of loan
+                            Purpouse of loan
                           </label>
                           <textarea
                             rows="4"
                             cols="80"
-                            {...register("purpose")}
+                            {...register("purpouse")}
                             className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full"
                             placeholder="Type a message..."
-                            value={loan.purpose}
+                            value={loan.purpouse}
                             onChange={(e) => handleChange(e)}
                           />
                           <small role="alert" className="text-red-500 ">
-                            {errors.purpose?.message}
+                            {errors.purpouse?.message}
                           </small>
                         </div>
                         <div className="text-center mt-6">
@@ -365,3 +386,5 @@ export default function Loan() {
     </TokenCheck>
   );
 }
+
+Loan.layout = Auth;

@@ -4,15 +4,13 @@ import Swal from "sweetalert2";
 
 const EditLoan = ({ loanId, setResponseLoan }) => {
   const LOAN_API_BASE_URL = "http://localhost:8080/api/v1/auth/loan";
-  let [isOpen, setIsOpen] = useState(false);
+  
+  const [isOpen, setIsOpen] = useState(false);
   const [loan, setLoan] = useState({
     fullName: "",
     email: "",
-    phoneNumber: 0,
-    address: "",
-    loanAmount: 0,
-    monthlyIncome: 0,
-    purpouse: "",
+    phoneNumber: "",
+    monthlyIncome: "",
   });
 
   useEffect(() => {
@@ -26,8 +24,7 @@ const EditLoan = ({ loanId, setResponseLoan }) => {
         });
         const _loan = await response.json();
         setLoan(_loan);
-        console.log(loan);
-        openModal();
+        setIsOpen(true);
       } catch (error) {
         console.log(error);
       }
@@ -52,7 +49,7 @@ const EditLoan = ({ loanId, setResponseLoan }) => {
 
   const reset = (e) => {
     e.preventDefault();
-    closeModal();
+    setIsOpen(false);
   };
 
   const updateLoan = async (e) => {
@@ -71,9 +68,8 @@ const EditLoan = ({ loanId, setResponseLoan }) => {
     }
     const _loan = await response.json();
     setResponseLoan(_loan);
-    console.log(loan);
-    Swal.fire("Updated!", "Updated Succesfully!", "success");
     reset(e);
+    Swal.fire("Updated!", "Updated Succesfully!", "success");
   };
 
   return (
@@ -137,48 +133,12 @@ const EditLoan = ({ loanId, setResponseLoan }) => {
                     </div>
                     <div className="h-14 my-4">
                       <label className="block text-gray-600 text-sm font-normal">
-                        Address
-                      </label>
-                      <input
-                        type="text"
-                        name="address"
-                        value={loan.address}
-                        onChange={(e) => handleChange(e)}
-                        className="h-10 w-96 border mt-2 px-2 py-2"
-                      ></input>
-                    </div>
-                    <div className="h-14 my-4">
-                      <label className="block text-gray-600 text-sm font-normal">
-                        Loan Amount
-                      </label>
-                      <input
-                        type="text"
-                        name="loanAmount"
-                        value={loan.loanAmount}
-                        onChange={(e) => handleChange(e)}
-                        className="h-10 w-96 border mt-2 px-2 py-2"
-                      ></input>
-                    </div>
-                    <div className="h-14 my-4">
-                      <label className="block text-gray-600 text-sm font-normal">
                         Monthly Income
                       </label>
                       <input
                         type="text"
                         name="monthlyIncome"
                         value={loan.monthlyIncome}
-                        onChange={(e) => handleChange(e)}
-                        className="h-10 w-96 border mt-2 px-2 py-2"
-                      ></input>
-                    </div>
-                    <div className="h-14 my-4">
-                      <label className="block text-gray-600 text-sm font-normal">
-                        Purpouse
-                      </label>
-                      <input
-                        type="text"
-                        name="purpouse"
-                        value={loan.purpouse}
                         onChange={(e) => handleChange(e)}
                         className="h-10 w-96 border mt-2 px-2 py-2"
                       ></input>
