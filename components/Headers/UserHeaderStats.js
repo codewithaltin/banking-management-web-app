@@ -7,6 +7,10 @@ export default function HeaderStats() {
   const [employeeCount, setEmployeeCount] = useState(null);
   const [donationCount, setDonationCount] = useState(null);
   const [loanCount, setLoanCount] = useState(null);
+  const [insPaymentC, setInsPaymentCount] = useState(null);
+  const [prePaymentC, setPrePaymentCount] = useState(null);
+  const [collPaymentC, setCollPaymentCount] = useState(null);
+  const [mobPaymentC, setMobPaymentCount] = useState(null);
   const [decoded, setDecoded] = useState(null);
 
   
@@ -74,6 +78,68 @@ export default function HeaderStats() {
       .catch((error) => {
         console.error("Error fetching loan data:", error);
       });
+
+      // Fetch donation data (replace with your actual endpoint)
+    fetch("http://localhost:8080/api/v1/auth/institutionPayments/user/")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      setInsPaymentCount(data.length);
+    })
+    .catch((error) => {
+      console.error("Error fetching donation data:", error);
+    });
+
+    // Fetch donation data (replace with your actual endpoint)
+    fetch("http://localhost:8080/api/v1/auth/collectorPayment/user/")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      setCollPaymentCount(data.length);
+    })
+    .catch((error) => {
+      console.error("Error fetching donation data:", error);
+    });
+
+    // Fetch donation data (replace with your actual endpoint)
+    fetch("http://localhost:8080/api/v1/auth/mobilePayment/user/")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      setMobPaymentCount(data.length);
+    })
+    .catch((error) => {
+      console.error("Error fetching donation data:", error);
+    });
+
+    // Fetch donation data (replace with your actual endpoint)
+    fetch("http://localhost:8080/api/v1/auth/prePaidPayment/user/")
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      return response.json();
+    })
+    .then((data) => {
+      setPrePaymentCount(data.length);
+    })
+    .catch((error) => {
+      console.error("Error fetching donation data:", error);
+    });
+
+
   }, []);
 
 
@@ -93,9 +159,10 @@ export default function HeaderStats() {
                   statPercent="12.45"
                   statPercentColor="text-emerald-500"
                   statDescripiron="Since last month"
-                  statIconName="far fa-chart-bar"
+                  statIconName="fas fa-piggy-bank"
                   statIconColor="bg-red-500"
                 />
+                
               </div>
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
@@ -105,7 +172,7 @@ export default function HeaderStats() {
                   statPercent="3.48"
                   statPercentColor="text-red-500"
                   statDescripiron="Since last month"
-                  statIconName="fas fa-chart-pie"
+                  statIconName="fas fa-comments-dollar"
                   statIconColor="bg-orange-500"
                 />
               </div>
@@ -116,10 +183,10 @@ export default function HeaderStats() {
                   statArrow="up"
                   statPercent="12"
                   statPercentColor="text-emerald-500"
-                  statDescripiron="Since last month"
-                  statIconName="fas fa-percent"
+                  statDescripiron="Set a saving goal"
+                  statIconName="fas fa-landmark"
                   statIconColor="bg-lightBlue-500"
-                />  
+                />
               </div>
               <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
                 <CardStats
@@ -129,8 +196,56 @@ export default function HeaderStats() {
                   statPercent="1.10"
                   statPercentColor="text-orange-500"
                   statDescripiron="Since last Month"
-                  statIconName="fas fa-users"
+                  statIconName="fas fa-hand-holding-usd"
                   statIconColor="bg-pink-500"
+                />
+              </div>
+              <div className="w-full lg:w-6/12 xl:w-3/12 px-4 mt-5">
+                <CardStats
+                  statSubtitle="My Instituion Payments"
+                  statTitle={insPaymentC !== null ? insPaymentC : "Loading..."} 
+                  statArrow="down"
+                  statPercent="1.10"
+                  statPercentColor="text-orange-500"
+                  statDescripiron="Since last Month"
+                  statIconName="fas fa-building"
+                  statIconColor="bg-pink-500"
+                />
+              </div>
+              <div className="w-full lg:w-6/12 xl:w-3/12 px-4 mt-5">
+                <CardStats
+                  statSubtitle="My Pre Paid Services"
+                  statTitle={prePaymentC !== null ? prePaymentC : "Loading..."} 
+                  statArrow="up"
+                  statPercent="12"
+                  statPercentColor="text-emerald-500"
+                  statDescripiron="Set a saving goal"
+                  statIconName="fas fa-coins"
+                  statIconColor="bg-lightBlue-500"
+                />
+              </div>
+              <div className="w-full lg:w-6/12 xl:w-3/12 px-4 mt-5">
+                <CardStats
+                  statSubtitle="My Collector Payments"
+                  statTitle={collPaymentC !== null ? collPaymentC : "Loading..."} 
+                  statArrow="down"
+                  statPercent="3.48"
+                  statPercentColor="text-red-500"
+                  statDescripiron="Since last month"
+                  statIconName="fas fa-globe"
+                  statIconColor="bg-orange-500"
+                />
+              </div>
+              <div className="w-full lg:w-6/12 xl:w-3/12 px-4 mt-5">
+                <CardStats
+                  statSubtitle="My Mobile Payments"
+                  statTitle={mobPaymentC !== null ? mobPaymentC : "Loading..."}               
+                  statArrow="up"
+                  statPercent="12.45"
+                  statPercentColor="text-emerald-500"
+                  statDescripiron="Since last month"
+                  statIconName="fas fa-mobile"
+                  statIconColor="bg-red-500"
                 />
               </div>
             </div>
