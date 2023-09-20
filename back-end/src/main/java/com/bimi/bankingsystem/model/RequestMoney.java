@@ -23,7 +23,7 @@ public class RequestMoney {
     @Column
     private String payeeEmail;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name="user_id", referencedColumnName = "id")
     private User user;
 

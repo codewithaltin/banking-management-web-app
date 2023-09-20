@@ -30,7 +30,7 @@ public class Loan {
     @NonNull
     private String purpouse;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne()
     @JoinColumn(name="user_id", referencedColumnName = "id")
     private User user;
     public User getUser() {
