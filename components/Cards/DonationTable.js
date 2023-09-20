@@ -22,6 +22,8 @@ export default function DonationTable({ donation, color }) {
 
   useEffect(() => {
     if (decoded) {
+      chooseEndPoint();
+      fetchData();
       setIsAuditor(checkAuditor());
     }
   }, [decoded]);

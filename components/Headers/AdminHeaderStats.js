@@ -129,6 +129,31 @@ export default function AdminHeaderStats() {
                   statIconColor="bg-pink-500"
                 />
               </div>
+              <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
+                <CardStats
+                  statSubtitle="Donations Made"
+                  statTitle={donationCount !== null ? donationCount : "Loading..."} 
+                  statArrow="down"
+                  statPercent="1.10"
+                  statPercentColor="text-orange-500"
+                  statDescripiron="Since yesterday"
+                  statIconName="fas fa-users"
+                  statIconColor="bg-pink-500"
+                />
+              </div>
+              <div className="w-full lg:w-6/12 xl:w-3/12 px-4">
+                <CardStats
+                  statSubtitle="Donations Made"
+                  statTitle={donationCount !== null ? donationCount : "Loading..."} 
+                  statArrow="down"
+                  statPercent="1.10"
+                  statPercentColor="text-orange-500"
+                  statDescripiron="Since yesterday"
+                  statIconName="fas fa-users"
+                  statIconColor="bg-pink-500"
+                />
+                
+              </div>
             </div>
           </div>
         </div>

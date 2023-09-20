@@ -31,6 +31,8 @@ export default function InstitutionPaymentsTable({ institutionPayment, color }) 
   
     useEffect(() => {
       if (decoded) {
+        chooseEndPoint();
+        fetchData();
         setIsAuditor(checkAuditor());
       }
     }, [decoded]);

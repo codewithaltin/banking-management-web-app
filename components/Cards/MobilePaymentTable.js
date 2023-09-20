@@ -30,6 +30,8 @@ export default function MobilePaymentTable({ mobilePayment, color }) {
 
   useEffect(() => {
     if (decoded) {
+      chooseEndPoint();
+      fetchData();
       setIsAuditor(checkAuditor());
     }
   }, [decoded]);
