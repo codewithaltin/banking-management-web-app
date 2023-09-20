@@ -7,37 +7,63 @@ import AddGoal from "./AddGoal";
 import TableDropdown from "components/Dropdowns/TableDropdown.js";
 import CardTable from "./CardTable";
 import Swal from "sweetalert2";
+import jwt_decode from "jwt-decode";
 
 export default function PrePaidServicesTable({ prePaidService, color }) {
 
 
-  const PREPAIDSERVICES_API_BASE_URL = "http://localhost:8080/api/v1/auth/prePaidPayment";
+  let PREPAIDSERVICES_API_BASE_URL;
 
   const [prePaidServices, setPrePaidServives] = useState(null);
   const [loading, setLoading] = useState(true);
   const [prePaidServivesId, setPrePaidServivesId] = useState(null);
   const [responsePrePaidServives, setResponsePrePaidServives] = useState(null);
   const [search, setSearch] = useState("");
+  const [decoded, setDecoded] = useState(null);
 
-useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch(PREPAIDSERVICES_API_BASE_URL, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const prePaidService = await response.json();
-        setPrePaidServives(prePaidService);
-      } catch (error) {
-        console.log(error);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      chooseEndPoint();
+      fetchData();
+    }
+  }, [decoded]);
+
+  function chooseEndPoint() {
+    let res = decoded.authorities === "ROLE_USER";
+    if (res) {
+      PREPAIDSERVICES_API_BASE_URL =
+        "http://localhost:8080/api/v1/auth/prePaidPayment/user/" + decoded.sub;
+    } else {
+      PREPAIDSERVICES_API_BASE_URL = "http://localhost:8080/api/v1/auth/prePaidPayment";
+    }
+  }
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(PREPAIDSERVICES_API_BASE_URL, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const collectorData = await response.json();
+        setPrePaidServives(collectorData);
+      } else {
+        throw new Error("Failed to fetch data");
       }
+    } catch (error) {
+      console.error(error);
+    } finally {
       setLoading(false);
-    };
-    fetchData();
-  }, [prePaidService, responsePrePaidServives]);
+    }
+  };
   let dialogValue = false;
 
   const ConfirmDialogAlert = (e, id) => {

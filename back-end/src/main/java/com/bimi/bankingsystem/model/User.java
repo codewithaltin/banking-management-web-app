@@ -137,6 +137,18 @@ public class User implements UserDetails {
         prePaidPayments.add(prePaidPayment);
     }
 
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<CollectorPayment> collectorPayments;
+    public List<CollectorPayment> getCollectorPayments() {
+        return collectorPayments;
+    }
+    public void addCollectorPayment(CollectorPayment collectorPayment){
+        collectorPayments.add(collectorPayment);
+    }
+
+
+
 
     @JsonIgnore
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
@@ -146,6 +158,17 @@ public class User implements UserDetails {
     }
     public void createDonation(Donation donation){
         donations.add(donation);
+    }
+
+
+    @JsonIgnore
+    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user")
+    private List<Loan> loans;
+    public List<Loan> getLoans() {
+        return loans;
+    }
+    public void createLoan(Loan loan){
+        loans.add(loan);
     }
 
 

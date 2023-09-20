@@ -42,7 +42,9 @@ const schema = yup
       .max(25000, "Donation amount must be lower than €25000"),
     cardInformation: yup
       .string()
-      .required("Card Info is required"),
+      .length(16, 'Card number must be exactly 16 digits')
+      .matches(/^\d+$/, 'Card number can only contain digits')
+      .required('Card number is required'),
     comment: yup
       .string()
       .required("Comment is required")
@@ -91,23 +93,6 @@ export default function Donate() {
       cardInformation: "",
       comment: "",
     });
-
-    /* const saveDonation = async (e) => {
-      //e.preventDefault();
-      const response = await fetch(DONATION_API_BASE_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(donation),
-      });
-      if (!response.ok) {
-        throw new Error("Something went wrong");
-      }
-      const _donation = await response.json();
-      setResponseDonation(_donation);
-      window.location.reload();
-    }; */
 
     const saveDonation = async (e) => {
       try {

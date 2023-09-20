@@ -54,17 +54,17 @@ public class ContactController {
         return ResponseEntity.ok(contact);
     }
 
-    @PostMapping("/contact/user/{userId}")
-    public Contact saveContactFormByUserId(@PathVariable Long userId, @RequestBody Contact contact){
-        User user = userService.getUserById(userId).get();
+    @PostMapping("/contact/user/{email}")
+    public Contact saveContactFormByUserId(@PathVariable String email, @RequestBody Contact contact){
+        User user = userService.getUserByEmail(email).get();
         user.addContact(contact);
         contact.assignUserToContact(user);
         return contactService.saveContact(contact);
     }
 
-    @GetMapping("/contact/user/{userId}")
-    public List<Contact> getContactFormByUserId(@PathVariable Long userId){
-        User user = userService.getUserById(userId).get();
+    @GetMapping("/contact/user/{email}")
+    public List<Contact> getContactFormByUserId(@PathVariable String email){
+        User user = userService.getUserByEmail(email).get();
         return user.getContacts();
     }
 

@@ -4,6 +4,7 @@ import com.bimi.bankingsystem.model.InstitutionPayment;
 import com.bimi.bankingsystem.model.User;
 import com.bimi.bankingsystem.service.InstitutionPaymentService;
 import com.bimi.bankingsystem.service.UserServiceImpl;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -51,20 +52,30 @@ public class InstitutionPaymentController {
     }
 
 
-    @PostMapping("/institutionPayments/user/{userId}")
-    public InstitutionPayment saveInstitutionPaymentByUserId(@PathVariable Long userId, @RequestBody InstitutionPayment institutionPayment){
-        User user = userService.getUserById(userId).get();
+    @PostMapping("/institutionPayments/user/{email}")
+    public InstitutionPayment saveInstitutionPaymentByUserId(@PathVariable String email, @RequestBody InstitutionPayment institutionPayment){
+        User user = userService.getUserByEmail(email).get();
         user.addInstitutionPayment(institutionPayment);
         institutionPayment.assignUserToInstitutionPayment(user);
         return institutionPaymentService.addInstitutionPayment(institutionPayment);
     }
 
-    @GetMapping("/institutionPayments/user/{userId}")
-    public List<InstitutionPayment> getInstitutionPaymentByUserId(@PathVariable Long userId){
-        User user = userService.getUserById(userId).get();
+    @GetMapping("/institutionPayments/user/{email}")
+    public List<InstitutionPayment> getInstitutionPaymentByUserId(@PathVariable String email){
+        User user = userService.getUserByEmail(email).get();
         return user.getInstitutionPayments();
     }
 
+    public ResponseEntity<String> processPayment(
+            @RequestParam("userId") long userId,
+            @RequestParam("paymentAmount") int paymentAmount) {
+        try {
+            institutionPaymentService.processPayment(userId, paymentAmount);
+            return ResponseEntity.ok("Payment processed successfully");
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("Insufficient balance");
+        }
+    }
 
 
 }

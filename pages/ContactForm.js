@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { useEffect } from "react";
+import jwt_decode from "jwt-decode";
 
 import Auth from "layouts/Auth.js";
 
@@ -30,8 +32,13 @@ export default function Contact() {
     watch,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+  const [decoded, setDecoded] = useState(null);
 
-  const CONTACT_API_BASE_URL = "http://localhost:8080/api/v1/auth/contact";
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
 
   const [isOpen, setIsOpen] = useState(false);
   const [contact, setContacts] = useState({
@@ -53,11 +60,13 @@ export default function Contact() {
 
   const saveContact = async (e) => {
     //e.preventDefault();
-    const response = await fetch(CONTACT_API_BASE_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    const response = await fetch(
+      "http://localhost:8080/api/v1/auth/contact/user/" + decoded.sub,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
       body: JSON.stringify(contact),
     });
     if (!response.ok) {
