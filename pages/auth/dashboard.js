@@ -1,17 +1,11 @@
 import React from "react";
-
 // components
-
 import CardLineChart from "components/Cards/CardLineChart.js";
-import CardBarChart from "components/Cards/CardBarChart.js";
-import CardPageVisits from "components/Cards/CardPageVisits.js";
-import CardSocialTraffic from "components/Cards/CardSocialTraffic.js";
-
 // layout for page
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 
-import Admin from "layouts/User.js";
+import User from "layouts/User.js";
 
 export default function Dashboard() {
   const router = useRouter();
@@ -51,4 +45,4 @@ export default function Dashboard() {
   );
 }
 
-Dashboard.layout = Admin;
+Dashboard.layout = User;
