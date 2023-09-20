@@ -17,9 +17,10 @@ export default function Sidebar() {
 
   useEffect(() => {
     if (decoded) {
-      setIsUser(checkUser());
+      setIsUser(true);
     }
   }, [decoded]);
+
   function checkUser() {
     return decoded.authorities === "ROLE_USER";
   }

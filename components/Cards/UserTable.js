@@ -16,6 +16,8 @@ export default function UserTable({ user, color }) {
   const [filter, setFilter] = useState([]);
   const [cities, setCities] = useState([]);
   const [decoded, setDecoded] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+
   const router = useRouter();
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -27,10 +29,14 @@ export default function UserTable({ user, color }) {
     if (decoded) {
       if (decoded.authorities === "ROLE_USER") {
         router.push("/");
+      } else if (decoded.authorities === "ROLE_ADMIN") {
+        setIsAdmin(checkAdmin());
       }
     }
   }, [decoded]);
-
+  function checkAdmin() {
+    return decoded.authorities === "ROLE_ADMIN";
+  }
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -50,7 +56,6 @@ export default function UserTable({ user, color }) {
     };
     fetchData();
   }, [user, responseUser]);
-
   let dialogValue = false;
 
   const confirmDelete = (e, id) => {
@@ -227,17 +232,19 @@ export default function UserTable({ user, color }) {
                   City
                 </th>
 
-                <th
-                  colSpan={2}
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                >
-                  Actions
-                </th>
+                {isAdmin && (
+                  <th
+                    colSpan={2}
+                    className={
+                      "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                      (color === "light"
+                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                    }
+                  >
+                    Actions
+                  </th>
+                )}
               </tr>
             </thead>
             {!loading && (
@@ -266,7 +273,7 @@ export default function UserTable({ user, color }) {
           </table>
         </div>
         <EditUser
-          userId={profile.id}
+          userId={userId}
           setResponseUser={setResponseUser}
           setIsOpen={true}
         />

@@ -25,7 +25,9 @@ export default function Navbar() {
           <form className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-3"></form>
           {/* User */}
 
-          <a>Log Out</a>
+          <a onClick={logout} className="">
+            Log Out
+          </a>
         </div>
       </nav>
       {/* End Navbar */}
