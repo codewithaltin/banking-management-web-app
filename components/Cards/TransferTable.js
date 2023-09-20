@@ -14,6 +14,7 @@ export default function TransferTable({ transfer,color }) {
   const [responseTransfer, setResponseTransfer] = useState(null);
   const [decoded, setDecoded] = useState(null);
   const [search, setSearch] = useState("");
+  const [isAuditor, setIsAuditor] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -23,10 +24,13 @@ export default function TransferTable({ transfer,color }) {
 
   useEffect(() => {
     if (decoded) {
-      chooseEndPoint();
-      fetchData();
+      setIsAuditor(checkAuditor());
     }
   }, [decoded]);
+
+  function checkAuditor() {
+    return decoded.authorities === "ROLE_AUDITOR";
+  }
 
   function chooseEndPoint() {
     let res = decoded.authorities === "ROLE_USER";
@@ -181,6 +185,7 @@ export default function TransferTable({ transfer,color }) {
                 >
                   Reciver Account Number
                 </th>
+                {!isAuditor && (
                 <th
                   colSpan={2}
                   className={
@@ -192,6 +197,7 @@ export default function TransferTable({ transfer,color }) {
                 >
                   Actions
                 </th>
+                )}
               </tr>
             </thead>
             {!loading && (

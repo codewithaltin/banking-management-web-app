@@ -21,19 +21,23 @@ export default function InstitutionPaymentsTable({ institutionPayment, color }) 
     const [isDialogOpen, setDialogOpen] = useState(false);
     const [search, setSearch] = useState("");
     const [decoded, setDecoded] = useState(null);
+    const [isAuditor, setIsAuditor] = useState(false);
 
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    const decodedToken = jwt_decode(token);
-    setDecoded(decodedToken);
-  }, []);
-
-  useEffect(() => {
-    if (decoded) {
-      chooseEndPoint();
-      fetchData();
+    useEffect(() => {
+      const token = localStorage.getItem("token");
+      const decodedToken = jwt_decode(token);
+      setDecoded(decodedToken);
+    }, []);
+  
+    useEffect(() => {
+      if (decoded) {
+        setIsAuditor(checkAuditor());
+      }
+    }, [decoded]);
+  
+    function checkAuditor() {
+      return decoded.authorities === "ROLE_AUDITOR";
     }
-  }, [decoded]);
 
   function chooseEndPoint() {
     let res = decoded.authorities === "ROLE_USER";
@@ -186,6 +190,7 @@ export default function InstitutionPaymentsTable({ institutionPayment, color }) 
                     >
                       Amount
                     </th>
+                    {!isAuditor && (
                     <th
                       className={
                         "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
@@ -196,6 +201,7 @@ export default function InstitutionPaymentsTable({ institutionPayment, color }) 
                     >
                         Actions
                     </th>
+                    )}
                     <th
                       className={
                         "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +

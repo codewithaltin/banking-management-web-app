@@ -12,19 +12,23 @@ export default function DonationTable({ donation, color }) {
     const [responseDonation, setResponseDonation] = useState(null);
     const [search, setSearch] = useState("");
     const [decoded, setDecoded] = useState(null);
-    
-    useEffect(() => {
-      const token = localStorage.getItem("token");
-      const decodedToken = jwt_decode(token);
-      setDecoded(decodedToken);
-    }, []);
-  
-    useEffect(() => {
-      if (decoded) {
-        chooseEndPoint();
-        fetchData();
-      }
-    }, [decoded]);
+    const [isAuditor, setIsAuditor] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      setIsAuditor(checkAuditor());
+    }
+  }, [decoded]);
+
+  function checkAuditor() {
+    return decoded.authorities === "ROLE_AUDITOR";
+  }
 
     function chooseEndPoint() {
       let res = decoded.authorities === "ROLE_USER";
@@ -193,6 +197,7 @@ export default function DonationTable({ donation, color }) {
                   }
                 >     Card Information
                     </th>
+                    {!isAuditor && (
                     <th
                   colSpan={2}
                   className={
@@ -204,6 +209,7 @@ export default function DonationTable({ donation, color }) {
                 >
                       Actions
                     </th>
+                    )}
                   </tr>
                 </thead>
                 {!loading && (

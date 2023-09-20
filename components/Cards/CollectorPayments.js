@@ -1,6 +1,30 @@
 import React from "react";
 
+import jwt_decode from "jwt-decode";
+import { useState } from "react";
+import { useEffect } from "react";
+
+
 const CollectorPayments = ({ collectorPayment, ConfirmDialogAlert, deleteCollectorPayment}) => {
+  const [decoded, setDecoded] = useState(null);
+  const [isAuditor, setIsAuditor] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      setIsAuditor(checkAuditor());
+    }
+  }, [decoded]);
+
+  function checkAuditor() {
+    return decoded.authorities === "ROLE_AUDITOR";
+  }
+
   return (
     <tr key={collectorPayment.id}>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
@@ -15,6 +39,8 @@ const CollectorPayments = ({ collectorPayment, ConfirmDialogAlert, deleteCollect
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
         {collectorPayment.amount}
       </td>
+      {!isAuditor && (
+        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
       <button
           onClick={(e, id) => ConfirmDialogAlert(e, collectorPayment.id)}
           class="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-md"
@@ -35,8 +61,9 @@ const CollectorPayments = ({ collectorPayment, ConfirmDialogAlert, deleteCollect
           </svg>
           Delete
         </button>
+        </td>
+      )}
     </tr>
-    
   );
 };
 

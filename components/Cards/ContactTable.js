@@ -14,6 +14,7 @@ export default function ContactTable({ contact, color }) {
   const [responseContact, setResponseContact] = useState(null);
   const [decoded, setDecoded] = useState(null);
   const [search, setSearch] = useState("");
+  const [isAuditor, setIsAuditor] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -23,10 +24,13 @@ export default function ContactTable({ contact, color }) {
 
   useEffect(() => {
     if (decoded) {
-      chooseEndPoint();
-      fetchData();
+      setIsAuditor(checkAuditor());
     }
   }, [decoded]);
+
+  function checkAuditor() {
+    return decoded.authorities === "ROLE_AUDITOR";
+  }
 
   function chooseEndPoint() {
     let res = decoded.authorities === "ROLE_USER";
@@ -170,7 +174,7 @@ export default function ContactTable({ contact, color }) {
                 >
                   Text
                 </th>
-                
+                {!isAuditor && (
                 <th
                   colSpan={2}
                   className={
@@ -182,6 +186,7 @@ export default function ContactTable({ contact, color }) {
                 >
                   Actions
                 </th>
+                )}
               </tr>
             </thead>
             {!loading && (

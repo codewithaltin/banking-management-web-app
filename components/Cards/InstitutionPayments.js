@@ -1,6 +1,28 @@
 import React from "react";
+import jwt_decode from "jwt-decode";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const InstitutionPayments = ({ institutionPayment,ConfirmDialogAlert, deleteInstitutionPayment}) => {
+  const [decoded, setDecoded] = useState(null);
+  const [isAuditor, setIsAuditor] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      setIsAuditor(checkAuditor());
+    }
+  }, [decoded]);
+
+  function checkAuditor() {
+    return decoded.authorities === "ROLE_AUDITOR";
+  }
+
   return (
     <tr key={institutionPayment.id}>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
@@ -15,6 +37,7 @@ const InstitutionPayments = ({ institutionPayment,ConfirmDialogAlert, deleteInst
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
         {institutionPayment.amount}
       </td>
+      {!isAuditor && (
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         <button
           onClick={(e, id) => ConfirmDialogAlert(e, institutionPayment.id)}
@@ -37,6 +60,7 @@ const InstitutionPayments = ({ institutionPayment,ConfirmDialogAlert, deleteInst
           Delete
         </button>
       </td>
+      )}
     </tr>
     
   );

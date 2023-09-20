@@ -1,6 +1,29 @@
 import React from "react";
 
+import jwt_decode from "jwt-decode";
+import { useState } from "react";
+import { useEffect } from "react";
+
 const PrePaidServices = ({ prePaidService,ConfirmDialogAlert, deletePrePaidServices}) => {
+  const [decoded, setDecoded] = useState(null);
+  const [isAuditor, setIsAuditor] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      setIsAuditor(checkAuditor());
+    }
+  }, [decoded]);
+
+  function checkAuditor() {
+    return decoded.authorities === "ROLE_AUDITOR";
+  }
+
   return (
     <tr key={prePaidService.id}>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
@@ -12,6 +35,7 @@ const PrePaidServices = ({ prePaidService,ConfirmDialogAlert, deletePrePaidServi
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
         {prePaidService.amount}
       </td>
+      {!isAuditor && (
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         <button
           onClick={(e, id) => ConfirmDialogAlert(e, prePaidService.id)}
@@ -34,6 +58,7 @@ const PrePaidServices = ({ prePaidService,ConfirmDialogAlert, deletePrePaidServi
           Delete
         </button>
       </td>
+      )}
     </tr>
     
   );

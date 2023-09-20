@@ -20,7 +20,7 @@ export default function MobilePaymentTable({ mobilePayment, color }) {
   const [responseMobilePayment, setResponseMobilePayment] = useState(null);
   const [search, setSearch] = useState("");
   const [decoded, setDecoded] = useState(null);
-
+  const [isAuditor, setIsAuditor] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -30,10 +30,15 @@ export default function MobilePaymentTable({ mobilePayment, color }) {
 
   useEffect(() => {
     if (decoded) {
-      chooseEndPoint();
-      fetchData();
+      setIsAuditor(checkAuditor());
     }
   }, [decoded]);
+
+  function checkAuditor() {
+    return decoded.authorities === "ROLE_AUDITOR";
+  }
+
+
 
   function chooseEndPoint() {
     let res = decoded.authorities === "ROLE_USER";
@@ -190,7 +195,7 @@ export default function MobilePaymentTable({ mobilePayment, color }) {
                   Amount
                 </th>
 
-
+                {!isAuditor && (
                 <th
                   className={
                     "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
@@ -201,6 +206,7 @@ export default function MobilePaymentTable({ mobilePayment, color }) {
                 >
                     Actions
                 </th>
+                )}
                 <th
                   className={
                     "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +

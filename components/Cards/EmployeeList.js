@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
+import jwt_decode from "jwt-decode";
+
 // components
 import EditEmployee from "./EditEmployee";
 import Employee from "./Employee";
@@ -13,6 +15,25 @@ export default function EmployeeList({ employee, color }) {
   const [employeeId, setemployeeId] = useState(null);
   const [responseEmployee, setResponseEmployee] = useState(null);
   const [search, setSearch] = useState("");
+  const [decoded, setDecoded] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      setIsAdmin(checkAdmin());
+    }
+  }, [decoded]);
+
+  function checkAdmin() {
+    return decoded.authorities === "ROLE_ADMIN";
+  }
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -193,6 +214,7 @@ export default function EmployeeList({ employee, color }) {
                       : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 ></th>
+                {isAdmin && (
                 <th
                   colSpan={2}
                   className={
@@ -204,6 +226,7 @@ export default function EmployeeList({ employee, color }) {
                 >
                   Actions
                 </th>
+                )}
               </tr>
             </thead>
             {!loading && (

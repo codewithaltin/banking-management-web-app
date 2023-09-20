@@ -1,10 +1,34 @@
 import React from "react";
 
+import jwt_decode from "jwt-decode";
+import { useState } from "react";
+import { useEffect } from "react";
+
 const RequestedMoney = ({
   requestedMoney,
   confirmDelete,
   editRequestedMoney,
 }) => {
+  const [decoded, setDecoded] = useState(null);
+  const [isAuditor, setIsAuditor] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      setIsAuditor(checkAuditor());
+    }
+  }, [decoded]);
+
+  function checkAuditor() {
+    return decoded.authorities === "ROLE_AUDITOR";
+  }
+
+
   return (
     <tr key={requestedMoney.id}>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
@@ -16,6 +40,7 @@ const RequestedMoney = ({
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         {requestedMoney.amount}
       </td>
+      {isAuditor && (
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         <div class="m-5">
           <button
@@ -38,6 +63,8 @@ const RequestedMoney = ({
           </button>
         </div>
       </td>
+      )}
+            {!isAuditor && (
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         <button
           onClick={(e, id) => confirmDelete(e, requestedMoney.id)}
@@ -60,6 +87,7 @@ const RequestedMoney = ({
           Delete
         </button>
       </td>
+      )}
     </tr>
   );
 };

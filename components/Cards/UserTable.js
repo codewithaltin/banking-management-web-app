@@ -16,7 +16,7 @@ export default function UserTable({ user, color }) {
   const [filter, setFilter] = useState([]);
   const [cities, setCities] = useState([]);
   const [decoded, setDecoded] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAuditor, setIsAuditor] = useState(false);
 
   const router = useRouter();
   useEffect(() => {
@@ -30,12 +30,12 @@ export default function UserTable({ user, color }) {
       if (decoded.authorities === "ROLE_USER") {
         router.push("/");
       } else if (decoded.authorities === "ROLE_ADMIN") {
-        setIsAdmin(checkAdmin());
+        setIsAuditor(checkAuditor());
       }
     }
   }, [decoded]);
-  function checkAdmin() {
-    return decoded.authorities === "ROLE_ADMIN";
+  function checkAuditor() {
+    return decoded.authorities === "ROLE_AUDITOR";
   }
   useEffect(() => {
     const fetchData = async () => {
@@ -232,7 +232,7 @@ export default function UserTable({ user, color }) {
                   City
                 </th>
 
-                {isAdmin && (
+                {!isAuditor && (
                   <th
                     colSpan={2}
                     className={

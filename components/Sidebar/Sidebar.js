@@ -17,7 +17,7 @@ export default function Sidebar() {
 
   useEffect(() => {
     if (decoded) {
-      setIsUser(true);
+      setIsUser(checkUser());
     }
   }, [decoded]);
 
