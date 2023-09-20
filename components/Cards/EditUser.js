@@ -39,6 +39,7 @@ const EditUser = ({ userId, setResponseUser }) => {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
+  const [cities, setCities] = useState([]);
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState({
     firstName: "",
@@ -72,6 +73,28 @@ const EditUser = ({ userId, setResponseUser }) => {
       fetchData();
     }
   }, [userId]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:8080/api/v1/auth/cities",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const arrOfCities = await response.json();
+        setCities(arrOfCities); // Update the cities array using the useState hook
+      } catch (error) {
+        throw new Error("Oops, fetching went wrong!");
+      }
+    };
+
+    fetchData();
+  }, []);
 
   function closeModal() {
     setIsOpen(false);
@@ -123,7 +146,7 @@ const EditUser = ({ userId, setResponseUser }) => {
     <div className="min-h-screen absolute top-1/2 right-1/4">
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" m onClose={closeModal}>
-          <div className="flex justify-center ">
+          <div className="flex justify-center">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-100"
@@ -172,6 +195,24 @@ const EditUser = ({ userId, setResponseUser }) => {
                     {/* <small role="alert" className="  text-red-500">
                       {errors.lastName?.message}
                     </small> */}
+                    <div className="h-14 mt-4">
+                    <label className="block text-gray-600 text-sm font-semibold">
+                        City
+                      </label>
+                    <select
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      type="text"
+                      name="city"
+                      value={user.city}
+                      onChange={(e) => handleChange(e)}
+                    >
+                      {cities.map((city, index) => (
+                        <option key={index} value={city}>
+                          {city}
+                        </option>
+                      ))}
+                    </select>
+                    </div>
                     <div className="h-14 mt-4">
                       <label className="block text-gray-600 text-sm font-semibold">
                         Email
