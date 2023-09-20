@@ -64,9 +64,6 @@ export default function Sidebar() {
             <li className="inline-block relative">
               <NotificationDropdown />
             </li>
-            <li className="inline-block relative">
-              <UserDropdown />
-            </li>
           </ul>
           {/* Collapse */}
           <div

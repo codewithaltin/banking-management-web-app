@@ -48,6 +48,16 @@ public class SavingGoalController {
     {
         return savingGoalService.deleteSavingGoal(id);
     }
+    @DeleteMapping("/savingGoal/{id}/user/{email}")
+    public boolean deleteUsersSavingGoal(@PathVariable("id") Long id,@PathVariable("id") String email)
+    {
+        User u = userService.getUserByEmail(email).get();
+        SavingGoal s = savingGoalService.getSavingGoalsById(id);
+        u.deleteSavingGoal(s);
+//        return savingGoalService.deleteSavingGoal(id);
+        return true;
+    }
+
 
 
     @PutMapping("/savingGoal/{id}")

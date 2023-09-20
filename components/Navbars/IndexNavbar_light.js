@@ -9,7 +9,6 @@ import NotificationDropdown from "components/Dropdowns/TableDropdown";
 import Contact from "pages/ContactForm";
 import ContactDropdown from "components/Dropdowns/ContactDropdown";
 import PagesDropdown from "components/Dropdowns/PagesDropdown";
-import UserDropdown from "components/Dropdowns/UserDropdown";
 import ServiceDropdown from "components/Dropdowns/ServiceDropdown";
 import PaymentDropdown from "components/Dropdowns/PaymentDropdown";
 import TokenCheck from "components/TokenCheck";
@@ -45,7 +44,6 @@ export default function Navbar() {
             }
             id="example-navbar-warning"
           >
-            
             <ul className="flex flex-col lg:flex-row list-none align-center mr-auto">
               <Link
                 className="text-costum-dark text-xs font-heavy leading-relaxed inline-block mr-4 py-2 whitespace-nowrap uppercase"

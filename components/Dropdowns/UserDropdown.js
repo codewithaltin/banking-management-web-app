@@ -8,6 +8,7 @@ const UserDropdown = () => {
   const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
   const btnDropdownRef = React.createRef();
   const popoverDropdownRef = React.createRef();
+
   const openDropdownPopover = () => {
     createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
       placement: "auto",
@@ -47,9 +48,6 @@ const UserDropdown = () => {
       >
         {" "}
         <i className="fas fa-user-circle text-2xl text-s pr-4"></i>
-        {/* <a className="text-darkBlue-600 text-xs font-heavy leading-relaxed inline-block whitespace-nowrap uppercase">
-          Account
-        </a> */}
       </a>
       <div
         ref={popoverDropdownRef}
@@ -79,7 +77,7 @@ const UserDropdown = () => {
         >
           <button onClick={successfulAlert}>
             <i className="fas fa-power-off text-s pr-4"></i>
-            <a>Log Out</a>
+            Log Out
           </button>
         </a>
       </div>

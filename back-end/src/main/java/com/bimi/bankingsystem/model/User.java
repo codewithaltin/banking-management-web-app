@@ -52,7 +52,9 @@ public class User implements UserDetails {
     private City city;
 
     @JsonIgnore
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
+//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "user", fetch = FetchType.EAGER)
+    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE},orphanRemoval = true,mappedBy="user",fetch = FetchType.LAZY)
+
     private List<SavingGoal> savingGoals;
 
     public List<SavingGoal> getSavingGoals() {
@@ -60,6 +62,9 @@ public class User implements UserDetails {
     }
     public void addSavingGoal(SavingGoal savingGoal){
         savingGoals.add(savingGoal);
+    }
+    public void deleteSavingGoal(SavingGoal savingGoal){
+
     }
 
     @JsonIgnore

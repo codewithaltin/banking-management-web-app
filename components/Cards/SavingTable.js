@@ -81,7 +81,7 @@ export default function SavingTable({ savingGoal, color }) {
 
   const deleteSavingGoal = (e, id) => {
     e.preventDefault();
-    fetch(SAVINGGOAL_API_BASE_URL + "/" + id, {
+    fetch("http://localhost:8080/api/v1/auth/savingGoal/" + id, {
       method: "DELETE",
     }).then((res) => {
       if (savingGoals) {
