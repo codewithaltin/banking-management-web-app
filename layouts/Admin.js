@@ -1,6 +1,6 @@
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
-import FooterAdmin from "components/Footers/FooterAdmin.js";
+
 import AdminHeaderStats from "components/Headers/AdminHeaderStats";
 
 export default function Admin({ children }) {
