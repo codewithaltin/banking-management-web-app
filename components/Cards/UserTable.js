@@ -257,8 +257,8 @@ export default function UserTable({ user, color }) {
                   })
                   .filter((item) => {
                     return filter === "All Cities"
-                      ? item
-                      : item.city.includes(filter);
+                    ? item
+                    : item.city && item.city.includes(filter);
                   })
                   .map((user) => (
                     <User
