@@ -80,7 +80,7 @@ export default function ContactTable({ contact, color }) {
 
   const deleteContact = (e, id) => {
     e.preventDefault();
-    fetch(CONTACT_API_BASE_URL + "/" + id, {
+    fetch("http://localhost:8080/api/v1/auth/contact/" + id, {
       method: "DELETE",
     }).then((res) => {
       if (contacts) {

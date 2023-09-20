@@ -78,7 +78,7 @@ export default function LoanTable({ loan, color }) {
 
   const deleteLoan = (e, id) => {
     e.preventDefault();
-    fetch(LOAN_API_BASE_URL + "/" + id, {
+    fetch("http://localhost:8080/api/v1/auth/loan/" + id, {
       method: "DELETE",
     }).then((res) => {
       if (loans) {

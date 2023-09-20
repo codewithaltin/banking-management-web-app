@@ -50,7 +50,7 @@ export default function RequestMoneyTable({ requestMoney, color }) {
 
   const deleteRequestedMoney = (e, id) => {
     e.preventDefault();
-    fetch(LOAN_API_BASE_URL + "/" + id, {
+    fetch("http://localhost:8080/api/v1/auth/requestmoney/" + id, {
       method: "DELETE",
     }).then((res) => {
       if (requestedMoney) {

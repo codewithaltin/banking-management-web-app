@@ -67,7 +67,6 @@ export default function PrePaidServicesTable({ prePaidService, color }) {
   let dialogValue = false;
 
   const ConfirmDialogAlert = (e, id) => {
-    if (dialogValue) return true;
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -82,12 +81,11 @@ export default function PrePaidServicesTable({ prePaidService, color }) {
         Swal.fire("Deleted!", "Deleted Succesfully!", "success");
       }
     });
-    return dialogValue;
   };
 
 const deletePrePaidServices = (e, id) => {
     e.preventDefault();
-    fetch(PREPAIDSERVICES_API_BASE_URL + "/" + id, {
+    fetch("http://localhost:8080/api/v1/auth/prePaidPayment/" + id, {
       method: "DELETE",
     }).then((res) => {
       if (prePaidServices) {

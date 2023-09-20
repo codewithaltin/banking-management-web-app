@@ -52,7 +52,7 @@ export default function EmployeeList({ employee, color }) {
 
   const deleteEmployee = (e, id) => {
     e.preventDefault();
-    fetch(EMPLOYEE_API_BASE_URL + "/" + id, {
+    fetch("http://localhost:8080/api/v1/auth/employee/" + id, {
       method: "DELETE",
     }).then((res) => {
       if (employees) {

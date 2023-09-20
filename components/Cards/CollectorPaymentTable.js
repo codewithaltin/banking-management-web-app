@@ -87,7 +87,7 @@ export default function CollectorPaymentTable({ collectorPayment, color }) {
 
   const deleteCollectorPayment = (e, id) => {
     e.preventDefault();
-    fetch(COLLECTORPAYMENT_API_BASE_URL + "/" + id, {
+    fetch("http://localhost:8080/api/v1/auth/collectorPayment/" + id, {
       method: "DELETE",
     }).then((res) => {
       if (collectorPayment) {

@@ -68,7 +68,7 @@ export default function InstitutionPaymentsTable({ institutionPayment, color }) 
 
 
   const ConfirmDialogAlert = (e, id) => {
-    if (dialogValue) return true;
+
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -83,12 +83,11 @@ export default function InstitutionPaymentsTable({ institutionPayment, color }) 
         Swal.fire("Deleted!", "Deleted Succesfully!", "success");
       }
     });
-    return dialogValue;
   };
 
       const deleteInstitutionPayment = (e, id) => {
         e.preventDefault();
-        fetch(INSTITUTIONPAYMENTS_API_BASE_URL + "/" + id, {
+        fetch("http://localhost:8080/api/v1/auth/institutionPayments/" + id, {
           method: "DELETE",
         }).then((res) => {
           if (institutionPayments) {

@@ -89,7 +89,7 @@ export default function MobilePaymentTable({ mobilePayment, color }) {
 
   const deleteMobilePayment = (e, id) => {
     e.preventDefault();
-    fetch(MOBILEPAYMENT_API_BASE_URL + "/" + id, {
+    fetch("http://localhost:8080/api/v1/auth/mobilePayment/" + id, {
       method: "DELETE",
     }).then((res) => {
       if (mobilePayments) {

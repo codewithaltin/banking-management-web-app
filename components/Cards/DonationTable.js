@@ -76,7 +76,7 @@ export default function DonationTable({ donation, color }) {
 
     const deleteDonation = (e, id) => {
         e.preventDefault();
-        fetch(DONATION_API_BASE_URL + "/" + id, {
+        fetch("http://localhost:8080/api/v1/auth/donation/" + id, {
             method: "DELETE",
           }).then((res) => {
             if (donations) {
