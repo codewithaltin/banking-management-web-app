@@ -1,35 +1,63 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-
+import jwt_decode from "jwt-decode";
 import EditLoan from "./EditLoan";
 import Loan from "./Loan";
 import Swal from "sweetalert2";
 export default function LoanTable({ loan, color }) {
-  const LOAN_API_BASE_URL = "http://localhost:8080/api/v1/auth/loan";
+
+  let LOAN_API_BASE_URL;
+
   const [loans, setLoans] = useState(null);
   const [loading, setLoading] = useState(true);
   const [loanId, setLoanId] = useState(null);
   const [responseLoan, setResponseLoan] = useState(null);
   const [search, setSearch] = useState("");
+  const [decoded, setDecoded] = useState(null);
+
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch(LOAN_API_BASE_URL, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const loans = await response.json();
-        setLoans(loans);
-      } catch (error) {
-        console.log(error);
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      chooseEndPoint();
+      fetchData();
+    }
+  }, [decoded]);
+
+  function chooseEndPoint() {
+    let res = decoded.authorities === "ROLE_USER";
+    if (res) {
+      LOAN_API_BASE_URL =
+        "http://localhost:8080/api/v1/auth/loan/user/" + decoded.sub;
+    } else {
+      LOAN_API_BASE_URL = "http://localhost:8080/api/v1/auth/loan";
+    }
+  }
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(LOAN_API_BASE_URL, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const loanData = await response.json();
+        setLoans(loanData);
+      } else {
+        throw new Error("Failed to fetch data");
       }
+    } catch (error) {
+      console.error(error);
+    } finally {
       setLoading(false);
-    };
-    fetchData();
-  }, [loan, responseLoan]);
+    }
+  };
 
   const confirmDelete = (e, id) => {
     Swal.fire({
@@ -153,17 +181,6 @@ export default function LoanTable({ loan, color }) {
                   }
                 >
                   {" "}
-                  Loan Amount
-                </th>
-                <th
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                >
-                  {" "}
                   Monthly Income
                 </th>
                 <th
@@ -202,7 +219,6 @@ export default function LoanTable({ loan, color }) {
         <EditLoan
           loanId={loanId}
           setResponseLoan={setResponseLoan}
-          setIsOpen={true}
         />
       </div>
     </>
