@@ -8,6 +8,7 @@ import InstitutionPaymentsTable from "components/Cards/InstitutionPaymentsTable"
 import PrePaidServicesTable from "components/Cards/PrePaidServicesTable";
 import CollectorPaymentTable from "components/Cards/CollectorPaymentTable";
 import MobilePaymentTable from "components/Cards/MobilePaymentTable";
+import Auth from "layouts/Auth";
 
 const MobilePaymentList = () => {
   return (
@@ -18,6 +19,6 @@ const MobilePaymentList = () => {
     </>
   );
 };
-MobilePaymentList.layout = User;
+MobilePaymentList.layout = Auth;
 
 export default MobilePaymentList;

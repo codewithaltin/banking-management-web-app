@@ -8,6 +8,7 @@ import * as yup from "yup";
 import Swal from "sweetalert2";
 import { useEffect } from "react";
 import { async } from "rxjs";
+import TableAuth from "layouts/TableAuth";
 const phoneReg =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
@@ -350,7 +351,7 @@ export default function Register() {
   );
 }
 
-Register.layout = Auth;
+Register.layout = TableAuth;
 /*
 ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>

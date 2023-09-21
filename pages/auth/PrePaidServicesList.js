@@ -6,6 +6,7 @@ import FooterAdmin from "components/Footers/FooterAdmin";
 import PaymentsNavbar from "components/Navbars/PaymentsNavbar";
 import InstitutionPaymentsTable from "components/Cards/InstitutionPaymentsTable";
 import PrePaidServicesTable from "components/Cards/PrePaidServicesTable";
+import Auth from "layouts/Auth";
 
 const PrePaidServicesList = () => {
   return (
@@ -16,6 +17,6 @@ const PrePaidServicesList = () => {
     </>
   );
 };
-PrePaidServicesList.layout = User;
+PrePaidServicesList.layout = Auth;
 
 export default PrePaidServicesList;

@@ -3,6 +3,7 @@ import SavingTable from "components/Cards/SavingTable.js";
 import Admin from "layouts/User.js";
 
 import User from "layouts/Admin";
+import Auth from "layouts/Auth";
 
 const savinglist = () => {
   return (
@@ -12,6 +13,6 @@ const savinglist = () => {
   );
 };
 
-savinglist.layout = Admin;
+savinglist.layout = Auth;
 
 export default savinglist;

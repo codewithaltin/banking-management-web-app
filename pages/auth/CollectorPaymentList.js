@@ -7,6 +7,8 @@ import PaymentsNavbar from "components/Navbars/PaymentsNavbar";
 import InstitutionPaymentsTable from "components/Cards/InstitutionPaymentsTable";
 import PrePaidServicesTable from "components/Cards/PrePaidServicesTable";
 import CollectorPaymentTable from "components/Cards/CollectorPaymentTable";
+import TableAuth from "layouts/TableAuth";
+import Auth from "layouts/Auth";
 
 const CollectorPaymentList = () => {
   return (
@@ -17,6 +19,6 @@ const CollectorPaymentList = () => {
     </>
   );
 };
-CollectorPaymentList.layout = User;
+CollectorPaymentList.layout = Auth;
 
 export default CollectorPaymentList;

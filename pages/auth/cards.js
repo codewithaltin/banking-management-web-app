@@ -10,6 +10,7 @@ import {
 } from "./utils";
 
 import Auth from "layouts/Auth.js";
+import TableAuth from "layouts/TableAuth";
 
 export default class cards extends React.Component {
   state = {
@@ -154,7 +155,7 @@ export default class cards extends React.Component {
   }
 }
 
-cards.layout = Auth;
+cards.layout = TableAuth;
 
 // import React from "react";
 // import { useForm } from "react-hook-form";

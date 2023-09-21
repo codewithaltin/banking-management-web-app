@@ -8,6 +8,7 @@ import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 
 import Auth from "layouts/Auth.js";
+import TableAuth from "layouts/TableAuth";
 
 const LOGIN_API_BASE_URL = "http://localhost:8080/api/v1/auth/authenticate";
 
@@ -148,4 +149,4 @@ export default function Login() {
   );
 }
 
-Login.layout = Auth;
+Login.layout = TableAuth;

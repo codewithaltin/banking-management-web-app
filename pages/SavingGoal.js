@@ -6,6 +6,7 @@ import Auth from "layouts/Auth.js";
 import { Route } from "react-router-dom";
 import jwt_decode from "jwt-decode";
 import { useEffect } from "react";
+import TableAuth from "layouts/TableAuth";
 
 export default function SavingGoal() {
   const {
@@ -263,4 +264,4 @@ export default function SavingGoal() {
   );
 }
 
-SavingGoal.layout = Auth;
+SavingGoal.layout = TableAuth;

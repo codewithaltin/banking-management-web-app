@@ -8,6 +8,7 @@ import User from "layouts/Admin.js";
 import jwt_decode from "jwt-decode";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import Auth from "layouts/Auth";
 const schema = yup
   .object()
   .shape({
@@ -152,4 +153,4 @@ export default function requestMoney() {
     </TokenCheck>
   );
 }
-requestMoney.layout = User;
+requestMoney.layout = Auth;

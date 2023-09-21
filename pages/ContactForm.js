@@ -5,7 +5,7 @@ import * as yup from "yup";
 import { useEffect } from "react";
 import jwt_decode from "jwt-decode";
 
-import Auth from "layouts/Auth.js";
+import TableAuth from "layouts/TableAuth";
 
 const schema = yup
   .object()
@@ -177,4 +177,4 @@ export default function Contact() {
   );
 }
 
-Contact.layout = Auth;
+Contact.layout = TableAuth;

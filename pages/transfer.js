@@ -12,6 +12,7 @@ import { useEffect } from "react";
 // layout for page
 
 import Auth from "layouts/Auth.js";
+import TableAuth from "layouts/TableAuth";
 
 
 const schema = yup
@@ -364,4 +365,4 @@ export default function Transfer() {
   );
 }
 
-Transfer.layout = Auth;
+Transfer.layout = TableAuth;

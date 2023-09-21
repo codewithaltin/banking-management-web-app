@@ -4,6 +4,7 @@ import User from "layouts/User";
 import FooterAdmin from "components/Footers/FooterAdmin";
 import PaymentsNavbar from "components/Navbars/PaymentsNavbar";
 import InstitutionPaymentsTable from "components/Cards/InstitutionPaymentsTable";
+import Auth from "layouts/Auth";
 
 const Institutionpaymentslist = () => {
   return (
@@ -13,6 +14,6 @@ const Institutionpaymentslist = () => {
     </>
   );
 };
-Institutionpaymentslist.layout = User;
+Institutionpaymentslist.layout = Auth;
 
 export default Institutionpaymentslist;

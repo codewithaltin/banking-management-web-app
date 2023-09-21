@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Auth from "layouts/Auth.js";
+import TableAuth from "layouts/TableAuth";
 const phoneReg =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
@@ -387,4 +388,4 @@ export default function Loan() {
   );
 }
 
-Loan.layout = Auth;
+Loan.layout = TableAuth;
