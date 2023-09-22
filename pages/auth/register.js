@@ -54,6 +54,8 @@ const schema = yup
   .required();
 export default function Register() {
   const router = useRouter();
+  const [emailError, setEmailError] = useState("");
+  const [accountNumberError, setAccountNumberError] = useState("");
   const [cities, setCities] = useState([]);
   const {
     register,
@@ -85,6 +87,26 @@ export default function Register() {
     });
   };
   const saveUser = async (e) => {
+    setEmailError(""); // Reset error messages
+  setAccountNumberError("");
+
+  // Check email uniqueness
+  const emailResponse = await fetch(`http://localhost:8080/api/v1/auth/user/checkEmail?email=${user.email}`);
+  const isEmailUnique = await emailResponse.json();
+
+  if (!isEmailUnique) {
+    setEmailError("Email is already in use");
+    return;
+  }
+
+  // Check account number uniqueness
+  const accountNumberResponse = await fetch(`http://localhost:8080/api/v1/auth/user/checkAccountNumber?accountNumber=${user.accountNumber}`);
+  const isAccountNumberUnique = await accountNumberResponse.json();
+
+  if (!isAccountNumberUnique) {
+    setAccountNumberError("Account number is already in use");
+    return;
+  }
     //e.preventDefault();
     const response = await fetch(USER_API_BASE_URL, {
       method: "POST",
@@ -177,6 +199,7 @@ export default function Register() {
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.accountNumber?.message}
+                      {accountNumberError && <div>{accountNumberError}</div>}
                     </small>
                   </div>
                   <label
@@ -233,6 +256,7 @@ export default function Register() {
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.email?.message}
+                      {emailError && <div>{emailError}</div>}
                     </small>
                   </div>
                   <div className="relative w-full mb-3">

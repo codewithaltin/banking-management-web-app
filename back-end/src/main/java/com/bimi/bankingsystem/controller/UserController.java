@@ -1,8 +1,8 @@
 package com.bimi.bankingsystem.controller;
 
 
-import com.bimi.bankingsystem.model.SavingGoal;
 import com.bimi.bankingsystem.model.User;
+import com.bimi.bankingsystem.repository.UserRepository;
 import com.bimi.bankingsystem.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -16,9 +16,11 @@ import java.util.*;
 public class UserController {
 
     private final UserService userService;
+    private UserRepository userRepository;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
     @PostMapping("/user")
@@ -53,6 +55,19 @@ public class UserController {
     public User updateUser(@PathVariable("id") Long id,
                            @RequestBody User user) {
         return userService.updateUser(id,user);
+    }
+
+    @GetMapping("/user/checkEmail")
+    public ResponseEntity<?> checkEmailUnique(@RequestParam String email) {
+        boolean isEmailUnique = !userRepository.existsByEmail(email);
+        return ResponseEntity.ok(isEmailUnique);
+    }
+
+    // Check account number uniqueness
+    @GetMapping("/user/checkAccountNumber")
+    public ResponseEntity<?> checkAccountNumberUnique(@RequestParam Long accountNumber) {
+        boolean isAccountNumberUnique = !userRepository.existsByAccountNumber(accountNumber);
+        return ResponseEntity.ok(isAccountNumberUnique);
     }
 
 }
