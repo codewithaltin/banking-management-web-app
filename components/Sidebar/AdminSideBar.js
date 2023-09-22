@@ -58,7 +58,7 @@ export default function AdminSideBar() {
                 : "text-blueGray-300")
             }
           ></i>{" "}
-          Add Roles
+          Add Users with Roles
         </Link>
         <hr className="my-4 md:min-w-full" />
 

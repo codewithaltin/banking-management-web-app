@@ -1,14 +1,12 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import Auth from "layouts/Auth.js";
 import { useRouter } from "next/router";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Swal from "sweetalert2";
 import { useEffect } from "react";
-import { async } from "rxjs";
 import TableAuth from "layouts/TableAuth";
+import Link from "next/link";
 const phoneReg =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
@@ -168,46 +166,13 @@ export default function Register() {
               <div className="rounded-t mb-0 px-6 py-6">
                 <div className="text-center mb-3">
                   <h6 className="text-blueGray-500 text-sm font-bold">
-                    Sign up with
+                    Fill the data below to create an account
                   </h6>
-                </div>
-                <div className="btn-wrapper text-center">
-                  <button
-                    className="bg-white active:bg-blueGray-50 text-blueGray-700 px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-                    type="button"
-                  >
-                    <img alt="..." className="w-5 mr-1" src="/img/fb.png" />
-                    Facebook
-                  </button>
                 </div>
                 <hr className="mt-6 border-b-1 border-blueGray-300" />
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                <div className="text-blueGray-400 text-center mb-3 font-bold">
-                  <small>Or sign up with credentials</small>
-                </div>
                 <form onSubmit={handleSubmit(saveUser)}>
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      Account Number
-                    </label>
-                    <input
-                      {...register("accountNumber")}
-                      type="tel"
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="XXXX-XXXX-XXXX-XXXX"
-                      value={user.accountNumber}
-                      name="accountNumber"
-                      onChange={(e) => handleChange(e)}
-                    />
-                    <small role="alert" className="text-red-500 ">
-                      {errors.accountNumber?.message}
-                      {accountNumberError && <div>{accountNumberError}</div>}
-                    </small>
-                  </div>
                   <label
                     className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                     htmlFor="grid-password"
@@ -243,7 +208,27 @@ export default function Register() {
                   </small>
                   <small role="alert" className="  text-red-500 mb-2 ">
                     {errors.lastName?.message}
-                  </small>
+                  </small>{" "}
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      Account Number
+                    </label>
+                    <input
+                      {...register("accountNumber")}
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="XXXX-XXXX-XXXX-XXXX"
+                      value={user.accountNumber}
+                      name="accountNumber"
+                      onChange={(e) => handleChange(e)}
+                    />
+                    <small role="alert" className="text-red-500 ">
+                      {errors.accountNumber?.message}
+                      {accountNumberError && <div>{accountNumberError}</div>}
+                    </small>
+                  </div>
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -355,7 +340,9 @@ export default function Register() {
                         <a
                           className="text-lightBlue-500"
                           onClick={() => {
-                            Swal.fire({ text: "STerms and privacy" });
+                            Swal.fire({
+                              text: "You agree to grade us with a 10.",
+                            });
                           }}
                         >
                           Privacy Policy
@@ -375,6 +362,15 @@ export default function Register() {
               </div>
             </div>
           </div>
+        </div>
+      </div>
+      <div className="flex flex-wrap mt-6 relative">
+        <div className="w-full text-center">
+          {" "}
+          <small className="text-blueGray-200">Have an account?</small>
+          <Link href="/auth/login" className="text-blueGray-200 font-bold">
+            <small> Log In</small>
+          </Link>
         </div>
       </div>
     </>

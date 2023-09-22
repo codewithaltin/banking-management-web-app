@@ -1,19 +1,182 @@
-import React from "react";
+import { Dialog, Transition } from "@headlessui/react";
+import { React, useState, useEffect, Fragment } from "react";
+import { yupResolver } from "@hookform/resolvers/yup";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import * as yup from "yup";
 
 // components
 
-export default function CardSettings() {
+const phoneReg =
+  /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
+const schema = yup
+  .object()
+  .shape({
+    firstName: yup
+      .string()
+      .required("First Name is required.")
+      .min(2, "First name must be longer than 5 characters")
+      .max(50, "First name must be shorter than 30 characters."),
+    lastName: yup
+      .string()
+      .required("Last Name is required.")
+      .min(2, "Last name must be longer than 5 characters")
+      .max(50, "Last name must be shorter than 50 characters."),
+    emailId: yup
+      .string()
+      .email("Please enter a valid e-mail")
+      .required("Email is required."),
+    phoneNumber: yup
+      .string()
+      .required("Phone number is required")
+      .matches(phoneReg, "Phone Number is not valid."),
+  })
+  .required();
+export default function CardSettings(userId) {
+  const USER_API_BASE_URL = "http://localhost:8080/api/v1/auth/user/";
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
+
+  const [cities, setCities] = useState([]);
+  const [isOpen, setIsOpen] = useState(false);
+  const [user, setUser] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    accountNumber: "",
+    phoneNumber: "",
+    password: "",
+    balance: 0,
+    city: "",
+    role: "",
+  });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(USER_API_BASE_URL + 3, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const _user = await response.json();
+        setUser(_user);
+        setIsOpen(true);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if (userId) {
+      fetchData();
+    }
+  }, [userId]);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:8080/api/v1/auth/cities",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const arrOfCities = await response.json();
+        setCities(arrOfCities); // Update the cities array using the useState hook
+      } catch (error) {
+        throw new Error("Oops, fetching went wrong!");
+      }
+    };
+
+    fetchData();
+  }, []);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  const reset = (e) => {
+    e.preventDefault();
+    setIsOpen(false);
+  };
+
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setUser({ ...user, [event.target.name]: value });
+  };
+  const updateUser = async (e) => {
+    e.preventDefault();
+    const updatedUserData = {
+      firstName: user.firstName,
+      lastName: user.lastName,
+      email: user.email,
+      accountNumber: user.accountNumber,
+      password: user.password,
+      phoneNumber: user.phoneNumber,
+      balance: user.balance,
+      city: user.city,
+    };
+    console.log(user.city);
+    const response = await fetch(USER_API_BASE_URL + userId, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(updatedUserData),
+    });
+    if (!response.ok) {
+      throw new Error("Something went wrong");
+    }
+    const _user = await response.json();
+    setResponseUser(_user);
+    reset(e);
+    Swal.fire("Updated!", "Updated Succesfully!", "success");
+  };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:8080/api/v1/auth/cities",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const arrOfCities = await response.json();
+        setCities(arrOfCities); // Update the cities array using the useState hook
+      } catch (error) {
+        throw new Error("Oops, fetching went wrong!");
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
         <div className="rounded-t bg-white mb-0 px-6 py-6">
           <div className="text-center flex justify-between">
-            <h6 className="text-blueGray-700 text-xl font-bold">My account</h6>
+            <h6 className="text-blueGray-700 text-xl font-bold">
+              Your information
+            </h6>
             <button
-              className="bg-blueGray-700 active:bg-blueGray-600 text-white font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
+              className="bg-emerald-400 active:bg-blueGray-400 text-white font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
               type="button"
             >
-              Settings
+              Update Information
             </button>
           </div>
         </div>

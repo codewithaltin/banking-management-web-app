@@ -310,26 +310,11 @@ const roles = () => {
                       {errors.role?.message}
                     </small>
                   </div>
-                  <div>
-                    <label className="inline-flex items-center cursor-pointer">
-                      <span className="ml-2 text-sm font-semibold text-blueGray-600">
-                        I agree with the{" "}
-                        <a
-                          className="text-lightBlue-500"
-                          onClick={() => {
-                            Swal.fire({ text: "STerms and privacy" });
-                          }}
-                        >
-                          Privacy Policy
-                        </a>
-                      </span>
-                    </label>
-                  </div>
                   <div className="text-center mt-6">
                     <input
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="submit"
-                      value="Submit"
+                      value="Add"
                       onClick={handleChange}
                     />
                   </div>

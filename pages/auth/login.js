@@ -103,18 +103,7 @@ export default function Login() {
                       {errors.password?.message}
                     </small> */}
                   </div>
-                  <div>
-                    <label className="inline-flex items-center cursor-pointer">
-                      <input
-                        id="customCheckLogin"
-                        type="checkbox"
-                        className="form-checkbox border-0 rounded text-blueGray-700 ml-1 w-5 h-5 ease-linear transition-all duration-150"
-                      />
-                      <span className="ml-2 text-sm font-semibold text-blueGray-600">
-                        Remember me
-                      </span>
-                    </label>
-                  </div>
+                  <div></div>
 
                   <div className="text-center mt-6">
                     <input
@@ -127,17 +116,8 @@ export default function Login() {
               </div>
             </div>
             <div className="flex flex-wrap mt-6 relative">
-              <div className="w-1/2">
-                <a
-                  href="#pablo"
-                  onClick={(e) => e.preventDefault()}
-                  className="text-blueGray-200"
-                >
-                  <small>Forgot password?</small>
-                </a>
-              </div>
-              <div className="w-1/2 text-right">
-                <Link href="/auth/register" className="text-blueGray-200">
+              <div className="w-full text-center">
+                <Link href="/auth/register" className="text-blueGray-200 bold">
                   <small>Create new account</small>
                 </Link>
               </div>

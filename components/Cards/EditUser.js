@@ -104,16 +104,15 @@ const EditUser = ({ userId, setResponseUser }) => {
     setIsOpen(true);
   }
 
-  const handleChange = (event) => {
-    const value = event.target.value;
-    setUser({ ...user, [event.target.name]: value });
-  };
-
   const reset = (e) => {
     e.preventDefault();
     setIsOpen(false);
   };
 
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setUser({ ...user, [event.target.name]: value });
+  };
   const updateUser = async (e) => {
     e.preventDefault();
     const updatedUserData = {
