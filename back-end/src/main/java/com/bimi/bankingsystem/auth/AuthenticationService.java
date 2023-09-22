@@ -11,6 +11,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.RequestParam;
 
 @Slf4j
 @Service
@@ -54,5 +55,15 @@ public class AuthenticationService {
         return AuthenticationResponse.builder()
                 .token(jwtToken)
                 .build();
+    }
+
+    public boolean checkEmailUnique(@RequestParam String email) {
+        return !repository.existsByEmail(email);
+    }
+
+    // Check account number uniqueness
+
+    public boolean checkAccountNumberUnique(@RequestParam Long accountNumber) {
+        return  !repository.existsByAccountNumber(accountNumber);
     }
 }

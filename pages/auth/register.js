@@ -94,17 +94,24 @@ export default function Register() {
   const emailResponse = await fetch(`http://localhost:8080/api/v1/auth/user/checkEmail?email=${user.email}`);
   const isEmailUnique = await emailResponse.json();
 
-  if (!isEmailUnique) {
-    setEmailError("Email is already in use");
-    return;
-  }
+  
 
   // Check account number uniqueness
   const accountNumberResponse = await fetch(`http://localhost:8080/api/v1/auth/user/checkAccountNumber?accountNumber=${user.accountNumber}`);
   const isAccountNumberUnique = await accountNumberResponse.json();
 
+  if(!isAccountNumberUnique && !isEmailUnique ){
+    setAccountNumberError("Account number is already in use");
+    setEmailError("Email is already in use");
+    return;
+  }
+
   if (!isAccountNumberUnique) {
     setAccountNumberError("Account number is already in use");
+    return;
+  }
+  if (!isEmailUnique) {
+    setEmailError("Email is already in use");
     return;
   }
     //e.preventDefault();
