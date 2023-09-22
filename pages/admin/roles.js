@@ -208,7 +208,6 @@ const roles = () => {
                     />
                     <small role="alert" className="text-red-500 ">
                       {errors.email?.message}
-                      {emailError && <div>{emailError}</div>}
                     </small>
                   </div>
                   <div className="relative w-full mb-3">
