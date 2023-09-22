@@ -41,6 +41,25 @@ export default function AdminSideBar() {
           ></i>{" "}
           DASHBOARD
         </Link>
+        <Link
+          href="/admin/roles"
+          className={
+            "text-xs uppercase py-3 font-bold block " +
+            (router.pathname.indexOf("/admin/roles") !== -1
+              ? "text-lightBlue-500 hover:text-lightBlue-600"
+              : "text-blueGray-700 hover:text-blueGray-500")
+          }
+        >
+          <i
+            className={
+              "fas fa-user-plus mr-2 text-sm " +
+              (router.pathname.indexOf("/admin/roles") !== -1
+                ? "opacity-75"
+                : "text-blueGray-300")
+            }
+          ></i>{" "}
+          Add Roles
+        </Link>
         <hr className="my-4 md:min-w-full" />
 
         <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">

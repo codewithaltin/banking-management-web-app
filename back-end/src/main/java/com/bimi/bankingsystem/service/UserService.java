@@ -12,6 +12,8 @@ public interface UserService {
 
     String[]  getCities();
 
+    String[]  getRoles();
+
     Optional<User> getUserById(Long id);
 
     Optional<User> getUserByEmail(String email);

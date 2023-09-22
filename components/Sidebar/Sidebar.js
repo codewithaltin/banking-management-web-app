@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 export default function Sidebar() {
   const [decoded, setDecoded] = useState(null);
   const [isUser, setIsUser] = useState(false);
-
+  
   useEffect(() => {
     const token = localStorage.getItem("token");
     const decodedToken = jwt_decode(token);

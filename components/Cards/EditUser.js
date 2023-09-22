@@ -167,7 +167,7 @@ const EditUser = ({ userId, setResponseUser }) => {
     <div className="min-h-screen absolute top-1/2 right-1/4">
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" m onClose={closeModal}>
-          <div className="flex justify-center">
+          <div className="flex justify-center self-center">
             <Transition.Child
               as={Fragment}
               enter="ease-out duration-100"

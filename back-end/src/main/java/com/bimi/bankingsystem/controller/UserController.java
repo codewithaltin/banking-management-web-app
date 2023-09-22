@@ -37,6 +37,10 @@ public class UserController {
     public String[] getAllCities() {
         return userService.getCities();
     }
+    @GetMapping("/roles")
+    public String[] getRoles() {
+        return userService.getRoles();
+    }
     @GetMapping("/user/{id}")
     public Optional<User> getUserById(@PathVariable("id") Long id) {
         return userService.getUserById(id);

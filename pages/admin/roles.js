@@ -1,14 +1,11 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
-import { Routes, Route, useNavigate } from "react-router-dom";
-import Auth from "layouts/Auth.js";
 import { useRouter } from "next/router";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Swal from "sweetalert2";
+import Admin from "layouts/Admin";
 import { useEffect } from "react";
-import { async } from "rxjs";
-import TableAuth from "layouts/TableAuth";
 const phoneReg =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
@@ -33,30 +30,18 @@ const schema = yup
       .string()
       .required("Phone number is required")
       .matches(phoneReg, "Phone Number is not valid."),
-    // accountNumber: yup
-    //   .typeError("Not a valid expiration date. Example: MM/YY")
-    //   .max(5, "Not a valid expiration date. Example: MM/YY")
-    //   .matches(
-    //     /([0-9]{2})\/([0-9]{2})/,
-    //     "Not a valid expiration date. Example: MM/YY"
-    //   ),
     password: yup
       .string()
       .required("Password is required.")
       .min(5, "Password must be 5 characters long")
       .max(35, "Password must be shorter than 35 characters"),
-    confirmPassword: yup
-      .string()
-      .oneOf([yup.ref("password"), null], "Passwords do not match.")
-      .required("Confirm Password field is required."),
     city: yup.string().required("City is required."),
+    role: yup.string().required("Role is required."),
   })
   .required();
-export default function Register() {
-  const router = useRouter();
-  const [emailError, setEmailError] = useState("");
-  const [accountNumberError, setAccountNumberError] = useState("");
+const roles = () => {
   const [cities, setCities] = useState([]);
+  const [roles, setRoles] = useState([]);
   const {
     register,
     handleSubmit,
@@ -64,9 +49,6 @@ export default function Register() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
 
-  const USER_API_BASE_URL = "http://localhost:8080/api/v1/auth/register";
-
-  const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState({
     firstName: "",
     accountNumber: "",
@@ -75,8 +57,10 @@ export default function Register() {
     phoneNumber: "",
     password: "",
     city: "",
-    role: "USER",
+    role: "",
   });
+
+  const USER_API_BASE_URL = "http://localhost:8080/api/v1/auth/register";
 
   const successfulAlert = () => {
     Swal.fire({
@@ -90,33 +74,6 @@ export default function Register() {
     setEmailError(""); // Reset error messages
     setAccountNumberError("");
 
-    // Check email uniqueness
-    const emailResponse = await fetch(
-      `http://localhost:8080/api/v1/auth/user/checkEmail?email=${user.email}`
-    );
-    const isEmailUnique = await emailResponse.json();
-
-    // Check account number uniqueness
-    const accountNumberResponse = await fetch(
-      `http://localhost:8080/api/v1/auth/user/checkAccountNumber?accountNumber=${user.accountNumber}`
-    );
-    const isAccountNumberUnique = await accountNumberResponse.json();
-
-    if (!isAccountNumberUnique && !isEmailUnique) {
-      setAccountNumberError("Account number is already in use");
-      setEmailError("Email is already in use");
-      return;
-    }
-
-    if (!isAccountNumberUnique) {
-      setAccountNumberError("Account number is already in use");
-      return;
-    }
-    if (!isEmailUnique) {
-      setEmailError("Email is already in use");
-      return;
-    }
-    //e.preventDefault();
     const response = await fetch(USER_API_BASE_URL, {
       method: "POST",
       headers: {
@@ -130,7 +87,7 @@ export default function Register() {
     const _user = await response.json();
     setUser(_user);
     successfulAlert();
-    await router.push("login");
+    windows.reload();
   };
 
   const handleChange = (event) => {
@@ -159,55 +116,44 @@ export default function Register() {
     fetchData();
   }, []);
 
+  useEffect(() => {
+    const fetchRoles = async () => {
+      try {
+        const response = await fetch(
+          "http://localhost:8080/api/v1/auth/roles",
+          {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        const arrOfRoles = await response.json();
+        setRoles(arrOfRoles);
+      } catch (error) {
+        throw new Error("Oops, fetching went wrong!");
+      }
+    };
+
+    fetchRoles();
+  }, []);
+
   return (
     <>
       <div className="container mx-auto px-4 h-full">
         <div className="flex content-center items-center justify-center h-full">
-          <div className="w-full lg:w-6/12 px-4">
+          <div className="w-full lg:w-full px-4">
             <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
               <div className="rounded-t mb-0 px-6 py-6">
                 <div className="text-center mb-3">
                   <h6 className="text-blueGray-500 text-sm font-bold">
-                    Sign up with
+                    Add user with specific role
                   </h6>
-                </div>
-                <div className="btn-wrapper text-center">
-                  <button
-                    className="bg-white active:bg-blueGray-50 text-blueGray-700 px-4 py-2 rounded outline-none focus:outline-none mr-1 mb-1 uppercase shadow hover:shadow-md inline-flex items-center font-bold text-xs ease-linear transition-all duration-150"
-                    type="button"
-                  >
-                    <img alt="..." className="w-5 mr-1" src="/img/fb.png" />
-                    Facebook
-                  </button>
                 </div>
                 <hr className="mt-6 border-b-1 border-blueGray-300" />
               </div>
-              <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                <div className="text-blueGray-400 text-center mb-3 font-bold">
-                  <small>Or sign up with credentials</small>
-                </div>
+              <div className="flex-auto px-4 lg:px-10 py-5 pt-0">
                 <form onSubmit={handleSubmit(saveUser)}>
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
-                    >
-                      Account Number
-                    </label>
-                    <input
-                      {...register("accountNumber")}
-                      type="tel"
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="XXXX-XXXX-XXXX-XXXX"
-                      value={user.accountNumber}
-                      name="accountNumber"
-                      onChange={(e) => handleChange(e)}
-                    />
-                    <small role="alert" className="text-red-500 ">
-                      {errors.accountNumber?.message}
-                      {accountNumberError && <div>{accountNumberError}</div>}
-                    </small>
-                  </div>
                   <label
                     className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                     htmlFor="grid-password"
@@ -218,9 +164,9 @@ export default function Register() {
                     <input
                       {...register("firstName")}
                       className="border-0 px-3 py-3 mr-3 placeholder-blueGray-300
-                    text-blueGray-900 bg-white rounded text-sm shadow
-                    focus:outline-none focus:ring w-1/2 ease-linear
-                    transition-all duration-150"
+              text-blueGray-900 bg-white rounded text-sm shadow
+              focus:outline-none focus:ring w-1/2 ease-linear
+              transition-all duration-150"
                       placeholder="First Name"
                       name="firstName"
                       value={user.firstName}
@@ -230,9 +176,9 @@ export default function Register() {
                       {...register("lastName")}
                       name="lastName"
                       className="border-0 px-3 py-3 mx-5 placeholder-blueGray-300
-                    text-blueGray-900 bg-white rounded text-sm shadow
-                    focus:outline-none focus:ring w-1/2  ease-linear
-                    transition-all duration-150"
+              text-blueGray-900 bg-white rounded text-sm shadow
+              focus:outline-none focus:ring w-1/2  ease-linear
+              transition-all duration-150"
                       placeholder="Last Name"
                       value={user.lastName}
                       onChange={(e) => handleChange(e)}
@@ -289,6 +235,26 @@ export default function Register() {
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
+                      Password
+                    </label>
+                    <input
+                      {...register("password")}
+                      type="password"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="Password"
+                      value={user.password}
+                      onChange={(e) => handleChange(e)}
+                    />
+                    <small role="alert" className="text-red-500 ">
+                      {errors.password?.message}
+                    </small>
+                  </div>
+
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
                       City
                     </label>
 
@@ -312,40 +278,37 @@ export default function Register() {
                       {errors.city?.message}
                     </small>
                   </div>
+
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      Password
+                      Role
                     </label>
-                    <input
-                      {...register("password")}
-                      type="password"
+
+                    <select
+                      {...register("role")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Password"
-                      value={user.password}
+                      value={user.role}
                       onChange={(e) => handleChange(e)}
-                    />
-                    <small role="alert" className="text-red-500 ">
-                      {errors.password?.message}
-                    </small>
-                  </div>
-                  <div className="relative w-full mb-3">
-                    <label
-                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="grid-password"
+                      name="role"
                     >
-                      Confirm Password
-                    </label>
-                    <input
-                      {...register("confirmPassword")}
-                      type="password"
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="Comfirm Password"
-                    />
+                      <option value="" disabled className="">
+                        Role
+                      </option>
+                      {roles
+                        ?.filter((item) => {
+                          return item === "USER" ? "" : item;
+                        })
+                        .map((role, index) => (
+                          <option key={index} value={role}>
+                            {role}
+                          </option>
+                        ))}
+                    </select>
                     <small role="alert" className="text-red-500 ">
-                      {errors.confirmPassword?.message}
+                      {errors.role?.message}
                     </small>
                   </div>
                   <div>
@@ -379,15 +342,6 @@ export default function Register() {
       </div>
     </>
   );
-}
-
-Register.layout = TableAuth;
-/*
-ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Register />
-    </BrowserRouter>
-  </React.StrictMode>
-);
-*/
+};
+roles.layout = Admin;
+export default roles;

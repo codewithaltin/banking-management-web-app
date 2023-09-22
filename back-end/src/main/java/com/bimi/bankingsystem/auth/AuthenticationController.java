@@ -24,8 +24,10 @@ public class AuthenticationController {
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(
             @RequestBody RegisterRequest request
-    ) {
-        if(service.checkEmailUnique(request.getEmail()) && service.checkAccountNumberUnique(request.getAccountNumber())) {
+    )
+
+    {
+        if(service.checkEmailUnique(request.getEmail()) && (service.checkAccountNumberUnique(request.getAccountNumber()) || (request.getAccountNumber() == 0))) {
             return ResponseEntity.ok(service.register(request));
         }else{
             throw new UnauthorizedException("User already exist");

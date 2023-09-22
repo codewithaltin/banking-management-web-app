@@ -1,5 +1,6 @@
 package com.bimi.bankingsystem.service;
 import com.bimi.bankingsystem.common.enums.City;
+import com.bimi.bankingsystem.common.enums.Role;
 import com.bimi.bankingsystem.model.SavingGoal;
 import com.bimi.bankingsystem.model.User;
 import com.bimi.bankingsystem.repository.UserRepository;
@@ -42,6 +43,11 @@ public class UserServiceImpl implements UserService {
     public String[] getCities(){
         return City.getNames(City.class);
     }
+
+    public String[] getRoles(){
+        return Role.getRoles(Role.class);
+    }
+
 
     @Override
     public boolean deleteUser(Long id) {
