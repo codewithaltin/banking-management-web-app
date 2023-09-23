@@ -22,10 +22,10 @@ const schema = yup
       .required("Full Name is required.")
       .min(5, "Full name must be longer than 5 characters")
       .max(50, "Full name must be shorter than 50 characters."),
-    email: yup
-      .string()
-      .email("Please enter a valid e-mail")
-      .required("Email is required."),
+    // email: yup
+    //   .string()
+    //   .email("Please enter a valid e-mail")
+    //   .required("Email is required."),
     phoneNumber: yup
       .string()
       .required("Phone number is required")
@@ -64,12 +64,6 @@ export default function Donate() {
     const [decoded, setDecoded] = useState(null);
     const [user, setUser] = useState(false);
 
-    useEffect(() => {
-      const token = localStorage.getItem("token");
-      const decodedToken = jwt_decode(token);
-      setDecoded(decodedToken);
-    }, []);
-
     //const DONATION_API_BASE_URL = "http://localhost:8080/api/v1/auth/donation";
 
     const [isOpen, setIsOpen] = useState(false);
@@ -93,6 +87,20 @@ export default function Donate() {
       cardInformation: "",
       comment: "",
     });
+
+    useEffect(() => {
+      const token = localStorage.getItem("token");
+      const decodedToken = jwt_decode(token);
+      setDecoded(decodedToken);
+    }, []);
+
+    useEffect(() => {
+    
+      if (decoded) {
+        console.log(decoded)
+        donation.email = decoded.sub;
+      } else console.log("decoding failed.");
+    }, [decoded]);
 
     const executeDonationMethod = async (e) => {
       try {
@@ -239,7 +247,7 @@ export default function Donate() {
                     </small>
                   </div>
 
-                  <div className="relative w-full mb-3">
+                  {/* <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="email"
@@ -257,7 +265,7 @@ export default function Donate() {
                     <small role="alert" className="text-red-500 ">
                       {errors.email?.message}
                     </small>
-                  </div>
+                  </div> */}
 
                   <div className="relative w-full mb-3">
                     <label
