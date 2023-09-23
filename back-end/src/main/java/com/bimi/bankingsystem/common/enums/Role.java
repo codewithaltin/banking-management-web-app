@@ -11,7 +11,8 @@ import java.util.EnumSet;
 public enum Role {
     USER("USER"),
     ADMIN("ADMIN"),
-    AUDITOR("AUDITOR");
+    AUDITOR("AUDITOR"),
+    DATA_MANAGER("DATA_MANAGER");
 
     private String value;
 

@@ -1,9 +1,31 @@
 import React from "react";
 import Link from "next/link";
+import jwt_decode from "jwt-decode";
+import { useState } from "react";
+import { useEffect } from "react";
 import { useRouter } from "next/router";
 
 export default function AdminSideBar() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
+  const [decoded, setDecoded] = useState(null);
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      setIsAdmin(checkAdmin());
+    }
+  }, [decoded]);
+
+  function checkAdmin() {
+    return decoded.authorities === "ROLE_ADMIN";
+  }
+
   const router = useRouter();
   return (
     <>
@@ -41,6 +63,8 @@ export default function AdminSideBar() {
           ></i>{" "}
           DASHBOARD
         </Link>
+
+        {isAdmin && (     
         <Link
           href="/admin/roles"
           className={
@@ -59,7 +83,8 @@ export default function AdminSideBar() {
             }
           ></i>{" "}
           Add Users with Roles
-        </Link>
+        </Link> )}
+
         <hr className="my-4 md:min-w-full" />
 
         <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">
