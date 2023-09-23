@@ -5,15 +5,11 @@ import { useEffect } from "react";
 import CardSettings from "components/Cards/CardSettings.js";
 import CardProfile from "components/Cards/CardProfile.js";
 import jwt_decode from "jwt-decode";
-
-// layout for page
-
 import User from "layouts/User.js";
 
 export default function Settings() {
   const [profile, setProfile] = useState({});
   const [decoded, setDecoded] = useState(null);
-
   useEffect(() => {
     const token = localStorage.getItem("token");
     const decodedToken = jwt_decode(token);
@@ -52,7 +48,12 @@ export default function Settings() {
       <div className="flex flex-wrap justify-center ">
         <CardProfile profile={profile} />
       </div>{" "}
-      <CardSettings profile={profile} />
+      <CardSettings
+        userId={profile.id}
+        setResponseUser={(updatedUser) => {
+          setProfile(updatedUser);
+        }}
+      />
     </>
   );
 }

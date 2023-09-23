@@ -32,7 +32,7 @@ const schema = yup
       .matches(phoneReg, "Phone Number is not valid."),
   })
   .required();
-export default function CardSettings(profile) {
+export default function CardSettings({ userId, setResponseUser }) {
   const USER_API_BASE_URL = "http://localhost:8080/api/v1/auth/user/";
   const {
     register,
@@ -49,11 +49,30 @@ export default function CardSettings(profile) {
     email: "",
     accountNumber: "",
     phoneNumber: "",
-    password: "",
     balance: 0,
     city: "",
-    role: "",
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(USER_API_BASE_URL + userId, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const _user = await response.json();
+        setUser(_user);
+        setIsOpen(true);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    if (userId) {
+      fetchData();
+    }
+  }, [userId]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,11 +95,25 @@ export default function CardSettings(profile) {
 
     fetchData();
   }, []);
+
+  function closeModal() {
+    setIsOpen(false);
+  }
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
   const handleChange = (event) => {
     const value = event.target.value;
     setUser({ ...user, [event.target.name]: value });
-    console.log(user);
   };
+
+  const reset = (e) => {
+    e.preventDefault();
+    setIsOpen(false);
+  };
+
   const updateUser = async (e) => {
     e.preventDefault();
     const updatedUserData = {
@@ -88,13 +121,12 @@ export default function CardSettings(profile) {
       lastName: user.lastName,
       email: user.email,
       accountNumber: user.accountNumber,
-      password: user.password,
       phoneNumber: user.phoneNumber,
       balance: user.balance,
       city: user.city,
     };
-    console.log(updatedUserData);
-    const response = await fetch(USER_API_BASE_URL + profile.profile.id, {
+    console.log(user.city);
+    const response = await fetch(USER_API_BASE_URL + userId, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
@@ -105,7 +137,8 @@ export default function CardSettings(profile) {
       throw new Error("Something went wrong");
     }
     const _user = await response.json();
-    setUser(_user);
+    setResponseUser(_user);
+    reset(e);
     Swal.fire("Updated!", "Updated Succesfully!", "success");
   };
   useEffect(() => {
@@ -121,7 +154,7 @@ export default function CardSettings(profile) {
           }
         );
         const arrOfCities = await response.json();
-        setCities(arrOfCities); // Update the cities array using the useState hook
+        setCities(arrOfCities);
       } catch (error) {
         throw new Error("Oops, fetching went wrong!");
       }
@@ -135,7 +168,7 @@ export default function CardSettings(profile) {
         <div className="rounded-t bg-white mb-0 px-6 py-6">
           <div className="text-center flex justify-between">
             <h6 className="text-blueGray-700 text-xl font-bold">
-              MOS KLIKO UPDATE HALA
+              Your Information
             </h6>
             <button
               className="bg-emerald-400 active:bg-blueGray-400 text-white font-bold uppercase text-xs px-4 py-2 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
@@ -164,7 +197,7 @@ export default function CardSettings(profile) {
                     type="text"
                     name="firstName"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    defaultValue={profile.profile.firstName}
+                    value={user.firstName}
                     onChange={(e) => handleChange(e)}
                   />
                 </div>
@@ -181,7 +214,7 @@ export default function CardSettings(profile) {
                     type="text"
                     name="lastName"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    defaultValue={profile.profile.lastName}
+                    value={user.lastName}
                     onChange={(e) => handleChange(e)}
                   />
                 </div>
@@ -194,7 +227,6 @@ export default function CardSettings(profile) {
               contact & address
             </h6>
             <div className="flex flex-wrap">
-              <div className="w-full lg:w-12/12 px-4"></div>
               <div className="w-full lg:w-4/12 px-4">
                 <div className="relative w-full mb-3">
                   <label
@@ -204,10 +236,10 @@ export default function CardSettings(profile) {
                     email
                   </label>
                   <input
-                    type="email"
+                    type="text"
                     name="email"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    defaultValue={profile.profile.email}
+                    value={user.email}
                     onChange={(e) => handleChange(e)}
                   />
                 </div>
@@ -224,7 +256,7 @@ export default function CardSettings(profile) {
                     type="text"
                     name="phoneNumber"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    defaultValue={profile.profile.phoneNumber}
+                    value={user.phoneNumber}
                     onChange={(e) => handleChange(e)}
                   />
                 </div>
@@ -253,7 +285,6 @@ export default function CardSettings(profile) {
               </div>
             </div>
             <hr className="mt-6 border-b-1 border-blueGray-300" />
-
             <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
               card information
             </h6>
@@ -270,7 +301,7 @@ export default function CardSettings(profile) {
                     type="text"
                     name="accountNumber"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    defaultValue={profile.profile.accountNumber}
+                    value={user.accountNumber}
                     onChange={(e) => handleChange(e)}
                   />
                 </div>

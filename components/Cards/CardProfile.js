@@ -10,7 +10,7 @@ export default function CardProfile(profile) {
           <div className="flex justify-between">
             <div>
               <h3 className="text-3xl  font-bold leading-normal text-blueGray-700 mb-2 ">
-                {"Welcome, " + " " + profile.profile.firstName + "!"}{" "}
+                {"Welcome, " + " " + profile.profile.firstName + ""}{" "}
               </h3>
             </div>
 
