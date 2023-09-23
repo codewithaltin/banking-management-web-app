@@ -13,6 +13,7 @@ import User from "layouts/User.js";
 export default function Settings() {
   const [profile, setProfile] = useState({});
   const [decoded, setDecoded] = useState(null);
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const decodedToken = jwt_decode(token);

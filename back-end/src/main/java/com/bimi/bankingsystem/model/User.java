@@ -42,7 +42,7 @@ public class User implements UserDetails {
     private long accountNumber;
     @NonNull
     private String phoneNumber;
-    @NonNull
+
     private String password;
 
     private double balance;

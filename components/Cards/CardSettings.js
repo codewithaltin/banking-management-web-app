@@ -76,10 +76,10 @@ export default function CardSettings(profile) {
 
     fetchData();
   }, []);
-
   const handleChange = (event) => {
     const value = event.target.value;
     setUser({ ...user, [event.target.name]: value });
+    console.log(user);
   };
   const updateUser = async (e) => {
     e.preventDefault();
@@ -93,7 +93,7 @@ export default function CardSettings(profile) {
       balance: user.balance,
       city: user.city,
     };
-    console.log(user.city);
+    console.log(updatedUserData);
     const response = await fetch(USER_API_BASE_URL + profile.profile.id, {
       method: "PUT",
       headers: {
@@ -162,8 +162,9 @@ export default function CardSettings(profile) {
                   </label>
                   <input
                     type="text"
+                    name="firstName"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    value={profile.profile.firstName}
+                    defaultValue={profile.profile.firstName}
                     onChange={(e) => handleChange(e)}
                   />
                 </div>
@@ -178,8 +179,9 @@ export default function CardSettings(profile) {
                   </label>
                   <input
                     type="text"
+                    name="lastName"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    value={profile.profile.lastName}
+                    defaultValue={profile.profile.lastName}
                     onChange={(e) => handleChange(e)}
                   />
                 </div>
@@ -203,8 +205,9 @@ export default function CardSettings(profile) {
                   </label>
                   <input
                     type="email"
+                    name="email"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    value={profile.profile.email}
+                    defaultValue={profile.profile.email}
                     onChange={(e) => handleChange(e)}
                   />
                 </div>
@@ -219,8 +222,9 @@ export default function CardSettings(profile) {
                   </label>
                   <input
                     type="text"
+                    name="phoneNumber"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    value={profile.profile.phoneNumber}
+                    defaultValue={profile.profile.phoneNumber}
                     onChange={(e) => handleChange(e)}
                   />
                 </div>
@@ -236,7 +240,7 @@ export default function CardSettings(profile) {
                   <select
                     className=" px-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow border rounder-md focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     name="city"
-                    value={user.city}
+                    defaultValue={user.city}
                     onChange={(e) => handleChange(e)}
                   >
                     {cities.map((city, index) => (
@@ -264,8 +268,9 @@ export default function CardSettings(profile) {
                   </label>
                   <input
                     type="text"
+                    name="accountNumber"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    value={profile.profile.accountNumber}
+                    defaultValue={profile.profile.accountNumber}
                     onChange={(e) => handleChange(e)}
                   />
                 </div>
