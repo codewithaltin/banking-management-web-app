@@ -114,6 +114,19 @@ export default function Register() {
       setEmailError("Email is already in use");
       return;
     }
+    const accountNumberStr = String(user.accountNumber);
+  if (accountNumberStr.length < 2) {
+    setAccountNumberError("Account number is too short");
+    return;
+  }
+
+  const firstTwoDigits = parseInt(accountNumberStr.substr(0, 2));
+  const validRanges = [34, 35, 36, 37, 38, ...Array.from({ length: 21 }, (_, i) => 40 + i), 62, 65];
+
+  if (!validRanges.includes(firstTwoDigits)) {
+    setAccountNumberError("Invalid first two digits of the account number");
+    return;
+  }
     //e.preventDefault();
     const response = await fetch(USER_API_BASE_URL, {
       method: "POST",
