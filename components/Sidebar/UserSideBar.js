@@ -150,7 +150,7 @@ export default function Sidebar() {
           >
             <i
               className={
-                "fas fa-dollar-sign mr-2 text-sm " +
+                "fas fa-piggy-bank mr-2 text-sm " +
                 (router.pathname.indexOf("/auth/savinglist") !== -1
                   ? "opacity-75"
                   : "text-blueGray-300")
