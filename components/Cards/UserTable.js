@@ -249,26 +249,25 @@ export default function UserTable({ user, color }) {
             </thead>
             {!loading && (
               <tbody>
-                {users
-                  ?.filter((item) => {
-                    return search.toLowerCase() === ""
-                      ? item
-                      : item.email.toLowerCase().includes(search);
-                  })
-                  .filter((item) => {
-                    return filter === "All Cities"
+              {users
+                ?.filter((item) => {
+                  return search.toLowerCase() === ""
                     ? item
-                    : item.city && item.city.includes(filter);
-                  })
-                  .map((user) => (
-                    <User
-                      user={user}
-                      key={user.id}
-                      confirmDelete={confirmDelete}
-                      editUser={editUser}
-                    />
-                  ))}
-              </tbody>
+                    : item.email.toLowerCase().includes(search);
+                })
+                .filter((item) => {
+                  return filter === "All Cities" ? item : item.city && item.city.includes(filter);
+                })
+                .filter((user) => user.role === "USER") // Filter by role "USER"
+                .map((user) => (
+                  <User
+                    user={user}
+                    key={user.id}
+                    confirmDelete={confirmDelete}
+                    editUser={editUser}
+                  />
+                ))}
+            </tbody>
             )}
           </table>
         </div>
