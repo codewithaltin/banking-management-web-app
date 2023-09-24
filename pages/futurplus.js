@@ -1,14 +1,16 @@
 import React, { useState } from "react";
-import { useForm } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-
 import Link from "next/link";
 import Navbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
-
+import TokenCheck from "components/TokenCheck";
+import jwt_decode from "jwt-decode";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { yupResolver } from "@hookform/resolvers/yup";
+import Swal from "sweetalert2";
+import * as yup from "yup";
 import Auth from "layouts/Auth.js";
-
+import TableAuth from "layouts/TableAuth";
 
   const schema = yup
   .object()
@@ -18,14 +20,15 @@ import Auth from "layouts/Auth.js";
     .required("Full Name is required.")
     .min(5, "Full name must be longer than 5 characters")
     .max(50, "Full name must be shorter than 50 characters."),
-    email: yup
-    .string()
-    .email("Please enter a valid e-mail")
-    .required("Email is required."),
-    cardInfo: yup
-    .string()
-    .required("Card Info is required")
-    .matches(/^\d+$/, "Card Info must be a number")
+    // email: yup
+    // .string()
+    // .email("Please enter a valid e-mail")
+    // .required("Email is required."),
+    cardInformation: yup
+      .string()
+      .length(16, 'Card number must be exactly 16 digits')
+      .matches(/^\d+$/, 'Card number can only contain digits')
+      .required('Card number is required')
   })
   .required();
 
@@ -37,37 +40,62 @@ import Auth from "layouts/Auth.js";
         formState: { errors },
       } = useForm({resolver: yupResolver(schema)});
 
-      const FUTURPLUS_API_BASE_URL = "http://localhost:8080/api/v1/futur_plus";
+      const [decoded, setDecoded] = useState(null);
+
+      let FUTURPLUS_API_BASE_URL;
 
       const [isOpen, setIsOpen] = useState(false);
-      const [futur_plus, setFuturPlus1] = useState({
+      const [futurPlus, setFuturPlus] = useState({
         id: "",
         fullName: "",
         email:"",
-        cardInfo:"",
+        cardInformation:"",
       });
       const [responseFuturPlus, setResponseFuturPlus] = useState({
         id: "",
         fullName: "",
         email:"",
-        cardInfo:"",
+        cardInformation:"",
       });
+
+      const successfulAlert = () => {
+        Swal.fire({
+          icon: "success",
+          title: "Succesfully applied!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      };
+
+      useEffect(() => {
+        const token = localStorage.getItem("token");
+        const decodedToken = jwt_decode(token);
+        setDecoded(decodedToken);
+      }, []);
+
+      useEffect(() => {
+    
+        if (decoded) {
+          console.log(decoded)
+          futurPlus.email = decoded.sub;
+        } else console.log("decoding failed.");
+      }, [decoded]);
 
 
       const saveFuturPlus = async (e) => {
-        //e.preventDefault();
-        const response = await fetch(FUTURPLUS_API_BASE_URL, {
+        const response = await fetch("http://localhost:8080/api/v1/auth/futurPlus/user/" + decoded.sub, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify(futur_plus),
+          body: JSON.stringify(futurPlus),
         });
         if (!response.ok) {
           throw new Error("Something went wrong");
         }
-        const _futur_plus = await response.json();
-        setResponseFuturPlus(_futur_plus);
+        const _FuturPlus = await response.json();
+        setResponseFuturPlus(_FuturPlus);
+        successfulAlert();
         window.location.reload();
       };
     
@@ -77,8 +105,8 @@ import Auth from "layouts/Auth.js";
           // };
 
       const handleChange = (event) => {
-      const value = event.target.type === 'number' ? parseFloat(event.target.value) : event.target.value;
-      setFuturPlus1({ ...futur_plus, [event.target.name]: value });
+      const value = event.target.value;
+      setFuturPlus({ ...futurPlus, [event.target.name]: value });
 };
 
 
@@ -188,7 +216,7 @@ import Auth from "layouts/Auth.js";
                       {...register("fullName")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s Ilir Gjika"
-                      value={futur_plus.fullName}
+                      value={futurPlus.fullName}
                       onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
@@ -208,7 +236,7 @@ import Auth from "layouts/Auth.js";
                       {...register("email")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s example@gmail.com"
-                      value={futur_plus.email}
+                      value={futurPlus.email}
                       onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
@@ -225,10 +253,10 @@ import Auth from "layouts/Auth.js";
                     </label>
                     <input
                       type="number"
-                      {...register("cardInfo")}
+                      {...register("cardInformation")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s 1214160204060810"
-                      value={futur_plus.cardInfo}
+                      value={futurPlus.cardInformation}
                       onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">

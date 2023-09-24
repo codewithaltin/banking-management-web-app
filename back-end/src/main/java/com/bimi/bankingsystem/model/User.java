@@ -176,6 +176,17 @@ public class User implements UserDetails {
         loans.add(loan);
     }
 
+    @JsonIgnore
+    @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE},orphanRemoval = true,mappedBy="user",fetch = FetchType.LAZY)
+
+    private List<FuturPlus> futurPluses;
+    public List<FuturPlus> getFuturPlus() {
+        return getFuturPluses();
+    }
+    public void createFuturPlus(FuturPlus futurPlus){
+        futurPluses.add(futurPlus);
+    }
+
 
 
     @OneToOne(mappedBy = "user")

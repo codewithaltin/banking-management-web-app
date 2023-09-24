@@ -35,7 +35,7 @@ public class FuturPlusService {
         FuturPlus futurPlus = futurPlusRepository.findById(id).get();
         futurPlus.setFullName(e.getFullName());
         futurPlus.setEmail(e.getEmail());
-        futurPlus.setCardInfo(e.getCardInfo());
+        futurPlus.setCardInformation(e.getCardInformation());
 
         return futurPlusRepository.save(futurPlus);
     }
