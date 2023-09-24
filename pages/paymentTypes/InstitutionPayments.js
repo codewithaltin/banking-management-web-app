@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import TokenCheck from "components/TokenCheck";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import Swal from "sweetalert2";
 import jwt_decode from "jwt-decode";
 
 import Auth from "layouts/Auth.js";
@@ -46,6 +47,15 @@ export default function InstitutionPayments() {
   //   navigate("/");
   // };ss
 
+  const successfulAlert = () => {
+    Swal.fire({
+      icon: "success",
+      title: "Succesfully registered Institution Payment!",
+      showConfirmButton: false,
+      timer: 2500,
+    });
+  };
+
   const saveInstitutionPayments = async (e) => {
     //e.preventDefault();
     const response = await fetch(
@@ -62,6 +72,7 @@ export default function InstitutionPayments() {
     }
     const _institutionPayments = await response.json();
     setResponseInstitutionPayments(_institutionPayments);
+    successfulAlert();
     window.location.reload();
   };
 

@@ -4,7 +4,7 @@ import TokenCheck from "components/TokenCheck";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import jwt_decode from "jwt-decode";
-
+import Swal from "sweetalert2";
 import Auth from "layouts/Auth.js";
 import { number } from "joi";
 import LazyResult from "postcss/lib/lazy-result";
@@ -48,6 +48,15 @@ export default function MobilePayments() {
   //   navigate("/");
   // };
 
+  const successfulAlert = () => {
+    Swal.fire({
+      icon: "success",
+      title: "Succesfully registered Mobile Payment!",
+      showConfirmButton: false,
+      timer: 5000,
+    });
+  };
+
   const saveMobilePayments = async (e) => {
     //e.preventDefault();
     const response = await fetch(
@@ -64,6 +73,7 @@ export default function MobilePayments() {
     }
     const _mobilePayments = await response.json();
     setResponseMobilePayments(_mobilePayments);
+    successfulAlert();
     window.location.reload();
   };
 

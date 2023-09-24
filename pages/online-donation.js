@@ -6,7 +6,7 @@ import Footer from "components/Footers/Footer.js";
 import Auth from "layouts/Auth.js";
 import jwt_decode from "jwt-decode";
 import { useEffect } from "react";
-
+import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -88,6 +88,15 @@ export default function Donate() {
       comment: "",
     });
 
+    const successfulAlert = () => {
+      Swal.fire({
+        icon: "success",
+        title: "Succesfully registered donation!",
+        showConfirmButton: false,
+        timer: 1500,
+      });
+    };
+
     useEffect(() => {
       const token = localStorage.getItem("token");
       const decodedToken = jwt_decode(token);
@@ -119,6 +128,7 @@ export default function Donate() {
     
         const _donation = await response.json();
         setResponseDonation(_donation);
+        successfulAlert();
         window.location.reload();
       } catch (error) {
         console.error("Error:", error.message);
