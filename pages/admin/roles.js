@@ -71,9 +71,6 @@ const roles = () => {
     });
   };
   const saveUser = async (e) => {
-    setEmailError(""); // Reset error messages
-    setAccountNumberError("");
-
     const response = await fetch(USER_API_BASE_URL, {
       method: "POST",
       headers: {
@@ -87,7 +84,7 @@ const roles = () => {
     const _user = await response.json();
     setUser(_user);
     successfulAlert();
-    windows.reload();
+    window.location.reload();
   };
 
   const handleChange = (event) => {

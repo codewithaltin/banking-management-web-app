@@ -63,7 +63,6 @@ public class UserServiceImpl implements UserService {
         u.setFirstName(user.getFirstName());
         u.setLastName(user.getLastName());
         u.setBalance(user.getBalance());
-        u.setPassword(user.getPassword());
         u.setCity(user.getCity());
         u.setPhoneNumber(user.getPhoneNumber());
 
