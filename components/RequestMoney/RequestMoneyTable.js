@@ -95,7 +95,7 @@ export default function RequestMoneyList({ requestMoney, color }) {
       method: "DELETE",
     }).then((res) => {
       if (requestMoneys) {
-        setrequestMoneys((prevElement) => {
+        setRequestMoneys((prevElement) => {
           return prevElement.filter((requestMoney) => requestMoney.id !== id);
         });
       }
@@ -218,7 +218,7 @@ export default function RequestMoneyList({ requestMoney, color }) {
                   ?.filter((item) => {
                     return search.toLowerCase() === ""
                       ? item
-                      : item.email.toLowerCase().includes(search);
+                      : item.payeeEmail.toLowerCase().includes(search);
                   })
                   .map((requestMoney) => (
                     <RequestMoney

@@ -10,8 +10,6 @@ const RequestMoney = ({
   confirmDelete,
   editRequestMoney,
 }) => {
-  const [decoded, setDecoded] = useState(null);
-
   return (
     <tr key={requestMoney.id}>
       {!isUser && (

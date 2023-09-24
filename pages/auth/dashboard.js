@@ -4,12 +4,30 @@ import CardLineChart from "components/Cards/CardLineChart.js";
 // layout for page
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
+import jwt_decode from "jwt-decode";
 
 import User from "layouts/User.js";
 
 export default function Dashboard() {
   const router = useRouter();
   const [profile, setProfile] = useState();
+  const [decoded, setDecoded] = useState(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      if (decoded.authorities != "ROLE_USER") {
+        window.alert("Unathorized acces, Riderecting you to your dashboard! ");
+        router.push("/admin/dashboard");
+      }
+      fetchProfile();
+    } else console.log("decoding failed.");
+  }, [decoded]);
 
   useEffect(() => {
     fetchProfile();

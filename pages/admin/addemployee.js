@@ -75,7 +75,7 @@ export default function addemployee() {
     successfulAlert();
     const _employee = await response.json();
     setResponseEmployee(_employee);
-    alert("Registered Succesfully!");
+    window.location.reload();
   };
   const handleChange = (event) => {
     const value = event.target.value;

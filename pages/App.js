@@ -236,7 +236,7 @@ function App() {
                   reality. Start saving with us now.
                 </p>
                 <a
-                  href="/SavingGoal"
+                  href="/savingGoal"
                   target="_blank"
                   className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
                 >

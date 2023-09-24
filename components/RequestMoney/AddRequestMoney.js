@@ -77,7 +77,6 @@ export default function AddRequestMoney() {
     const _requestMoney = await response.json();
     setRequestMoney(_requestMoney);
     successfulAlert();
-    await router.push("admin/dashboard");
   };
 
   const handleChange = (event) => {

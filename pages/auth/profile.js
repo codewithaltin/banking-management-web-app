@@ -6,10 +6,11 @@ import CardSettings from "components/Cards/CardSettings.js";
 import CardProfile from "components/Cards/CardProfile.js";
 import jwt_decode from "jwt-decode";
 import User from "layouts/User.js";
-
+import { useRouter } from "next/router";
 export default function Settings() {
   const [profile, setProfile] = useState({});
   const [decoded, setDecoded] = useState(null);
+  const router = useRouter();
   useEffect(() => {
     const token = localStorage.getItem("token");
     const decodedToken = jwt_decode(token);
@@ -18,6 +19,10 @@ export default function Settings() {
 
   useEffect(() => {
     if (decoded) {
+      if (decoded.authorities != "ROLE_USER") {
+        window.alert("Unathorized acces, Riderecting you to your dashboard! ");
+        router.push("/admin/dashboard");
+      }
       fetchProfile();
     } else console.log("decoding failed.");
   }, [decoded]);
