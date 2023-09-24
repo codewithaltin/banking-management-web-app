@@ -1,15 +1,20 @@
 package com.bimi.bankingsystem.service;
 
+import com.bimi.bankingsystem.exception.NotFoundException;
 import com.bimi.bankingsystem.model.SavingGoal;
+import com.bimi.bankingsystem.model.User;
 import com.bimi.bankingsystem.repository.SavingGoalRepository;
+import com.bimi.bankingsystem.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class SavingGoalService {
 
-    private SavingGoalRepository savingGoalRepository;
+    private final SavingGoalRepository savingGoalRepository;
+    private UserRepository userRepository = null;
 
     public SavingGoalService(SavingGoalRepository savingGoalRepository){ this.savingGoalRepository = savingGoalRepository;}
 
@@ -22,12 +27,20 @@ public class SavingGoalService {
         return savingGoalRepository.findAll();
     }
 
-    public SavingGoal getSavingGoalsById(Long id){
-        return savingGoalRepository.findById(id).get();
+    public SavingGoal getSavingGoalsById(Long id) {
+        try {
+            return savingGoalRepository.findById(id).orElseThrow(() -> new NotFoundException("SavingGoal with id " + id + " not found"));
+        } catch (NotFoundException ex) {
+            System.out.println("SavingGoal could not be found, id: " + id);
+            throw ex;
+        }
     }
 
-    public boolean deleteSavingGoals(Long id ){
-        savingGoalRepository.deleteById(id);
+
+    public boolean deleteSavingGoal(Long id) {
+        SavingGoal savingGoal =  savingGoalRepository.findById(id).get();
+
+        savingGoalRepository.delete(savingGoal);
         return true;
     }
     public SavingGoal updateSavingGoals(Long id, SavingGoal e){
@@ -39,10 +52,10 @@ public class SavingGoalService {
         savingGoal.setGoalName(e.getGoalName());
         savingGoal.setGoalDescription(e.getGoalDescription());
 
-
         return savingGoalRepository.save(savingGoal);
 
     }
+
 
 
 }

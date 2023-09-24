@@ -1,6 +1,7 @@
-import React from 'react';
+import React from "react";
 import DonationTable from "components/Cards/DonationTable";
-import Admin from "layouts/Admin.js";
+import User from "layouts/User.js";
+import Auth from "layouts/Auth";
 
 const DonationList = () => {
   return (
@@ -9,6 +10,6 @@ const DonationList = () => {
     </>
   );
 };
-DonationList.layout = Admin;
+DonationList.layout = Auth;
 
 export default DonationList;

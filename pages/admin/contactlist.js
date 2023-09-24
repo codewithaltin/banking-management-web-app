@@ -1,14 +1,14 @@
 import React from "react";
 import ContactTable from "components/Cards/ContactTable.js";
-import Admin from "layouts/Admin.js";
+import Auth from "layouts/Auth";
 
 const contactlist = () => {
   return (
     <>
-      <ContactTable />;
+      <ContactTable />
     </>
   );
 };
-contactlist.layout = Admin;
+contactlist.layout = Auth;
 
 export default contactlist;

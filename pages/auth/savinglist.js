@@ -1,19 +1,18 @@
 import React from "react";
 import SavingTable from "components/Cards/SavingTable.js";
-import Admin from "layouts/Admin.js";
+import Admin from "layouts/User.js";
 
-import User from "layouts/User";
-
+import User from "layouts/Admin";
+import Auth from "layouts/Auth";
 
 const savinglist = () => {
   return (
     <>
-            
       <SavingTable />
-
     </>
   );
 };
-savinglist.layout = User;
+
+savinglist.layout = Auth;
 
 export default savinglist;

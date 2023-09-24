@@ -1,9 +1,13 @@
-import React, { useState } from "react";
+import React, { useState, useEffect} from "react";
 import { useForm } from "react-hook-form";
+import TokenCheck from "components/TokenCheck";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-
+import jwt_decode from "jwt-decode";
+import Swal from "sweetalert2";
 import Auth from "layouts/Auth.js";
+import { number } from "joi";
+import LazyResult from "postcss/lib/lazy-result";
 
 export default function MobilePayments() {
 
@@ -13,23 +17,30 @@ export default function MobilePayments() {
       watch,
       formState: { errors },
     } = useForm({ });
+    const [decoded, setDecoded] = useState(null);
+  
+    useEffect(() => {
+      const token = localStorage.getItem("token");
+      const decodedToken = jwt_decode(token);
+      setDecoded(decodedToken);
+    }, []);
     
   
-  const MOBILEPAYMENTS_API_BASE_URL = "http://localhost:8080/api/v1/institutionPayments";
+  let MOBILEPAYMENTS_API_BASE_URL;
 
   const [isOpen, setIsOpen] = useState(false);
   const [mobilePayments, setMobilePayments] = useState({
     id: "",
     serviceProvider: "",
-    code: "",
-    mobilePhoneNumber: "",
+    numberCode: "",
+    phoneNumber: "",
     amount: "",
   });
   const [responseMobilePayments, setResponseMobilePayments] = useState({
     id: "",
     serviceProvider: "",
-    code: "",
-    mobilePhoneNumber: "",
+    numberCode: "",
+    phoneNumber: "",
     amount: "",
   });
   // const navigate = useNavigate();
@@ -37,13 +48,24 @@ export default function MobilePayments() {
   //   navigate("/");
   // };
 
+  const successfulAlert = () => {
+    Swal.fire({
+      icon: "success",
+      title: "Succesfully registered Mobile Payment!",
+      showConfirmButton: false,
+      timer: 5000,
+    });
+  };
+
   const saveMobilePayments = async (e) => {
     //e.preventDefault();
-    const response = await fetch(MOBILEPAYMENTS_API_BASE_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    const response = await fetch(
+      "http://localhost:8080/api/v1/auth/mobilePayment/user/" + decoded.sub,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
       body: JSON.stringify(mobilePayments),
     });
     if (!response.ok) {
@@ -51,6 +73,7 @@ export default function MobilePayments() {
     }
     const _mobilePayments = await response.json();
     setResponseMobilePayments(_mobilePayments);
+    successfulAlert();
     window.location.reload();
   };
 
@@ -77,6 +100,7 @@ export default function MobilePayments() {
   };
 
   return (
+    <TokenCheck>
     <>
       <div className="container mx-auto px-4 h-full">
         <div className="flex content-center items-center justify-center h-full">
@@ -106,10 +130,9 @@ export default function MobilePayments() {
                     </label>
                  
                     <select
-                   
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={handleChange}
-                      name="savingReason"
+                      name="serviceProvider"
                     >
                       <option></option>
                       {serviceProviderOption.map((option, index) => {
@@ -128,10 +151,10 @@ export default function MobilePayments() {
                     Number Code
                   </label>
                   <select
-                   
+                   {...register("numberCode")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={handleChange}
-                      name="savingReason"
+                      name="numberCode"
                     >
                       <option></option>
                       {codeOption.map((option, index) => {
@@ -149,7 +172,7 @@ export default function MobilePayments() {
                     Mobile Phone Number
                   </label>
                   <input
-                    {... register("amount")}
+                    {... register("phoneNumber")}
                     type="text"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     onChange={(e) => handleChange(e)}
@@ -165,7 +188,7 @@ export default function MobilePayments() {
                       Amount
                     </label>
                     <input
-                      {... register("goalName")}
+                      {... register("amount")}
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={(e) => handleChange(e)}
@@ -173,12 +196,8 @@ export default function MobilePayments() {
                     
                   </div>
             </div>
-                  
-                  
-                  
                   <div className="text-center mt-6">
                     <input
-                    
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="submit"
                       value="Submit"
@@ -191,6 +210,7 @@ export default function MobilePayments() {
         </div>
       </div>
     </>
+    </TokenCheck>
   );
 }
 

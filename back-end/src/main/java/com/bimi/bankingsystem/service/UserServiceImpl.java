@@ -1,8 +1,10 @@
 package com.bimi.bankingsystem.service;
+import com.bimi.bankingsystem.common.enums.City;
+import com.bimi.bankingsystem.common.enums.Role;
+import com.bimi.bankingsystem.model.SavingGoal;
 import com.bimi.bankingsystem.model.User;
 import com.bimi.bankingsystem.repository.UserRepository;
 import org.springframework.stereotype.Service;
-
 
 import java.util.List;
 import java.util.Optional;
@@ -13,6 +15,7 @@ public class UserServiceImpl implements UserService {
 
 
     private UserRepository userRepository;
+    private SavingGoalService savingGoalService;
 
     public UserServiceImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -30,26 +33,43 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Optional<User> getUserById(Long id) {
-       return userRepository.findById(id);
+        return userRepository.findById(id);
     }
+    @Override
+
+    public Optional<User> getUserByEmail(String email) {
+        return userRepository.findByEmail(email);
+    }
+    public String[] getCities(){
+        return City.getNames(City.class);
+    }
+
+    public String[] getRoles(){
+        return Role.getRoles(Role.class);
+    }
+
 
     @Override
     public boolean deleteUser(Long id) {
-       userRepository.deleteById(id);
-       return true;
+        userRepository.deleteById(id);
+        return true;
     }
 
     @Override
     public User updateUser(Long id, User user) {
         User u =
                 userRepository.findById(id).get();
-        u.setEmailId(user.getEmailId());
+        u.setEmail(user.getEmail());
         u.setFirstName(user.getFirstName());
         u.setLastName(user.getLastName());
-        u.setPassword(user.getPassword());
+        u.setBalance(user.getBalance());
+        u.setCity(user.getCity());
         u.setPhoneNumber(user.getPhoneNumber());
 
         return userRepository.save(u);
 
     }
+
+
+
 }

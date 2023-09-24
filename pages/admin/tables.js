@@ -6,7 +6,7 @@ import CardTable from "components/Cards/CardTable.js";
 
 // layout for page
 
-import Admin from "layouts/Admin.js";
+import Admin from "layouts/User.js";
 
 export default function Tables() {
   return (

@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import TokenCheck from "components/TokenCheck";
 import * as yup from "yup";
+import jwt_decode from "jwt-decode";
+import { useEffect } from "react";
 
 // components
 
@@ -9,21 +12,12 @@ import * as yup from "yup";
 // layout for page
 
 import Auth from "layouts/Auth.js";
+import TableAuth from "layouts/TableAuth";
 
 
 const schema = yup
   .object()
   .shape({
-    firstName: yup
-      .string()
-      .required("First Name is required.")
-      .min(2, "First name must be longer than 2 characters")
-      .max(50, "First name must be shorter than 50 characters."),
-    lastName: yup
-      .string()
-      .required("Last Name is required.")
-      .min(3, "Last name must be longer than 3 characters")
-      .max(50, "Last name must be shorter than 50 characters."),
     accountNumber: yup
       .string()
       .matches(/^[0-9]+$/, "Must be only digits")
@@ -59,6 +53,8 @@ const schema = yup
   })
   .required();
 
+  
+
 
 export default function Transfer() {
 
@@ -68,14 +64,17 @@ export default function Transfer() {
         watch,
         formState: { errors },
       } = useForm({ resolver: yupResolver(schema) });
+      const [decoded, setDecoded] = useState(null);
 
-      const TRANSFER_API_BASE_URL = "http://localhost:8080/api/v1/transfer";
+      useEffect(() => {
+        const token = localStorage.getItem("token");
+        const decodedToken = jwt_decode(token);
+        setDecoded(decodedToken);
+      }, []);
 
     
     const [transfer, setTransfers] = useState({
     id: "",
-    firstName: "",
-    lastName:"",
     accountNumber:"",
     amount: "",
     date:"",
@@ -87,8 +86,6 @@ export default function Transfer() {
   });
   const [responseTransfer, setResponseTransfer] = useState({
     id: "",
-    firstName: "",
-    lastName:"",
     accountNumber:"",
     amount: "",
     date:"",
@@ -98,6 +95,31 @@ export default function Transfer() {
     postCode:"",
     text: "",
   });
+
+  
+
+  const executeTransferMethod = async () => {
+    try {
+      const response = await fetch("http://localhost:8080/api/v1/auth/transfer/user/" + decoded.sub, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(transfer), 
+      });
+  
+      if (!response.ok) {
+        // Handle any errors if needed
+        console.error('Transfer failed');
+      } else {
+        console.log('Transfer executed successfully!');
+        location.reload();
+      }
+    } catch (error) {
+ 
+      console.error('An error occurred:', error);
+    }
+  };
 
   const saveTransfer = async (e) => {
     //e.preventDefault();
@@ -122,6 +144,7 @@ export default function Transfer() {
       };
 
   return (
+    <TokenCheck>
     <>
       <div className="flex flex-wrap justify-center ">
         <div className="w-full  lg:w-8/12 px-4">
@@ -133,50 +156,16 @@ export default function Transfer() {
           </div>
         </div>
         <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-          <form onSubmit={handleSubmit(saveTransfer)}>
+          <form onSubmit={handleSubmit(executeTransferMethod)}>
             <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
               Your Information
             </h6>
             <div className="flex flex-wrap">
               <div className="w-full lg:w-6/12 px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    First Name
-                  </label>
-                  <input
-                    {...register("firstName")}
-                    type="text"
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    value={transfer.firstName}
-                    onChange={(e) => handleChange(e)}
-                  />
-                  <small role="alert" className="text-red-500 ">
-                    {errors.firstName?.message}
-                  </small>
-                </div>
+                
               </div>
               <div className="w-full lg:w-6/12 px-4">
-                <div className="relative w-full mb-3">
-                  <label
-                    className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                    htmlFor="grid-password"
-                  >
-                    Last Name
-                  </label>
-                  <input 
-                  {... register("lastName")}
-                    type="text"
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    value={transfer.lastName}
-                    onChange={(e) => handleChange(e)}
-                  />
-                  <small role="alert" className="text-red-500 ">
-                    {errors.lastName?.message}
-                  </small>
-                </div>
+                
               </div>
               <div className="w-full lg:w-12/12 px-4">
                 <div className="relative w-full mb-3">
@@ -245,7 +234,7 @@ export default function Transfer() {
             </div>
             <hr className="mt-6 border-b-1 border-blueGray-300" />
             <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
-              Reciver Information
+              Receiver Information
             </h6>
             <div className="flex flex-wrap">
               <div className="w-full lg:w-12/12 px-4">
@@ -372,7 +361,8 @@ export default function Transfer() {
         </div>
       </div>
     </>
+    </TokenCheck>
   );
 }
 
-Transfer.layout = Auth;
+Transfer.layout = TableAuth;

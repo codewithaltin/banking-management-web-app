@@ -1,11 +1,21 @@
-package com.bimi.bankingsystem.repository;
+    package com.bimi.bankingsystem.repository;
 
 
-import com.bimi.bankingsystem.model.User;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
+    import com.bimi.bankingsystem.model.User;
+    import org.springframework.data.jpa.repository.JpaRepository;
 
-@Repository
-public interface UserRepository extends JpaRepository<User, Long> {
-}
+    import java.util.Optional;
+
+    public interface UserRepository extends JpaRepository<User, Long> {
+
+        Optional<User> findByEmail(String email);
+
+        User findById(long id);
+        User findByAccountNumber(long accountNumber);
+
+        boolean existsByEmail(String email);
+        boolean existsByAccountNumber(Long accountNumber);
+
+
+    }
 

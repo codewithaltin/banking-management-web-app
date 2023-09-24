@@ -1,5 +1,6 @@
 package com.bimi.bankingsystem.model;
 
+import com.bimi.bankingsystem.common.enums.Departaments;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -12,7 +13,6 @@ public class Employee {
     @SequenceGenerator(name="course_sequence",sequenceName = "course_sequence",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "course_sequence")
     @Column(updatable = false)
-    @NonNull
     private long id;
 
     @NonNull
@@ -35,8 +35,8 @@ public class Employee {
     private String address;
 
     @NonNull
-    @Column
-    private String department;
+    @Enumerated(EnumType.STRING)
+    private Departaments departament;
 
     @NonNull
     @Column
@@ -58,14 +58,14 @@ public class Employee {
 
     }
 
-    public Employee(Long id, String firstName, String lastName, String email, String phoneNumber, String address, String department, String jobTitle, String salary, String startDate, String endDate) {
+    public Employee(Long id, String firstName, String lastName, String email, String phoneNumber, String address, Departaments department, String jobTitle, String salary, String startDate, String endDate) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.address = address;
-        this.department = department;
+        this.departament = department;
         this.jobTitle = jobTitle;
         this.salary = salary;
         this.startDate = startDate;

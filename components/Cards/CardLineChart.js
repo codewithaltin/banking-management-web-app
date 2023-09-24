@@ -1,43 +1,69 @@
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import Chart from "chart.js";
+import jwt_decode from "jwt-decode";
+import { decode } from "next-auth/jwt";
 
 export default function CardLineChart() {
-  React.useEffect(() => {
-    var config = {
-      type: "line",
-      data: {
-        labels: [
-          "January",
-          "February",
-          "March",
-          "April",
-          "May",
-          "June",
-          "July",
-        ],
+  const chartRef = useRef(null);
+  const [profile, setProfile] = useState(null);
+  const [balance, setBalance] = useState(null);
+  const [decoded, setDecoded] = useState(null);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  async function fetchProfile() {
+    try {
+      const res = await fetch(
+        "http://localhost:8080/api/v1/auth/userbyemail/" + decoded.sub,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (res.ok) {
+        const json = await res.json();
+        setProfile(json);
+        setBalance(json.balance);
+      } else {
+        throw new Error("Something went wrong.");
+      }
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+    }
+  }
+
+  useEffect(() => {
+    if (decoded) {
+      fetchProfile();
+    }
+  }, [decoded]);
+
+  useEffect(() => {
+    if (chartRef.current && profile) {
+      const chartData = {
+        labels: ["September", "Sep/Oct", "October", "November", "December"],
         datasets: [
           {
             label: new Date().getFullYear(),
             backgroundColor: "#4c51bf",
             borderColor: "#4c51bf",
-            data: [65, 78, 66, 44, 56, 67, 75],
+            data: [0, profile.balance * 0.1, profile.balance],
             fill: false,
-          },
-          {
-            label: new Date().getFullYear() - 1,
-            fill: false,
-            backgroundColor: "#fff",
-            borderColor: "#fff",
-            data: [40, 68, 86, 74, 56, 60, 87],
           },
         ],
-      },
-      options: {
+      };
+
+      const chartOptions = {
         maintainAspectRatio: false,
         responsive: true,
         title: {
           display: false,
-          text: "Sales Charts",
+          text: "Balance",
           fontColor: "white",
         },
         legend: {
@@ -101,11 +127,17 @@ export default function CardLineChart() {
             },
           ],
         },
-      },
-    };
-    var ctx = document.getElementById("line-chart").getContext("2d");
-    window.myLine = new Chart(ctx, config);
-  }, []);
+      };
+
+      const ctx = chartRef.current.getContext("2d");
+      new Chart(ctx, {
+        type: "line",
+        data: chartData,
+        options: chartOptions,
+      });
+    }
+  }, [profile]);
+
   return (
     <>
       <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded bg-blueGray-700">
@@ -113,16 +145,18 @@ export default function CardLineChart() {
           <div className="flex flex-wrap items-center">
             <div className="relative w-full max-w-full flex-grow flex-1">
               <h6 className="uppercase text-blueGray-100 mb-1 text-xs font-semibold">
-                Overview
+                balance
               </h6>
-              <h2 className="text-white text-xl font-semibold">Sales value</h2>
+              <h2 className="text-white text-2xl font-semibold">
+                {balance + " EUR"}
+              </h2>
             </div>
           </div>
         </div>
         <div className="p-4 flex-auto">
           {/* Chart */}
           <div className="relative h-350-px">
-            <canvas id="line-chart"></canvas>
+            <canvas id="line-chart" ref={chartRef}></canvas>
           </div>
         </div>
       </div>

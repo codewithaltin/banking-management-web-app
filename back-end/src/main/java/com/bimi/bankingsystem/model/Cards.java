@@ -26,6 +26,11 @@ public class Cards {
     private int valid;
 
 
+    @OneToOne()
+    @JoinColumn(name = "fk_id")
+    private User user;
+    public void assignUserToCard(User user){this.user = user;}
+
     public Cards() {
     }
 

@@ -1,14 +1,15 @@
-import React from 'react'
+import React from "react";
 import LoanTable from "components/Cards/LoanTable.js";
-import Admin from "layouts/Admin.js";
+import User from "layouts/User.js";
+import Auth from "layouts/Auth";
 
 const loanlist = () => {
   return (
     <>
-        <LoanTable />;
+      <LoanTable />
     </>
   );
 };
-loanlist.layout = Admin;
+loanlist.layout = Auth;
 
 export default loanlist;

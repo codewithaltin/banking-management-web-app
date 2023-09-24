@@ -1,18 +1,16 @@
 package com.bimi.bankingsystem.service;
 
 import com.bimi.bankingsystem.model.Employee;
-import com.bimi.bankingsystem.repository.EmployeeRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
 
-    private EmployeeRepository er;
+    private EmplRepo er;
 
-    public EmployeeService(EmployeeRepository er){ this.er = er;}
+    public EmployeeService(EmplRepo er){ this.er = er;}
 
 
     public Employee addEmployee(Employee e){
@@ -39,7 +37,7 @@ public class EmployeeService {
         employee.setAddress(e.getAddress());
         employee.setEmail(e.getEmail());
         employee.setPhoneNumber(e.getPhoneNumber());
-        employee.setDepartment(e.getDepartment());
+        employee.setDepartament(e.getDepartament());
         employee.setJobTitle(e.getJobTitle());
         employee.setSalary(e.getSalary());
         employee.setStartDate(e.getStartDate());

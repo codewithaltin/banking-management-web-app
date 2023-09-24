@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import Link from "next/link";
+import TokenCheck from "components/TokenCheck";
 import Navbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
-
+import Auth from "layouts/Auth.js";
+import jwt_decode from "jwt-decode";
+import { useEffect } from "react";
+import Swal from "sweetalert2";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 
-import Auth from "layouts/Auth.js";
-import Donation from "components/Cards/Donation";
 const phoneReg = /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
-
 
 const schema = yup
   .object()
@@ -20,10 +21,10 @@ const schema = yup
       .required("Full Name is required.")
       .min(5, "Full name must be longer than 5 characters")
       .max(50, "Full name must be shorter than 50 characters."),
-    email: yup
-      .string()
-      .email("Please enter a valid e-mail")
-      .required("Email is required."),
+    // email: yup
+    //   .string()
+    //   .email("Please enter a valid e-mail")
+    //   .required("Email is required."),
     phoneNumber: yup
       .string()
       .required("Phone number is required")
@@ -40,12 +41,13 @@ const schema = yup
       .max(25000, "Donation amount must be lower than €25000"),
     cardInformation: yup
       .string()
-      .required("Card Info is required")
-      .min(16, "Card Info must be at least 16 characters"),
+      .length(16, 'Card number must be exactly 16 digits')
+      .matches(/^\d+$/, 'Card number can only contain digits')
+      .required('Card number is required'),
     comment: yup
       .string()
       .required("Comment is required")
-      .min(20, "Purpose must be at least 20 characters"),
+      .min(10, "Purpouse must be at least 10 characters"),
     
   })
   .required();
@@ -58,11 +60,13 @@ export default function Donate() {
       watch,
       formState: { errors },
     } = useForm({ resolver: yupResolver(schema) });
+    const [decoded, setDecoded] = useState(null);
+    const [user, setUser] = useState(false);
 
-    const DONATION_API_BASE_URL = "http://localhost:8080/api/v1/donation";
+    //const DONATION_API_BASE_URL = "http://localhost:8080/api/v1/auth/donation";
 
-    // const [isOpen, setIsOpen] = useState(false);
-    const [donation, setDonation] = useState({
+    const [isOpen, setIsOpen] = useState(false);
+    const [donation, setDonations] = useState({
       id: "",
       fullName: "",
       email: "",
@@ -83,28 +87,61 @@ export default function Donate() {
       comment: "",
     });
 
-    const saveDonation = async (e) => {
-      //e.preventDefault();
-      const response = await fetch(DONATION_API_BASE_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(donation),
+    const successfulAlert = () => {
+      Swal.fire({
+        icon: "success",
+        title: "Succesfully registered donation!",
+        showConfirmButton: false,
+        timer: 1500,
       });
-      if (!response.ok) {
-        throw new Error("Something went wrong");
-      }
-      const _donation = await response.json();
-      setResponseDonation(_donation);
-      window.location.reload();
-    };
-    const handleChange = (event) => {
-      const value = event.target.value;
-      setDonation({ ...donation, [event.target.name]: value });
     };
 
-    return( 
+    useEffect(() => {
+      const token = localStorage.getItem("token");
+      const decodedToken = jwt_decode(token);
+      setDecoded(decodedToken);
+    }, []);
+
+    useEffect(() => {
+    
+      if (decoded) {
+        console.log(decoded)
+        donation.email = decoded.sub;
+      } else console.log("decoding failed.");
+    }, [decoded]);
+
+    const executeDonationMethod = async (e) => {
+      try {
+        const response = await fetch(
+          "http://localhost:8080/api/v1/auth/donation/user/"+ decoded.sub, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(donation),
+        });
+        
+        if (!response.ok) {
+          throw new Error("Failed to submit donation");
+        }
+    
+        const _donation = await response.json();
+        setResponseDonation(_donation);
+        successfulAlert();
+        window.location.reload();
+      } catch (error) {
+        console.error("Error:", error.message);
+        // Handle the error, e.g., display an error message to the user
+      }
+    };
+    
+    const handleChange = (event) => {
+      const value = event.target.value;
+      setDonations({ ...donation, [event.target.name]: value });
+    };
+
+    return(
+    <TokenCheck>
     <>
       <Navbar transparent />
       <main>
@@ -197,7 +234,7 @@ export default function Donate() {
                   </p>
 
 
-                  <form onSubmit={handleSubmit(saveDonation)}>
+                  <form onSubmit={handleSubmit(executeDonationMethod)}>
                   {" "}
                   <div className="relative w-full mb-3 mt-8">
                     <label
@@ -219,7 +256,7 @@ export default function Donate() {
                     </small>
                   </div>
 
-                  <div className="relative w-full mb-3">
+                  {/* <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="email"
@@ -237,7 +274,7 @@ export default function Donate() {
                     <small role="alert" className="text-red-500 ">
                       {errors.email?.message}
                     </small>
-                  </div>
+                  </div> */}
 
                   <div className="relative w-full mb-3">
                     <label
@@ -295,14 +332,14 @@ export default function Donate() {
                       onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
-                      {errors.amount?.message}
+                      {errors.donationAmount?.message}
                     </small>
                   </div>
 
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                      htmlFor="cardinfo"
+                      htmlFor="cardInformation"
                     >
                       Card Information
                     </label>
@@ -315,7 +352,7 @@ export default function Donate() {
                       onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
-                      {errors.cardinfo?.message}
+                      {errors.cardInformation?.message}
                     </small>
                   </div>
 
@@ -336,7 +373,7 @@ export default function Donate() {
                       onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
-                      {errors.purpose?.message}
+                      {errors.comment?.message}
                     </small>
                   </div>
                   <div className="text-center mt-6">
@@ -358,7 +395,7 @@ export default function Donate() {
 
       </main>
     <Footer />
-  </>);
+  </>
+  </TokenCheck>
+  );
 }
-
-Donate.layout = Auth;

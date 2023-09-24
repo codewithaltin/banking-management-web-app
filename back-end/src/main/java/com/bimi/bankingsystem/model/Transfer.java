@@ -1,10 +1,18 @@
 package com.bimi.bankingsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import jakarta.persistence.*;
+
+@Entity
+@Table(name = "transfer")
 public class Transfer {
 
+    @Id
+    @SequenceGenerator(name =   "transfer_sequence", sequenceName = "transfer_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "transfer_sequence")
+    @Column(updatable = false)
     private long id;
-    private String firstName;
-    private String lastName;
+
     private long accountNumber;
 
     private int amount;
@@ -20,11 +28,10 @@ public class Transfer {
 
     private String description;
 
-    public Transfer(long id, String firstName, String lastName, long accountNumber, int amount, String date,
+    public Transfer(long id, long accountNumber, int amount, String date,
                     long reciverAccountNumber, String city, String country, int postCode, String description) {
         this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
+
         this.accountNumber = accountNumber;
         this.amount = amount;
         this.date = date;
@@ -34,6 +41,19 @@ public class Transfer {
         this.postCode = postCode;
         this.description = description;
     }
+
+
+    @ManyToOne()
+    @JoinColumn(name="user_id", referencedColumnName = "id")
+    private User user;
+    public User getUser() {
+        return user;
+    }
+    public void assignUserToTransfer(User user){
+        this.user = user;
+    }
+
+
     public Transfer() {
     }
     public long getId() {
@@ -41,18 +61,6 @@ public class Transfer {
     }
     public void setId(long id) {
         this.id = id;
-    }
-    public String getFirstName() {
-        return firstName;
-    }
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-    public String getLastName() {
-        return lastName;
-    }
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
     }
     public long getAccountNumber() {
         return accountNumber;

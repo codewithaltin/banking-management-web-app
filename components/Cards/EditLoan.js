@@ -1,19 +1,16 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { React, useState, useEffect, Fragment } from "react";
+import Swal from "sweetalert2";
 
 const EditLoan = ({ loanId, setResponseLoan }) => {
-  const LOAN_API_BASE_URL = "http://localhost:8080/api/v1/loan";
-
+  const LOAN_API_BASE_URL = "http://localhost:8080/api/v1/auth/loan";
+  
   const [isOpen, setIsOpen] = useState(false);
   const [loan, setLoan] = useState({
-    loan_id: "",
     fullName: "",
     email: "",
     phoneNumber: "",
-    address: "",
-    loanAmount: "",
     monthlyIncome: "",
-    purpouse: "",
   });
 
   useEffect(() => {
@@ -56,7 +53,6 @@ const EditLoan = ({ loanId, setResponseLoan }) => {
   };
 
   const updateLoan = async (e) => {
-    e.preventDefault();
     const response = await fetch(LOAN_API_BASE_URL + "/" + loanId, {
       method: "PUT",
       headers: {
@@ -65,24 +61,28 @@ const EditLoan = ({ loanId, setResponseLoan }) => {
       body: JSON.stringify(loan),
     });
     if (!response.ok) {
-      throw new Error("Something went wrong");
+      Swal.fire({
+        icon: "error",
+        title: "Failed to update!",
+      });
     }
     const _loan = await response.json();
     setResponseLoan(_loan);
     reset(e);
+    Swal.fire("Updated!", "Updated Succesfully!", "success");
   };
 
   return (
     <div className="min-h-screen absolute top-1/2 right-1/4">
       <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" m onClose={closeModal}>
-          <div className="px-4 text-center">
+          <div className="flex justify-center ">
             <Transition.Child
               as={Fragment}
-              enter="ease-out duration-300"
+              enter="ease-out duration-100"
               enterFrom="opacity-0 scale-95"
               enterTo="opacity-100 scale-100"
-              leave="ease-in duration-200"
+              leave="ease-in duration-100"
               leaveFrom="opacity-100 scale-100"
               leaveTo="opacity-0 scale-95"
             >
@@ -102,7 +102,7 @@ const EditLoan = ({ loanId, setResponseLoan }) => {
                       <input
                         type="text"
                         name="fullName"
-                        value={loan.fullName}
+                        defaultValue={loan.fullName}
                         onChange={(e) => handleChange(e)}
                         className="h-10 w-96 border mt-2 px-2 py-2"
                       ></input>
@@ -133,30 +133,6 @@ const EditLoan = ({ loanId, setResponseLoan }) => {
                     </div>
                     <div className="h-14 my-4">
                       <label className="block text-gray-600 text-sm font-normal">
-                        Address
-                      </label>
-                      <input
-                        type="text"
-                        name="address"
-                        value={loan.address}
-                        onChange={(e) => handleChange(e)}
-                        className="h-10 w-96 border mt-2 px-2 py-2"
-                      ></input>
-                    </div>
-                    <div className="h-14 my-4">
-                      <label className="block text-gray-600 text-sm font-normal">
-                        Loan Amount
-                      </label>
-                      <input
-                        type="text"
-                        name="loanAmount"
-                        value={loan.loanAmount}
-                        onChange={(e) => handleChange(e)}
-                        className="h-10 w-96 border mt-2 px-2 py-2"
-                      ></input>
-                    </div>
-                    <div className="h-14 my-4">
-                      <label className="block text-gray-600 text-sm font-normal">
                         Monthly Income
                       </label>
                       <input
@@ -167,19 +143,6 @@ const EditLoan = ({ loanId, setResponseLoan }) => {
                         className="h-10 w-96 border mt-2 px-2 py-2"
                       ></input>
                     </div>
-                    <div className="h-14 my-4">
-                      <label className="block text-gray-600 text-sm font-normal">
-                        Purpouse
-                      </label>
-                      <input
-                        type="text"
-                        name="purpouse"
-                        value={loan.purpouse}
-                        onChange={(e) => handleChange(e)}
-                        className="h-10 w-96 border mt-2 px-2 py-2"
-                      ></input>
-                    </div>
-
 
                     <div className="h-14 my-4 space-x-4 pt-4">
                       <button

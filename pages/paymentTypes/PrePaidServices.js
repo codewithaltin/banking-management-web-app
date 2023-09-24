@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import TokenCheck from "components/TokenCheck";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import Swal from "sweetalert2";
+import jwt_decode from "jwt-decode";
 
 import Auth from "layouts/Auth.js";
 
@@ -13,12 +16,19 @@ export default function PrePaidServices() {
       watch,
       formState: { errors },
     } = useForm({ });
+    const [decoded, setDecoded] = useState(null);
+  
+    useEffect(() => {
+      const token = localStorage.getItem("token");
+      const decodedToken = jwt_decode(token);
+      setDecoded(decodedToken);
+    }, []);
     
   
-  const PREPAIDSERVICES_API_BASE_URL = "http://localhost:8080/api/v1/prePaidServices";
+  let PREPAIDSERVICES_API_BASE_URL;
 
   const [isOpen, setIsOpen] = useState(false);
-  const [prePaidServices, setPrePaidServices] = useState({
+  const [prePaidService, setPrePaidServices] = useState({
     id: "",
     operator: "",
     product: "",
@@ -35,20 +45,32 @@ export default function PrePaidServices() {
   //   navigate("/");
   // };ss
 
+  const successfulAlert = () => {
+    Swal.fire({
+      icon: "success",
+      title: "Succesfully registered Pre Paid!",
+      showConfirmButton: false,
+      timer: 2000,
+    });
+  };
+
   const savePrePaidServices = async (e) => {
     //e.preventDefault();
-    const response = await fetch(PREPAIDSERVICES_API_BASE_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(prePaidServices),
+    const response = await fetch(
+      "http://localhost:8080/api/v1/auth/prePaidPayment/user/" + decoded.sub,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      body: JSON.stringify(prePaidService),
     });
-    if (!response.ok) {
+    if(!response.ok){
       throw new Error("Something went wrong");
     }
     const _prePaidServices = await response.json();
     setResponsePrePaidServices(_prePaidServices);
+    successfulAlert();
     window.location.reload();
   };
 
@@ -73,10 +95,11 @@ export default function PrePaidServices() {
 
   const handleChange = (event) => {
     const value = event.target.value;
-    setPrePaidServices({ ...prePaidServices, [event.target.name]: value });
+    setPrePaidServices({ ...prePaidService, [event.target.name]: value });
   };
 
   return (
+    <TokenCheck>
     <>
       <div className="container mx-auto px-4 h-full">
         <div className="flex content-center items-center justify-center h-full">
@@ -104,12 +127,11 @@ export default function PrePaidServices() {
                     <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                       Operator
                     </label>
-                 
                     <select
-                   
+
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={handleChange}
-                      name="savingReason"
+                      name="operator"
                     >
                       <option></option>
                       {OperatorOption.map((option, index) => {
@@ -117,19 +139,14 @@ export default function PrePaidServices() {
                       })}
                     </select>
                   </div>
-
-                  
-                  
                   <div className="relative w-full mb-3">
                     <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                       Product
                     </label>
-                 
                     <select
-                   
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={handleChange}
-                      name="savingReason"
+                      name="product"
                     >
                       <option></option>
                       {ProductOption.map((option, index) => {
@@ -146,16 +163,13 @@ export default function PrePaidServices() {
                       Amount
                     </label>
                     <input
-                      {... register("goalName")}
+                      {... register("amount")}
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={(e) => handleChange(e)}
                     />
                     
                   </div>
-            
-                  
-                  
                   
                   <div className="text-center mt-6">
                     <input
@@ -172,6 +186,7 @@ export default function PrePaidServices() {
         </div>
       </div>
     </>
+    </TokenCheck>
   );
 }
 

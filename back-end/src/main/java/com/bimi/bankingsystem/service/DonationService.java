@@ -22,22 +22,25 @@ public class DonationService {
         return donationRepository.findAll();
     }
 
-    public Donation updateDonation(Integer id, Donation donation) {
+    public Donation getDonationById(Long id) {
+        return donationRepository.findById(id).get();
+    }
+
+    public Donation updateDonation(Long id, Donation d) {
         Donation donation1 = donationRepository.findById(id).get();
-        donation1.setFullName(donation.getFullName());
-        donation1.setEmail(donation.getEmail());
-        donation1.setPhoneNumber(donation.getPhoneNumber());
-        donation1.setAddress(donation.getAddress());
-        donation1.setDonationAmount(donation.getDonationAmount());
-        donation1.setCardInformation(donation.getCardInformation());
-        donation1.setComment(donation.getComment());
+        donation1.setFullName(d.getFullName());
+        donation1.setEmail(d.getEmail());
+        donation1.setPhoneNumber(d.getPhoneNumber());
+        donation1.setAddress(d.getAddress());
+        donation1.setDonationAmount(d.getDonationAmount());
+        donation1.setCardInformation(d.getCardInformation());
+        donation1.setComment(d.getComment());
 
         return donationRepository.save(donation1);
     }
 
-    public boolean deleteDonation(Integer id) {
+    public boolean deleteDonation(Long id) {
         donationRepository.deleteById(id);
-
         return true;
     }
 }

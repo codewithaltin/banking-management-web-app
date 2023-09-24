@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import TokenCheck from "components/TokenCheck";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import Swal from "sweetalert2";
+import jwt_decode from "jwt-decode";
 
 import Auth from "layouts/Auth.js";
 
@@ -13,9 +16,16 @@ export default function InstitutionPayments() {
       watch,
       formState: { errors },
     } = useForm({ });
+    const [decoded, setDecoded] = useState(null);
+  
+    useEffect(() => {
+      const token = localStorage.getItem("token");
+      const decodedToken = jwt_decode(token);
+      setDecoded(decodedToken);
+    }, []);
     
   
-  const INSTITUTIONPAYMENTS_API_BASE_URL = "http://localhost:8080/api/v1/institutionPayments";
+  let INSTITUTIONPAYMENTS_API_BASE_URL;
 
   const [isOpen, setIsOpen] = useState(false);
   const [institutionPayments, setInstitutionPayments] = useState({
@@ -37,13 +47,24 @@ export default function InstitutionPayments() {
   //   navigate("/");
   // };ss
 
+  const successfulAlert = () => {
+    Swal.fire({
+      icon: "success",
+      title: "Succesfully registered Institution Payment!",
+      showConfirmButton: false,
+      timer: 2500,
+    });
+  };
+
   const saveInstitutionPayments = async (e) => {
     //e.preventDefault();
-    const response = await fetch(INSTITUTIONPAYMENTS_API_BASE_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    const response = await fetch(
+      "http://localhost:8080/api/v1/auth/institutionPayments/user/" + decoded.sub,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
       body: JSON.stringify(institutionPayments),
     });
     if (!response.ok) {
@@ -51,6 +72,7 @@ export default function InstitutionPayments() {
     }
     const _institutionPayments = await response.json();
     setResponseInstitutionPayments(_institutionPayments);
+    successfulAlert();
     window.location.reload();
   };
 
@@ -74,6 +96,7 @@ export default function InstitutionPayments() {
   };
 
   return (
+    <TokenCheck>
     <>
       <div className="container mx-auto px-4 h-full">
         <div className="flex content-center items-center justify-center h-full">
@@ -101,12 +124,10 @@ export default function InstitutionPayments() {
                     <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2">
                       Institution
                     </label>
-                 
                     <select
-                   
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={handleChange}
-                      name="savingReason"
+                      name="institution"
                     >
                       <option></option>
                       {InstitutionOption.map((option, index) => {
@@ -122,7 +143,7 @@ export default function InstitutionPayments() {
                       Company
                     </label>
                     <input
-                      {... register("goalName")}
+                      {... register("company")}
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={(e) => handleChange(e)}
@@ -183,6 +204,7 @@ export default function InstitutionPayments() {
         </div>
       </div>
     </>
+    </TokenCheck>
   );
 }
 

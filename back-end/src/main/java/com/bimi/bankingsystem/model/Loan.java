@@ -1,110 +1,43 @@
 package com.bimi.bankingsystem.model;
 import jakarta.persistence.*;
+import lombok.*;
 
+@Getter
+@Setter
 @Entity
-@Table (name = "\"loan\"")
+@AllArgsConstructor
+@NoArgsConstructor
+@Table (name = "loan")
 public class Loan {
+    @Setter(AccessLevel.PROTECTED)
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "loan_id")
-    private Integer id;
-
-    @Column(name = "name")
+    @Column(updatable = false)
+    @NonNull
+    private long id;
+    @NonNull
     private String fullName;
-
-    @Column(name = "email")
+    @NonNull
     private String email;
-    
-    @Column(name = "phone")
+    @NonNull
     private Integer phoneNumber;
-
-    @Column(name = "address")
+    @NonNull
     private String address;
-
-    @Column(name = "amount")
+    @NonNull
     private double loanAmount;
-
-    @Column(name = "income")
+    @NonNull
     private double monthlyIncome;
-
-    @Column(name = "purpouse")
+    @NonNull
     private String purpouse;
 
-    public Loan() {
+    @ManyToOne()
+    @JoinColumn(name="user_id", referencedColumnName = "id")
+    private User user;
+    public User getUser() {
+        return user;
     }
 
-    public Loan(Integer id, String fullName, String email, Integer phoneNumber, String adress, double loanAmount, double monthlyIcome, String purpouse) {
-        this.id = id;
-        this.fullName = fullName;
-        this.email = email;
-        this.phoneNumber = phoneNumber;
-        this.address = adress;
-        this.loanAmount = loanAmount;
-        this.monthlyIncome = monthlyIcome;
-        this.purpouse = purpouse;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getFullName() {
-        return fullName;
-    }
-
-    public void setFullName(String fullName) {
-        this.fullName = fullName;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public Integer getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(Integer phoneNumber) {
-        this.phoneNumber = phoneNumber;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public double getLoanAmount() {
-        return loanAmount;
-    }
-
-    public void setLoanAmount(double loanAmount) {
-        this.loanAmount = loanAmount;
-    }
-
-    public double getMonthlyIncome() {
-        return monthlyIncome;
-    }
-
-    public void setMonthlyIncome(double monthlyIncome) {
-        this.monthlyIncome = monthlyIncome;
-    }
-
-    public String getPurpouse() {
-        return purpouse;
-    }
-
-    public void setPurpouse(String purpouse) {
-        this.purpouse = purpouse;
+    public void assignUserToLoan(User user){
+        this.user = user;
     }
 }

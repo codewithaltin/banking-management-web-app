@@ -1,7 +1,10 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
+import TokenCheck from "components/TokenCheck";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import Swal from "sweetalert2";
+import jwt_decode from "jwt-decode";
 
 import Auth from "layouts/Auth.js";
 
@@ -13,9 +16,16 @@ export default function CollectorPayments() {
       watch,
       formState: { errors },
     } = useForm({ });
+    const [decoded, setDecoded] = useState(null);
+  
+    useEffect(() => {
+      const token = localStorage.getItem("token");
+      const decodedToken = jwt_decode(token);
+      setDecoded(decodedToken);
+    }, []);
     
   
-  const COLLECTORPAYMENTS_API_BASE_URL = "http://localhost:8080/api/v1/institutionPayments";
+  const COLLECTORPAYMENTS_API_BASE_URL = "http://localhost:8080/api/v1/auth/collectorPayment";
 
   const [isOpen, setIsOpen] = useState(false);
   const [collectorPayments, setCollectorPayments] = useState({
@@ -24,7 +34,7 @@ export default function CollectorPayments() {
     serialNo: "",
     uniref: "",
     amount: "",
-    description:""
+    description:"",
   });
   const [responseCollectorPayments, setResponseCollectorPayments] = useState({
     id: "",
@@ -39,13 +49,24 @@ export default function CollectorPayments() {
   //   navigate("/");
   // };
 
+  const successfulAlert = () => {
+    Swal.fire({
+      icon: "success",
+      title: "Succesfully registered Collector Payment!",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
+  
   const saveCollectorPayments = async (e) => {
     //e.preventDefault();
-    const response = await fetch(COLLECTORPAYMENTS_API_BASE_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
+    const response = await fetch(
+      "http://localhost:8080/api/v1/auth/collectorPayment/user/" + decoded.sub,
+      {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
       body: JSON.stringify(collectorPayments),
     });
     if (!response.ok) {
@@ -53,10 +74,11 @@ export default function CollectorPayments() {
     }
     const _collectorPayments = await response.json();
     setResponseCollectorPayments(_collectorPayments);
+    successfulAlert();
     window.location.reload();
   };
 
-
+  
   const CollectorOption = [
     "Public Organizations",
     "Private Organizations",
@@ -74,10 +96,11 @@ export default function CollectorPayments() {
 
   const handleChange = (event) => {
     const value = event.target.value;
-    setInstitutionPayments({ ...institutionPayments, [event.target.name]: value });
+    setCollectorPayments({ ...collectorPayments, [event.target.name]: value });
   };
 
   return (
+    <TokenCheck>
     <>
       <div className="container mx-auto px-4 h-full">
         <div className="flex content-center items-center justify-center h-full">
@@ -107,10 +130,9 @@ export default function CollectorPayments() {
                     </label>
                  
                     <select
-                   
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={handleChange}
-                      name="savingReason"
+                      name="collector"
                     >
                       <option></option>
                       {CollectorOption.map((option, index) => {
@@ -126,7 +148,7 @@ export default function CollectorPayments() {
                       Serial NO
                     </label>
                     <input
-                      {... register("goalName")}
+                      {... register("serialNo")}
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={(e) => handleChange(e)}
@@ -143,7 +165,7 @@ export default function CollectorPayments() {
                     UNIREF
                   </label>
                   <input
-                    {... register("referenceNumber")}
+                    {... register("uniref")}
                     type="text"
                     className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                     onChange={(e) => handleChange(e)}
@@ -177,7 +199,7 @@ export default function CollectorPayments() {
                       Description
                     </label>
                     <input
-                      {... register("goalName")}
+                      {... register("description")}
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={(e) => handleChange(e)}
@@ -199,6 +221,7 @@ export default function CollectorPayments() {
         </div>
       </div>
     </>
+    </TokenCheck>
   );
 }
 

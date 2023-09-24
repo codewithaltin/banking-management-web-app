@@ -2,23 +2,21 @@ import React from "react";
 
 // components
 
+import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import IndexNavbar_light from "components/Navbars/IndexNavbar_light.js";
 import FooterSmall from "components/Footers/FooterSmall.js";
+import Sidebar from "components/Sidebar/Sidebar.js";
 
 export default function LightAuth({ children }) {
   return (
     <>
-      <IndexNavbar_light transparent />
-      <main>
-        <section className="relative w-full h-full py-40 min-h-screen">
-          <div className="absolute top-0 w-full h-full bg-blueGray-200 bg-no-repeat bg-full"></div>
-          {children}
-          {/* style={{
-              backgroundImage: "url('/img/register_bg_2.png')",
-            }}*/}
-          <FooterSmall absolute />
-        </section>
-      </main>
+      <Sidebar />
+      <div className="relative md:ml-64 bg-blueGray-100">
+        <AdminNavbar />
+        {/* Header */}
+        <div className="px-4 md:px-10 mx-auto w-full -m-24">{children}</div>
+      </div>
     </>
   );
 }
+

@@ -1,5 +1,4 @@
 package com.bimi.bankingsystem.service;
-import com.bimi.bankingsystem.entity.ContactEntity;
 import com.bimi.bankingsystem.model.Contact;
 import com.bimi.bankingsystem.repository.ContactRepository;
 import org.springframework.beans.BeanUtils;
@@ -17,19 +16,19 @@ public class ContactService {
     }
 
     public Contact saveContact(Contact contact) {
-        ContactEntity contactEntity = new ContactEntity();
+        Contact contactEntity = new Contact();
         BeanUtils.copyProperties(contact, contactEntity);
         contactRepository.save(contactEntity);
         return contact;
     }
 
-    public List<ContactEntity> getAllContact() {
-        List<ContactEntity> contactEntities
+    public List<Contact> getAllContact() {
+        List<Contact> contactEntities
                 = contactRepository.findAll();
 
-        List<ContactEntity> contacts = contactEntities
+        List<Contact> contacts = contactEntities
                 .stream()
-                .map(contactEntity -> new ContactEntity(
+                .map(contactEntity -> new Contact(
                         contactEntity.getId(),
                         contactEntity.getFullName(),
                         contactEntity.getEmail(),
@@ -42,7 +41,7 @@ public class ContactService {
 
 
     public Contact getContactById(Integer id) {
-        ContactEntity contactEntity
+        Contact contactEntity
                 = contactRepository.findById(id).get();
         Contact contact = new Contact();
         BeanUtils.copyProperties(contactEntity, contact);
@@ -51,14 +50,14 @@ public class ContactService {
 
 
     public boolean deleteContact(Integer id) {
-        ContactEntity contact =  contactRepository.findById(id).get();
+        Contact contact =  contactRepository.findById(id).get();
         contactRepository.delete(contact);
         return true;
     }
 
 
     public Contact updateContact(Integer id, Contact contact) {
-        ContactEntity contactEntity =
+        Contact contactEntity =
                 contactRepository.findById(id).get();
         contactEntity.setFullName(contact.getFullName());
         contactEntity.setEmail(contact.getEmail());

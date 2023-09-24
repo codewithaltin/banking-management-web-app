@@ -1,18 +1,19 @@
 package com.bimi.bankingsystem.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
 @Getter
 @Setter
 @Entity
-@Table(name = "Money Requested")
+@AllArgsConstructor
+@Table(name = "money_requested")
 public class RequestMoney {
     @Id
     @SequenceGenerator(name="course_sequence",sequenceName = "course_sequence",allocationSize = 1)
     @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "course_sequence")
     @Column(updatable = false)
-    @NonNull
     private long id;
 
     @NonNull
@@ -22,16 +23,21 @@ public class RequestMoney {
     @Column
     private String payeeEmail;
 
-    @NonNull
+    @ManyToOne()
+    @JoinColumn(name="user_id", referencedColumnName = "id")
+    private User user;
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     @Column
     private double amount ;
 
-    public RequestMoney(@NonNull long id, @NonNull String personsRequestingEmail, @NonNull String payeeEmail, @NonNull double amount) {
-        this.id = id;
-        this.requestedEmail = personsRequestingEmail;
-        this.payeeEmail = payeeEmail;
-        this.amount = amount;
-    }
 
     public RequestMoney() {
     }

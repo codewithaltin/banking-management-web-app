@@ -3,54 +3,90 @@ import PropTypes from "prop-types";
 
 // components
 import Savings from "./Savings";
-import AddGoal from "./AddGoal";
-import TableDropdown from "components/Dropdowns/TableDropdown.js";
-import CardTable from "./CardTable";
+
+import EditSavingGoal from "./EditSavingGoal";
+import Swal from "sweetalert2";
+import jwt_decode from "jwt-decode";
 
 export default function SavingTable({ savingGoal, color }) {
-
-
-  const SAVINGGOAL_API_BASE_URL = "http://localhost:8080/api/v1/savingGoal";
+  let SAVINGGOAL_API_BASE_URL;
   const [savingGoals, setSavingGoals] = useState(null);
   const [loading, setLoading] = useState(true);
   const [savingGoalId, setSavingGoalId] = useState(null);
   const [responseSavingGoal, setResponseSavingGoal] = useState(null);
   const [isDialogOpen, setDialogOpen] = useState(false);
-
-  const handleOpenDialog = () => {
-    setDialogOpen(true);
-  };
-
-  const handleCloseDialog = () => {
-    setDialogOpen(false);
-  };
-
+  const [decoded, setDecoded] = useState(null);
+  const [search, setSearch] = useState("");
+  const [isAuditor, setIsAuditor] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch(SAVINGGOAL_API_BASE_URL, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const savingGoals = await response.json();
-        setSavingGoals(savingGoals);
-      } catch (error) {
-        console.log(error);
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      chooseEndPoint();
+      fetchData();
+      setIsAuditor(checkAuditor());
+    }
+  }, [decoded]);
+
+  function checkAuditor() {
+    return decoded.authorities === "ROLE_AUDITOR";
+  }
+
+  function chooseEndPoint() {
+    if (decoded.authorities === "ROLE_USER") {
+      SAVINGGOAL_API_BASE_URL =
+        "http://localhost:8080/api/v1/auth/savingGoal/user/" + decoded.sub;
+    } else {
+      SAVINGGOAL_API_BASE_URL = "http://localhost:8080/api/v1/auth/savingGoal";
+    }
+  }
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(SAVINGGOAL_API_BASE_URL, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const savingGoalsData = await response.json();
+        setSavingGoals(savingGoalsData);
+      } else {
+        throw new Error("Failed to fetch data");
       }
+    } catch (error) {
+      console.error(error);
+    } finally {
       setLoading(false);
-    };
-    fetchData();
-  }, [savingGoal, responseSavingGoal]);
+    }
+  };
+
+  const ConfirmDialogAlert = (e, id) => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      icon: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!",
+    }).then((result) => {
+      if (result.isConfirmed) {
+        deleteSavingGoal(e, id);
+        Swal.fire("Deleted!", "Deleted Succesfully!", "success");
+      }
+    });
+  };
 
   const deleteSavingGoal = (e, id) => {
-    let confirmed = confirm("Are you sure you wanna delete this goal ?");
-    if (!confirmed) return;
     e.preventDefault();
-    fetch(SAVINGGOAL_API_BASE_URL + "/" + id, {
+    fetch("http://localhost:8080/api/v1/auth/savingGoal/" + id, {
       method: "DELETE",
     }).then((res) => {
       if (savingGoals) {
@@ -59,6 +95,11 @@ export default function SavingTable({ savingGoal, color }) {
         });
       }
     });
+  };
+
+  const editSavingGoal = (e, id) => {
+    e.preventDefault();
+    setSavingGoalId(id);
   };
 
   return (
@@ -72,27 +113,39 @@ export default function SavingTable({ savingGoal, color }) {
         <div className="rounded-t mb-0 px-4 py-3 border-0">
           <div className="flex flex-wrap items-center">
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-              <h3
-                className={
-                  "font-semibold text-lg " +
-                  (color === "light" ? "text-blueGray-700" : "text-white")
-                }>
-                Saving Goals
-              </h3>
-              <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-              <a  
-                className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                href="/SavingGoal"
-              >
-                Add Goal
-              </a>
-              
-              {isDialogOpen && <AddGoal isDialogOpen={handleOpenDialog} />}
+              <div className="flex items-center">
+                <form>
+                  <div class="relative">
+                    <div class="absolute inset-b-0 left-0 flex items-center pl-3 pointer-events-none">
+                      <i className="fa fa-search text-blue-50 mt-3"></i>
+                    </div>
+                    <input
+                      type="search"
+                      id="default-search"
+                      class="block w-full p-2 pl-10 text-sm text-blue-50 border border-gray-300 rounded-lg bg-blueGray-600 "
+                      placeholder="Search saving by e-mail..."
+                      onChange={(e) => setSearch(e.target.value)}
+                      required
+                    ></input>
+                    <button
+                      type="submit"
+                      class="text-white absolute right-2.5 bottom-2.5 bg-blue-50 "
+                    ></button>
+                  </div>
+                </form>
+                <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
+                  <a
+                    className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                    href="/SavingGoal"
+                  >
+                    Add Goal
+                  </a>
+                </div>{" "}
+              </div>
             </div>
-            </div>
-            </div>
+          </div>
         </div>
-            <div className="block w-full overflow-x-auto">
+        <div className="block w-full overflow-x-auto">
           {/* Projects table */}
           <table className="items-center w-full bg-transparent border-collapse">
             <thead>
@@ -137,16 +190,18 @@ export default function SavingTable({ savingGoal, color }) {
                 >
                   Goal Name
                 </th>
-                <th
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                >
+                {!isAuditor && (
+                  <th
+                    className={
+                      "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                      (color === "light"
+                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                    }
+                  >
                     Actions
-                </th>
+                  </th>
+                )}
                 <th
                   className={
                     "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
@@ -159,17 +214,29 @@ export default function SavingTable({ savingGoal, color }) {
             </thead>
             {!loading && (
               <tbody>
-                {savingGoals?.map((savingGoal) => (
-                  <Savings
-                  savingGoal={savingGoal}
-                    key={savingGoal.id}
-                    deleteSavingGoal={deleteSavingGoal}
-                  />
-                ))}
+                {savingGoals
+                  ?.filter((item) => {
+                    return search.toLowerCase() === ""
+                      ? item
+                      : item.goalName.toLowerCase().includes(search);
+                  })
+                  .map((savingGoal) => (
+                    <Savings
+                      savingGoal={savingGoal}
+                      key={savingGoal.id}
+                      ConfirmDialogAlert={ConfirmDialogAlert}
+                      deleteSavingGoal={deleteSavingGoal}
+                      editSavingGoal={editSavingGoal}
+                    />
+                  ))}
               </tbody>
             )}
           </table>
         </div>
+        <EditSavingGoal
+          savingGoalId={savingGoalId}
+          setResponseSavingGoal={setResponseSavingGoal}
+        />
       </div>
     </>
   );
