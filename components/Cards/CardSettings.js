@@ -275,6 +275,9 @@ export default function CardSettings({ userId, setResponseUser }) {
                     defaultValue={user.city}
                     onChange={(e) => handleChange(e)}
                   >
+                    <option value="" disabled>
+                      {user.city}
+                    </option>
                     {cities.map((city, index) => (
                       <option key={index} value={city}>
                         {city}

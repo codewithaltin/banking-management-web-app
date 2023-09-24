@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
 
 import jwt_decode from "jwt-decode";
 
 // components
-import EditEmployee from "./EditEmployee";
-import Employee from "./Employee";
+import RequestMoney from "./RequestMoney";
 import Swal from "sweetalert2";
 
-export default function EmployeeList({ employee, color }) {
-  const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/v1/auth/employee";
-  const [employees, setemployees] = useState(null);
+export default function RequestMoneyList({ requestMoney, color }) {
+  const REQUEST_MONEY_API_BASE_URL =
+    "http://localhost:8080/api/v1/auth/requestmoney";
+  const [requestMoneys, setrequestMoneys] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [employeeId, setemployeeId] = useState(null);
-  const [responseEmployee, setResponseEmployee] = useState(null);
+  const [requestMoneyId, setrequestMoneyId] = useState(null);
+  const [responseRequestMoney, setResponseRequestMoney] = useState(null);
   const [search, setSearch] = useState("");
   const [decoded, setDecoded] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAuditor, setIsAuditor] = useState(false);
+  const [isUser, setIsUser] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -26,33 +26,36 @@ export default function EmployeeList({ employee, color }) {
 
   useEffect(() => {
     if (decoded) {
-      setIsAdmin(checkAdmin());
+      setIsAuditor(checkAuditor());
+      setIsUser(checkUser());
     }
   }, [decoded]);
 
-  function checkAdmin() {
-    return decoded.authorities === "ROLE_ADMIN";
+  function checkAuditor() {
+    return decoded.authorities === "ROLE_AUDITOR";
   }
-
+  function checkUser() {
+    return decoded.authorities === "ROLE_USER";
+  }
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await fetch(EMPLOYEE_API_BASE_URL, {
+        const response = await fetch(REQUEST_MONEY_API_BASE_URL, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
         });
-        const employees = await response.json();
-        setemployees(employees);
+        const requestMoneys = await response.json();
+        setrequestMoneys(requestMoneys);
       } catch (error) {
         console.log(error);
       }
       setLoading(false);
     };
     fetchData();
-  }, [employee, responseEmployee]);
+  }, [requestMoney, responseRequestMoney]);
 
   const confirmDelete = (e, id) => {
     Swal.fire({
@@ -65,28 +68,28 @@ export default function EmployeeList({ employee, color }) {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteEmployee(e, id);
+        deleteRequestMoney(e, id);
         Swal.fire("Deleted!", "Deleted Succesfully!", "success");
       }
     });
   };
 
-  const deleteEmployee = (e, id) => {
+  const deleteRequestMoney = (e, id) => {
     e.preventDefault();
-    fetch("http://localhost:8080/api/v1/auth/employee/" + id, {
+    fetch("http://localhost:8080/api/v1/auth/requestmoney/" + id, {
       method: "DELETE",
     }).then((res) => {
-      if (employees) {
-        setemployees((prevElement) => {
-          return prevElement.filter((employee) => employee.id !== id);
+      if (requestMoneys) {
+        setrequestMoneys((prevElement) => {
+          return prevElement.filter((requestMoney) => requestMoney.id !== id);
         });
       }
     });
   };
 
-  const editEmployee = (e, id) => {
+  const editRequestMoney = (e, id) => {
     e.preventDefault();
-    setemployeeId(id);
+    setrequestMoneyId(id);
   };
   return (
     <>
@@ -101,7 +104,7 @@ export default function EmployeeList({ employee, color }) {
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
               <div className="flex items-center">
                 <form>
-                <div class="relative">
+                  <div class="relative">
                     <div class="absolute inset-b-0 left-0 flex items-center pl-3 pointer-events-none">
                       <i className="fa fa-search text-blue-50 mt-3"></i>
                     </div>
@@ -109,7 +112,7 @@ export default function EmployeeList({ employee, color }) {
                       type="search"
                       id="default-search"
                       class="block w-full p-2 pl-10 text-sm text-blue-50 border border-gray-300 rounded-lg bg-blueGray-600 "
-                      placeholder="Search employee by e-mail..."
+                      placeholder="Search requestMoney by e-mail..."
                       onChange={(e) => setSearch(e.target.value)}
                       required
                     ></input>
@@ -122,9 +125,9 @@ export default function EmployeeList({ employee, color }) {
                 <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
                   <a
                     className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    href="addemployee"
+                    href="/requestMoney"
                   >
-                    Add Employee
+                    Request Money
                   </a>
                 </div>{" "}
               </div>
@@ -136,6 +139,18 @@ export default function EmployeeList({ employee, color }) {
           <table className="items-center w-full bg-transparent border-collapse">
             <thead>
               <tr>
+                {!isUser && (
+                  <th
+                    className={
+                      "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                      (color === "light"
+                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                    }
+                  >
+                    Sent From
+                  </th>
+                )}
                 <th
                   className={
                     "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
@@ -144,7 +159,7 @@ export default function EmployeeList({ employee, color }) {
                       : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 >
-                  First Name
+                  Sent To
                 </th>
                 <th
                   className={
@@ -154,8 +169,9 @@ export default function EmployeeList({ employee, color }) {
                       : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 >
-                  Last Name
+                  Amount
                 </th>
+
                 <th
                   className={
                     "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
@@ -164,95 +180,45 @@ export default function EmployeeList({ employee, color }) {
                       : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 >
-                  Email
+                  Description
                 </th>
-                <th
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                >
-                  Phone Number
-                </th>
-                <th
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                >
-                  Departament
-                </th>
-                <th
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                >
-                  Job Title
-                </th>
-                <th
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                >
-                  End Agreement Date
-                </th>
-                <th
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                ></th>
-                {isAdmin && (
-                <th
-                  colSpan={2}
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                >
-                  Actions
-                </th>
+                {!isAuditor && (
+                  <th
+                    colSpan={2}
+                    className={
+                      "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                      (color === "light"
+                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                    }
+                  >
+                    Actions
+                  </th>
                 )}
               </tr>
             </thead>
             {!loading && (
               <tbody>
-                {employees
-                ?.filter((item) => {
-                  return search.toLowerCase() === ""
-                    ? item
-                    : item.email.toLowerCase().includes(search);
-                }).map((employee) => (
-                  <Employee
-                    employee={employee}
-                    key={employee.id}
-                    confirmDelete={confirmDelete}
-                    editEmployee={editEmployee}
-                  />
-                ))}
+                {requestMoneys
+                  ?.filter((item) => {
+                    return search.toLowerCase() === ""
+                      ? item
+                      : item.email.toLowerCase().includes(search);
+                  })
+                  .map((requestMoney) => (
+                    <RequestMoney
+                      isUser={isUser}
+                      isAuditor={isAuditor}
+                      requestMoney={requestMoney}
+                      key={requestMoney.id}
+                      confirmDelete={confirmDelete}
+                      editRequestMoney={editRequestMoney}
+                    />
+                  ))}
               </tbody>
             )}
           </table>
         </div>
-        <EditEmployee
-          employeeId={employeeId}
-          setResponseEmployee={setResponseEmployee}
-          setIsOpen={true}
-        />
       </div>
     </>
   );

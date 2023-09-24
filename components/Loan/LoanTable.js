@@ -5,7 +5,6 @@ import EditLoan from "./EditLoan";
 import Loan from "./Loan";
 import Swal from "sweetalert2";
 export default function LoanTable({ loan, color }) {
-
   let LOAN_API_BASE_URL;
 
   const [loans, setLoans] = useState(null);
@@ -113,7 +112,7 @@ export default function LoanTable({ loan, color }) {
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
               <div className="flex items-center">
                 <form>
-                <div class="relative">
+                  <div class="relative">
                     <div class="absolute inset-b-0 left-0 flex items-center pl-3 pointer-events-none">
                       <i className="fa fa-search text-blue-50 mt-3"></i>
                     </div>
@@ -190,44 +189,41 @@ export default function LoanTable({ loan, color }) {
                   Monthly Income
                 </th>
                 {!isAuditor && (
-                <th
-                  colSpan={2}
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                >
-                  Actions
-                </th>
+                  <th
+                    colSpan={2}
+                    className={
+                      "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                      (color === "light"
+                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                    }
+                  >
+                    Actions
+                  </th>
                 )}
               </tr>
             </thead>
             {!loading && (
               <tbody>
                 {loans
-                ?.filter((item) => {
-                  return search.toLowerCase() === ""
-                    ? item
-                    : item.email.toLowerCase().includes(search);
-                })
-                .map((loan) => (
-                  <Loan
-                    loan={loan}
-                    key={loan.id}
-                    confirmDelete={confirmDelete}
-                    editLoan={editLoan}
-                  />
-                ))}
+                  ?.filter((item) => {
+                    return search.toLowerCase() === ""
+                      ? item
+                      : item.email.toLowerCase().includes(search);
+                  })
+                  .map((loan) => (
+                    <Loan
+                      loan={loan}
+                      key={loan.id}
+                      confirmDelete={confirmDelete}
+                      editLoan={editLoan}
+                    />
+                  ))}
               </tbody>
             )}
           </table>
         </div>
-        <EditLoan
-          loanId={loanId}
-          setResponseLoan={setResponseLoan}
-        />
+        <EditLoan loanId={loanId} setResponseLoan={setResponseLoan} />
       </div>
     </>
   );

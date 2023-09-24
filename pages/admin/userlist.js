@@ -1,5 +1,5 @@
 import React from "react";
-import UserTable from "components/Cards/UserTable.js";
+import UserTable from "components/User/UserTable.js";
 import Admin from "layouts/Admin.js";
 
 const userlist = () => {

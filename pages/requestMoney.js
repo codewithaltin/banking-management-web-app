@@ -12,30 +12,32 @@ import Auth from "layouts/Auth";
 const schema = yup
   .object()
   .shape({
-    requestedEmail: yup
-      .string()
-      .email("Please enter a valid e-mail")
-      .required("Email is required."),
     payeeEmail: yup
       .string()
       .email("Please enter a valid e-mail")
       .required("Email is required."),
+    amount: yup
+      .number()
+      .typeError("You must enter only numbers")
+      .required("Please enter an amount.")
+      .min(5, "5 EUR is the minmimun you can request."),
   })
   .required();
 export default function requestMoney() {
   const router = useRouter();
   const [decoded, setDecoded] = useState(null);
   const REQUEST_API_BASE_URL = "http://localhost:8080/api/v1/auth/requestmoney";
-  // const {
-  //   register,
-  //   handleSubmit,
-  //   watch,
-  //   formState: { errors },
-  // } = useForm({ resolver: yupResolver(schema) });
+  const {
+    register,
+    handleSubmit,
+    watch,
+    formState: { errors },
+  } = useForm({ resolver: yupResolver(schema) });
   const [requestMoney, setRequestMoney] = useState({
     requestedEmail: "",
     payeeEmail: "",
     amount: 0,
+    description: "",
   });
 
   useEffect(() => {
@@ -59,7 +61,6 @@ export default function requestMoney() {
     });
   };
   const saveRequestMoney = async (e) => {
-    //e.preventDefault();
     const response = await fetch(REQUEST_API_BASE_URL, {
       method: "POST",
       headers: {
@@ -96,7 +97,7 @@ export default function requestMoney() {
                 <hr className="mt-6 border-b-1 border-blueGray-300" />
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                <form onSubmit={saveRequestMoney}>
+                <form onSubmit={handleSubmit(saveRequestMoney)}>
                   <div className="relative w-full mb-3">
                     <label
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
@@ -105,7 +106,7 @@ export default function requestMoney() {
                       Payee Email
                     </label>
                     <input
-                      // {...register("payeeEmail")}
+                      {...register("payeeEmail")}
                       type="email"
                       name="payeeEmail"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
@@ -113,9 +114,9 @@ export default function requestMoney() {
                       onChange={(e) => handleChange(e)}
                       value={requestMoney.payeeEmail}
                     />
-                    {/* <small role="alert" className="text-red-500 ">
+                    <small role="alert" className="text-red-500 ">
                       {errors.payeeEmail?.message}
-                    </small> */}
+                    </small>
                   </div>
                   <div className="relative w-full mb-3">
                     <label
@@ -125,7 +126,7 @@ export default function requestMoney() {
                       Amount
                     </label>
                     <input
-                      // {...register("amount")}
+                      {...register("amount")}
                       type="number"
                       name="amount"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
@@ -133,16 +134,31 @@ export default function requestMoney() {
                       placeholder="Enter the amount"
                       value={requestMoney.amount}
                     />
-                    {/* <small role="alert" className="text-red-500 ">
+                    <small role="alert" className="text-red-500 ">
                       {errors["amount"]?.message}
-                    </small> */}
-                    <div className="text-center mt-6">
-                      <input
-                        className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
-                        type="submit"
-                        value="Request Money"
-                      />
-                    </div>
+                    </small>
+                  </div>
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      Descrciption
+                    </label>
+                    <input
+                      type="text"
+                      name="description"
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      onChange={(e) => handleChange(e)}
+                      placeholder="Write a short description about the request."
+                    />
+                  </div>
+                  <div className="text-center mt-6">
+                    <input
+                      className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
+                      type="submit"
+                      value="Request Money"
+                    />
                   </div>
                 </form>
               </div>

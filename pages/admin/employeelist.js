@@ -1,5 +1,5 @@
 import React from "react";
-import EmployeeList from "components/Cards/EmployeeList.js";
+import EmployeeList from "components/Employee/EmployeeList.js";
 import User from "layouts/Admin.js";
 
 const employeeList = () => {

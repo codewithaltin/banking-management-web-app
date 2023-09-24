@@ -1,11 +1,12 @@
 import React from "react";
+
 import jwt_decode from "jwt-decode";
 import { useState } from "react";
 import { useEffect } from "react";
 
-const User = ({ user, confirmDelete, editUser }) => {
+const Loan = ({ loan, confirmDelete, editLoan }) => {
   const [decoded, setDecoded] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAuditor, setIsAuditor] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -15,38 +16,32 @@ const User = ({ user, confirmDelete, editUser }) => {
 
   useEffect(() => {
     if (decoded) {
-      setIsAdmin(checkAdmin());
+      setIsAuditor(checkAuditor());
     }
   }, [decoded]);
 
-  function checkAdmin() {
-    return decoded.authorities === "ROLE_ADMIN";
+  function checkAuditor() {
+    return decoded.authorities === "ROLE_AUDITOR";
   }
   return (
-    <tr key={user.id}>
+    <tr key={loan.id}>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
-        {user.firstName}
+        {loan.fullName}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-medium tracking-wide">
-        {user.lastName}
+        {loan.email}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
-        {user.email}
+        {loan.phoneNumber}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
-        {user.phoneNumber}
+        {loan.monthlyIncome}
       </td>
-      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
-        {"XXXX-XXXX-" + (user.accountNumber % 10000)}
-      </td>
-      <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
-        {user.city}
-      </td>
-      {isAdmin && (
+      {!isAuditor && (
         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
           <div class="m-5">
             <button
-              onClick={(e, id) => editUser(e, user.id)}
+              onClick={(e, id) => editLoan(e, loan.id)}
               class="inline-flex items-center px-4 py-2 bg-emerald-400 hover:bg-emerald-600 text-white text-sm font-medium rounded-md"
             >
               <svg
@@ -66,10 +61,10 @@ const User = ({ user, confirmDelete, editUser }) => {
           </div>
         </td>
       )}
-      {isAdmin && (
+      {!isAuditor && (
         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
           <button
-            onClick={(e, id) => confirmDelete(e, user.id)}
+            onClick={(e, id) => confirmDelete(e, loan.id)}
             class="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-md"
           >
             <svg
@@ -94,4 +89,4 @@ const User = ({ user, confirmDelete, editUser }) => {
   );
 };
 
-export default User;
+export default Loan;
