@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Auth from "layouts/Auth.js";
 import { Route } from "react-router-dom";
 import jwt_decode from "jwt-decode";
+import Swal from "sweetalert2";
 import { useEffect } from "react";
 import TableAuth from "layouts/TableAuth";
 
@@ -45,6 +46,14 @@ export default function SavingGoal() {
   // const navigateHome = () => {
   //   navigate("/");
   // };
+  const successfulAlert = () => {
+    Swal.fire({
+      icon: "success",
+      title: "Succesfully registered Saving Goal!",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
 
   const saveSavingGoals = async (e) => {
     //e.preventDefault();
@@ -63,6 +72,7 @@ export default function SavingGoal() {
     }
     const _savingGoal = await response.json();
     setResponseSavingGoal(_savingGoal);
+    successfulAlert();
     window.location.reload();
   };
 

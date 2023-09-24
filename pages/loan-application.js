@@ -7,6 +7,7 @@ import jwt_decode from "jwt-decode";
 import { useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import Swal from "sweetalert2";
 import * as yup from "yup";
 import Auth from "layouts/Auth.js";
 import TableAuth from "layouts/TableAuth";
@@ -19,7 +20,7 @@ const schema = yup
     fullName: yup
       .string()
       .required("Full Name is required.")
-      .min(5, "Full name must be longer than 5 characters")
+      .min(2, "Full name must be longer than 2 characters")
       .max(50, "Full name must be shorter than 50 characters."),
     // email: yup
     //   .string()
@@ -32,7 +33,7 @@ const schema = yup
     address: yup
       .string()
       .required("Address is required")
-      .min(7, "Address must be at least 7 characters"),
+      .min(5, "Address must be at least 5 characters"),
     loanAmount: yup
       .number()
       .typeError("Input must be a number")
@@ -86,6 +87,15 @@ export default function Loan() {
     purpouse: "",
   });
 
+  const successfulAlert = () => {
+    Swal.fire({
+      icon: "success",
+      title: "Succesfully registered loan!",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const decodedToken = jwt_decode(token);
@@ -103,7 +113,6 @@ export default function Loan() {
   
 
   const executeLoanMethod = async () => {
-    try {
       const response = await fetch("http://localhost:8080/api/v1/auth/loan/user/" + decoded.sub, {
         method: 'POST',
         headers: {
@@ -114,33 +123,32 @@ export default function Loan() {
   
       if (!response.ok) {
         // Handle any errors if needed
-        console.error('Transfer failed');
-      } else {
-        console.log('Transfer executed successfully!');
-        location.reload();
+        console.error('Loan failed');
       }
-    } catch (error) {
- 
-      console.error('An error occurred:', error);
-    }
-  };
 
-  const saveLoan = async (e) => {
-    //e.preventDefault();
-    const response = await fetch(LOAN_API_BASE_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(loan),
-    });
-    if (!response.ok) {
-      throw new Error("Something went wrong");
-    }
     const _loan = await response.json();
     setResponseLoan(_loan);
+    successfulAlert();
     window.location.reload();
   };
+
+  // const saveLoan = async (e) => {
+  //   const response = await fetch(LOAN_API_BASE_URL, {
+  //     method: "POST",
+  //     headers: {
+  //       "Content-Type": "application/json",
+  //     },
+  //     body: JSON.stringify(loan),
+  //   });
+  //   if (!response.ok) {
+  //     throw new Error("Something went wrong");
+  //   }
+
+  //   const _loan = await response.json();
+  //   setResponseLoan(_loan);
+  //   window.location.reload();
+  // };
+
   const handleChange = (event) => {
     const value = event.target.value;
     setLoans({ ...loan, [event.target.name]: value });

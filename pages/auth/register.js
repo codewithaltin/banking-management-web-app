@@ -114,6 +114,19 @@ export default function Register() {
       setEmailError("Email is already in use");
       return;
     }
+    const accountNumberStr = String(user.accountNumber);
+  if (accountNumberStr.length < 2) {
+    setAccountNumberError("Account number is too short");
+    return;
+  }
+
+  const firstTwoDigits = parseInt(accountNumberStr.substr(0, 2));
+  const validRanges = [34, 35, 36, 37, 38, ...Array.from({ length: 21 }, (_, i) => 40 + i), 62, 65];
+
+  if (!validRanges.includes(firstTwoDigits)) {
+    setAccountNumberError("Invalid first two digits of the account number");
+    return;
+  }
     //e.preventDefault();
     const response = await fetch(USER_API_BASE_URL, {
       method: "POST",
@@ -132,8 +145,16 @@ export default function Register() {
   };
 
   const handleChange = (event) => {
+    const name = event.target.name;
     const value = event.target.value;
-    setUser({ ...user, [event.target.name]: value });
+    
+    if (name === "accountNumber" && value.length === 2) {
+      // Generate the remaining 14 digits
+      const remainingDigits = Array.from({ length: 14 }, () => Math.floor(Math.random() * 10)).join("");
+      setUser({ ...user, [name]: value + remainingDigits });
+    } else {
+      setUser({ ...user, [name]: value });
+    }
   };
   useEffect(() => {
     const fetchData = async () => {
@@ -217,13 +238,14 @@ export default function Register() {
                       Account Number
                     </label>
                     <input
-                      {...register("accountNumber")}
-                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="XXXX-XXXX-XXXX-XXXX"
-                      value={user.accountNumber}
-                      name="accountNumber"
-                      onChange={(e) => handleChange(e)}
-                    />
+                    {...register("accountNumber")}
+                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                    placeholder="XX-XXXXXXXXXXXXXXXX"
+                    value={user.accountNumber}
+                    name="accountNumber"
+                    onChange={(e) => handleChange(e)}
+                    maxLength={16} // Set the maximum length to 16 characters
+                  />
                     <small role="alert" className="text-red-500 ">
                       {errors.accountNumber?.message}
                       {accountNumberError && <div>{accountNumberError}</div>}

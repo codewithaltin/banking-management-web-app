@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import TokenCheck from "components/TokenCheck";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import Swal from "sweetalert2";
 import jwt_decode from "jwt-decode";
 
 import Auth from "layouts/Auth.js";
@@ -47,6 +48,15 @@ export default function CollectorPayments() {
   // const navigateHome = () => {
   //   navigate("/");
   // };
+
+  const successfulAlert = () => {
+    Swal.fire({
+      icon: "success",
+      title: "Succesfully registered Collector Payment!",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
   
   const saveCollectorPayments = async (e) => {
     //e.preventDefault();
@@ -64,6 +74,7 @@ export default function CollectorPayments() {
     }
     const _collectorPayments = await response.json();
     setResponseCollectorPayments(_collectorPayments);
+    successfulAlert();
     window.location.reload();
   };
 
