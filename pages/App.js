@@ -34,8 +34,7 @@ function App() {
               </p>
               <div className="mt-12 ">
                 <a
-                  href="/auth/individual_register"
-                  target="_blank"
+                  href="/auth/register"
                   className="get-started text-blueGray-100 font-heavy px-6 py-4 rounded-lg outline-none focus:outline-none mr-1 mb-1 bg-black hover:bg-blueGray-100  bg-opacity-20 capitalize text-m shadow-lg hover:shadow-lg ease-linear transition-all duration-"
                 >
                   GET STARTED
@@ -155,7 +154,7 @@ function App() {
                 </a>
               </div>
               <div className="my-4 w-full lg:w-6/12 px-4 lg:mt-16">
-              <a href="/auth/cards">
+                <a href="/auth/cards">
                   <div className="flex flex-wrap justify-center rounded-full">
                     <div className="w-8/16 mt-8 sm:w-4/12 px-4 ">
                       <img

@@ -7,9 +7,7 @@ import RequestMoney from "./RequestMoney";
 import Swal from "sweetalert2";
 
 export default function RequestMoneyList({ requestMoney, color }) {
-  const REQUEST_MONEY_API_BASE_URL =
-    "http://localhost:8080/api/v1/auth/requestmoney";
-  const [requestMoneys, setrequestMoneys] = useState(null);
+  const [requestMoneys, setRequestMoneys] = useState(null);
   const [loading, setLoading] = useState(true);
   const [requestMoneyId, setrequestMoneyId] = useState(null);
   const [responseRequestMoney, setResponseRequestMoney] = useState(null);
@@ -17,6 +15,7 @@ export default function RequestMoneyList({ requestMoney, color }) {
   const [decoded, setDecoded] = useState(null);
   const [isAuditor, setIsAuditor] = useState(false);
   const [isUser, setIsUser] = useState(false);
+  let REQUEST_MONEY_API_BASE_URL;
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -26,8 +25,10 @@ export default function RequestMoneyList({ requestMoney, color }) {
 
   useEffect(() => {
     if (decoded) {
+      chooseEndPoint();
       setIsAuditor(checkAuditor());
       setIsUser(checkUser());
+      fetchData();
     }
   }, [decoded]);
 
@@ -37,25 +38,39 @@ export default function RequestMoneyList({ requestMoney, color }) {
   function checkUser() {
     return decoded.authorities === "ROLE_USER";
   }
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch(REQUEST_MONEY_API_BASE_URL, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const requestMoneys = await response.json();
-        setrequestMoneys(requestMoneys);
-      } catch (error) {
-        console.log(error);
+
+  function chooseEndPoint() {
+    let res = decoded.authorities === "ROLE_USER";
+    if (res) {
+      REQUEST_MONEY_API_BASE_URL =
+        "http://localhost:8080/api/v1/auth/requestmoney/userRequest/" +
+        decoded.sub;
+    } else {
+      REQUEST_MONEY_API_BASE_URL =
+        "http://localhost:8080/api/v1/auth/requestmoney";
+    }
+  }
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(REQUEST_MONEY_API_BASE_URL, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const data = await response.json();
+        setRequestMoneys(data);
+      } else {
+        throw new Error("Failed to fetch data");
       }
+    } catch (error) {
+      console.error(error);
+    } finally {
       setLoading(false);
-    };
-    fetchData();
-  }, [requestMoney, responseRequestMoney]);
+    }
+  };
 
   const confirmDelete = (e, id) => {
     Swal.fire({

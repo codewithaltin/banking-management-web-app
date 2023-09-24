@@ -31,13 +31,11 @@ const schema = yup
       .string()
       .required("Phone number is required")
       .matches(phoneReg, "Phone Number is not valid."),
-    // accountNumber: yup
-    //   .typeError("Not a valid expiration date. Example: MM/YY")
-    //   .max(5, "Not a valid expiration date. Example: MM/YY")
-    //   .matches(
-    //     /([0-9]{2})\/([0-9]{2})/,
-    //     "Not a valid expiration date. Example: MM/YY"
-    //   ),
+    accountNumber: yup
+      .number()
+      .typeError("Input must be a number")
+      .required("Account number is required")
+      .typeError("Please enter only numbers"),
     password: yup
       .string()
       .required("Password is required.")
@@ -115,18 +113,27 @@ export default function Register() {
       return;
     }
     const accountNumberStr = String(user.accountNumber);
-  if (accountNumberStr.length < 2) {
-    setAccountNumberError("Account number is too short");
-    return;
-  }
+    if (accountNumberStr.length < 2) {
+      setAccountNumberError("Account number is too short");
+      return;
+    }
 
-  const firstTwoDigits = parseInt(accountNumberStr.substr(0, 2));
-  const validRanges = [34, 35, 36, 37, 38, ...Array.from({ length: 21 }, (_, i) => 40 + i), 62, 65];
+    const firstTwoDigits = parseInt(accountNumberStr.substr(0, 2));
+    const validRanges = [
+      34,
+      35,
+      36,
+      37,
+      38,
+      ...Array.from({ length: 21 }, (_, i) => 40 + i),
+      62,
+      65,
+    ];
 
-  if (!validRanges.includes(firstTwoDigits)) {
-    setAccountNumberError("Invalid first two digits of the account number");
-    return;
-  }
+    if (!validRanges.includes(firstTwoDigits)) {
+      setAccountNumberError("Invalid first two digits of the account number");
+      return;
+    }
     //e.preventDefault();
     const response = await fetch(USER_API_BASE_URL, {
       method: "POST",
@@ -147,10 +154,12 @@ export default function Register() {
   const handleChange = (event) => {
     const name = event.target.name;
     const value = event.target.value;
-    
+
     if (name === "accountNumber" && value.length === 2) {
       // Generate the remaining 14 digits
-      const remainingDigits = Array.from({ length: 14 }, () => Math.floor(Math.random() * 10)).join("");
+      const remainingDigits = Array.from({ length: 14 }, () =>
+        Math.floor(Math.random() * 10)
+      ).join("");
       setUser({ ...user, [name]: value + remainingDigits });
     } else {
       setUser({ ...user, [name]: value });
@@ -238,14 +247,15 @@ export default function Register() {
                       Account Number
                     </label>
                     <input
-                    {...register("accountNumber")}
-                    className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                    placeholder="XX-XXXXXXXXXXXXXXXX"
-                    value={user.accountNumber}
-                    name="accountNumber"
-                    onChange={(e) => handleChange(e)}
-                    maxLength={16} // Set the maximum length to 16 characters
-                  />
+                      {...register("accountNumber")}
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      placeholder="XX-XXXXXXXXXXXXXXXX"
+                      value={user.accountNumber}
+                      name="accountNumber"
+                      type="number"
+                      onChange={(e) => handleChange(e)}
+                      maxLength={16} // Set the maximum length to 16 characters
+                    />
                     <small role="alert" className="text-red-500 ">
                       {errors.accountNumber?.message}
                       {accountNumberError && <div>{accountNumberError}</div>}

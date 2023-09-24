@@ -213,6 +213,7 @@ export default function LoanTable({ loan, color }) {
                   })
                   .map((loan) => (
                     <Loan
+                      isAuditor={isAuditor}
                       loan={loan}
                       key={loan.id}
                       confirmDelete={confirmDelete}

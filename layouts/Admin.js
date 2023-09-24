@@ -1,9 +1,27 @@
 import AdminNavbar from "components/Navbars/AdminNavbar.js";
 import Sidebar from "components/Sidebar/Sidebar.js";
-
+import jwt_decode from "jwt-decode";
 import AdminHeaderStats from "components/Headers/AdminHeaderStats";
+import { useRouter } from "next/router";
+import { useState, useEffect } from "react";
 
 export default function Admin({ children }) {
+  const router = useRouter();
+  const [decoded, setDecoded] = useState(null);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      if (decoded.authorities === "ROLE_USER") {
+        window.alert("Unathorized acces, Riderecting you to your dashboard! ");
+        router.push("/auth/dashboard");
+      }
+    }
+  }, [decoded]);
   return (
     <>
       <Sidebar />
