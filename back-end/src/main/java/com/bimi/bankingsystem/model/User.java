@@ -177,6 +177,11 @@ public class User implements UserDetails {
     }
 
 
+
+    @OneToOne(mappedBy = "user")
+    private Cards card;
+
+
     @Enumerated(EnumType.STRING)
     private Role role;
 
