@@ -10,7 +10,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Swal from "sweetalert2";
 import * as yup from "yup";
 import { useRouter } from "next/router";
-import Auth from "layouts/Auth.js";
 import TableAuth from "layouts/TableAuth";
 const phoneReg =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
