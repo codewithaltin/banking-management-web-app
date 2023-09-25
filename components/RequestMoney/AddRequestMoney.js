@@ -41,16 +41,16 @@ export default function AddRequestMoney() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    if (!token) {
-      router.push("/auth/login");
-    }
     const decodedToken = jwt_decode(token);
     setDecoded(decodedToken);
-    if (decoded) {
-      requestMoney.requestedEmail = decoded.sub;
-    }
   }, []);
 
+  useEffect(() => {
+    if (decoded) {
+      requestMoney.requestedEmail = decoded.sub;
+      console.log(requestMoney.requestedEmail);
+    } else console.log("decoding failed.");
+  }, [decoded]);
   const successfulAlert = () => {
     Swal.fire({
       icon: "success",
