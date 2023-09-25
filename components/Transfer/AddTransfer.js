@@ -48,7 +48,7 @@ const schema = yup
       .min(5, "Text must be longer than  5 characters"),
   })
   .required();
-  
+
 export default function Transfer() {
   const {
     register,
@@ -58,7 +58,7 @@ export default function Transfer() {
   } = useForm({ resolver: yupResolver(schema) });
   const [decoded, setDecoded] = useState(null);
   const router = useRouter();
-  
+
   useEffect(() => {
     const token = localStorage.getItem("token");
     const decodedToken = jwt_decode(token);
@@ -115,7 +115,6 @@ export default function Transfer() {
       );
 
       if (!response.ok) {
-        // Handle any errors if needed
         console.error("Transfer failed");
       } else {
         console.log("Transfer executed successfully!");
@@ -125,24 +124,6 @@ export default function Transfer() {
       console.error("An error occurred:", error);
     }
   };
-
-  const saveTransfer = async (e) => {
-    //e.preventDefault();
-    const response = await fetch(TRANSFER_API_BASE_URL, {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(transfer),
-    });
-    if (!response.ok) {
-      throw new Error("Something went wrong");
-    }
-    const _transfer = await response.json();
-    setResponseTransfer(_transfer);
-    window.location.reload();
-  };
-
   const handleChange = (event) => {
     const value = event.target.value;
     setTransfers({ ...transfer, [event.target.name]: value });
@@ -354,7 +335,7 @@ export default function Transfer() {
                     <input
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"
                       type="submit"
-                      value="Sent"
+                      value="Send"
                     />
                   </div>
                 </form>

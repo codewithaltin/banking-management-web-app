@@ -193,6 +193,7 @@ const EditUser = ({ userId, setResponseUser }) => {
                         value={user.firstName}
                         onChange={(e) => handleChange(e)}
                         className="h-10  border mt-2 p-4 w-full rounded-md"
+                        required
                       ></input>
                     </div>
                     {/* <small role="alert" className="text-red-500">
@@ -208,6 +209,7 @@ const EditUser = ({ userId, setResponseUser }) => {
                         value={user.lastName}
                         onChange={(e) => handleChange(e)}
                         className="h-10 border mt-2 px-2 p-4 w-full rounded-md"
+                        required
                       ></input>
                     </div>
                     {/* <small role="alert" className="  text-red-500">
@@ -222,6 +224,7 @@ const EditUser = ({ userId, setResponseUser }) => {
                         name="city"
                         value={user.city}
                         onChange={(e) => handleChange(e)}
+                        required
                       >
                         {cities.map((city, index) => (
                           <option key={index} value={city}>
@@ -240,6 +243,7 @@ const EditUser = ({ userId, setResponseUser }) => {
                         value={user.email}
                         onChange={(e) => handleChange(e)}
                         className="h-10 border mt-2 p-4 w-full rounded-md"
+                        required
                       ></input>
                     </div>
                     {/* <small role="alert" className="  text-red-500 ">
@@ -255,6 +259,7 @@ const EditUser = ({ userId, setResponseUser }) => {
                         value={user.phoneNumber}
                         onChange={(e) => handleChange(e)}
                         className="h-10  outline-none mt-2 p-4 w-full"
+                        required
                       ></input>
                     </div>
 

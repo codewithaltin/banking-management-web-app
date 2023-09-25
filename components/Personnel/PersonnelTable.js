@@ -277,6 +277,7 @@ export default function PersonnelTable({ user, color }) {
                   )
                   .map((user) => (
                     <Personnel
+                      isAuditor={isAuditor}
                       user={user}
                       key={user.id}
                       confirmDelete={confirmDelete}

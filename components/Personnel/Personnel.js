@@ -3,25 +3,7 @@ import jwt_decode from "jwt-decode";
 import { useState } from "react";
 import { useEffect } from "react";
 
-const Personnel = ({ user, confirmDelete, editUser }) => {
-  const [decoded, setDecoded] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    const decodedToken = jwt_decode(token);
-    setDecoded(decodedToken);
-  }, []);
-
-  useEffect(() => {
-    if (decoded) {
-      setIsAdmin(checkAdmin());
-    }
-  }, [decoded]);
-
-  function checkAdmin() {
-    return decoded.authorities === "ROLE_ADMIN";
-  }
+const Personnel = ({ isAuditor, user, confirmDelete, editUser }) => {
   return (
     <tr key={user.id}>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
@@ -42,7 +24,7 @@ const Personnel = ({ user, confirmDelete, editUser }) => {
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         {user.city}
       </td>
-      {isAdmin && (
+      {!isAuditor && (
         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
           <div class="m-5">
             <button
@@ -66,7 +48,7 @@ const Personnel = ({ user, confirmDelete, editUser }) => {
           </div>
         </td>
       )}
-      {isAdmin && (
+      {!isAuditor && (
         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
           <button
             onClick={(e, id) => confirmDelete(e, user.id)}

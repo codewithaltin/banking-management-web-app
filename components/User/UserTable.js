@@ -258,8 +258,14 @@ export default function UserTable({ user, color }) {
                   .filter((item) => {
                     return filter === "All Cities"
                       ? item
+                      : item.email.toLowerCase().includes(search);
+                  })
+                  .filter((item) => {
+                    return filter === "All Cities"
+                      ? item
                       : item.city && item.city.includes(filter);
                   })
+                  .filter((user) => user.role === "USER") // Filter by role "USER"
                   .map((user) => (
                     <User
                       user={user}

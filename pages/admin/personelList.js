@@ -1,6 +1,6 @@
 import React from "react";
 import Auth from "layouts/Auth";
-import PersonnelTable from "components/Cards/PersonnelTable.js";
+import PersonnelTable from "components/Personnel/PersonnelTable.js";
 
 const personelList = () => {
   return (
