@@ -1,7 +1,7 @@
 import React, { useContext, useState } from "react";
-import ProductForm from "components/Cards/Subscription/ProductForm";
-import PriceForm from "components/Cards/Subscription/PriceForm";
-import PlanForm from "components/Cards/Subscription/PlanForm";
+import ProductForm from "components/Subscription/ProductForm";
+import PriceForm from "components/Subscription/PriceForm";
+import PlanForm from "components/Subscription/PlanForm";
 import { Stepper, StepLabel, Step } from "@material-ui/core";
 import { multiStepContext } from "./step_context";
 

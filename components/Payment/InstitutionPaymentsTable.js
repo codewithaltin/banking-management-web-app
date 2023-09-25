@@ -2,22 +2,23 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
 // components
-import PrePaidServices from "./PrePaidServices";
-import AddGoal from "./AddGoal";
-import TableDropdown from "components/Dropdowns/TableDropdown.js";
-import CardTable from "./CardTable";
+import Payments from "./InstitutionPayments";
+import InstitutionPayments from "./InstitutionPayments";
 import Swal from "sweetalert2";
 import jwt_decode from "jwt-decode";
 
-export default function PrePaidServicesTable({ prePaidService, color }) {
+export default function InstitutionPaymentsTable({
+  institutionPayment,
+  color,
+}) {
+  let INSTITUTIONPAYMENTS_API_BASE_URL;
 
-
-  let PREPAIDSERVICES_API_BASE_URL;
-
-  const [prePaidServices, setPrePaidServives] = useState(null);
+  const [institutionPayments, setInstitutionPayments] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [prePaidServivesId, setPrePaidServivesId] = useState(null);
-  const [responsePrePaidServives, setResponsePrePaidServives] = useState(null);
+  const [institutionPaymentsId, setInstitutionPaymentsId] = useState(null);
+  const [responseInstitutionPayments, setResponseInstitutionPayments] =
+    useState(null);
+  const [isDialogOpen, setDialogOpen] = useState(false);
   const [search, setSearch] = useState("");
   const [decoded, setDecoded] = useState(null);
   const [isAuditor, setIsAuditor] = useState(false);
@@ -53,34 +54,29 @@ export default function PrePaidServicesTable({ prePaidService, color }) {
     return decoded.authorities === "ROLE_USER";
   }
 
-  useEffect(() => {
-    if (decoded) {
-      chooseEndPoint();
-      fetchData();
-    }
-  }, [decoded]);
-
   function chooseEndPoint() {
     let res = decoded.authorities === "ROLE_USER";
     if (res) {
-      PREPAIDSERVICES_API_BASE_URL =
-        "http://localhost:8080/api/v1/auth/prePaidPayment/user/" + decoded.sub;
+      INSTITUTIONPAYMENTS_API_BASE_URL =
+        "http://localhost:8080/api/v1/auth/institutionPayments/user/" +
+        decoded.sub;
     } else {
-      PREPAIDSERVICES_API_BASE_URL = "http://localhost:8080/api/v1/auth/prePaidPayment";
+      INSTITUTIONPAYMENTS_API_BASE_URL =
+        "http://localhost:8080/api/v1/auth/institutionPayments";
     }
   }
   const fetchData = async () => {
     setLoading(true);
     try {
-      const response = await fetch(PREPAIDSERVICES_API_BASE_URL, {
+      const response = await fetch(INSTITUTIONPAYMENTS_API_BASE_URL, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
         },
       });
       if (response.ok) {
-        const collectorData = await response.json();
-        setPrePaidServives(collectorData);
+        const institutionPaymentData = await response.json();
+        setInstitutionPayments(institutionPaymentData);
       } else {
         throw new Error("Failed to fetch data");
       }
@@ -90,7 +86,6 @@ export default function PrePaidServicesTable({ prePaidService, color }) {
       setLoading(false);
     }
   };
-  let dialogValue = false;
 
   const ConfirmDialogAlert = (e, id) => {
     Swal.fire({
@@ -103,36 +98,30 @@ export default function PrePaidServicesTable({ prePaidService, color }) {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        deletePrePaidServices(e, id);
+        deleteInstitutionPayment(e, id);
         Swal.fire("Deleted!", "Deleted Succesfully!", "success");
       }
     });
   };
 
-const deletePrePaidServices = (e, id) => {
+  const deleteInstitutionPayment = (e, id) => {
     e.preventDefault();
-    fetch("http://localhost:8080/api/v1/auth/prePaidPayment/" + id, {
+    fetch("http://localhost:8080/api/v1/auth/institutionPayments/" + id, {
       method: "DELETE",
     }).then((res) => {
-      if (prePaidServices) {
-        setPrePaidServives((prevElement) => {
-          return prevElement.filter((prePaidServives) => prePaidServives.id !== id);
+      if (institutionPayments) {
+        setInstitutionPayments((prevElement) => {
+          return prevElement.filter(
+            (institutionPayment) => institutionPayment.id !== id
+          );
         });
       }
     });
   };
 
-  const handleOpenDialog = () => {
-    setDialogOpen(true);
-  };
-
-  const handleCloseDialog = () => {
-    setDialogOpen(false);
-  };
-
-    return(
+  return (
     <>
-    <div
+      <div
         className={
           "relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded " +
           (color === "light" ? "bg-white" : "bg-blueGray-700 text-white")
@@ -143,7 +132,7 @@ const deletePrePaidServices = (e, id) => {
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
               <div className="flex items-center">
                 <form>
-                <div class="relative">
+                  <div class="relative">
                     <div class="absolute inset-b-0 left-0 flex items-center pl-3 pointer-events-none">
                       <i className="fa fa-search text-blue-50 mt-3"></i>
                     </div>
@@ -151,7 +140,7 @@ const deletePrePaidServices = (e, id) => {
                       type="search"
                       id="default-search"
                       class="block w-full p-2 pl-10 text-sm text-blue-50 border border-gray-300 rounded-lg bg-blueGray-600 "
-                      placeholder="Search Pre-Paid by operator..."
+                      placeholder="Search I.P by company..."
                       onChange={(e) => setSearch(e.target.value)}
                       required
                     ></input>
@@ -162,19 +151,20 @@ const deletePrePaidServices = (e, id) => {
                   </div>
                 </form>
                 {isUser && (
-                <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-                  <a
-                    className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    href="/paymentTypes/PrePaidServices"
-                  >
-                    Add Pre Paid 
-                  </a>
-                </div>)}{" "}
+                  <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
+                    <a
+                      className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      href="/paymentTypes/InstitutionPayments"
+                    >
+                      Add Institution Payments
+                    </a>
+                  </div>
+                )}{" "}
               </div>
             </div>
           </div>
         </div>
-            <div className="block w-full overflow-x-auto">
+        <div className="block w-full overflow-x-auto">
           {/* Projects table */}
           <table className="items-center w-full bg-transparent border-collapse">
             <thead>
@@ -187,7 +177,7 @@ const deletePrePaidServices = (e, id) => {
                       : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 >
-                  Operator
+                  Institution
                 </th>
                 <th
                   className={
@@ -197,7 +187,17 @@ const deletePrePaidServices = (e, id) => {
                       : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 >
-                  Product
+                  Company
+                </th>
+                <th
+                  className={
+                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                    (color === "light"
+                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                  }
+                >
+                  Reference Number
                 </th>
                 <th
                   className={
@@ -210,16 +210,16 @@ const deletePrePaidServices = (e, id) => {
                   Amount
                 </th>
                 {!isAuditor && (
-                <th
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                >
+                  <th
+                    className={
+                      "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                      (color === "light"
+                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                    }
+                  >
                     Actions
-                </th>
+                  </th>
                 )}
                 <th
                   className={
@@ -230,31 +230,28 @@ const deletePrePaidServices = (e, id) => {
                   }
                 ></th>
               </tr>
-              </thead>
+            </thead>
             {!loading && (
               <tbody>
-                {prePaidServices
-                ?.filter((item) => {
-                  return search.toLowerCase() === ""
-                    ? item
-                    : item.operator.toLowerCase().includes(search);
-                }).map((prePaidService) => (
-                  <PrePaidServices
-                  prePaidService={prePaidService}
-                  ConfirmDialogAlert={ConfirmDialogAlert}
-                    key={prePaidService.id}
-                    deletePrePaidServices={deletePrePaidServices}
-                  />
-                ))}
+                {institutionPayments
+                  ?.filter((item) => {
+                    return search.toLowerCase() === ""
+                      ? item
+                      : item.company.toLowerCase().includes(search);
+                  })
+                  .map((institutionPayment) => (
+                    <InstitutionPayments
+                      institutionPayment={institutionPayment}
+                      ConfirmDialogAlert={ConfirmDialogAlert}
+                      key={institutionPayment.id}
+                      deleteInstitutionPayment={deleteInstitutionPayment}
+                    />
+                  ))}
               </tbody>
             )}
           </table>
         </div>
       </div>
-
     </>
-
-                    
-
   );
 }

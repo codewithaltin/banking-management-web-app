@@ -3,15 +3,11 @@ import PropTypes from "prop-types";
 
 // components
 import MobilePayments from "./MobilePayments";
-import AddGoal from "./AddGoal";
 import TableDropdown from "components/Dropdowns/TableDropdown.js";
-import CardTable from "./CardTable";
 import Swal from "sweetalert2";
 import jwt_decode from "jwt-decode";
 
 export default function MobilePaymentTable({ mobilePayment, color }) {
-
-
   let MOBILEPAYMENT_API_BASE_URL;
 
   const [mobilePayments, setMobilePayment] = useState(null);
@@ -53,14 +49,14 @@ export default function MobilePaymentTable({ mobilePayment, color }) {
     return decoded.authorities === "ROLE_USER";
   }
 
-
   function chooseEndPoint() {
     let res = decoded.authorities === "ROLE_USER";
     if (res) {
       MOBILEPAYMENT_API_BASE_URL =
         "http://localhost:8080/api/v1/auth/mobilePayment/user/" + decoded.sub;
     } else {
-      MOBILEPAYMENT_API_BASE_URL = "http://localhost:8080/api/v1/auth/mobilePayment";
+      MOBILEPAYMENT_API_BASE_URL =
+        "http://localhost:8080/api/v1/auth/mobilePayment";
     }
   }
   const fetchData = async () => {
@@ -119,9 +115,9 @@ export default function MobilePaymentTable({ mobilePayment, color }) {
     });
   };
 
-  return(
+  return (
     <>
-    <div
+      <div
         className={
           "relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded " +
           (color === "light" ? "bg-white" : "bg-blueGray-700 text-white")
@@ -132,7 +128,7 @@ export default function MobilePaymentTable({ mobilePayment, color }) {
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
               <div className="flex items-center">
                 <form>
-                <div class="relative">
+                  <div class="relative">
                     <div class="absolute inset-b-0 left-0 flex items-center pl-3 pointer-events-none">
                       <i className="fa fa-search text-blue-50 mt-3"></i>
                     </div>
@@ -151,19 +147,20 @@ export default function MobilePaymentTable({ mobilePayment, color }) {
                   </div>
                 </form>
                 {isUser && (
-                <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-                  <a
-                    className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    href="/paymentTypes/MobilePayments"
-                  >
-                    Add Mobile Payment
-                  </a>
-                </div>)}{" "}
+                  <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
+                    <a
+                      className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      href="/paymentTypes/MobilePayments"
+                    >
+                      Add Mobile Payment
+                    </a>
+                  </div>
+                )}{" "}
               </div>
             </div>
           </div>
         </div>
-            <div className="block w-full overflow-x-auto">
+        <div className="block w-full overflow-x-auto">
           {/* Projects table */}
           <table className="items-center w-full bg-transparent border-collapse">
             <thead>
@@ -198,7 +195,7 @@ export default function MobilePaymentTable({ mobilePayment, color }) {
                 >
                   Phone Number
                 </th>
-                
+
                 <th
                   className={
                     "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
@@ -211,16 +208,16 @@ export default function MobilePaymentTable({ mobilePayment, color }) {
                 </th>
 
                 {!isAuditor && (
-                <th
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                >
+                  <th
+                    className={
+                      "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                      (color === "light"
+                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                    }
+                  >
                     Actions
-                </th>
+                  </th>
                 )}
                 <th
                   className={
@@ -235,23 +232,24 @@ export default function MobilePaymentTable({ mobilePayment, color }) {
             {!loading && (
               <tbody>
                 {mobilePayments
-                ?.filter((item) => {
-                  return search.toLowerCase() === ""
-                    ? item
-                    : item.email.toLowerCase().includes(search);
-                }).map((mobilePayment) => (
-                  <MobilePayments
-                  mobilePayment={mobilePayment}
-                  ConfirmDialogAlert={ConfirmDialogAlert}
-                    key={mobilePayment.id}
-                    deleteMobilePayment={deleteMobilePayment}
-                  />
-                ))}
+                  ?.filter((item) => {
+                    return search.toLowerCase() === ""
+                      ? item
+                      : item.email.toLowerCase().includes(search);
+                  })
+                  .map((mobilePayment) => (
+                    <MobilePayments
+                      mobilePayment={mobilePayment}
+                      ConfirmDialogAlert={ConfirmDialogAlert}
+                      key={mobilePayment.id}
+                      deleteMobilePayment={deleteMobilePayment}
+                    />
+                  ))}
               </tbody>
             )}
           </table>
         </div>
       </div>
     </>
-  )
-};
+  );
+}

@@ -5,7 +5,7 @@ import CardLineChart from "components/Cards/CardLineChart.js";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
 import jwt_decode from "jwt-decode";
-
+import Swal from "sweetalert2";
 import User from "layouts/User.js";
 
 export default function Dashboard() {
@@ -22,8 +22,12 @@ export default function Dashboard() {
   useEffect(() => {
     if (decoded) {
       if (decoded.authorities != "ROLE_USER") {
-        window.alert("Unathorized acces, Riderecting you to your dashboard! ");
-        router.push("/admin/dashboard");
+        Swal.fire({
+          title: "Unauthorized page!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        router.push("/");
       }
       fetchProfile();
     } else console.log("decoding failed.");

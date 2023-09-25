@@ -1,22 +1,22 @@
 import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 
+// components
+import PrePaidServices from "../Payment/PrePaidServices";
+import Swal from "sweetalert2";
 import jwt_decode from "jwt-decode";
 
-// components
-import EditEmployee from "./EditEmployee";
-import Employee from "./Employee";
-import Swal from "sweetalert2";
+export default function PrePaidServicesTable({ prePaidService, color }) {
+  let PREPAIDSERVICES_API_BASE_URL;
 
-export default function EmployeeList({ employee, color }) {
-  const EMPLOYEE_API_BASE_URL = "http://localhost:8080/api/v1/auth/employee";
-  const [employees, setemployees] = useState(null);
+  const [prePaidServices, setPrePaidServives] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [employeeId, setemployeeId] = useState(null);
-  const [responseEmployee, setResponseEmployee] = useState(null);
+  const [prePaidServivesId, setPrePaidServivesId] = useState(null);
+  const [responsePrePaidServives, setResponsePrePaidServives] = useState(null);
   const [search, setSearch] = useState("");
   const [decoded, setDecoded] = useState(null);
   const [isAuditor, setIsAuditor] = useState(false);
+  const [isUser, setIsUser] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -26,7 +26,17 @@ export default function EmployeeList({ employee, color }) {
 
   useEffect(() => {
     if (decoded) {
+      chooseEndPoint();
+      fetchData();
       setIsAuditor(checkAuditor());
+    }
+  }, [decoded]);
+
+  useEffect(() => {
+    if (decoded) {
+      chooseEndPoint();
+      fetchData();
+      setIsUser(checkUser());
     }
   }, [decoded]);
 
@@ -34,27 +44,51 @@ export default function EmployeeList({ employee, color }) {
     return decoded.authorities === "ROLE_AUDITOR";
   }
 
-  useEffect(() => {
-    const fetchData = async () => {
-      setLoading(true);
-      try {
-        const response = await fetch(EMPLOYEE_API_BASE_URL, {
-          method: "GET",
-          headers: {
-            "Content-Type": "application/json",
-          },
-        });
-        const employees = await response.json();
-        setemployees(employees);
-      } catch (error) {
-        console.log(error);
-      }
-      setLoading(false);
-    };
-    fetchData();
-  }, [employee, responseEmployee]);
+  function checkUser() {
+    return decoded.authorities === "ROLE_USER";
+  }
 
-  const confirmDelete = (e, id) => {
+  useEffect(() => {
+    if (decoded) {
+      chooseEndPoint();
+      fetchData();
+    }
+  }, [decoded]);
+
+  function chooseEndPoint() {
+    let res = decoded.authorities === "ROLE_USER";
+    if (res) {
+      PREPAIDSERVICES_API_BASE_URL =
+        "http://localhost:8080/api/v1/auth/prePaidPayment/user/" + decoded.sub;
+    } else {
+      PREPAIDSERVICES_API_BASE_URL =
+        "http://localhost:8080/api/v1/auth/prePaidPayment";
+    }
+  }
+  const fetchData = async () => {
+    setLoading(true);
+    try {
+      const response = await fetch(PREPAIDSERVICES_API_BASE_URL, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      if (response.ok) {
+        const collectorData = await response.json();
+        setPrePaidServives(collectorData);
+      } else {
+        throw new Error("Failed to fetch data");
+      }
+    } catch (error) {
+      console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+  let dialogValue = false;
+
+  const ConfirmDialogAlert = (e, id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -65,29 +99,35 @@ export default function EmployeeList({ employee, color }) {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteEmployee(e, id);
+        deletePrePaidServices(e, id);
         Swal.fire("Deleted!", "Deleted Succesfully!", "success");
       }
     });
   };
 
-  const deleteEmployee = (e, id) => {
+  const deletePrePaidServices = (e, id) => {
     e.preventDefault();
-    fetch("http://localhost:8080/api/v1/auth/employee/" + id, {
+    fetch("http://localhost:8080/api/v1/auth/prePaidPayment/" + id, {
       method: "DELETE",
     }).then((res) => {
-      if (employees) {
-        setemployees((prevElement) => {
-          return prevElement.filter((employee) => employee.id !== id);
+      if (prePaidServices) {
+        setPrePaidServives((prevElement) => {
+          return prevElement.filter(
+            (prePaidServives) => prePaidServives.id !== id
+          );
         });
       }
     });
   };
 
-  const editEmployee = (e, id) => {
-    e.preventDefault();
-    setemployeeId(id);
+  const handleOpenDialog = () => {
+    setDialogOpen(true);
   };
+
+  const handleCloseDialog = () => {
+    setDialogOpen(false);
+  };
+
   return (
     <>
       <div
@@ -109,7 +149,7 @@ export default function EmployeeList({ employee, color }) {
                       type="search"
                       id="default-search"
                       class="block w-full p-2 pl-10 text-sm text-blue-50 border border-gray-300 rounded-lg bg-blueGray-600 "
-                      placeholder="Search employee by e-mail..."
+                      placeholder="Search Pre-Paid by operator..."
                       onChange={(e) => setSearch(e.target.value)}
                       required
                     ></input>
@@ -119,16 +159,16 @@ export default function EmployeeList({ employee, color }) {
                     ></button>
                   </div>
                 </form>
-                {!isAuditor && (
+                {isUser && (
                   <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
                     <a
                       className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                      href="addemployee"
+                      href="/paymentTypes/PrePaidServices"
                     >
-                      Add Employee
+                      Add Pre Paid
                     </a>
                   </div>
-                )}
+                )}{" "}
               </div>
             </div>
           </div>
@@ -140,13 +180,13 @@ export default function EmployeeList({ employee, color }) {
               <tr>
                 <th
                   className={
-                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
                     (color === "light"
                       ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                       : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 >
-                  First Name
+                  Operator
                 </th>
                 <th
                   className={
@@ -156,7 +196,7 @@ export default function EmployeeList({ employee, color }) {
                       : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 >
-                  Last Name
+                  Product
                 </th>
                 <th
                   className={
@@ -166,61 +206,12 @@ export default function EmployeeList({ employee, color }) {
                       : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 >
-                  Email
+                  Amount
                 </th>
-                <th
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                >
-                  Phone Number
-                </th>
-                <th
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                >
-                  Departament
-                </th>
-                <th
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                >
-                  Job Title
-                </th>
-                <th
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                >
-                  End Agreement Date
-                </th>
-                <th
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                ></th>
                 {!isAuditor && (
                   <th
-                    colSpan={2}
                     className={
-                      "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                      "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
                       (color === "light"
                         ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                         : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
@@ -229,33 +220,36 @@ export default function EmployeeList({ employee, color }) {
                     Actions
                   </th>
                 )}
+                <th
+                  className={
+                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                    (color === "light"
+                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                  }
+                ></th>
               </tr>
             </thead>
             {!loading && (
               <tbody>
-                {employees
+                {prePaidServices
                   ?.filter((item) => {
                     return search.toLowerCase() === ""
                       ? item
-                      : item.email.toLowerCase().includes(search);
+                      : item.operator.toLowerCase().includes(search);
                   })
-                  .map((employee) => (
-                    <Employee
-                      employee={employee}
-                      key={employee.id}
-                      confirmDelete={confirmDelete}
-                      editEmployee={editEmployee}
+                  .map((prePaidService) => (
+                    <PrePaidServices
+                      prePaidService={prePaidService}
+                      ConfirmDialogAlert={ConfirmDialogAlert}
+                      key={prePaidService.id}
+                      deletePrePaidServices={deletePrePaidServices}
                     />
                   ))}
               </tbody>
             )}
           </table>
         </div>
-        <EditEmployee
-          employeeId={employeeId}
-          setResponseEmployee={setResponseEmployee}
-          setIsOpen={true}
-        />
       </div>
     </>
   );

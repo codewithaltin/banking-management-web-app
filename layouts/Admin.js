@@ -16,12 +16,14 @@ export default function Admin({ children }) {
 
   useEffect(() => {
     if (decoded) {
-      Swal.fire({
-        title: "Unauthorized page!",
-        showConfirmButton: false,
-        timer: 2000,
-      });
-      router.push("/");
+      if (decoded.authorities === "ROLE_USER") {
+        Swal.fire({
+          title: "Unauthorized page!",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        router.push("/");
+      }
     }
   }, [decoded]);
   return (

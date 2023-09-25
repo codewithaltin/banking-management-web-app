@@ -4,10 +4,7 @@ import Admin from "layouts/User.js";
 import User from "layouts/Admin";
 import FooterAdmin from "components/Footers/FooterAdmin";
 import PaymentsNavbar from "components/Navbars/PaymentsNavbar";
-import InstitutionPaymentsTable from "components/Cards/InstitutionPaymentsTable";
-import PrePaidServicesTable from "components/Cards/PrePaidServicesTable";
-import CollectorPaymentTable from "components/Cards/CollectorPaymentTable";
-import MobilePaymentTable from "components/Cards/MobilePaymentTable";
+import MobilePaymentTable from "components/Payment/MobilePaymentTable";
 import Auth from "layouts/Auth";
 
 const MobilePaymentList = () => {

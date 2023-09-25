@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 // components
-//import EditUser from "./EditUser";
-import User from "./User";
+import EditUser from "../User/EditUser";
+import User from "../User/User";
 import jwt_decode from "jwt-decode";
 import Swal from "sweetalert2";
 import Personnel from "./Personnel";
@@ -143,8 +143,7 @@ export default function PersonnelTable({ user, color }) {
                       required
                     ></input>
                     <select
-                     className="capitalize eblock w-full p-2  text-sm text-blue-50 border border-gray-300 rounded-lg bg-blueGray-600 mr-4"
-
+                      className="capitalize eblock w-full p-2  text-sm text-blue-50 border border-gray-300 rounded-lg bg-blueGray-600 mr-4"
                       value={filter}
                       onChange={(e) => setFilter(e.target.value)}
                       name="role"
@@ -259,26 +258,32 @@ export default function PersonnelTable({ user, color }) {
             </thead>
             {!loading && (
               <tbody>
-              {users
-                ?.filter((item) => {
-                  return search.toLowerCase() === ""
-                    ? item
-                    : item.email.toLowerCase().includes(search);
-                })
-                .filter((item) => {
-                  return filter === "Roles" ? item : item.role && item.role.includes(filter);
-                })
-                .filter((user) => user.role === "DATA_MANAGER" || user.role === "AUDITOR" || user.role === "ADMIN") 
-                .map((user) => (
-                  <Personnel
-                    user={user}
-                    key={user.id}
-                    confirmDelete={confirmDelete}
-                    editUser={editUser}
-                  />
-                ))}
-            </tbody>
-            
+                {users
+                  ?.filter((item) => {
+                    return search.toLowerCase() === ""
+                      ? item
+                      : item.email.toLowerCase().includes(search);
+                  })
+                  .filter((item) => {
+                    return filter === "Roles"
+                      ? item
+                      : item.role && item.role.includes(filter);
+                  })
+                  .filter(
+                    (user) =>
+                      user.role === "DATA_MANAGER" ||
+                      user.role === "AUDITOR" ||
+                      user.role === "ADMIN"
+                  )
+                  .map((user) => (
+                    <Personnel
+                      user={user}
+                      key={user.id}
+                      confirmDelete={confirmDelete}
+                      editUser={editUser}
+                    />
+                  ))}
+              </tbody>
             )}
           </table>
         </div>

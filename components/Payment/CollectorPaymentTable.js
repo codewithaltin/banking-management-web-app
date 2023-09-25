@@ -3,21 +3,19 @@ import PropTypes from "prop-types";
 
 // components
 import Payments from "./InstitutionPayments";
-import AddGoal from "./AddGoal";
 import TableDropdown from "components/Dropdowns/TableDropdown.js";
-import CardTable from "./CardTable";
 import CollectorPayments from "./CollectorPayments";
 import Swal from "sweetalert2";
 import jwt_decode from "jwt-decode";
 
 export default function CollectorPaymentTable({ collectorPayment, color }) {
-
   let COLLECTORPAYMENT_API_BASE_URL;
 
   const [collectorPayments, setCollectorPayment] = useState(null);
   const [loading, setLoading] = useState(true);
   const [collectorPaymentId, setCollectorPaymentId] = useState(null);
-  const [responseCollectorPayment, setResponseCollectorPayment] = useState(null);
+  const [responseCollectorPayment, setResponseCollectorPayment] =
+    useState(null);
   const [search, setSearch] = useState("");
   const [decoded, setDecoded] = useState(null);
   const [isAuditor, setIsAuditor] = useState(false);
@@ -57,9 +55,11 @@ export default function CollectorPaymentTable({ collectorPayment, color }) {
     let res = decoded.authorities === "ROLE_USER";
     if (res) {
       COLLECTORPAYMENT_API_BASE_URL =
-        "http://localhost:8080/api/v1/auth/collectorPayment/user/" + decoded.sub;
+        "http://localhost:8080/api/v1/auth/collectorPayment/user/" +
+        decoded.sub;
     } else {
-      COLLECTORPAYMENT_API_BASE_URL = "http://localhost:8080/api/v1/auth/collectorPayment";
+      COLLECTORPAYMENT_API_BASE_URL =
+        "http://localhost:8080/api/v1/auth/collectorPayment";
     }
   }
   const fetchData = async () => {
@@ -84,7 +84,6 @@ export default function CollectorPaymentTable({ collectorPayment, color }) {
     }
   };
 
-
   const ConfirmDialogAlert = (e, id) => {
     Swal.fire({
       title: "Are you sure?",
@@ -102,7 +101,6 @@ export default function CollectorPaymentTable({ collectorPayment, color }) {
     });
   };
 
-
   const deleteCollectorPayment = (e, id) => {
     e.preventDefault();
     fetch("http://localhost:8080/api/v1/auth/collectorPayment/" + id, {
@@ -110,17 +108,17 @@ export default function CollectorPaymentTable({ collectorPayment, color }) {
     }).then((res) => {
       if (collectorPayment) {
         setCollectorPayment((prevElement) => {
-          return prevElement.filter((collectorPayment) => collectorPayment.id !== id);
+          return prevElement.filter(
+            (collectorPayment) => collectorPayment.id !== id
+          );
         });
       }
     });
   };
 
-
-
-  return(
-  <>
-  <div
+  return (
+    <>
+      <div
         className={
           "relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded " +
           (color === "light" ? "bg-white" : "bg-blueGray-700 text-white")
@@ -131,7 +129,7 @@ export default function CollectorPaymentTable({ collectorPayment, color }) {
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
               <div className="flex items-center">
                 <form>
-                <div class="relative">
+                  <div class="relative">
                     <div class="absolute inset-b-0 left-0 flex items-center pl-3 pointer-events-none">
                       <i className="fa fa-search text-blue-50 mt-3"></i>
                     </div>
@@ -150,19 +148,20 @@ export default function CollectorPaymentTable({ collectorPayment, color }) {
                   </div>
                 </form>
                 {isUser && (
-                <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
-                  <a
-                    className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
-                    href="/paymentTypes/CollectorPayments"
-                  >
-                    Add Collector Payments
-                  </a>
-                </div>)}{" "}
+                  <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
+                    <a
+                      className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
+                      href="/paymentTypes/CollectorPayments"
+                    >
+                      Add Collector Payments
+                    </a>
+                  </div>
+                )}{" "}
               </div>
             </div>
           </div>
         </div>
-            <div className="block w-full overflow-x-auto">
+        <div className="block w-full overflow-x-auto">
           {/* Projects table */}
           <table className="items-center w-full bg-transparent border-collapse">
             <thead>
@@ -197,75 +196,60 @@ export default function CollectorPaymentTable({ collectorPayment, color }) {
                 >
                   UNIREF
                 </th>
-                
+
                 <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                        (color === "light"
-                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                          : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                      }
-                    >
-                      Amount
-                    </th>
-                    {!isAuditor && (
-                    <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                        (color === "light"
-                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                          : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                      }
-                    >
-                        Actions
-                    </th>
-                    )}
-                    <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                        (color === "light"
-                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                          : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                      }
-                    ></th>
+                  className={
+                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                    (color === "light"
+                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                  }
+                >
+                  Amount
+                </th>
+                {!isAuditor && (
+                  <th
+                    className={
+                      "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                      (color === "light"
+                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                    }
+                  >
+                    Actions
+                  </th>
+                )}
+                <th
+                  className={
+                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                    (color === "light"
+                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                  }
+                ></th>
               </tr>
             </thead>
             {!loading && (
               <tbody>
                 {collectorPayments
-                ?.filter((item) => {
-                  return search.toLowerCase() === ""
-                    ? item
-                    : item.collector.toLowerCase().includes(search);
-                }).map((collectorPayment) => (
-                  <CollectorPayments
-                  ConfirmDialogAlert={ConfirmDialogAlert}  
-                  collectorPayment={collectorPayment}
-                    key={collectorPayment.id}
-                    deleteCollectorPayment={deleteCollectorPayment}
-                  />
-                ))}
+                  ?.filter((item) => {
+                    return search.toLowerCase() === ""
+                      ? item
+                      : item.collector.toLowerCase().includes(search);
+                  })
+                  .map((collectorPayment) => (
+                    <CollectorPayments
+                      ConfirmDialogAlert={ConfirmDialogAlert}
+                      collectorPayment={collectorPayment}
+                      key={collectorPayment.id}
+                      deleteCollectorPayment={deleteCollectorPayment}
+                    />
+                  ))}
               </tbody>
             )}
           </table>
         </div>
       </div>
-      </>
-      );
+    </>
+  );
 }
-  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

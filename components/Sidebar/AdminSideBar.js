@@ -9,6 +9,7 @@ export default function AdminSideBar() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
   const [decoded, setDecoded] = useState(null);
   const [isAdmin, setIsAdmin] = useState(false);
+  const [isAuditor, setIsAuditor] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -19,11 +20,15 @@ export default function AdminSideBar() {
   useEffect(() => {
     if (decoded) {
       setIsAdmin(checkAdmin());
+      setIsAuditor(checkAuditor());
     }
   }, [decoded]);
 
   function checkAdmin() {
     return decoded.authorities === "ROLE_ADMIN";
+  }
+  function checkAuditor() {
+    return decoded.authorities === "ROLE_AUDITOR";
   }
 
   const router = useRouter();
@@ -64,47 +69,49 @@ export default function AdminSideBar() {
           DASHBOARD
         </Link>
 
-        {isAdmin && (     
-        <Link
-          href="/admin/roles"
-          className={
-            "text-xs uppercase py-3 font-bold block " +
-            (router.pathname.indexOf("/admin/roles") !== -1
-              ? "text-lightBlue-500 hover:text-lightBlue-600"
-              : "text-blueGray-700 hover:text-blueGray-500")
-          }
-        >
-          <i
-            className={
-              "fas fa-user-plus mr-2 text-sm " +
-              (router.pathname.indexOf("/admin/roles") !== -1
-                ? "opacity-75"
-                : "text-blueGray-300")
-            }
-          ></i>{" "}
-          Add Users with Roles
-        </Link> )}
-
         {isAdmin && (
-        <Link
-          href="/admin/addemployee"
-          className={
-            "text-xs uppercase py-3 font-bold block " +
-            (router.pathname.indexOf("/admin/addemployee") !== -1
-              ? "text-lightBlue-500 hover:text-lightBlue-600"
-              : "text-blueGray-700 hover:text-blueGray-500")
-          }
-        >
-          <i
+          <Link
+            href="/admin/roles"
             className={
-              "fas fa-user-tie mr-2 text-sm " +
-              (router.pathname.indexOf("/admin/addemployee") !== -1
-                ? "opacity-75"
-                : "text-blueGray-300")
+              "text-xs uppercase py-3 font-bold block " +
+              (router.pathname.indexOf("/admin/roles") !== -1
+                ? "text-lightBlue-500 hover:text-lightBlue-600"
+                : "text-blueGray-700 hover:text-blueGray-500")
             }
-          ></i>{" "}
-          Add Employee
-        </Link>)}
+          >
+            <i
+              className={
+                "fas fa-user-plus mr-2 text-sm " +
+                (router.pathname.indexOf("/admin/roles") !== -1
+                  ? "opacity-75"
+                  : "text-blueGray-300")
+              }
+            ></i>{" "}
+            Add Users with Roles
+          </Link>
+        )}
+
+        {!isAuditor && (
+          <Link
+            href="/admin/addemployee"
+            className={
+              "text-xs uppercase py-3 font-bold block " +
+              (router.pathname.indexOf("/admin/addemployee") !== -1
+                ? "text-lightBlue-500 hover:text-lightBlue-600"
+                : "text-blueGray-700 hover:text-blueGray-500")
+            }
+          >
+            <i
+              className={
+                "fas fa-user-tie mr-2 text-sm " +
+                (router.pathname.indexOf("/admin/addemployee") !== -1
+                  ? "opacity-75"
+                  : "text-blueGray-300")
+              }
+            ></i>{" "}
+            Add Employee
+          </Link>
+        )}
 
         <hr className="my-4 md:min-w-full" />
 

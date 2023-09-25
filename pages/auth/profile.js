@@ -6,6 +6,7 @@ import CardSettings from "components/Cards/CardSettings.js";
 import CardProfile from "components/Cards/CardProfile.js";
 import jwt_decode from "jwt-decode";
 import User from "layouts/User.js";
+import Swal from "sweetalert2";
 import { useRouter } from "next/router";
 export default function Settings() {
   const [profile, setProfile] = useState({});
@@ -20,8 +21,12 @@ export default function Settings() {
   useEffect(() => {
     if (decoded) {
       if (decoded.authorities != "ROLE_USER") {
-        window.alert("Unathorized acces, Riderecting you to your dashboard! ");
-        router.push("/admin/dashboard");
+        Swal.fire({
+          title: "Unauthorized page!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        router.push("/");
       }
       fetchProfile();
     } else console.log("decoding failed.");

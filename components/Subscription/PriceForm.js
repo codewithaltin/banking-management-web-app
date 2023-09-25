@@ -4,8 +4,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { multiStepContext } from "pages/step_context";
-import ProductList from "../ProductList";
-import PlanList from "../PlanList";
+import ProductList from "../Cards/ProductList";
+import PlanList from "../Cards/PlanList";
 import SubscribtionList from "./SubscribtionList";
 const schema = yup
   .object()

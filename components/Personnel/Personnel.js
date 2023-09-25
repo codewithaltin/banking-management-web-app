@@ -37,7 +37,7 @@ const Personnel = ({ user, confirmDelete, editUser }) => {
         {user.phoneNumber}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
-      {user.role}
+        {user.role}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         {user.city}
