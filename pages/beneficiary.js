@@ -2,10 +2,13 @@ import React from "react";
 import Navbar from "components/Navbars/IndexNavbar.js";
 import TokenCheck from "components/TokenCheck";
 import Footer from "components/Footers/Footer.js";
-
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as Yup from "yup";
+import { useEffect } from "react";
+import Swal from "sweetalert2";
+import jwt_decode from "jwt-decode";
 
 import { useState } from 'react';
 
@@ -97,6 +100,28 @@ function Beneficiary() {
         // alert("SUCCESS!! :-)\n\n");
         // return false;
     }
+
+    const [decoded, setDecoded] = useState(null);
+
+  const router = useRouter();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      if (decoded.authorities != "ROLE_USER") {
+        Swal.fire({
+          title: "Unauthorized page!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        router.push("/");
+      }
+    } else console.log("decoding failed.");
+  }, [decoded]);
 
     const formOptions = { resolver: yupResolver(validationSchema) };
 

@@ -7,6 +7,7 @@ import Auth from "layouts/Auth.js";
 import jwt_decode from "jwt-decode";
 import { useEffect } from "react";
 import Swal from "sweetalert2";
+import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -63,6 +64,26 @@ export default function Donate() {
     const [decoded, setDecoded] = useState(null);
     const [user, setUser] = useState(false);
 
+    const router = useRouter();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      if (decoded.authorities != "ROLE_USER") {
+        Swal.fire({
+          title: "Unauthorized page!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        router.push("/");
+      }
+    } else console.log("decoding failed.");
+  }, [decoded]);
+
     //const DONATION_API_BASE_URL = "http://localhost:8080/api/v1/auth/donation";
 
     const [isOpen, setIsOpen] = useState(false);
@@ -95,12 +116,6 @@ export default function Donate() {
         timer: 1500,
       });
     };
-
-    useEffect(() => {
-      const token = localStorage.getItem("token");
-      const decodedToken = jwt_decode(token);
-      setDecoded(decodedToken);
-    }, []);
 
     useEffect(() => {
     

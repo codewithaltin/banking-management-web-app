@@ -3,6 +3,8 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import TokenCheck from "components/TokenCheck";
 import * as yup from "yup";
+import Swal from "sweetalert2";
+import { useRouter } from "next/router";
 import jwt_decode from "jwt-decode";
 import { useEffect } from "react";
 
@@ -46,7 +48,7 @@ const schema = yup
       .min(5, "Text must be longer than  5 characters"),
   })
   .required();
-
+  
 export default function Transfer() {
   const {
     register,
@@ -55,12 +57,26 @@ export default function Transfer() {
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
   const [decoded, setDecoded] = useState(null);
-
+  const router = useRouter();
+  
   useEffect(() => {
     const token = localStorage.getItem("token");
     const decodedToken = jwt_decode(token);
     setDecoded(decodedToken);
   }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      if (decoded.authorities != "ROLE_USER") {
+        Swal.fire({
+          title: "Unauthorized page!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        router.push("/");
+      }
+    } else console.log("decoding failed.");
+  }, [decoded]);
 
   const [transfer, setTransfers] = useState({
     id: "",

@@ -2,6 +2,11 @@ import React from "react";
 import Card from "react-credit-cards";
 import TokenCheck from "components/TokenCheck";
 import "react-credit-cards/es/styles-compiled.css";
+import jwt_decode from "jwt-decode";
+import { useEffect } from "react";
+import { useForm } from "react-hook-form";
+import { useRouter } from "next/router";
+import Swal from "sweetalert2";
 
 import {
   formatCreditCardNumber,
@@ -72,6 +77,26 @@ export default class cards extends React.Component {
     if (!response.ok) {
       throw new Error("Something went wrong");
     }
+
+    const router = useRouter();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      if (decoded.authorities != "ROLE_USER") {
+        Swal.fire({
+          title: "Unauthorized page!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        router.push("/");
+      }
+    } else console.log("decoding failed.");
+  }, [decoded]);
 
     this.setState({ formData });
     this.form.reset();

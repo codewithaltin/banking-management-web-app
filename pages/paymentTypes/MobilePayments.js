@@ -6,6 +6,7 @@ import * as yup from "yup";
 import jwt_decode from "jwt-decode";
 import Swal from "sweetalert2";
 import Auth from "layouts/Auth.js";
+import { useRouter } from "next/router";
 import { number } from "joi";
 import LazyResult from "postcss/lib/lazy-result";
 
@@ -18,12 +19,26 @@ export default function MobilePayments() {
       formState: { errors },
     } = useForm({ });
     const [decoded, setDecoded] = useState(null);
+    const router = useRouter();
   
     useEffect(() => {
       const token = localStorage.getItem("token");
       const decodedToken = jwt_decode(token);
       setDecoded(decodedToken);
     }, []);
+
+    useEffect(() => {
+      if (decoded) {
+        if (decoded.authorities != "ROLE_USER") {
+          Swal.fire({
+            title: "Unauthorized page!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          router.push("/");
+        }
+      } else console.log("decoding failed.");
+    }, [decoded]);
     
   
   let MOBILEPAYMENTS_API_BASE_URL;
