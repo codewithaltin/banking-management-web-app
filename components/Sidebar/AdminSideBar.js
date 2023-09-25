@@ -114,6 +114,27 @@ export default function AdminSideBar() {
         </li>
         <li className="items-center">
           <Link
+            href="/admin/personelList"
+            className={
+              "text-xs uppercase py-3 font-bold block " +
+              (router.pathname.indexOf("/admin/personelList") !== -1
+                ? "text-lightBlue-500 hover:text-lightBlue-600"
+                : "text-blueGray-700 hover:text-blueGray-500")
+            }
+          >
+            <i
+              className={
+                "fas fa-users mr-2 text-sm " +
+                (router.pathname.indexOf("/admin/personelList") !== -1
+                  ? "opacity-75"
+                  : "text-blueGray-300")
+              }
+            ></i>{" "}
+            Personnel List
+          </Link>
+        </li>
+        <li className="items-center">
+          <Link
             href="/admin/employeelist"
             className={
               "text-xs uppercase py-3 font-bold block " +
