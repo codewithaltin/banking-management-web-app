@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import Swal from "sweetalert2";
 import jwt_decode from "jwt-decode";
+import { useRouter } from "next/router";
 
 import Auth from "layouts/Auth.js";
 
@@ -18,11 +19,26 @@ export default function CollectorPayments() {
     } = useForm({ });
     const [decoded, setDecoded] = useState(null);
   
+    const router = useRouter();
+
     useEffect(() => {
       const token = localStorage.getItem("token");
       const decodedToken = jwt_decode(token);
       setDecoded(decodedToken);
     }, []);
+
+    useEffect(() => {
+      if (decoded) {
+        if (decoded.authorities != "ROLE_USER") {
+          Swal.fire({
+            title: "Unauthorized page!",
+            showConfirmButton: false,
+            timer: 1500,
+          });
+          router.push("/");
+        }
+      } else console.log("decoding failed.");
+    }, [decoded]);
     
   
   const COLLECTORPAYMENTS_API_BASE_URL = "http://localhost:8080/api/v1/auth/collectorPayment";

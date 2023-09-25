@@ -5,6 +5,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import Auth from "layouts/Auth.js";
 import { Route } from "react-router-dom";
 import jwt_decode from "jwt-decode";
+import { useRouter } from "next/router";
 import Swal from "sweetalert2";
 import { useEffect } from "react";
 import TableAuth from "layouts/TableAuth";
@@ -19,11 +20,27 @@ export default function AddSavingGoal() {
   const [decoded, setDecoded] = useState(null);
   const [user, setUser] = useState(false);
 
+  
   useEffect(() => {
     const token = localStorage.getItem("token");
     const decodedToken = jwt_decode(token);
     setDecoded(decodedToken);
   }, []);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    if (decoded) {
+      if (decoded.authorities != "ROLE_USER") {
+        Swal.fire({
+          title: "Unauthorized page!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        router.push("/");
+      }
+    } else console.log("decoding failed.");
+  }, [decoded]);
 
   const [isOpen, setIsOpen] = useState(false);
   const [savingGoal, setSavingGoals] = useState({

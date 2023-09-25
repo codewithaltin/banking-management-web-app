@@ -61,11 +61,12 @@ const roles = () => {
   useEffect(() => {
     if (decoded) {
       if (decoded.authorities != "ROLE_ADMIN") {
-        window.alert(
-          "Unathorized acces, Riderecting you to your dashboard! ",
-          200
-        );
-        router.push("/admin/dashboard");
+        Swal.fire({
+          title: "Unauthorized page!",
+          showConfirmButton: false,
+          timer: 2000,
+        });
+        router.push("/");
       }
     }
   }, [decoded]);

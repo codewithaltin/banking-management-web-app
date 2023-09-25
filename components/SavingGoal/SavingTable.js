@@ -18,6 +18,7 @@ export default function SavingTable({ savingGoal, color }) {
   const [decoded, setDecoded] = useState(null);
   const [search, setSearch] = useState("");
   const [isAuditor, setIsAuditor] = useState(false);
+  const [isUser, setIsUser] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -33,8 +34,20 @@ export default function SavingTable({ savingGoal, color }) {
     }
   }, [decoded]);
 
+  useEffect(() => {
+    if (decoded) {
+      chooseEndPoint();
+      fetchData();
+      setIsUser(checkUser());
+    }
+  }, [decoded]);
+
   function checkAuditor() {
     return decoded.authorities === "ROLE_AUDITOR";
+  }
+
+  function checkUser() {
+    return decoded.authorities === "ROLE_USER";
   }
 
   function chooseEndPoint() {
@@ -133,6 +146,7 @@ export default function SavingTable({ savingGoal, color }) {
                     ></button>
                   </div>
                 </form>
+                {isUser && (
                 <div className="relative w-full px-4 max-w-full flex-grow flex-1 text-right">
                   <a
                     className="bg-indigo-500 text-white active:bg-indigo-600 text-xs font-bold uppercase px-3 py-1 rounded outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150"
@@ -140,7 +154,7 @@ export default function SavingTable({ savingGoal, color }) {
                   >
                     Add Goal
                   </a>
-                </div>{" "}
+                </div>)}{" "}
               </div>
             </div>
           </div>

@@ -1,9 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import Navbar from "components/Navbars/IndexNavbar.js";
 import Footer from "components/Footers/Footer.js";
 import TokenCheck from "components/TokenCheck";
 import { useForm } from "react-hook-form";
+import jwt_decode from "jwt-decode";
+import Swal from "sweetalert2";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+
 import * as Yup from "yup";
 
 export default Invoice;
@@ -73,6 +78,28 @@ function Invoice() {
     alert("SUCCESS!! :-)\n\n");
     return false;
   }
+
+  const [decoded, setDecoded] = useState(null);
+
+  const router = useRouter();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      if (decoded.authorities != "ROLE_USER") {
+        Swal.fire({
+          title: "Unauthorized page!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        router.push("/");
+      }
+    } else console.log("decoding failed.");
+  }, [decoded]);
 
   return (
     <TokenCheck>

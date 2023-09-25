@@ -4,7 +4,7 @@ import jwt_decode from "jwt-decode";
 import AdminHeaderStats from "components/Headers/AdminHeaderStats";
 import { useRouter } from "next/router";
 import { useState, useEffect } from "react";
-
+import Swal from "sweetalert2";
 export default function Admin({ children }) {
   const router = useRouter();
   const [decoded, setDecoded] = useState(null);
@@ -16,10 +16,12 @@ export default function Admin({ children }) {
 
   useEffect(() => {
     if (decoded) {
-      if (decoded.authorities === "ROLE_USER") {
-        window.alert("Unathorized acces, Riderecting you to your dashboard! ");
-        router.push("/auth/dashboard");
-      }
+      Swal.fire({
+        title: "Unauthorized page!",
+        showConfirmButton: false,
+        timer: 2000,
+      });
+      router.push("/");
     }
   }, [decoded]);
   return (

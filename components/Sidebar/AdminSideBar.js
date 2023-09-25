@@ -85,6 +85,27 @@ export default function AdminSideBar() {
           Add Users with Roles
         </Link> )}
 
+        {isAdmin && (
+        <Link
+          href="/admin/addemployee"
+          className={
+            "text-xs uppercase py-3 font-bold block " +
+            (router.pathname.indexOf("/admin/addemployee") !== -1
+              ? "text-lightBlue-500 hover:text-lightBlue-600"
+              : "text-blueGray-700 hover:text-blueGray-500")
+          }
+        >
+          <i
+            className={
+              "fas fa-user-tie mr-2 text-sm " +
+              (router.pathname.indexOf("/admin/addemployee") !== -1
+                ? "opacity-75"
+                : "text-blueGray-300")
+            }
+          ></i>{" "}
+          Add Employee
+        </Link>)}
+
         <hr className="my-4 md:min-w-full" />
 
         <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">

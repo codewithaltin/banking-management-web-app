@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 // components
-import EditUser from "./EditUser";
+//import EditUser from "./EditUser";
 import User from "./User";
 import jwt_decode from "jwt-decode";
 import Swal from "sweetalert2";
