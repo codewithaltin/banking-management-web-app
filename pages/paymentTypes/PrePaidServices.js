@@ -147,6 +147,7 @@ export default function PrePaidServices() {
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={handleChange}
                       name="product"
+                      required
                     >
                       <option></option>
                       {ProductOption.map((option, index) => {
@@ -167,6 +168,7 @@ export default function PrePaidServices() {
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={(e) => handleChange(e)}
+                      required
                     />
                     
                   </div>

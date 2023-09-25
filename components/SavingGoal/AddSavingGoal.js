@@ -9,7 +9,7 @@ import Swal from "sweetalert2";
 import { useEffect } from "react";
 import TableAuth from "layouts/TableAuth";
 
-export default function SavingGoal() {
+export default function AddSavingGoal() {
   const {
     register,
     handleSubmit,
@@ -185,8 +185,9 @@ export default function SavingGoal() {
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         onChange={handleChange}
                         name="savingReason"
+                        
                       >
-                        <option>Select</option>
+                        <option >Select</option>
                         {SavingOptions.map((option, index) => {
                           return <option key={index}>{option}</option>;
                         })}
@@ -206,6 +207,7 @@ export default function SavingGoal() {
                             type="text"
                             className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                             onChange={(e) => handleChange(e)}
+                            required
                           />
                         </div>
                       </div>
@@ -221,6 +223,7 @@ export default function SavingGoal() {
                           type="date"
                           {...register("date")}
                           onChange={(e) => handleChange(e)}
+                          required  
                         />
                       </div>
                     </div>
@@ -237,6 +240,7 @@ export default function SavingGoal() {
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         placeholder="p.s VacayGoal"
                         onChange={(e) => handleChange(e)}
+                        required
                       />
                     </div>
                     <div className="relative w-full mb-3">
@@ -254,6 +258,7 @@ export default function SavingGoal() {
                         rows="5"
                         cols="40"
                         onChange={(e) => handleChange(e)}
+                        required
                       />
                     </div>
                     <div className="text-center mt-6">
@@ -273,5 +278,3 @@ export default function SavingGoal() {
     </TokenCheck>
   );
 }
-
-SavingGoal.layout = TableAuth;
