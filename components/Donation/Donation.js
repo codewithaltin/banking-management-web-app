@@ -34,9 +34,6 @@ const Donation = ({donation, confirmDelete}) => {
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         {donation.phoneNumber}
       </td>
-      {/* <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
-        {donation.address}
-      </td> */}
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         {donation.donationAmount}
       </td>

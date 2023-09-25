@@ -65,8 +65,7 @@ export default function ContactTable({ contact, color }) {
     }
   };
 
-  const ConfirmDialogAlert = (e, id) => {
-    if (dialogValue) return true;
+  const confirmDelete = (e, id) => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -81,7 +80,6 @@ export default function ContactTable({ contact, color }) {
         Swal.fire("Deleted!", "Deleted Succesfully!", "success");
       }
     });
-    return dialogValue;
   };
 
   const deleteContact = (e, id) => {
@@ -203,8 +201,8 @@ export default function ContactTable({ contact, color }) {
                   <Contact
                   contact={contact}
                     key={contact.id}
-                    ConfirmDialogAlert={ConfirmDialogAlert}
-                    deleteContact={deleteContact}
+                    confirmDelete={confirmDelete}
+                    //deleteContact={deleteContact}
                   />
                 ))}
               </tbody>

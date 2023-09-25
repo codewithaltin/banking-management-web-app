@@ -1,9 +1,33 @@
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
+import jwt_decode from "jwt-decode";
+import { useState } from "react";
+import { useEffect } from "react";
 
 export default function Sidebar() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
+  const [decoded, setDecoded] = useState(null);
+  const [isUser, setIsUser] = useState(false);
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      setIsUser(checkUser());
+    }
+  }, [decoded]);
+
+  function checkUser() {
+    return decoded.authorities === "ROLE_USER";
+  }
+
+
+
   const router = useRouter();
   return (
     <>
@@ -92,6 +116,7 @@ export default function Sidebar() {
             Donations List
           </Link>
         </li>
+        {!isUser && (
         <li className="items-center">
           <Link
             href="/admin/contactlist"
@@ -112,7 +137,7 @@ export default function Sidebar() {
             ></i>{" "}
             Contact Forms List
           </Link>
-        </li>
+        </li> )}
         <li className="items-center">
           <Link
             href="/auth/requestedMoneyList"

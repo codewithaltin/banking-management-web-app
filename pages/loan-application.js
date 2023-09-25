@@ -9,6 +9,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import Swal from "sweetalert2";
 import * as yup from "yup";
+import { useRouter } from "next/router";
 import Auth from "layouts/Auth.js";
 import TableAuth from "layouts/TableAuth";
 const phoneReg =
@@ -61,7 +62,25 @@ export default function Loan() {
   } = useForm({ resolver: yupResolver(schema) });
   const [decoded, setDecoded] = useState(null);
 
-  
+  const router = useRouter();
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      if (decoded.authorities != "ROLE_USER") {
+        Swal.fire({
+          title: "Unauthorized page!",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        router.push("/");
+      }
+    } else console.log("decoding failed.");
+  }, [decoded]);
 
   let LOAN_API_BASE_URL;
 
@@ -97,12 +116,6 @@ export default function Loan() {
   };
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const decodedToken = jwt_decode(token);
-    setDecoded(decodedToken);
-  }, []);
-
-  useEffect(() => {
     
     if (decoded) {
       console.log(decoded)
@@ -131,23 +144,6 @@ export default function Loan() {
     successfulAlert();
     window.location.reload();
   };
-
-  // const saveLoan = async (e) => {
-  //   const response = await fetch(LOAN_API_BASE_URL, {
-  //     method: "POST",
-  //     headers: {
-  //       "Content-Type": "application/json",
-  //     },
-  //     body: JSON.stringify(loan),
-  //   });
-  //   if (!response.ok) {
-  //     throw new Error("Something went wrong");
-  //   }
-
-  //   const _loan = await response.json();
-  //   setResponseLoan(_loan);
-  //   window.location.reload();
-  // };
 
   const handleChange = (event) => {
     const value = event.target.value;
