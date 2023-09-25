@@ -47,24 +47,33 @@ const EditSavingGoal = ({ savingGoalId, setResponseSavingGoal }) => {
     setIsOpen(true);
   }
 
-  const handleChange = (event) => {
-    const value = event.target.value;
-    setSavingGoal({ ...savingGoal, [event.target.name]: value });
-  };
-
   const reset = (e) => {
     e.preventDefault();
     setIsOpen(false);
   };
 
+  const handleChange = (event) => {
+    const value = event.target.value;
+    setSavingGoal({ ...savingGoal, [event.target.name]: value });
+  };
+
+  
+
   const updateSavingGoal = async (e) => {
     e.preventDefault();
-    const response = await fetch(SAVINGGOAL_API_BASE_URL + "/" + savingGoalId, {
+    const updateSavingGoalData = {
+      savingReason: savingGoal.savingReason,
+      amount: savingGoal.amount,
+      goalName: savingGoal.goalName,
+      date: savingGoal.date,
+      goalDescription: savingGoal.goalDescription,
+    };
+    const response = await fetch(SAVINGGOAL_API_BASE_URL + savingGoalId, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(savingGoal),
+      body: JSON.stringify(updateSavingGoalData),
     });
     if (!response.ok) {
       throw new Error("Something went wrong");
