@@ -2,10 +2,6 @@ import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
 
-import NotificationDropdown from "components/Dropdowns/NotificationDropdown.js";
-import UserDropdown from "components/Dropdowns/UserDropdown.js";
-import AdminSideBar from "./AdminSideBar";
-
 export default function Sidebar() {
   const [collapseShow, setCollapseShow] = React.useState("hidden");
   const router = useRouter();
@@ -119,10 +115,10 @@ export default function Sidebar() {
         </li>
         <li className="items-center">
           <Link
-            href="/auth/requestMoney"
+            href="/auth/requestedMoneyList"
             className={
               "text-xs uppercase py-3 font-bold block " +
-              (router.pathname.indexOf("/auth/requestMoney") !== -1
+              (router.pathname.indexOf("/auth/requestedMoneyList") !== -1
                 ? "text-lightBlue-500 hover:text-lightBlue-600"
                 : "text-blueGray-700 hover:text-blueGray-500")
             }
@@ -130,7 +126,7 @@ export default function Sidebar() {
             <i
               className={
                 "fas fa-dollar-sign mr-2 text-sm " +
-                (router.pathname.indexOf("/auth/requestMoney") !== -1
+                (router.pathname.indexOf("/auth/requestedMoneyList") !== -1
                   ? "opacity-75"
                   : "text-blueGray-300")
               }

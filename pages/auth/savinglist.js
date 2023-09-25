@@ -1,5 +1,5 @@
 import React from "react";
-import SavingTable from "components/Cards/SavingTable.js";
+import SavingTable from "components/SavingGoal/SavingTable.js";
 import Admin from "layouts/User.js";
 
 import User from "layouts/Admin";

@@ -23,6 +23,9 @@ public class RequestMoney {
     @Column
     private String payeeEmail;
 
+    @Column
+    private String description;
+
     @ManyToOne()
     @JoinColumn(name="user_id", referencedColumnName = "id")
     private User user;

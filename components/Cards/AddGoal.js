@@ -1,28 +1,28 @@
 import { Dialog, Transition } from "@headlessui/react";
 import React from "react";
 import { Fragment, useState } from "react";
-import SavingTable from "./SavingTable";
+import SavingTable from "../SavingGoal/SavingTable";
 
 const AddGoal = () => {
-    const SAVINGGOAL_API_BASE_URL = "http://localhost:8080/api/v1/savingGoal";
+  const SAVINGGOAL_API_BASE_URL = "http://localhost:8080/api/v1/savingGoal";
 
-    const [isDialogOpen, setDialogOpen] = useState(false);
-    const [savingGoal, setSavingGoals] = useState({
-      id: "",
-      savingReason: "",
-      amount: "",
-      date: "",
-      goalName: "",
-      goalDescription: "",
-    });
-    const [responseSavingGoal, setResponseSavingGoal] = useState({
-      id: "",
-      savingReason: "",
-      amount: "",
-      date: "",
-      goalName: "",
-      goalDescription: "",
-    });
+  const [isDialogOpen, setDialogOpen] = useState(false);
+  const [savingGoal, setSavingGoals] = useState({
+    id: "",
+    savingReason: "",
+    amount: "",
+    date: "",
+    goalName: "",
+    goalDescription: "",
+  });
+  const [responseSavingGoal, setResponseSavingGoal] = useState({
+    id: "",
+    savingReason: "",
+    amount: "",
+    date: "",
+    goalName: "",
+    goalDescription: "",
+  });
 
   function closeModal() {
     setDialogOpen(false);
@@ -57,12 +57,12 @@ const AddGoal = () => {
   const reset = (e) => {
     e.preventDefault();
     setSavingGoals({
-        id: "",
-        savingReason: "",
-        amount: "",
-        date: "",
-        goalName: "",
-        goalDescription: "",
+      id: "",
+      savingReason: "",
+      amount: "",
+      date: "",
+      goalName: "",
+      goalDescription: "",
     });
     closeModal();
   };
@@ -73,7 +73,8 @@ const AddGoal = () => {
         <div className="h-12">
           <button
             onClick={openModal}
-            className="rounded bg-slate-600 text-white px-6 py-2 font-semibold">
+            className="rounded bg-slate-600 text-white px-6 py-2 font-semibold"
+          >
             Add Goal
           </button>
         </div>
@@ -82,7 +83,8 @@ const AddGoal = () => {
         <Dialog
           as="div"
           className="fixed inset-0 z-10 overflow-y-auto"
-          onClose={closeModal}>
+          onClose={closeModal}
+        >
           <div className="min-h-screen px-4 text-center">
             <Transition.Child
               as={React.Fragment}
@@ -91,11 +93,13 @@ const AddGoal = () => {
               enterTo="opacity-100 scale-100"
               leave="ease-in duration-200"
               leaveFrom="opacity-100 scale-100"
-              leaveTo="opacity-0 scale-95">
+              leaveTo="opacity-0 scale-95"
+            >
               <div className="inline-block w-full max-w-md p-6 my-8 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-md">
                 <Dialog.Title
                   as="h3"
-                  className="text-lg font-medium leading-6 text-gray-900">
+                  className="text-lg font-medium leading-6 text-gray-900"
+                >
                   Add new Goal
                 </Dialog.Title>
                 <div className="flex max-w-md max-auto">
@@ -109,7 +113,8 @@ const AddGoal = () => {
                         name="firstName"
                         value={savingGoal.savingReason}
                         onChange={(e) => handleChange(e)}
-                        className="h-10 w-96 border mt-2 px-2 py-2"></input>
+                        className="h-10 w-96 border mt-2 px-2 py-2"
+                      ></input>
                     </div>
                     <div className="h-14 my-4">
                       <label className="block text-gray-600 text-sm font-normal">
@@ -120,7 +125,8 @@ const AddGoal = () => {
                         name="lastName"
                         value={savingGoal.amount}
                         onChange={(e) => handleChange(e)}
-                        className="h-10 w-96 border mt-2 px-2 py-2"></input>
+                        className="h-10 w-96 border mt-2 px-2 py-2"
+                      ></input>
                     </div>
                     <div className="h-14 my-4">
                       <label className="block text-gray-600 text-sm font-normal">
@@ -131,7 +137,8 @@ const AddGoal = () => {
                         name="emailId"
                         value={savingGoal.date}
                         onChange={(e) => handleChange(e)}
-                        className="h-10 w-96 border mt-2 px-2 py-2"></input>
+                        className="h-10 w-96 border mt-2 px-2 py-2"
+                      ></input>
                     </div>
                     <div className="h-14 my-4">
                       <label className="block text-gray-600 text-sm font-normal">
@@ -142,7 +149,8 @@ const AddGoal = () => {
                         name="emailId"
                         value={savingGoal.goalName}
                         onChange={(e) => handleChange(e)}
-                        className="h-10 w-96 border mt-2 px-2 py-2"></input>
+                        className="h-10 w-96 border mt-2 px-2 py-2"
+                      ></input>
                     </div>
                     <div className="h-14 my-4">
                       <label className="block text-gray-600 text-sm font-normal">
@@ -153,21 +161,24 @@ const AddGoal = () => {
                         name="emailId"
                         value={savingGoal.goalDescription}
                         onChange={(e) => handleChange(e)}
-                        className="h-10 w-96 border mt-2 px-2 py-2"></input>
+                        className="h-10 w-96 border mt-2 px-2 py-2"
+                      ></input>
                     </div>
                     <div className="h-14 my-4 space-x-4 pt-4">
-                  <button
-                    onClick={saveSavingGoals}
-                    className="rounded text-white font-semibold bg-green-400 hover:bg-green-700 py-2 px-6">
-                    Save
-                  </button>
-                  <button
-                    onClick={reset}
-                    className="rounded text-white font-semibold bg-red-400 hover:bg-red-700 py-2 px-6">
-                    Close
-                  </button>
+                      <button
+                        onClick={saveSavingGoals}
+                        className="rounded text-white font-semibold bg-green-400 hover:bg-green-700 py-2 px-6"
+                      >
+                        Save
+                      </button>
+                      <button
+                        onClick={reset}
+                        className="rounded text-white font-semibold bg-red-400 hover:bg-red-700 py-2 px-6"
+                      >
+                        Close
+                      </button>
+                    </div>
                   </div>
-                </div>
                 </div>
               </div>
             </Transition.Child>

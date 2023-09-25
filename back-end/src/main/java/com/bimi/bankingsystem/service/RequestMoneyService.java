@@ -41,6 +41,7 @@ public class RequestMoneyService {
         rm.setRequestedEmail(e.getRequestedEmail());
         rm.setPayeeEmail(e.getPayeeEmail());
         rm.setAmount(e.getAmount());
+        rm.setDescription(e.getDescription());
 
         return rmr.save(rm);
 

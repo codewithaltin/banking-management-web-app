@@ -1,3 +1,5 @@
+
+
 package com.bimi.bankingsystem.model;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;

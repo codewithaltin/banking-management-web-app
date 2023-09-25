@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 const User = ({ user, confirmDelete, editUser }) => {
   const [decoded, setDecoded] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAuditor, setIsAuditor] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -15,12 +15,12 @@ const User = ({ user, confirmDelete, editUser }) => {
 
   useEffect(() => {
     if (decoded) {
-      setIsAdmin(checkAdmin());
+      setIsAuditor(checkAuditor());
     }
   }, [decoded]);
 
-  function checkAdmin() {
-    return decoded.authorities === "ROLE_ADMIN";
+  function checkAuditor() {
+    return decoded.authorities === "ROLE_AUDITOR";
   }
   return (
     <tr key={user.id}>
@@ -42,7 +42,7 @@ const User = ({ user, confirmDelete, editUser }) => {
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         {user.city}
       </td>
-      {isAdmin && (
+      {!isAuditor && (
         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
           <div class="m-5">
             <button
@@ -66,7 +66,7 @@ const User = ({ user, confirmDelete, editUser }) => {
           </div>
         </td>
       )}
-      {isAdmin && (
+      {!isAuditor && (
         <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
           <button
             onClick={(e, id) => confirmDelete(e, user.id)}

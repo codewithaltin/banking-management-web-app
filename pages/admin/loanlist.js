@@ -1,5 +1,5 @@
 import React from "react";
-import LoanTable from "components/Cards/LoanTable.js";
+import LoanTable from "components/Loan/LoanTable.js";
 import User from "layouts/User.js";
 import Auth from "layouts/Auth";
 

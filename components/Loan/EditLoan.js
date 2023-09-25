@@ -4,7 +4,7 @@ import Swal from "sweetalert2";
 
 const EditLoan = ({ loanId, setResponseLoan }) => {
   const LOAN_API_BASE_URL = "http://localhost:8080/api/v1/auth/loan";
-  
+
   const [isOpen, setIsOpen] = useState(false);
   const [loan, setLoan] = useState({
     fullName: "",
@@ -53,6 +53,7 @@ const EditLoan = ({ loanId, setResponseLoan }) => {
   };
 
   const updateLoan = async (e) => {
+    e.preventDefault();
     const response = await fetch(LOAN_API_BASE_URL + "/" + loanId, {
       method: "PUT",
       headers: {
@@ -102,7 +103,7 @@ const EditLoan = ({ loanId, setResponseLoan }) => {
                       <input
                         type="text"
                         name="fullName"
-                        defaultValue={loan.fullName}
+                        value={loan.fullName}
                         onChange={(e) => handleChange(e)}
                         className="h-10 w-96 border mt-2 px-2 py-2"
                       ></input>

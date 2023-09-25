@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useEffect } from "react";
+import Swal from "sweetalert2";
 import jwt_decode from "jwt-decode";
 
 import TableAuth from "layouts/TableAuth";
@@ -58,6 +59,15 @@ export default function Contact() {
   //   navigate("/");
   // };ss
 
+  const successfulAlert = () => {
+    Swal.fire({
+      icon: "success",
+      title: "Succesfully registered your Contact!",
+      showConfirmButton: false,
+      timer: 1500,
+    });
+  };
+
   const saveContact = async (e) => {
     //e.preventDefault();
     const response = await fetch(
@@ -74,6 +84,7 @@ export default function Contact() {
     }
     const _contact = await response.json();
     setResponseContact(_contact);
+    successfulAlert();
     window.location.reload();
   };
   const handleChange = (event) => {

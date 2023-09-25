@@ -3,6 +3,7 @@ import { useForm } from "react-hook-form";
 import TokenCheck from "components/TokenCheck";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import Swal from "sweetalert2";
 import jwt_decode from "jwt-decode";
 
 import Auth from "layouts/Auth.js";
@@ -44,6 +45,15 @@ export default function PrePaidServices() {
   //   navigate("/");
   // };ss
 
+  const successfulAlert = () => {
+    Swal.fire({
+      icon: "success",
+      title: "Succesfully registered Pre Paid!",
+      showConfirmButton: false,
+      timer: 2000,
+    });
+  };
+
   const savePrePaidServices = async (e) => {
     //e.preventDefault();
     const response = await fetch(
@@ -60,6 +70,7 @@ export default function PrePaidServices() {
     }
     const _prePaidServices = await response.json();
     setResponsePrePaidServices(_prePaidServices);
+    successfulAlert();
     window.location.reload();
   };
 

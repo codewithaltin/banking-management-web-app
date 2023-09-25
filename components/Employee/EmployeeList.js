@@ -16,7 +16,7 @@ export default function EmployeeList({ employee, color }) {
   const [responseEmployee, setResponseEmployee] = useState(null);
   const [search, setSearch] = useState("");
   const [decoded, setDecoded] = useState(null);
-  const [isAdmin, setIsAdmin] = useState(false);
+  const [isAuditor, setIsAuditor] = useState(false);
 
   useEffect(() => {
     const token = localStorage.getItem("token");
@@ -26,12 +26,12 @@ export default function EmployeeList({ employee, color }) {
 
   useEffect(() => {
     if (decoded) {
-      setIsAdmin(checkAdmin());
+      setIsAuditor(checkAuditor());
     }
   }, [decoded]);
 
-  function checkAdmin() {
-    return decoded.authorities === "ROLE_ADMIN";
+  function checkAuditor() {
+    return decoded.authorities === "ROLE_AUDITOR";
   }
 
   useEffect(() => {
@@ -101,7 +101,7 @@ export default function EmployeeList({ employee, color }) {
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
               <div className="flex items-center">
                 <form>
-                <div class="relative">
+                  <div class="relative">
                     <div class="absolute inset-b-0 left-0 flex items-center pl-3 pointer-events-none">
                       <i className="fa fa-search text-blue-50 mt-3"></i>
                     </div>
@@ -214,36 +214,37 @@ export default function EmployeeList({ employee, color }) {
                       : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 ></th>
-                {isAdmin && (
-                <th
-                  colSpan={2}
-                  className={
-                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                    (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                  }
-                >
-                  Actions
-                </th>
+                {!isAuditor && (
+                  <th
+                    colSpan={2}
+                    className={
+                      "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                      (color === "light"
+                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                    }
+                  >
+                    Actions
+                  </th>
                 )}
               </tr>
             </thead>
             {!loading && (
               <tbody>
                 {employees
-                ?.filter((item) => {
-                  return search.toLowerCase() === ""
-                    ? item
-                    : item.email.toLowerCase().includes(search);
-                }).map((employee) => (
-                  <Employee
-                    employee={employee}
-                    key={employee.id}
-                    confirmDelete={confirmDelete}
-                    editEmployee={editEmployee}
-                  />
-                ))}
+                  ?.filter((item) => {
+                    return search.toLowerCase() === ""
+                      ? item
+                      : item.email.toLowerCase().includes(search);
+                  })
+                  .map((employee) => (
+                    <Employee
+                      employee={employee}
+                      key={employee.id}
+                      confirmDelete={confirmDelete}
+                      editEmployee={editEmployee}
+                    />
+                  ))}
               </tbody>
             )}
           </table>

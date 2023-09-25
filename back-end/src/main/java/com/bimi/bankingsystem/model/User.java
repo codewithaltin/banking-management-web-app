@@ -176,8 +176,6 @@ public class User implements UserDetails {
         loans.add(loan);
     }
 
-
-
     @OneToOne(mappedBy = "user")
     private Cards card;
 

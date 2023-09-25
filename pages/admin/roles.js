@@ -6,6 +6,7 @@ import * as yup from "yup";
 import Swal from "sweetalert2";
 import Admin from "layouts/Admin";
 import { useEffect } from "react";
+import jwt_decode from "jwt-decode";
 const phoneReg =
   /^((\\+[1-9]{1,4}[ \\-]*)|(\\([0-9]{2,3}\\)[ \\-]*)|([0-9]{2,4})[ \\-]*)*?[0-9]{3,4}?[ \\-]*[0-9]{3,4}?$/;
 
@@ -42,12 +43,32 @@ const schema = yup
 const roles = () => {
   const [cities, setCities] = useState([]);
   const [roles, setRoles] = useState([]);
+  const [decoded, setDecoded] = useState(null);
   const {
     register,
     handleSubmit,
     watch,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
+  const router = useRouter();
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    const decodedToken = jwt_decode(token);
+    setDecoded(decodedToken);
+  }, []);
+
+  useEffect(() => {
+    if (decoded) {
+      if (decoded.authorities != "ROLE_ADMIN") {
+        window.alert(
+          "Unathorized acces, Riderecting you to your dashboard! ",
+          200
+        );
+        router.push("/admin/dashboard");
+      }
+    }
+  }, [decoded]);
 
   const [user, setUser] = useState({
     firstName: "",
