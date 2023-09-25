@@ -1,2 +1,4 @@
-package com.bimi.bankingsystem.service;public class Personi {
+package com.bimi.bankingsystem.service;
+
+public class Personi {
 }
