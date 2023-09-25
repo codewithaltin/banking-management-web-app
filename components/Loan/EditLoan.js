@@ -7,11 +7,14 @@ const EditLoan = ({ loanId, setResponseLoan }) => {
 
   const [isOpen, setIsOpen] = useState(false);
   const [loan, setLoan] = useState({
+    id: "",
     fullName: "",
     email: "",
     phoneNumber: "",
     monthlyIncome: "",
   });
+
+  
 
   useEffect(() => {
     const fetchData = async () => {
@@ -76,7 +79,7 @@ const EditLoan = ({ loanId, setResponseLoan }) => {
   return (
     <div className="min-h-screen absolute top-1/2 right-1/4">
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" m onClose={closeModal}>
+        <Dialog as="div"  onClose={closeModal}>
           <div className="flex justify-center ">
             <Transition.Child
               as={Fragment}

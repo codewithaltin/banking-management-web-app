@@ -4,6 +4,7 @@ import com.bimi.bankingsystem.model.Donation;
 import com.bimi.bankingsystem.model.Loan;
 import com.bimi.bankingsystem.model.SavingGoal;
 import com.bimi.bankingsystem.service.LoanService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import com.bimi.bankingsystem.model.User;
 import com.bimi.bankingsystem.service.UserServiceImpl;
@@ -59,9 +60,11 @@ public class LoanController {
         return loanService.deleteLoan(id);
     }
 
-    @PutMapping("loan/{id}")
-    public Loan updateLoan(@PathVariable Long id, @RequestBody Loan loan){
-        return loanService.updateLoan(id,loan);
+    @PutMapping("/loan/{id}")
+    public ResponseEntity<Loan> updateLoan(@PathVariable("id") Long id,
+                                                       @RequestBody Loan loan){
+        loan = loanService.updateLoan(id,loan);
+        return ResponseEntity.ok(loan);
     }
 
 }

@@ -47,33 +47,24 @@ const EditSavingGoal = ({ savingGoalId, setResponseSavingGoal }) => {
     setIsOpen(true);
   }
 
-  const reset = (e) => {
-    e.preventDefault();
-    setIsOpen(false);
-  };
-
   const handleChange = (event) => {
     const value = event.target.value;
     setSavingGoal({ ...savingGoal, [event.target.name]: value });
   };
 
-  
+  const reset = (e) => {
+    e.preventDefault();
+    setIsOpen(false);
+  };
 
   const updateSavingGoal = async (e) => {
     e.preventDefault();
-    const updateSavingGoalData = {
-      savingReason: savingGoal.savingReason,
-      amount: savingGoal.amount,
-      goalName: savingGoal.goalName,
-      date: savingGoal.date,
-      goalDescription: savingGoal.goalDescription,
-    };
-    const response = await fetch(SAVINGGOAL_API_BASE_URL + savingGoalId, {
+    const response = await fetch(SAVINGGOAL_API_BASE_URL + "/" + savingGoalId, {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(updateSavingGoalData),
+      body: JSON.stringify(savingGoal),
     });
     if (!response.ok) {
       throw new Error("Something went wrong");
@@ -87,7 +78,7 @@ const EditSavingGoal = ({ savingGoalId, setResponseSavingGoal }) => {
   return (
     <div className="min-h-screen absolute top-1/2 right-1/4">
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" m onClose={closeModal}>
+        <Dialog as="div" onClose={closeModal}>
           <div className="flex justify-center ">
             <Transition.Child
               as={Fragment}

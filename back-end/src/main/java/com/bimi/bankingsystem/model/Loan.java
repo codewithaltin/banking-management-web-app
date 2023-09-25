@@ -1,4 +1,5 @@
 package com.bimi.bankingsystem.model;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,15 +22,15 @@ public class Loan {
     private String email;
     @NonNull
     private Integer phoneNumber;
-    @NonNull
     private String address;
-    @NonNull
+
     private double loanAmount;
     @NonNull
     private double monthlyIncome;
-    @NonNull
+
     private String purpouse;
 
+    @JsonIgnore
     @ManyToOne()
     @JoinColumn(name="user_id", referencedColumnName = "id")
     private User user;
