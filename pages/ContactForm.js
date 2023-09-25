@@ -4,7 +4,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useEffect } from "react";
 import Swal from "sweetalert2";
-import jwt_decode from "jwt-decode";
 
 import TableAuth from "layouts/TableAuth";
 
@@ -33,13 +32,6 @@ export default function Contact() {
     watch,
     formState: { errors },
   } = useForm({ resolver: yupResolver(schema) });
-  const [decoded, setDecoded] = useState(null);
-
-  useEffect(() => {
-    const token = localStorage.getItem("token");
-    const decodedToken = jwt_decode(token);
-    setDecoded(decodedToken);
-  }, []);
 
   const [isOpen, setIsOpen] = useState(false);
   const [contact, setContacts] = useState({
@@ -71,7 +63,7 @@ export default function Contact() {
   const saveContact = async (e) => {
     //e.preventDefault();
     const response = await fetch(
-      "http://localhost:8080/api/v1/auth/contact/user/" + decoded.sub,
+      "http://localhost:8080/api/v1/auth/contact",
       {
         method: "POST",
         headers: {

@@ -4,7 +4,7 @@ import jwt_decode from "jwt-decode";
 import { useState } from "react";
 import { useEffect } from "react";
 
-const Contact = ({ contact,ConfirmDialogAlert, deleteContact}) => {
+const Contact = ({ contact,confirmDelete, deleteContact}) => {
   const [decoded, setDecoded] = useState(null);
   const [isAuditor, setIsAuditor] = useState(false);
 
@@ -38,7 +38,7 @@ const Contact = ({ contact,ConfirmDialogAlert, deleteContact}) => {
       {!isAuditor && (
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         <button
-          onClick={(e, id) => ConfirmDialogAlert(e, contact.id)}
+          onClick={(e, id) => confirmDelete(e, contact.id)}
           class="inline-flex items-center px-4 py-2 bg-red-600 hover:bg-red-700 text-white text-sm font-medium rounded-md"
         >
           <svg
