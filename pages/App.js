@@ -236,7 +236,31 @@ function App() {
                   reality. Start saving with us now.
                 </p>
                 <a
-                  href="/SavingGoal"
+                  href="/personi"
+                  target="_blank"
+                  className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
+                >
+                  Set a Saving Goal{" "}
+                  <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
+                </a>
+                <a
+                  href="/banka"
+                  target="_blank"
+                  className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
+                >
+                  Set a Saving Goal{" "}
+                  <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
+                </a>
+                <a
+                  href="/banklist"
+                  target="_blank"
+                  className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
+                >
+                  Set a Saving Goal{" "}
+                  <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
+                </a>
+                <a
+                  href="/personatlist"
                   target="_blank"
                   className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
                 >
