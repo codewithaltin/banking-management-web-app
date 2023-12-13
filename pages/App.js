@@ -236,36 +236,10 @@ function App() {
                   reality. Start saving with us now.
                 </p>
                 <a
-                  href="/personi"
-                  target="_blank"
-                  className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
+                  href="/SavingGoal"
+                  className="github-star mt-4 inline-block text-white font-bold px-6 py-4 rounded outline-none focus:outline-none mr-1 mb-1 bg-blueGray-600 active:bg-blueGray-600 uppercase text-sm shadow hover:shadow-lg"
                 >
-                  Set a Saving Goal{" "}
-                  <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
-                </a>
-                <a
-                  href="/banka"
-                  target="_blank"
-                  className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
-                >
-                  Set a Saving Goal{" "}
-                  <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
-                </a>
-                <a
-                  href="/banklist"
-                  target="_blank"
-                  className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
-                >
-                  Set a Saving Goal{" "}
-                  <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
-                </a>
-                <a
-                  href="/personatlist"
-                  target="_blank"
-                  className="font-bold text-blueGray-700 hover:text-blueGray-500 ease-linear transition-all duration-150"
-                >
-                  Set a Saving Goal{" "}
-                  <i className="fa fa-angle-double-right ml-1 leading-relaxed"></i>
+                  Set saving goal{""}
                 </a>
               </div>
 

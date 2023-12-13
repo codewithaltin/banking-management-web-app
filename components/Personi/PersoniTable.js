@@ -7,15 +7,13 @@ import EditPersoni from "./EditPersoni";
 import jwt_decode from "jwt-decode";
 import Swal from "sweetalert2";
 import Personi from "./Personi";
-export default function PersoniTable({ banka, color }) {
+export default function PersoniTable({ personi, color }) {
   const USER_API_BASE_URL = "http://localhost:8080/api/v1/auth/personi";
   const [users, setUsers] = useState(null);
   const [loading, setLoading] = useState(true);
   const [userId, setUserId] = useState(null);
   const [responseUser, setResponseUser] = useState(null);
 
-
-  
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -34,7 +32,7 @@ export default function PersoniTable({ banka, color }) {
       setLoading(false);
     };
     fetchData();
-  }, [banka, responseUser]);
+  }, [personi, responseUser]);
   let dialogValue = false;
 
   const confirmDelete = (e, id) => {
@@ -85,10 +83,8 @@ export default function PersoniTable({ banka, color }) {
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
               <div className="flex items-center">
                 <form>
-                  <div class="relative flex">
-                  </div>
+                  <div class="relative flex"></div>
                 </form>
-               
               </div>
             </div>
           </div>
@@ -118,31 +114,39 @@ export default function PersoniTable({ banka, color }) {
                 >
                   Last Name
                 </th>
-                  <th
-                    colSpan={2}
-                    className={
-                      "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                      (color === "light"
-                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                        : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                    }
-                  >
-                    Actions
-                  </th>
-             
+                <th
+                  className={
+                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                    (color === "light"
+                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                  }
+                >
+                  Banka
+                </th>
+                <th
+                  colSpan={2}
+                  className={
+                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                    (color === "light"
+                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                  }
+                >
+                  Actions
+                </th>
               </tr>
             </thead>
             {!loading && (
               <tbody>
-                {users
-                  .map((banka) => (
-                    <Personi
-                      banka={banka}
-                      key={banka.id}
-                      confirmDelete={confirmDelete}
-                      editBanka={editBanka}
-                    />
-                  ))}
+                {users.map((personi) => (
+                  <Personi
+                    personi={personi}
+                    key={personi.id}
+                    confirmDelete={confirmDelete}
+                    editBanka={editBanka}
+                  />
+                ))}
               </tbody>
             )}
           </table>

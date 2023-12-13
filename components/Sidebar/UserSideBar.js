@@ -26,8 +26,6 @@ export default function Sidebar() {
     return decoded.authorities === "ROLE_USER";
   }
 
-
-
   const router = useRouter();
   return (
     <>
@@ -41,23 +39,29 @@ export default function Sidebar() {
         {/* Navigation */}
         <li className="items-center">
           <Link
-            href="/admin/transferlist"
+            href="/personatlist"
             className={
               "text-xs uppercase py-3 font-bold block " +
-              (router.pathname.indexOf("/admin/transferlist") !== -1
+              (router.pathname.indexOf("/personatlist") !== -1
                 ? "text-lightBlue-500 hover:text-lightBlue-600"
                 : "text-blueGray-700 hover:text-blueGray-500")
             }
           >
-            <i
-              className={
-                "fas fa-comments-dollar mr-2 text-sm " +
-                (router.pathname.indexOf("/admin/transferlist") !== -1
-                  ? "opacity-75"
-                  : "text-blueGray-300")
-              }
-            ></i>{" "}
-            Transfers List
+            Personat List
+          </Link>
+        </li>
+        <li className="items-center">
+          {" "}
+          <Link
+            href="/banklist"
+            className={
+              "text-xs uppercase py-3 font-bold block " +
+              (router.pathname.indexOf("/banklist") !== -1
+                ? "text-lightBlue-500 hover:text-lightBlue-600"
+                : "text-blueGray-700 hover:text-blueGray-500")
+            }
+          >
+            Banka List
           </Link>
         </li>
         <li className="items-center">
@@ -79,6 +83,27 @@ export default function Sidebar() {
               }
             ></i>{" "}
             Loan List
+          </Link>
+        </li>
+        <li className="items-center">
+          <Link
+            href="/admin/transferlist"
+            className={
+              "text-xs uppercase py-3 font-bold block " +
+              (router.pathname.indexOf("/admin/transferlist") !== -1
+                ? "text-lightBlue-500 hover:text-lightBlue-600"
+                : "text-blueGray-700 hover:text-blueGray-500")
+            }
+          >
+            <i
+              className={
+                "fas fa-comments-dollar mr-2 text-sm " +
+                (router.pathname.indexOf("/admin/transferlist") !== -1
+                  ? "opacity-75"
+                  : "text-blueGray-300")
+              }
+            ></i>{" "}
+            Transfers List
           </Link>
         </li>
         <li className="items-center">
@@ -117,27 +142,28 @@ export default function Sidebar() {
           </Link>
         </li>
         {!isUser && (
-        <li className="items-center">
-          <Link
-            href="/admin/contactlist"
-            className={
-              "text-xs uppercase py-3 font-bold block " +
-              (router.pathname.indexOf("/admin/contactlist") !== -1
-                ? "text-lightBlue-500 hover:text-lightBlue-600"
-                : "text-blueGray-700 hover:text-blueGray-500")
-            }
-          >
-            <i
+          <li className="items-center">
+            <Link
+              href="/admin/contactlist"
               className={
-                "far fa-address-card mr-2 text-sm " +
-                (router.pathname.indexOf("/admin/userlist") !== -1
-                  ? "opacity-75"
-                  : "text-blueGray-300")
+                "text-xs uppercase py-3 font-bold block " +
+                (router.pathname.indexOf("/admin/contactlist") !== -1
+                  ? "text-lightBlue-500 hover:text-lightBlue-600"
+                  : "text-blueGray-700 hover:text-blueGray-500")
               }
-            ></i>{" "}
-            Contact Forms List
-          </Link>
-        </li> )}
+            >
+              <i
+                className={
+                  "far fa-address-card mr-2 text-sm " +
+                  (router.pathname.indexOf("/admin/userlist") !== -1
+                    ? "opacity-75"
+                    : "text-blueGray-300")
+                }
+              ></i>{" "}
+              Contact Forms List
+            </Link>
+          </li>
+        )}
         <li className="items-center">
           <Link
             href="/auth/requestedMoneyList"

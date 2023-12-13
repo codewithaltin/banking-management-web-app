@@ -14,8 +14,6 @@ export default function BankaTable({ banka, color }) {
   const [userId, setUserId] = useState(null);
   const [responseUser, setResponseUser] = useState(null);
 
-
-  
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -27,14 +25,17 @@ export default function BankaTable({ banka, color }) {
           },
         });
         const users = await response.json();
+
         setUsers(users);
       } catch (error) {
         console.log(error);
       }
       setLoading(false);
     };
+    console.log(users);
     fetchData();
   }, [banka, responseUser]);
+
   let dialogValue = false;
 
   const confirmDelete = (e, id) => {
@@ -85,10 +86,8 @@ export default function BankaTable({ banka, color }) {
             <div className="relative w-full px-4 max-w-full flex-grow flex-1">
               <div className="flex items-center">
                 <form>
-                  <div class="relative flex">
-                  </div>
+                  <div class="relative flex"></div>
                 </form>
-               
               </div>
             </div>
           </div>
@@ -106,34 +105,42 @@ export default function BankaTable({ banka, color }) {
                       : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 >
+                  ID
+                </th>
+                <th
+                  className={
+                    "px-6 align-middle border border-solid py-3 text-s uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                    (color === "light"
+                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                  }
+                >
                   Name
                 </th>
-                
-                  <th
-                    colSpan={2}
-                    className={
-                      "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                      (color === "light"
-                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                        : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
-                    }
-                  >
-                    Actions
-                  </th>
-             
+
+                <th
+                  colSpan={2}
+                  className={
+                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                    (color === "light"
+                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
+                  }
+                >
+                  Actions
+                </th>
               </tr>
             </thead>
             {!loading && (
               <tbody>
-                {users
-                  .map((banka) => (
-                    <Banka
-                      banka={banka}
-                      key={banka.id}
-                      confirmDelete={confirmDelete}
-                      editBanka={editBanka}
-                    />
-                  ))}
+                {users.map((banka) => (
+                  <Banka
+                    banka={banka}
+                    key={banka.id}
+                    confirmDelete={confirmDelete}
+                    editBanka={editBanka}
+                  />
+                ))}
               </tbody>
             )}
           </table>

@@ -7,6 +7,8 @@ import * as yup from "yup";
 
 const EditPersoni = ({ userId, setResponseUser }) => {
   const USER_API_BASE_URL = "http://localhost:8080/api/v1/auth/personi/";
+  const BANKA_API_BASE_URL = "http://localhost:8080/api/v1/auth/banka";
+  const [banks, setBanks] = useState(null);
   const {
     register,
     handleSubmit,
@@ -15,8 +17,10 @@ const EditPersoni = ({ userId, setResponseUser }) => {
   } = useForm();
   const [isOpen, setIsOpen] = useState(false);
   const [user, setUser] = useState({
+    id: "",
     firstName: "",
     lastName: "",
+    banka: "",
   });
 
   useEffect(() => {
@@ -39,8 +43,27 @@ const EditPersoni = ({ userId, setResponseUser }) => {
       fetchData();
     }
   }, [userId]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(BANKA_API_BASE_URL, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const banks = await response.json();
 
+        setBanks(banks);
+        console.log(banks); // Move it here to log the updated state
+      } catch (error) {
+        console.log(error);
+      }
+      console.log(banks);
+    };
 
+    fetchData();
+  }, []);
   function closeModal() {
     setIsOpen(false);
   }
@@ -58,30 +81,46 @@ const EditPersoni = ({ userId, setResponseUser }) => {
     const value = event.target.value;
     setUser({ ...user, [event.target.name]: value });
   };
+  // ...
+
   const updateUser = async (e) => {
     e.preventDefault();
-    
-    console.log(user.city);
-    const response = await fetch(USER_API_BASE_URL + userId, {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(user),
-    });
-    if (!response.ok) {
-      throw new Error("Something went wrong");
+
+    // Ensure user.banka is a valid object
+    const selectedBanka = user.banka;
+
+    if (!selectedBanka) {
+      // Handle the case where banka is not selected
+      console.error("Please select a Banka");
+      return;
     }
-    const _user = await response.json();
-    setResponseUser(_user);
-    reset(e);
-    Swal.fire("Updated!", "Updated Succesfully!", "success");
+
+    const url = `http://localhost:8080/api/v1/auth/personi/${userId}`;
+
+    try {
+      const response = await fetch(url, {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ ...user, banka: selectedBanka }),
+      });
+
+      if (!response.ok) {
+        throw new Error("Something went wrong");
+      }
+
+      const _user = await response.json();
+      setResponseUser(_user);
+      reset(e);
+      Swal.fire("Updated!", "Updated Successfully!", "success");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  
- 
+  // ...
 
-    
   return (
     <div className="min-h-screen absolute top-1/2 right-1/4">
       <Transition appear show={isOpen} as={Fragment}>
@@ -107,7 +146,7 @@ const EditPersoni = ({ userId, setResponseUser }) => {
                   <div className="py-2">
                     <div className="h-14 mt-4">
                       <label className="block text-gray-600 text-sm font-semibold">
-                       First Name
+                        First Name
                       </label>
                       <input
                         type="text"
@@ -120,7 +159,7 @@ const EditPersoni = ({ userId, setResponseUser }) => {
                     </div>
                     <div className="h-14 mt-4">
                       <label className="block text-gray-600 text-sm font-semibold">
-                       Last Name
+                        Last Name
                       </label>
                       <input
                         type="text"
@@ -131,7 +170,25 @@ const EditPersoni = ({ userId, setResponseUser }) => {
                         required
                       ></input>
                     </div>
-                    
+                    <div className="h-14 mt-4">
+                      <label className="block text-gray-600 text-sm font-semibold">
+                        Banka
+                      </label>
+                      <select
+                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        onChange={(e) => handleChange(e)}
+                        name="banka"
+                        value={user.banka.id}
+                      >
+                        <option value={user.banka.id}>{user.banka.name}</option>
+                        {banks &&
+                          banks.map((bank) => (
+                            <option key={bank.id} value={bank.id}>
+                              {bank.name}
+                            </option>
+                          ))}
+                      </select>
+                    </div>
 
                     <div className="h-14 my-4 space-x-4 flex justify-center">
                       <button

@@ -23,7 +23,6 @@ export default function banka() {
   const [responseContact, setResponseContact] = useState({
     id: "",
     name: "",
-    
   });
   // const navigate = useNavigate();
   // const navigateHome = () => {
@@ -41,13 +40,11 @@ export default function banka() {
 
   const saveContact = async (e) => {
     //e.preventDefault();
-    const response = await fetch(
-      "http://localhost:8080/api/v1/auth/banka",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+    const response = await fetch("http://localhost:8080/api/v1/auth/banka", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(banka),
     });
     if (!response.ok) {
@@ -71,9 +68,7 @@ export default function banka() {
             <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
               <div className="rounded-t mb-0 px-6 py-6">
                 <div className="text-center mb-3">
-                  <h6 className="text-blueGray-800 text-lg font-bold">
-                    Banka
-                  </h6>
+                  <h6 className="text-blueGray-800 text-lg font-bold">Banka</h6>
                 </div>
 
                 <hr className="mt-6 border-b-1 border-blueGray-300" />
@@ -86,7 +81,7 @@ export default function banka() {
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                       Name
+                      Name
                     </label>
                     <input
                       {...register("name")}
@@ -102,8 +97,6 @@ export default function banka() {
                       {errors.name?.message}
                     </small>
                   </div>
-                  
-            
                   <div className="text-center mt-6">
                     <input
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"

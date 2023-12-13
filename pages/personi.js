@@ -15,16 +15,39 @@ export default function personi() {
     formState: { errors },
   } = useForm();
 
-  const [isOpen, setIsOpen] = useState(false);
+  const USER_API_BASE_URL = "http://localhost:8080/api/v1/auth/banka";
+  const [users, setUsers] = useState(null);
   const [personi, setPersoni] = useState({
     id: "",
-    fullName: "",
+    firstName: "",
     lastName: "",
+    bankaId: "",
   });
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(USER_API_BASE_URL, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        const users = await response.json();
+
+        setUsers(users);
+        console.log(users); // Move it here to log the updated state
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    console.log(users);
+    fetchData();
+  }, []);
   const [responseContact, setResponseContact] = useState({
-    id: "",
-    fullName: "",
+    firstName: "",
     lastName: "",
+    bankaId: "",
   });
   // const navigate = useNavigate();
   // const navigateHome = () => {
@@ -39,31 +62,36 @@ export default function personi() {
       timer: 1500,
     });
   };
-
   const saveContact = async (e) => {
-    //e.preventDefault();
-    const response = await fetch(
-      "http://localhost:8080/api/v1/auth/personi/banka/6",
-      {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+    const selectedBankaId = personi.bankaId;
+
+    if (!selectedBankaId) {
+      console.error("Please select a Banka");
+      return;
+    }
+    const url = `http://localhost:8080/api/v1/auth/personi/banka/${selectedBankaId}`;
+
+    const response = await fetch(url, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
       body: JSON.stringify(personi),
     });
+
     if (!response.ok) {
       throw new Error("Something went wrong");
     }
+
     const _contact = await response.json();
     setResponseContact(_contact);
     successfulAlert();
-    window.location.reload();
   };
+
   const handleChange = (event) => {
     const value = event.target.value;
     setPersoni({ ...personi, [event.target.name]: value });
   };
-
   return (
     <>
       <div className="container mx-auto px-4 h-full">
@@ -118,11 +146,36 @@ export default function personi() {
                       value={personi.lastName}
                       onChange={(e) => handleChange(e)}
                     />
+
                     <small role="alert" className="text-red-500 ">
                       {errors.lastName?.message}
                     </small>
                   </div>
-            
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      Banka
+                    </label>
+                    <select
+                      className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                      onChange={(e) => handleChange(e)}
+                      value={personi.bankaId.id}
+                      name="bankaId"
+                    >
+                      <option value="">Select a Bank</option>
+                      {users &&
+                        users.map((user) => (
+                          <option key={user.id} value={user.id}>
+                            {user.name}
+                          </option>
+                        ))}
+                    </select>
+                    <small role="alert" className="text-red-500 ">
+                      {errors.city?.message}
+                    </small>
+                  </div>
                   <div className="text-center mt-6">
                     <input
                       className="bg-blueGray-800 text-white active:bg-blueGray-600 text-sm font-bold uppercase px-6 py-3 rounded shadow hover:shadow-lg outline-none focus:outline-none mr-1 mb-1 w-full ease-linear transition-all duration-150"

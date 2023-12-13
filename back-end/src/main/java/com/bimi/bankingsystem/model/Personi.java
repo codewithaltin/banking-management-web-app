@@ -21,7 +21,6 @@ public class Personi {
     @Column
     private String lastName;
 
-    @JsonIgnore
     @ManyToOne()
     @JoinColumn(name="banka_id", referencedColumnName = "id")
     private Banka banka;

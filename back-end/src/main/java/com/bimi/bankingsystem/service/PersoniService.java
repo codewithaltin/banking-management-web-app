@@ -35,6 +35,7 @@ public class PersoniService {
                 er.findById(id).get();
         employee.setFirstName(e.getFirstName());
         employee.setLastName(e.getLastName());
+        employee.setBanka(e.getBanka());
 
         return er.save(employee);
 

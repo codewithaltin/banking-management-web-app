@@ -77,7 +77,22 @@ const ServiceDropdown = () => {
             "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-800"
           }
         ></span>
-
+        <Link
+          href="/personi"
+          className={
+            "text-sm py-2 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
+          }
+        >
+          Personi
+        </Link>
+        <Link
+          href="/banka"
+          className={
+            "text-sm py-2 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
+          }
+        >
+          Banka
+        </Link>
         <Link
           href="/transfer"
           className={
@@ -86,6 +101,7 @@ const ServiceDropdown = () => {
         >
           Transfer Money
         </Link>
+
         <span
           className={
             "text-sm pt-2 pb-0 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-800"
@@ -138,8 +154,7 @@ const ServiceDropdown = () => {
         >
           Invoice
         </Link>
-       
-        
+
         <div className="h-0 mx-4 my-2 border border-solid border-blueGray-100" />
       </div>
     </>
