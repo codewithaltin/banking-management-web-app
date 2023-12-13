@@ -78,10 +78,19 @@ const EditPersoni = ({ userId, setResponseUser }) => {
   };
 
   const handleChange = (event) => {
+    const name = event.target.name;
     const value = event.target.value;
-    setUser({ ...user, [event.target.name]: value });
+
+    if (name === "banka") {
+      const selectedBank = banks.find(
+        (bank) => bank.id === parseInt(value, 10)
+      );
+
+      setUser({ ...user, [name]: selectedBank });
+    } else {
+      setUser({ ...user, [name]: value });
+    }
   };
-  // ...
 
   const updateUser = async (e) => {
     e.preventDefault();

@@ -36,7 +36,7 @@ public class Banka {
     public void addPersoni(Personi personi){
         personat.add(personi);
     }
-    public void deletePersoni(Personi savingGoal) {
+    public void deletePersoni(Personi personi) {
     }
 
 }
