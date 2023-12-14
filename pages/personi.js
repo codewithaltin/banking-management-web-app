@@ -15,10 +15,9 @@ export default function personi() {
     formState: { errors },
   } = useForm();
 
-  const USER_API_BASE_URL = "http://localhost:8080/api/v1/auth/banka";
-  const [users, setUsers] = useState(null);
+  const BANK_API_BASE_URL = "http://localhost:8080/api/v1/auth/banka";
+  const [banks, setBanks] = useState(null);
   const [personi, setPersoni] = useState({
-    id: "",
     firstName: "",
     lastName: "",
     bankaId: "",
@@ -27,42 +26,33 @@ export default function personi() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(USER_API_BASE_URL, {
+        const response = await fetch(BANK_API_BASE_URL, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
         });
-        const users = await response.json();
+        const banks = await response.json();
 
-        setUsers(users);
-        console.log(users); // Move it here to log the updated state
+        setBanks(banks);
+        console.log(banks);
       } catch (error) {
         console.log(error);
       }
     };
-    console.log(users);
+    console.log(banks);
     fetchData();
   }, []);
-  const [responseContact, setResponseContact] = useState({
-    firstName: "",
-    lastName: "",
-    bankaId: "",
-  });
-  // const navigate = useNavigate();
-  // const navigateHome = () => {
-  //   navigate("/");
-  // };ss
 
   const successfulAlert = () => {
     Swal.fire({
       icon: "success",
-      title: "Succesfully registered your Contact!",
+      title: "Succesfully registered Personi!",
       showConfirmButton: false,
       timer: 1500,
     });
   };
-  const saveContact = async (e) => {
+  const savePersoni = async (e) => {
     const selectedBankaId = personi.bankaId;
 
     if (!selectedBankaId) {
@@ -83,8 +73,7 @@ export default function personi() {
       throw new Error("Something went wrong");
     }
 
-    const _contact = await response.json();
-    setResponseContact(_contact);
+    const _personi = await response.json();
     successfulAlert();
     window.location.reload();
   };
@@ -109,7 +98,7 @@ export default function personi() {
                 <hr className="mt-6 border-b-1 border-blueGray-300" />
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                <form onSubmit={handleSubmit(saveContact)}>
+                <form onSubmit={handleSubmit(savePersoni)}>
                   {" "}
                   <div className="relative w-full mb-3">
                     <label
@@ -166,15 +155,15 @@ export default function personi() {
                       name="bankaId"
                     >
                       <option value="">Select a Bank</option>
-                      {users &&
-                        users.map((user) => (
-                          <option key={user.id} value={user.id}>
-                            {user.name}
+                      {banks &&
+                        banks.map((bank) => (
+                          <option key={bank.id} value={bank.id}>
+                            {bank.name}
                           </option>
                         ))}
                     </select>
-                    <small role="alert" className="text-red-500 ">
-                      {errors.city?.message}
+                    <small role="alert" className="text-red-500">
+                      {errors.banka?.message}
                     </small>
                   </div>
                   <div className="text-center mt-6">
