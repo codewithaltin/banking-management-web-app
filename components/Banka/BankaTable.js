@@ -3,38 +3,37 @@ import PropTypes from "prop-types";
 import { useRouter } from "next/router";
 // components
 import EditBanka from "./EditBanka";
-
-import jwt_decode from "jwt-decode";
 import Swal from "sweetalert2";
 import Banka from "./Banka";
+
 export default function BankaTable({ banka, color }) {
-  const USER_API_BASE_URL = "http://localhost:8080/api/v1/auth/banka";
-  const [users, setUsers] = useState(null);
+  const BANKA_API_BASE_URL = "http://localhost:8080/api/v1/auth/banka";
+  const [bankas, setBankas] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [userId, setUserId] = useState(null);
-  const [responseUser, setResponseUser] = useState(null);
+  const [bankaId, setBankaId] = useState(null);
+  const [responseBanka, setResponseBanka] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await fetch(USER_API_BASE_URL, {
+        const response = await fetch(BANKA_API_BASE_URL, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
         });
-        const users = await response.json();
+        const bankas = await response.json();
 
-        setUsers(users);
+        setBankas(bankas);
       } catch (error) {
         console.log(error);
       }
       setLoading(false);
     };
-    console.log(users);
+    console.log(bankas);
     fetchData();
-  }, [banka, responseUser]);
+  }, [banka, responseBanka]);
 
   let dialogValue = false;
 
@@ -50,27 +49,27 @@ export default function BankaTable({ banka, color }) {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteUser(e, id);
+        deleteBanka(e, id);
         Swal.fire("Deleted!", "Deleted Succesfully!", "success");
       }
     });
     return dialogValue;
   };
-  const deleteUser = (e, id) => {
+  const deleteBanka = (e, id) => {
     e.preventDefault();
-    fetch(USER_API_BASE_URL + "/" + id, {
+    fetch(BANKA_API_BASE_URL + "/" + id, {
       method: "DELETE",
     }).then((res) => {
-      if (users) {
-        setUsers((prevElement) => {
-          return prevElement.filter((user) => user.id !== id);
+      if (bankas) {
+        setBankas((prevElement) => {
+          return prevElement.filter((banka) => banka.id !== id);
         });
       }
     });
   };
   const editBanka = (e, id) => {
     e.preventDefault();
-    setUserId(id);
+    setBankaId(id);
   };
 
   return (
@@ -133,7 +132,7 @@ export default function BankaTable({ banka, color }) {
             </thead>
             {!loading && (
               <tbody>
-                {users.map((banka) => (
+                {bankas.map((banka) => (
                   <Banka
                     banka={banka}
                     key={banka.id}
@@ -146,8 +145,8 @@ export default function BankaTable({ banka, color }) {
           </table>
         </div>
         <EditBanka
-          userId={userId}
-          setResponseUser={setResponseUser}
+          bankaId={bankaId}
+          setResponseBanka={setResponseBanka}
           setIsOpen={true}
         />
       </div>

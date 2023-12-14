@@ -1,7 +1,4 @@
 import React from "react";
-import jwt_decode from "jwt-decode";
-import { useState } from "react";
-import { useEffect } from "react";
 
 const Personi = ({ personi, confirmDelete, editBanka }) => {
   return (
