@@ -4,7 +4,6 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { useEffect } from "react";
 import Swal from "sweetalert2";
-
 import TableAuth from "layouts/TableAuth";
 
 export default function banka() {
@@ -15,29 +14,20 @@ export default function banka() {
     formState: { errors },
   } = useForm();
 
-  const [isOpen, setIsOpen] = useState(false);
   const [banka, setBanka] = useState({
     name: "",
   });
-  const [responseContact, setResponseContact] = useState({
-    id: "",
-    name: "",
-  });
-  // const navigate = useNavigate();
-  // const navigateHome = () => {
-  //   navigate("/");
-  // };ss
 
   const successfulAlert = () => {
     Swal.fire({
       icon: "success",
-      title: "Succesfully registered your Contact!",
+      title: "Succesfully added Banka!",
       showConfirmButton: false,
       timer: 1500,
     });
   };
 
-  const saveContact = async (e) => {
+  const saveBanka = async (e) => {
     //e.preventDefault();
     const response = await fetch("http://localhost:8080/api/v1/auth/banka", {
       method: "POST",
@@ -49,8 +39,7 @@ export default function banka() {
     if (!response.ok) {
       throw new Error("Something went wrong");
     }
-    const _contact = await response.json();
-    setResponseContact(_contact);
+    const _banka = await response.json();
     successfulAlert();
     window.location.reload();
   };
@@ -73,7 +62,7 @@ export default function banka() {
                 <hr className="mt-6 border-b-1 border-blueGray-300" />
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                <form onSubmit={handleSubmit(saveContact)}>
+                <form onSubmit={handleSubmit(saveBanka)}>
                   {" "}
                   <div className="relative w-full mb-3">
                     <label

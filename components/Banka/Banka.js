@@ -1,7 +1,4 @@
 import React from "react";
-import jwt_decode from "jwt-decode";
-import { useState } from "react";
-import { useEffect } from "react";
 
 const Banka = ({ banka, confirmDelete, editBanka }) => {
   return (
@@ -31,7 +28,7 @@ const Banka = ({ banka, confirmDelete, editBanka }) => {
             >
               <polygon points="16 3 21 8 8 21 3 21 3 16 16 3"></polygon>
             </svg>
-            Update{" "}
+            Update
           </button>
         </div>
       </td>
