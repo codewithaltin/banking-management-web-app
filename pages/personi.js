@@ -7,7 +7,7 @@ import Swal from "sweetalert2";
 
 import TableAuth from "layouts/TableAuth";
 
-export default function personi() {
+export default function ashensori() {
   const {
     register,
     handleSubmit,
@@ -17,7 +17,7 @@ export default function personi() {
 
   const BANK_API_BASE_URL = "http://localhost:8080/api/v1/auth/banka";
   const [banks, setBanks] = useState(null);
-  const [personi, setPersoni] = useState({
+  const [ashensori, setAshensori] = useState({
     firstName: "",
     lastName: "",
     bankaId: "",
@@ -47,40 +47,40 @@ export default function personi() {
   const successfulAlert = () => {
     Swal.fire({
       icon: "success",
-      title: "Succesfully registered Personi!",
+      title: "Succesfully registered Ashensori!",
       showConfirmButton: false,
       timer: 1500,
     });
   };
-  const savePersoni = async (e) => {
-    const selectedBankaId = personi.bankaId;
+  const saveAshensori = async (e) => {
+    const selectedBankaId = ashensori.bankaId;
 
     if (!selectedBankaId) {
       console.error("Please select a Banka");
       return;
     }
-    const url = `http://localhost:8080/api/v1/auth/personi/banka/${selectedBankaId}`;
+    const url = `http://localhost:8080/api/v1/auth/ashensori/banka/${selectedBankaId}`;
 
     const response = await fetch(url, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(personi),
+      body: JSON.stringify(ashensori),
     });
 
     if (!response.ok) {
       throw new Error("Something went wrong");
     }
 
-    const _personi = await response.json();
+    const _ashensori = await response.json();
     successfulAlert();
     window.location.reload();
   };
 
   const handleChange = (event) => {
     const value = event.target.value;
-    setPersoni({ ...personi, [event.target.name]: value });
+    setAshensori({ ...ashensori, [event.target.name]: value });
   };
   return (
     <>
@@ -91,14 +91,14 @@ export default function personi() {
               <div className="rounded-t mb-0 px-6 py-6">
                 <div className="text-center mb-3">
                   <h6 className="text-blueGray-800 text-lg font-bold">
-                    Personi
+                    Ashensori
                   </h6>
                 </div>
 
                 <hr className="mt-6 border-b-1 border-blueGray-300" />
               </div>
               <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
-                <form onSubmit={handleSubmit(savePersoni)}>
+                <form onSubmit={handleSubmit(saveAshensori)}>
                   {" "}
                   <div className="relative w-full mb-3">
                     <label
@@ -113,8 +113,9 @@ export default function personi() {
                     text-blueGray-900 bg-white rounded text-sm shadow
                     focus:outline-none focus:ring w-full ease-linear
                     transition-all duration-150"
+                      required
                       placeholder="First name"
-                      value={personi.firstName}
+                      value={ashensori.firstName}
                       onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
@@ -133,7 +134,8 @@ export default function personi() {
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s example@gmail.com"
-                      value={personi.lastName}
+                      value={ashensori.lastName}
+                      required
                       onChange={(e) => handleChange(e)}
                     />
 
@@ -151,10 +153,11 @@ export default function personi() {
                     <select
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={(e) => handleChange(e)}
-                      value={personi.bankaId.id}
+                      required
+                      value={ashensori.bankaId.id}
                       name="bankaId"
                     >
-                      <option value="">Select a Bank</option>
+                      <option value="">Selekto banken </option>
                       {banks &&
                         banks.map((bank) => (
                           <option key={bank.id} value={bank.id}>
@@ -183,4 +186,4 @@ export default function personi() {
   );
 }
 
-personi.layout = TableAuth;
+ashensori.layout = TableAuth;
