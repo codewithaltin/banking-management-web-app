@@ -14,38 +14,38 @@ import java.util.List;
 public class PersoniController {
 
 
-    private PersoniService employeeService;
+    private PersoniService personiService;
 
     private BankaService bankaService;
 
-    public PersoniController(PersoniService employeeService, BankaService bankaService) {
-        this.employeeService = employeeService;
+    public PersoniController(PersoniService personiService, BankaService bankaService) {
+        this.personiService = personiService;
         this.bankaService = bankaService;
     }
     @PostMapping("/personi")
     public Personi createEmployee(@RequestBody Personi e){
-        return employeeService.addPerson(e);
+        return personiService.addPerson(e);
     }
 
     @GetMapping("/personi")
     public ResponseEntity<List<Personi>> getAllEmployees(){
-        return ResponseEntity.ok(employeeService.getAllPerson());
+        return ResponseEntity.ok(personiService.getAllPerson());
     }
     @GetMapping("/personi/{id}")
     public ResponseEntity<Personi> getEmployeeById(@PathVariable("id") Long id) {
         Personi e = null;
-        e = employeeService.getPersonById(id);
+        e = personiService.getPersonById(id);
         return ResponseEntity.ok(e);
     }
 
     @DeleteMapping("/personi/{id}")
     public boolean deleteEmployee(@PathVariable Long id){
-        return employeeService.deletePerson(id);
+        return personiService.deletePerson(id);
     }
 
     @PutMapping("/personi/{id}")
     public Personi updateEmployee(@PathVariable Long id, @RequestBody Personi e) {
-        return employeeService.updatePerson(id,e);
+        return personiService.updatePerson(id,e);
 
     }
 
@@ -54,7 +54,7 @@ public class PersoniController {
         Banka user = bankaService.getBankaById(id);
         user.addPersoni(personi);
         personi.assignBanka(user);
-        return employeeService.addPerson(personi);
+        return personiService.addPerson(personi);
     }
 
     @GetMapping("/personi/banka/{id}")

@@ -86,6 +86,7 @@ export default function personi() {
     const _contact = await response.json();
     setResponseContact(_contact);
     successfulAlert();
+    window.location.reload();
   };
 
   const handleChange = (event) => {

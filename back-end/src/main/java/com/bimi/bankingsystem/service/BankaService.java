@@ -33,11 +33,11 @@ public class BankaService {
         return true;
     }
     public Banka updateBanka(Long id, Banka e){
-        Banka employee =
+        Banka banka =
                 er.findById(id).get();
-        employee.setName(e.getName());
+        banka.setName(e.getName());
 
-        return er.save(employee);
+        return er.save(banka);
 
     }
 

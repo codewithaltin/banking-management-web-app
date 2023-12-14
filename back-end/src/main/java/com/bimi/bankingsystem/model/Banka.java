@@ -9,7 +9,7 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "banka")
+@Table(name = "bankaTable")
 public class Banka {
     @Id
     @SequenceGenerator(name="course_sequence",sequenceName = "course_sequence",allocationSize = 1)

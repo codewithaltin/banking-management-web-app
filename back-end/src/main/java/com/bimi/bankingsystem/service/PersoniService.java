@@ -31,13 +31,13 @@ public class PersoniService {
         return true;
     }
     public Personi updatePerson(Long id, Personi e){
-        Personi employee =
+        Personi personi =
                 er.findById(id).get();
-        employee.setFirstName(e.getFirstName());
-        employee.setLastName(e.getLastName());
-        employee.setBanka(e.getBanka());
+        personi.setFirstName(e.getFirstName());
+        personi.setLastName(e.getLastName());
+        personi.setBanka(e.getBanka());
 
-        return er.save(employee);
+        return er.save(personi);
 
     }
 

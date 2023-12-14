@@ -17,7 +17,6 @@ export default function banka() {
 
   const [isOpen, setIsOpen] = useState(false);
   const [banka, setBanka] = useState({
-    id: "",
     name: "",
   });
   const [responseContact, setResponseContact] = useState({

@@ -7,7 +7,7 @@ import lombok.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "personi")
+@Table(name = "personat")
 public class Personi {
     @Id
     @SequenceGenerator(name="course_sequence",sequenceName = "course_sequence",allocationSize = 1)
@@ -35,8 +35,8 @@ public class Personi {
     public Banka getBanka() {
         return banka;
     }
-    public void assignBanka(Banka user){
-        this.banka = user;
+    public void assignBanka(Banka banka){
+        this.banka = banka;
     }
     public Personi(){}
 }
