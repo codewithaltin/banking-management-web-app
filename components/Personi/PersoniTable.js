@@ -1,38 +1,35 @@
 import React, { useEffect, useState } from "react";
-import PropTypes from "prop-types";
-import { useRouter } from "next/router";
 // components
 import EditPersoni from "./EditPersoni";
 
-import jwt_decode from "jwt-decode";
 import Swal from "sweetalert2";
 import Personi from "./Personi";
 export default function PersoniTable({ personi, color }) {
-  const USER_API_BASE_URL = "http://localhost:8080/api/v1/auth/personi";
-  const [users, setUsers] = useState(null);
+  const PERSONI_API_BASE_URL = "http://localhost:8080/api/v1/auth/personi";
+  const [personis, setPersonis] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [userId, setUserId] = useState(null);
-  const [responseUser, setResponseUser] = useState(null);
+  const [personiId, setPersoniId] = useState(null);
+  const [responsePersoni, setResponsePersoni] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
       try {
-        const response = await fetch(USER_API_BASE_URL, {
+        const response = await fetch(PERSONI_API_BASE_URL, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
         });
-        const users = await response.json();
-        setUsers(users);
+        const personis = await response.json();
+        setPersonis(personis);
       } catch (error) {
         console.log(error);
       }
       setLoading(false);
     };
     fetchData();
-  }, [personi, responseUser]);
+  }, [personi, responsePersoni]);
   let dialogValue = false;
 
   const confirmDelete = (e, id) => {
@@ -47,27 +44,27 @@ export default function PersoniTable({ personi, color }) {
       confirmButtonText: "Yes, delete it!",
     }).then((result) => {
       if (result.isConfirmed) {
-        deleteUser(e, id);
+        deletePersoni(e, id);
         Swal.fire("Deleted!", "Deleted Succesfully!", "success");
       }
     });
     return dialogValue;
   };
-  const deleteUser = (e, id) => {
+  const deletePersoni = (e, id) => {
     e.preventDefault();
-    fetch(USER_API_BASE_URL + "/" + id, {
+    fetch(PERSONI_API_BASE_URL + "/" + id, {
       method: "DELETE",
     }).then((res) => {
-      if (users) {
-        setUsers((prevElement) => {
-          return prevElement.filter((user) => user.id !== id);
+      if (personis) {
+        setPersonis((prevElement) => {
+          return prevElement.filter((personi) => personi.id !== id);
         });
       }
     });
   };
-  const editBanka = (e, id) => {
+  const editPersoni = (e, id) => {
     e.preventDefault();
-    setUserId(id);
+    setPersoniId(id);
   };
 
   return (
@@ -139,12 +136,12 @@ export default function PersoniTable({ personi, color }) {
             </thead>
             {!loading && (
               <tbody>
-                {users.map((personi) => (
+                {personis.map((personi) => (
                   <Personi
                     personi={personi}
                     key={personi.id}
                     confirmDelete={confirmDelete}
-                    editBanka={editBanka}
+                    editPersoni={editPersoni}
                   />
                 ))}
               </tbody>
@@ -152,8 +149,8 @@ export default function PersoniTable({ personi, color }) {
           </table>
         </div>
         <EditPersoni
-          userId={userId}
-          setResponseUser={setResponseUser}
+          personiId={personiId}
+          setResponsePersoni={setResponsePersoni}
           setIsOpen={true}
         />
       </div>

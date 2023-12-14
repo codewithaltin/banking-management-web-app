@@ -1,6 +1,6 @@
 import React from "react";
 
-const Personi = ({ personi, confirmDelete, editBanka }) => {
+const Personi = ({ personi, confirmDelete, editPersoni }) => {
   return (
     <tr key={personi.id}>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
@@ -15,7 +15,7 @@ const Personi = ({ personi, confirmDelete, editBanka }) => {
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4  tracking-wide">
         <div class="m-5">
           <button
-            onClick={(e, id) => editBanka(e, personi.id)}
+            onClick={(e, id) => editPersoni(e, personi.id)}
             class="inline-flex items-center px-4 py-2 bg-emerald-400 hover:bg-emerald-600 text-white text-sm font-medium rounded-md"
           >
             <svg

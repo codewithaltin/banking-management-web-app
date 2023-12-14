@@ -5,8 +5,8 @@ import { useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import * as yup from "yup";
 
-const EditPersoni = ({ userId, setResponseUser }) => {
-  const USER_API_BASE_URL = "http://localhost:8080/api/v1/auth/personi/";
+const EditPersoni = ({ personiId, setResponsePersoni }) => {
+  const PERSONI_API_BASE_URL = "http://localhost:8080/api/v1/auth/personi/";
   const BANKA_API_BASE_URL = "http://localhost:8080/api/v1/auth/banka";
   const [banks, setBanks] = useState(null);
   const {
@@ -16,7 +16,7 @@ const EditPersoni = ({ userId, setResponseUser }) => {
     formState: { errors },
   } = useForm();
   const [isOpen, setIsOpen] = useState(false);
-  const [user, setUser] = useState({
+  const [personi, setPersoni] = useState({
     id: "",
     firstName: "",
     lastName: "",
@@ -26,23 +26,23 @@ const EditPersoni = ({ userId, setResponseUser }) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(USER_API_BASE_URL + userId, {
+        const response = await fetch(PERSONI_API_BASE_URL + personiId, {
           method: "GET",
           headers: {
             "Content-Type": "application/json",
           },
         });
-        const _user = await response.json();
-        setUser(_user);
+        const _personi = await response.json();
+        setPersoni(_personi);
         setIsOpen(true);
       } catch (error) {
         console.log(error);
       }
     };
-    if (userId) {
+    if (personiId) {
       fetchData();
     }
-  }, [userId]);
+  }, [personiId]);
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -55,7 +55,6 @@ const EditPersoni = ({ userId, setResponseUser }) => {
         const banks = await response.json();
 
         setBanks(banks);
-        console.log(banks); // Move it here to log the updated state
       } catch (error) {
         console.log(error);
       }
@@ -86,17 +85,17 @@ const EditPersoni = ({ userId, setResponseUser }) => {
         (bank) => bank.id === parseInt(value, 10)
       );
 
-      setUser({ ...user, [name]: selectedBank });
+      setPersoni({ ...personi, [name]: selectedBank });
     } else {
-      setUser({ ...user, [name]: value });
+      setPersoni({ ...personi, [name]: value });
     }
   };
 
-  const updateUser = async (e) => {
+  const updatePersoni = async (e) => {
     e.preventDefault();
 
-    // Ensure user.banka is a valid object
-    const selectedBanka = user.banka;
+    // Ensure personi.banka is a valid object
+    const selectedBanka = personi.banka;
 
     if (!selectedBanka) {
       // Handle the case where banka is not selected
@@ -104,7 +103,7 @@ const EditPersoni = ({ userId, setResponseUser }) => {
       return;
     }
 
-    const url = `http://localhost:8080/api/v1/auth/personi/${userId}`;
+    const url = `http://localhost:8080/api/v1/auth/personi/${personiId}`;
 
     try {
       const response = await fetch(url, {
@@ -112,15 +111,15 @@ const EditPersoni = ({ userId, setResponseUser }) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ ...user, banka: selectedBanka }),
+        body: JSON.stringify({ ...personi, banka: selectedBanka }),
       });
 
       if (!response.ok) {
         throw new Error("Something went wrong");
       }
 
-      const _user = await response.json();
-      setResponseUser(_user);
+      const _personi = await response.json();
+      setResponsePersoni(_personi);
       reset(e);
       Swal.fire("Updated!", "Updated Successfully!", "success");
     } catch (error) {
@@ -160,7 +159,7 @@ const EditPersoni = ({ userId, setResponseUser }) => {
                       <input
                         type="text"
                         name="firstName"
-                        value={user.firstName}
+                        value={personi.firstName}
                         onChange={(e) => handleChange(e)}
                         className="h-10  border mt-2 p-4 w-full rounded-md"
                         required
@@ -173,7 +172,7 @@ const EditPersoni = ({ userId, setResponseUser }) => {
                       <input
                         type="text"
                         name="lastName"
-                        value={user.lastName}
+                        value={personi.lastName}
                         onChange={(e) => handleChange(e)}
                         className="h-10  border mt-2 p-4 w-full rounded-md"
                         required
@@ -187,9 +186,11 @@ const EditPersoni = ({ userId, setResponseUser }) => {
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                         onChange={(e) => handleChange(e)}
                         name="banka"
-                        value={user.banka.id}
+                        value={personi.banka.id}
                       >
-                        <option value={user.banka.id}>{user.banka.name}</option>
+                        <option value={personi.banka.id}>
+                          {personi.banka.name}
+                        </option>
                         {banks &&
                           banks.map((bank) => (
                             <option key={bank.id} value={bank.id}>
@@ -201,7 +202,7 @@ const EditPersoni = ({ userId, setResponseUser }) => {
 
                     <div className="h-14 my-4 space-x-4 flex justify-center">
                       <button
-                        onClick={updateUser}
+                        onClick={updatePersoni}
                         className=" bg-emerald-400 hover:bg-emerald-600 rounded text-white font-semibold w-full py-2  px-6"
                       >
                         Update
