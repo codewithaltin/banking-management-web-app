@@ -79,6 +79,7 @@ export default function banka() {
                     transition-all duration-150"
                       placeholder="First name"
                       value={banka.name}
+                      required
                       onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">

@@ -150,7 +150,10 @@ const EditPersoni = ({ personiId, setResponsePersoni }) => {
                 >
                   Update Person
                 </Dialog.Title>
-                <div className="flex max-w-md max-auto">
+                <form
+                  onSubmit={updatePersoni}
+                  className="flex max-w-md max-auto"
+                >
                   <div className="py-2">
                     <div className="h-14 mt-4">
                       <label className="block text-gray-600 text-sm font-semibold">
@@ -184,25 +187,27 @@ const EditPersoni = ({ personiId, setResponsePersoni }) => {
                       </label>
                       <select
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        value={personi.banka.id}
                         onChange={(e) => handleChange(e)}
                         name="banka"
-                        value={personi.banka.id}
                       >
                         <option value={personi.banka.id}>
                           {personi.banka.name}
                         </option>
                         {banks &&
-                          banks.map((bank) => (
-                            <option key={bank.id} value={bank.id}>
-                              {bank.name}
-                            </option>
-                          ))}
+                          banks
+                            .filter((bank) => bank.id !== personi.banka.id)
+                            .map((bank) => (
+                              <option key={bank.id} value={bank.id}>
+                                {bank.name}
+                              </option>
+                            ))}
                       </select>
                     </div>
 
                     <div className="h-14 my-4 space-x-4 flex justify-center">
                       <button
-                        onClick={updatePersoni}
+                        type="submit"
                         className=" bg-emerald-400 hover:bg-emerald-600 rounded text-white font-semibold w-full py-2  px-6"
                       >
                         Update
@@ -215,7 +220,7 @@ const EditPersoni = ({ personiId, setResponsePersoni }) => {
                       </button>
                     </div>
                   </div>
-                </div>
+                </form>
               </div>
             </Transition.Child>
           </div>

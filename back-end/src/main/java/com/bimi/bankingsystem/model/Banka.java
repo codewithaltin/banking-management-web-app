@@ -9,11 +9,11 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "bankaTable")
+@Table(name = "banka")
 public class Banka {
     @Id
-    @SequenceGenerator(name="course_sequence",sequenceName = "course_sequence",allocationSize = 1)
-    @GeneratedValue(strategy = GenerationType.SEQUENCE,generator = "course_sequence")
+    @SequenceGenerator(name = "banka_sequence", sequenceName = "banka_sequence", allocationSize = 1)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "banka_sequence")
     @Column(updatable = false)
     private long id;
 

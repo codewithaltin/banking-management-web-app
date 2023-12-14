@@ -113,6 +113,7 @@ export default function personi() {
                     text-blueGray-900 bg-white rounded text-sm shadow
                     focus:outline-none focus:ring w-full ease-linear
                     transition-all duration-150"
+                      required
                       placeholder="First name"
                       value={personi.firstName}
                       onChange={(e) => handleChange(e)}
@@ -134,6 +135,7 @@ export default function personi() {
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       placeholder="p.s example@gmail.com"
                       value={personi.lastName}
+                      required
                       onChange={(e) => handleChange(e)}
                     />
 
@@ -151,10 +153,11 @@ export default function personi() {
                     <select
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                       onChange={(e) => handleChange(e)}
+                      required
                       value={personi.bankaId.id}
                       name="bankaId"
                     >
-                      <option value="">Select a Bank</option>
+                      <option value="">Selekto banken </option>
                       {banks &&
                         banks.map((bank) => (
                           <option key={bank.id} value={bank.id}>
