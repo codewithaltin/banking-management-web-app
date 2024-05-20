@@ -99,7 +99,7 @@ const EditPersoni = ({ personiId, setResponsePersoni }) => {
 
     if (!selectedBanka) {
       // Handle the case where banka is not selected
-      console.error("Please select a Banka");
+      console.error("Please select a Director");
       return;
     }
 
@@ -148,7 +148,7 @@ const EditPersoni = ({ personiId, setResponsePersoni }) => {
                   as="h3"
                   className="text-lg font-medium leading-6 text-gray-900"
                 >
-                  Update Person
+                  Update Movie
                 </Dialog.Title>
                 <form
                   onSubmit={updatePersoni}
@@ -157,12 +157,12 @@ const EditPersoni = ({ personiId, setResponsePersoni }) => {
                   <div className="py-2">
                     <div className="h-14 mt-4">
                       <label className="block text-gray-600 text-sm font-semibold">
-                        First Name
+                        Title
                       </label>
                       <input
                         type="text"
-                        name="firstName"
-                        value={personi.firstName}
+                        name="title"
+                        value={personi.title}
                         onChange={(e) => handleChange(e)}
                         className="h-10  border mt-2 p-4 w-full rounded-md"
                         required
@@ -170,12 +170,12 @@ const EditPersoni = ({ personiId, setResponsePersoni }) => {
                     </div>
                     <div className="h-14 mt-4">
                       <label className="block text-gray-600 text-sm font-semibold">
-                        Last Name
+                        Release Year
                       </label>
                       <input
-                        type="text"
-                        name="lastName"
-                        value={personi.lastName}
+                        type="number"
+                        name="releaseYear"
+                        value={personi.releaseYear}
                         onChange={(e) => handleChange(e)}
                         className="h-10  border mt-2 p-4 w-full rounded-md"
                         required
@@ -183,7 +183,7 @@ const EditPersoni = ({ personiId, setResponsePersoni }) => {
                     </div>
                     <div className="h-14 mt-4">
                       <label className="block text-gray-600 text-sm font-semibold">
-                        Banka
+                      Director
                       </label>
                       <select
                         className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"

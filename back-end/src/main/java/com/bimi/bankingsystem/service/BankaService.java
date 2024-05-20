@@ -36,6 +36,7 @@ public class BankaService {
         Banka banka =
                 er.findById(id).get();
         banka.setName(e.getName());
+        banka.setBirthYear(e.getBirthYear());
 
         return er.save(banka);
 

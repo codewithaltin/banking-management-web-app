@@ -99,7 +99,7 @@ export default function PersoniTable({ personi, color }) {
                       : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 >
-                  First Name
+                  Title
                 </th>
                 <th
                   className={
@@ -109,7 +109,7 @@ export default function PersoniTable({ personi, color }) {
                       : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 >
-                  Last Name
+                  Release Year
                 </th>
                 <th
                   className={
@@ -119,7 +119,7 @@ export default function PersoniTable({ personi, color }) {
                       : "bg-blueGray-600 text-blueGray-200 border-blueGray-500")
                   }
                 >
-                  Banka
+                  Director
                 </th>
                 <th
                   colSpan={2}

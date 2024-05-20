@@ -33,8 +33,8 @@ public class PersoniService {
     public Personi updatePerson(Long id, Personi e){
         Personi personi =
                 er.findById(id).get();
-        personi.setFirstName(e.getFirstName());
-        personi.setLastName(e.getLastName());
+        personi.setTitle(e.getTitle());
+        personi.setReleaseYear(e.getReleaseYear());
         personi.setBanka(e.getBanka());
 
         return er.save(personi);

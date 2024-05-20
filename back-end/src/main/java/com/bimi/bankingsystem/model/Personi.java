@@ -7,7 +7,8 @@ import lombok.*;
 @Getter
 @Setter
 @Entity
-@Table(name = "personi")
+@AllArgsConstructor
+@Table(name = "movie")
 public class Personi {
     @Id
     @SequenceGenerator(name = "personi_sequence", sequenceName = "personi_sequence", allocationSize = 1)
@@ -17,21 +18,21 @@ public class Personi {
 
 
     @Column
-    private String firstName;
+    private String title;
 
     @Column
-    private String lastName;
+    private int releaseYear;
 
     @ManyToOne()
-    @JoinColumn(name="banka_id", referencedColumnName = "id")
+    @JoinColumn(name="director_id", referencedColumnName = "id")
     private Banka banka;
 
 
-    public Personi(long id,String firstName, String lastName) {
-        this.id = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
+//    public Personi(long id,String firstName, String lastName) {
+//        this.id = id;
+//        this.firstName = firstName;
+//        this.releaseYear = releaseYear;
+//    }
 
     public Banka getBanka() {
         return banka;

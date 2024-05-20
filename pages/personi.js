@@ -47,7 +47,7 @@ export default function personi() {
   const successfulAlert = () => {
     Swal.fire({
       icon: "success",
-      title: "Succesfully registered Personi!",
+      title: "Succesfully registered Movie!",
       showConfirmButton: false,
       timer: 1500,
     });
@@ -56,7 +56,7 @@ export default function personi() {
     const selectedBankaId = personi.bankaId;
 
     if (!selectedBankaId) {
-      console.error("Please select a Banka");
+      console.error("Please select a Director");
       return;
     }
     const url = `http://localhost:8080/api/v1/auth/personi/banka/${selectedBankaId}`;
@@ -91,7 +91,7 @@ export default function personi() {
               <div className="rounded-t mb-0 px-6 py-6">
                 <div className="text-center mb-3">
                   <h6 className="text-blueGray-800 text-lg font-bold">
-                    Personi
+                  Movie
                   </h6>
                 </div>
 
@@ -105,17 +105,17 @@ export default function personi() {
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      First Name
+                      Title
                     </label>
                     <input
-                      {...register("firstName")}
+                      {...register("title")}
                       className="border-0 px-3 py-3 placeholder-blueGray-300
                     text-blueGray-900 bg-white rounded text-sm shadow
                     focus:outline-none focus:ring w-full ease-linear
                     transition-all duration-150"
                       required
-                      placeholder="First name"
-                      value={personi.firstName}
+                      placeholder="Title"
+                      value={personi.title}
                       onChange={(e) => handleChange(e)}
                     />
                     <small role="alert" className="text-red-500 ">
@@ -127,14 +127,14 @@ export default function personi() {
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      Last Name
+                      Release Year
                     </label>
                     <input
-                      {...register("lastName")}
+                      {...register("releaseYear")}
                       type="text"
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                      placeholder="p.s example@gmail.com"
-                      value={personi.lastName}
+                      placeholder="releaseYear"
+                      value={personi.releaseYear}
                       required
                       onChange={(e) => handleChange(e)}
                     />
@@ -148,7 +148,7 @@ export default function personi() {
                       className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
                       htmlFor="grid-password"
                     >
-                      Banka
+                      Director
                     </label>
                     <select
                       className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
@@ -157,7 +157,7 @@ export default function personi() {
                       value={personi.bankaId.id}
                       name="bankaId"
                     >
-                      <option value="">Selekto banken </option>
+                      <option value="">Selekto Directorin </option>
                       {banks &&
                         banks.map((bank) => (
                           <option key={bank.id} value={bank.id}>

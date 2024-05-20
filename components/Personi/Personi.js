@@ -4,10 +4,10 @@ const Personi = ({ personi, confirmDelete, editPersoni }) => {
   return (
     <tr key={personi.id}>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
-        {personi.firstName}
+        {personi.title}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
-        {personi.lastName}
+        {personi.releaseYear}
       </td>
       <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-s whitespace-nowrap p-4 font-semibold tracking-wide">
         {personi.banka.name}

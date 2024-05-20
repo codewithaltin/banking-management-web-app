@@ -83,7 +83,7 @@ const ServiceDropdown = () => {
             "text-sm py-2 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
           }
         >
-          Personi
+          Movie
         </Link>
         <Link
           href="/banka"
@@ -91,7 +91,7 @@ const ServiceDropdown = () => {
             "text-sm py-2 px-4 font-bold block w-full whitespace-nowrap bg-transparent text-blueGray-400"
           }
         >
-          Banka
+          Director
         </Link>
         <Link
           href="/transfer"

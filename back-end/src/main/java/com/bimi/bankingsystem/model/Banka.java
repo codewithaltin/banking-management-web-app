@@ -9,7 +9,8 @@ import java.util.List;
 @Getter
 @Setter
 @Entity
-@Table(name = "banka")
+@AllArgsConstructor
+@Table(name = "director")
 public class Banka {
     @Id
     @SequenceGenerator(name = "banka_sequence", sequenceName = "banka_sequence", allocationSize = 1)
@@ -20,12 +21,15 @@ public class Banka {
     @Column
     private String name;
 
+    @Column
+    private int birthYear;
+
     public Banka(){}
 
-    public Banka(long id,String name) {
-        this.id = id;
-        this.name = name;
-    }
+//    public Banka(long id,String name) {
+//        this.id = id;
+//        this.name = name;
+//    }
 
     @JsonIgnore
     @OneToMany(cascade = {CascadeType.PERSIST,CascadeType.REMOVE},orphanRemoval = true,mappedBy="banka",fetch = FetchType.LAZY)

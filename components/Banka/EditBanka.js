@@ -113,6 +113,20 @@ const EditBanka = ({ bankaId, setResponseBanka }) => {
                       ></input>
                     </div>
 
+                    <div className="h-14 mt-4">
+                      <label className="block text-gray-600 text-sm font-semibold">
+                        BirthYear
+                      </label>
+                      <input
+                        type="number"
+                        name="birthYear"
+                        value={banka.birthYear}
+                        onChange={(e) => handleChange(e)}
+                        className="h-10  border mt-2 p-4 w-full rounded-md"
+                        required
+                      ></input>
+                    </div>
+
                     <div className="h-14 my-4 space-x-4 flex justify-center">
                       <button
                         onClick={updateBanka}

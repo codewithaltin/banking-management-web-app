@@ -21,7 +21,7 @@ export default function banka() {
   const successfulAlert = () => {
     Swal.fire({
       icon: "success",
-      title: "Succesfully added Banka!",
+      title: "Succesfully added Director!",
       showConfirmButton: false,
       timer: 1500,
     });
@@ -56,7 +56,7 @@ export default function banka() {
             <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-200 border-0">
               <div className="rounded-t mb-0 px-6 py-6">
                 <div className="text-center mb-3">
-                  <h6 className="text-blueGray-800 text-lg font-bold">Banka</h6>
+                  <h6 className="text-blueGray-800 text-lg font-bold">Director</h6>
                 </div>
 
                 <hr className="mt-6 border-b-1 border-blueGray-300" />
@@ -79,6 +79,28 @@ export default function banka() {
                     transition-all duration-150"
                       placeholder="First name"
                       value={banka.name}
+                      required
+                      onChange={(e) => handleChange(e)}
+                    />
+                    <small role="alert" className="text-red-500 ">
+                      {errors.name?.message}
+                    </small>
+                  </div>
+                  <div className="relative w-full mb-3">
+                    <label
+                      className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                      htmlFor="grid-password"
+                    >
+                      BirthYear
+                    </label>
+                    <input
+                      {...register("birthYear")}
+                      className="border-0 px-3 py-3 placeholder-blueGray-300
+                    text-blueGray-900 bg-white rounded text-sm shadow
+                    focus:outline-none focus:ring w-full ease-linear
+                    transition-all duration-150"
+                      placeholder="BirthYear"
+                      value={banka.birthYear}
                       required
                       onChange={(e) => handleChange(e)}
                     />

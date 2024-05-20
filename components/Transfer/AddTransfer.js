@@ -1,18 +1,16 @@
-import React, { useState } from "react";
-import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import TokenCheck from "components/TokenCheck";
-import * as yup from "yup";
-import Swal from "sweetalert2";
-import { useRouter } from "next/router";
 import jwt_decode from "jwt-decode";
-import { useEffect } from "react";
+import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
+import { useForm } from "react-hook-form";
+import Swal from "sweetalert2";
+import * as yup from "yup";
 
 // components
 
 // layout for page
 
-import Auth from "layouts/Auth.js";
 
 const schema = yup
   .object()
@@ -23,7 +21,10 @@ const schema = yup
       .required("Account number is required.")
       .min(16, "Account number must be exactly 16 characters")
       .max(16, "Account number must be exactly 16 characters"),
-    amount: yup.string().required("Amount of transfer is required"),
+      amount: yup.number()
+      .min(1, 'Amount must be at least 1')
+      .max(10000, 'Amount must be 10000 or less')
+      .required('Amount is required'),
     date: yup.string().required("Date is required"),
     reciverAccountNumber: yup
       .string()
@@ -186,7 +187,7 @@ export default function Transfer() {
                         </label>
                         <input
                           {...register("amount")}
-                          type="text"
+                          type="number"
                           className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                           value={transfer.amount}
                           onChange={(e) => handleChange(e)}

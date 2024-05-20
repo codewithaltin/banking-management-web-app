@@ -47,7 +47,7 @@ export default function Sidebar() {
                 : "text-blueGray-700 hover:text-blueGray-500")
             }
           >
-            Personat List
+            Movie List
           </Link>
         </li>
         <li className="items-center">
@@ -61,7 +61,7 @@ export default function Sidebar() {
                 : "text-blueGray-700 hover:text-blueGray-500")
             }
           >
-            Banka List
+            Director List
           </Link>
         </li>
         <li className="items-center">
