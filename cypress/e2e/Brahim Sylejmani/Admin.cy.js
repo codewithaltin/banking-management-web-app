@@ -1,7 +1,7 @@
 describe('Adding users with specific roles', () => {
   beforeEach(() => {
     cy.visit('http://localhost:3000/auth/login')
-    // Login with admin credentials
+    
     cy.get('input[name="email"]').type('admin@futur.com')
     cy.get('input[name="password"]').type('12345')
     cy.get('input[type="submit"]').click()
@@ -20,10 +20,10 @@ describe('Adding users with specific roles', () => {
     cy.get('select[name="city"]').select('Prishtine')
     cy.get('select[name="role"]').select('DATA_MANAGER')
 
-    // Submit the form
+    
     cy.get('input[type="submit"]').click()
 
-    // Check if the user was successfully added
+    
     cy.contains('User added successfully').should('be.visible')
   })
 })

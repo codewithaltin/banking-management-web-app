@@ -7,7 +7,7 @@ describe('Donation Tests', () => {
         cy.url().should('not.include', '/auth/login')
       })
     beforeEach(() => {
-        cy.visit('http://localhost:3000'); // Run this before each test case
+        cy.visit('http://localhost:3000'); 
     });
 
     it('Should not allow donation when amount is 0', () => {

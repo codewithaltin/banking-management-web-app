@@ -8,7 +8,7 @@ describe('Collector Payments Tests', () => {
         cy.url().should('not.include', '/auth/login')
       })
     beforeEach(() => {
-        cy.visit('http://localhost:3000/paymentTypes/CollectorPayments'); // Run this before each test case
+        cy.visit('http://localhost:3000/paymentTypes/CollectorPayments'); 
     });
 
     it('Should allow payment when collector is selected', () => {

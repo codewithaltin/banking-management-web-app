@@ -8,7 +8,7 @@ describe('Institutional Payments Tests', () => {
         cy.url().should('not.include', '/auth/login')
       })
     beforeEach(() => {
-        cy.visit('http://localhost:3000/paymentTypes/InstitutionPayments'); // Run this before each test case
+        cy.visit('http://localhost:3000/paymentTypes/InstitutionPayments'); 
     });
 
     it('Should allow payment when institution is selected', () => {

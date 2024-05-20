@@ -7,7 +7,7 @@ describe('Loan Application Tests', () => {
         cy.url().should('not.include', '/auth/login')
       })
     beforeEach(() => {
-        cy.visit('http://localhost:3000/loan-application'); // Run this before each test case
+        cy.visit('http://localhost:3000/loan-application'); 
     });
 
     it('Should not allow application when user is not registered', () => {
@@ -22,7 +22,7 @@ describe('Loan Application Tests', () => {
     });
 
     it('Should allow application when user has all necessary information', () => {
-        // You may need to simulate being a registered user with all necessary information
+        
         cy.contains('Aplikimi për kredi mund të bëhet - Valide');
     });
 

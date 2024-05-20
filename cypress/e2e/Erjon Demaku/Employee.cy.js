@@ -8,7 +8,7 @@ describe('Employee Addition Tests', () => {
         cy.url().should('not.include', '/auth/login')
       })
     beforeEach(() => {
-        cy.visit('http://localhost:3000/admin/addemployee'); // Run this before each test case
+        cy.visit('http://localhost:3000/admin/addemployee');
     });
 
     it('Should allow adding an employee with all required fields filled', () => {
@@ -40,5 +40,5 @@ describe('Employee Addition Tests', () => {
         cy.contains('Employee nuk shtohet, Jo valid');
     });
 
-    // Add more test cases for other scenarios as needed
+    
 });

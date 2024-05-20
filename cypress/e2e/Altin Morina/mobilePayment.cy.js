@@ -28,7 +28,7 @@ describe('Mobile Payments', () => {
       cy.get('.success').should('contain', 'Payment processed successfully');
     });
   
-    // Add other test cases for different scenarios
+  
   
     afterEach(() => {
       cy.reload();

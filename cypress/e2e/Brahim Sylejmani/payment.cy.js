@@ -9,7 +9,7 @@ describe('Payment System Tests', () => {
       })
 
     beforeEach(() => {
-        cy.visit('http://localhost:3000/paymentTypes/InstitutionPayments'); // Run this before each test case
+        cy.visit('http://localhost:3000/paymentTypes/InstitutionPayments'); 
     });
 
     it('Should not accept 0 monetary units', () => {
